@@ -680,8 +680,7 @@
       },
       "strength": 0,
       "stealth": false,
-      "proficient": true,
-      "worn": false
+      "proficient": true
     },
     "feat": {
       "templates": ["itemDescription", "activatedEffect", "action"],
