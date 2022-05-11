@@ -1,0 +1,240 @@
+<li class="attribute well-conditions container-box container-panel">
+    <div class="attribute-name container-box-header">
+        <span>{{ localize "SKJAALD.Hunger" }}</span>
+        <span>{{ localize "SKJAALD.Thirst" }}</span>
+        <span>{{ localize "SKJAALD.Fatigue" }}</span>
+        <span>{{ localize "SKJAALD.Temperature" }}</span>
+    </div>
+
+    
+    <div class="sheet-container-body">
+        <ul class="sheet-list-conditions conditions">
+            <li>
+                <label class="sheet-radio hunger0">
+                    <input type="checkbox" {{checked data.attributes.exhaustion.hunger.stuffed}}>
+                    <span >Stuffed</span>
+                </label>
+            </li>
+            <li>
+                <label class="sheet-radio hunger1">
+                    <input type="checkbox"  {{checked data.attributes.exhaustion.hunger.wellfed}}>
+                    <span title="@{condition_hunger}">Well-fed</span>
+                </label>
+            </li>
+            <li>
+                <label class="sheet-radio hunger2">
+                    <input type="checkbox" {{checked data.attributes.exhaustion.hunger.ok}}>
+                    <span >Ok</span>
+                </label>
+            </li>
+            <li>
+                <label class="sheet-radio hunger3">
+                    <input type="checkbox" {{checked data.attributes.exhaustion.hunger.peckish}}>
+                    <span >Peckish</span>
+                </label>
+            </li>
+            <li>
+                <label class="sheet-radio hunger4">
+                    <input type="checkbox" {{checked data.attributes.exhaustion.hunger.hungry}}>
+                    <span >Hungry</span>
+                </label>
+            </li>
+            <li>
+                <label class="sheet-radio hunger5">
+                    <input type="checkbox"  {{checked data.attributes.exhaustion.hunger.ravenous}}>
+                    <span >Ravenous</span>
+                </label>
+            </li>
+            <li>
+                <label class="sheet-radio hunger6">
+                    <input type="checkbox"  {{checked data.attributes.exhaustion.hunger.starving}} >
+                    <span >Starving</span>
+                </label>
+            </li>
+        </ul>
+
+        <ul class="sheet-list-conditions">
+            <li>
+                <label class="sheet-radio thirst0">
+                    <input type="checkbox"  {{checked data.attributes.exhaustion.thirst.quenched}}>
+                    <span title="@{condition_thirst}">Quenched</span>
+                </label>
+            </li>
+            <li>
+                <label class="sheet-radio thirst1">
+                    <input type="checkbox"  {{checked data.attributes.exhaustion.thirst.refreshed}}>
+                    <span title="@{condition_thirst}">Refreshed</span>
+                </label>
+            </li>
+            <li>
+                <label class="sheet-radio thirst2">
+                    <input type="checkbox"  {{checked data.attributes.exhaustion.thirst.ok}}>
+                    <span title="@{condition_thirst}">Ok</span>
+                </label>
+            </li>
+            <li>
+                <label class="sheet-radio thirst3">
+                    <input type="checkbox"  {{checked data.attributes.exhaustion.thirst.parched}}>
+                    <span title="@{condition_thirst}">Parched</span>
+                </label>
+            </li>
+            <li>
+                <label class="sheet-radio thirst4">
+                    <input type="checkbox"  {{checked data.attributes.exhaustion.thirst.thirsty}}>
+                    <span title="@{condition_thirst}">Thirsty</span>
+                </label>
+            </li>
+            <li>
+                <label class="sheet-radio thirst5">
+                    <input type="checkbox"  {{checked data.attributes.exhaustion.thirst.dry}}>
+                    <span title="@{condition_thirst}">Dry</span>
+                </label>
+            </li>
+            <li>
+                <label class="sheet-radio thirst6">
+                    <input type="checkbox"  {{checked data.attributes.exhaustion.thirst.dehydrated}}>
+                    <span title="@{condition_thirst}">Dehydrated</span>
+                </label>
+            </li>
+        </ul>
+        <ul class="sheet-list-conditions">
+            <li>
+                <label class="sheet-radio fatigue0">
+                    <input type="checkbox"  {{checked data.attributes.exhaustion.fatigue.energised}}>
+                    <span title="@{condition_fatigue}">Energised</span>
+                </label>
+            </li>
+            <li>
+                <label class="sheet-radio fatigue1">
+                    <input type="checkbox"  {{checked data.attributes.exhaustion.fatigue.wellrested}}>
+                    <span title="@{condition_fatigue}">Well-rested</span>
+                </label>
+            </li>
+            <li>
+                <label class="sheet-radio fatigue2">
+                    <input type="checkbox"  {{checked data.attributes.exhaustion.fatigue.ok}}>
+                    <span title="@{condition_fatigue}">Ok</span>
+                </label>
+            </li>
+            <li>
+                <label class="sheet-radio fatigue3">
+                    <input type="checkbox"  {{checked data.attributes.exhaustion.fatigue.tired}}>
+                    <span title="@{condition_fatigue}">Tired</span>
+                </label>
+            </li>
+            <li>
+                <label class="sheet-radio fatigue4">
+                    <input type="checkbox"  {{checked data.attributes.exhaustion.fatigue.sleepy}}>
+                    <span title="@{condition_fatigue}">Sleepy</span>
+                </label>
+            </li>
+            <li>
+                <label class="sheet-radio fatigue5">
+                    <input type="checkbox"  {{checked data.attributes.exhaustion.fatigue.verysleepy}}>
+                    <span title="@{condition_fatigue}">Very sleepy</span>
+                </label>
+            </li>
+            <li>
+                <label class="sheet-radio fatigue6">
+                    <input type="checkbox"  {{checked data.attributes.exhaustion.fatigue.barelyawake}}>
+                    <span title="@{condition_fatigue}">Barely awake</span>
+                </label>
+            </li>
+        </ul>
+        <ul class="sheet-list-conditions">
+            <li>
+                <label class="sheet-radio temp0">
+                    <input type="checkbox"  {{checked data.attributes.exhaustion.temperature.perfect}}>
+                    <span title="@{condition_temperature}">Perfect</span>
+                </label>
+            </li>
+            <li>
+                <label class="sheet-radio temp1">
+                    <input type="checkbox"  {{checked data.attributes.exhaustion.temperature.comfortable}}>
+                    <span title="@{condition_temperature}">Comfortable</span>
+                </label>
+            </li>
+            <li>
+                <label class="sheet-radio temp2">
+                    <input type="checkbox"  {{checked data.attributes.exhaustion.temperature.ok}}>
+                    <span title="@{condition_temperature}">Ok</span>
+                </label>
+            </li>
+            <li>
+                <label class="sheet-radio temp3">
+                    <input type="checkbox"  {{checked data.attributes.exhaustion.temperature.noticable}}>
+                    <span title="@{condition_temperature}">Noticable</span>
+                </label>
+            </li>
+            <li>
+                <label class="sheet-radio temp4">
+                    <input type="checkbox"  {{checked data.attributes.exhaustion.temperature.uncomfortable}}>
+                    <span title="@{condition_temperature}">Uncomfortable</span>
+                </label>
+            </li>
+            <li>
+                <label class="sheet-radio temp5">
+                    <input type="checkbox"  {{checked data.attributes.exhaustion.temperature.overwhelming}}>
+                    <span title="@{condition_temperature}">Overwhelming</span>
+                </label>
+            </li>
+            <li>
+                <label class="sheet-radio temp6">
+                    <input type="checkbox"  {{checked data.attributes.exhaustion.temperature.unbearable}}>
+                    <span title="@{condition_temperature}">Unbearable</span>
+                </label>
+            </li>
+        </ul>
+
+    </div>
+</li>
+
+<li class="attribute health-conditions container-box container-panel">
+    <ul class="sheet-list-conditions">
+        <li>
+            <label class="sheet-radio health0 noclick">
+                <input type="checkbox" {{checked data.attributes.hp.robust}}>
+                <span >Robust</span>
+            </label>
+        </li>
+        <li>
+            <label class="sheet-radio health1 noclick">
+                <input type="checkbox"  {{checked data.attributes.hp.healthy}}>
+                <span title="@{condition_hunger}">Healthy</span>
+            </label>
+        </li>
+        <li>
+            <label class="sheet-radio health2 noclick">
+                <input type="checkbox" {{checked data.attributes.hp.ok}}>
+                <span >Ok</span>
+            </label>
+        </li>
+        <li>
+            <label class="sheet-radio health3 noclick">
+                <input type="checkbox" {{checked data.attributes.hp.hit}}>
+                <span >Hit</span>
+            </label>
+        </li>
+        <li>
+            <label class="sheet-radio health4 noclick">
+                <input type="checkbox" {{checked data.attributes.hp.bloodied}}>
+                <span >Bloodied</span>
+            </label>
+        </li>
+        <li>
+            <label class="sheet-radio health5 noclick">
+                <input type="checkbox"  {{checked data.attributes.hp.hurt}}>
+                <span >Hurt</span>
+            </label>
+        </li>
+        <li>
+            <label class="sheet-radio health6 noclick">
+                <input type="checkbox"  {{checked data.attributes.hp.critical}} >
+                <span >Critical</span>
+            </label>
+        </li>
+    </ul>
+    <h5 class="attribute-name container-box-header">
+        {{ localize "SKJAALD.Health" }}
+    </h5>
+</li>

@@ -1,0 +1,93 @@
+
+
+        <li class="attribute armor container-box container-panel-armor">
+            <div class="attribute-value container-box-body auto-calc-value ac">
+                <input type="text" name="data.attributes.ac.foo" value="{{data.attributes.ac.foo}}" data-dtype="Number" placeholder="0"/>
+            </div>
+            <h5 class="attribute-name container-box-header ac-header">
+                {{ localize "SKJAALD.ArmorClass" }}
+            </h5>
+        </li>
+
+        <li class="attribute denialpoints container-panel">
+            <h5 class="container-box-footer">
+                {{ localize "SKJAALD.Max" }}: 
+                    <span>{{data.attributes.maxdp.value}}</span>
+            </h5>    
+            <div class="attribute-value container-box-body auto-dp-value dp" data-property="attributes.dp">
+                <input type="text" name="data.attributes.dp.value" value="{{data.attributes.dp.value}}" data-dtype="Number"/>
+            </div>
+            <h4 class="attribute-name container-box-header">
+                {{ localize "SKJAALD.DenialPoints" }}
+            </h4>
+        </li>
+
+        <li class="attribute speed container-panel">
+            <div class="attribute-value container-box-body auto-calc-value speed-input">
+                <input type="text" value="{{data.attributes.movement.walk}}" data-dtype="Number"/>
+            </div>
+            <h4 class="attribute-name container-box-header speed-header">
+                {{ localize "SKJAALD.Speed" }}
+            </h4>
+        </li>
+
+        <li class="attribute fate container-panel2">
+            <h4 class="attribute-name container-box-header">
+                {{ localize "SKJAALD.Fate" }}
+            </h4>    
+            <input type="hidden" name="data.attributes.fate.value" value="{{data.attributes.fate.value}}" data-dtype="Number"/>
+            <a class="proficiency-toggle skill-proficiency check-toggle-fate" title="fate">{{{data.attributes.fate.icon}}}</a>
+        </li>
+
+
+        <li class="attribute inspiration container-panel2">
+            <h4 class="attribute-name container-box-header">
+                {{ localize "SKJAALD.Inspiration" }}
+            </h4>
+            <input type="hidden" name="data.attributes.inspiration.point1" value="{{data.attributes.inspiration.point1}}"/>
+            <a class="proficiency-toggle skill-proficiency check-toggle" >{{{data.attributes.inspiration.icon1}}}</a>
+            <input type="hidden" name="data.attributes.inspiration.point2" value="{{data.attributes.inspiration.point2}}"/>
+            <a class="proficiency-toggle skill-proficiency check-toggle" >{{{data.attributes.inspiration.icon2}}}</a>
+            <input type="hidden" name="data.attributes.inspiration.point3" value="{{data.attributes.inspiration.point3}}"/>
+            <a class="proficiency-toggle skill-proficiency check-toggle" >{{{data.attributes.inspiration.icon3}}}</a>
+        </li>
+
+        <li class="attribute legend container-panel2">
+            <h4 class="attribute-name container-box-header">
+                {{ localize "SKJAALD.Legend" }}
+            </h4>
+            <input type="hidden" name="data.attributes.legend.point1" value="{{data.attributes.legend.point1}}"/>
+            <a class="proficiency-toggle skill-proficiency check-toggle" >{{{data.attributes.legend.icon1}}}</a>
+            <input type="hidden" name="data.attributes.legend.point2" value="{{data.attributes.legend.point2}}"/>
+            <a class="proficiency-toggle skill-proficiency check-toggle" >{{{data.attributes.legend.icon2}}}</a>
+            <input type="hidden" name="data.attributes.legend.point3" value="{{data.attributes.legend.point3}}"/>
+            <a class="proficiency-toggle skill-proficiency check-toggle" >{{{data.attributes.legend.icon3}}}</a>
+        </li>
+
+        <li class="attribute exhaustion container-panel">
+            <h5 class="sheet-container-footer">
+                <div class="container-box-body">
+                    <span>{{ localize "SKJAALD.Base" }}</span>
+                </div>
+                <div class="container-box-body">
+                    <span>{{ localize "SKJAALD.Cond" }}</span>
+                </div>
+                <div class="container-box-body">
+                    <span>{{ localize "SKJAALD.Total" }}</span>
+                </div>
+            </h5>
+            <div class="sheet-container-body">
+                <div class="attribute-value container-box-body auto-dp-value textbox exhaustion-base" >
+                    <input type="text" name="data.attributes.exhaustion.base" value="{{data.attributes.exhaustion.base}}" data-dtype="Number"/>
+                </div>
+                <div class="attribute-value container-box-body auto-dp-value" >
+                    <span>{{data.attributes.exhaustion.conditional}}</span>
+                </div>
+                <div class="attribute-value container-box-body auto-dp-value" >
+                    <span>{{data.attributes.exhaustion.total}}</span>
+                </div>
+            </div>
+            <h4 class="attribute-name box-title">
+                {{ localize "SKJAALD.Exhaustion" }}
+            </h4>
+        </li>

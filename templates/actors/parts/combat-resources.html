@@ -1,0 +1,141 @@
+<li class="attribute resource1 container-box container-panel">
+    <div class="attribute-value container-box-body auto-calc-value">
+        <input class="duplicate" type="text" name="data.resources.primary.value2" value="{{data.resources.primary.value}}"/>
+        /
+        <input class="duplicate" type="text" name="data.resources.primary.max2" value="{{data.resources.primary.max}}" />
+    </div>
+    <h5 class="attribute-name container-box-header">
+        <input class="duplicate" type="text" name="data.resources.primary.label2" value="{{data.resources.primary.label}}" />
+    </h5>
+</li>
+
+<li class="attribute resource2 container-box container-panel">
+    <div class="attribute-value container-box-body auto-calc-value" data-property="attributes.hp">
+        <input class="duplicate" type="text" name="data.resources.secondary.value2" value="{{data.resources.secondary.value}}"/>
+        /
+        <input class="duplicate" type="text" name="data.resources.secondary.max2" value="{{data.resources.secondary.max}}" />
+    </div>
+    <h5 class="attribute-name container-box-header">
+        <input class="duplicate" type="text" name="data.resources.secondary.label2" value="{{data.resources.secondary.label}}" />
+    </h5>
+</li>
+
+<li class="attribute resource3 container-box container-panel">
+    <div class="attribute-value container-box-body auto-calc-value" data-property="attributes.hp">
+        <input class="duplicate" type="text" name="data.resources.tertiary.value2" value="{{data.resources.tertiary.value}}"/>
+        /
+        <input class="duplicate" type="text" name="data.resources.tertiary.max2" value="{{data.resources.tertiary.max}}" />
+    </div>
+    <h5 class="attribute-name container-box-header">
+        <input class="duplicate" type="text" name="data.resources.tertiary.label2" value="{{data.resources.tertiary.label}}" />
+    </h5>
+</li>
+
+<li class="attribute other-resources container-box container-panel">
+    <div class="attribute-value container-box-body auto-calc-value">
+        <ol class="items-list inventory-list">
+            {{#each sections as |section sid|}}
+                <li class="items-header flexrow">
+                    <h3 class="item-name flexrow">{{localize section.label}}</h3>
+            
+                    {{#if section.hasActions}}
+                    <div class="item-detail item-uses">{{localize "SKJAALD.Uses"}}</div>
+                    <div class="item-detail item-action">{{localize "SKJAALD.Usage"}}</div>
+                    {{/if}}
+            
+                    {{#if section.columns}}
+                        {{#each section.columns}}
+                            <div class="item-detail {{css}}">{{label}}</div>
+                        {{/each}}
+                    {{/if}}
+            
+                    {{#if ../owner}}
+                    <div class="item-controls flexrow">
+                        <a class="item-control item-create" title="{{localize 'SKJAALD.FeatureAdd'}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
+                            <i class="fas fa-plus"></i> {{localize "SKJAALD.Add"}}
+                        </a>
+                    </div>
+                    {{/if}}
+                </li>
+            
+                <ol class="item-list">
+                {{#each section.items as |item iid|}}
+                    <li class="item flexrow {{#if isDepleted}}depleted{{/if}}" data-item-id="{{item._id}}">
+                        <div class="item-name flexrow rollable">
+                            <div class="item-image" style="background-image: url('{{item.img}}')"></div>
+                            <h4>
+                                {{item.name}}
+                                {{#if item.isOriginalClass}} <i class="original-class fas fa-sun" title="{{localize 'SKJAALD.ClassOriginal'}}"></i>{{/if}}
+                            </h4>
+                        </div>
+            
+                        {{#if section.hasActions}}
+                        <div class="item-detail item-uses">
+                            {{#if item.isOnCooldown}}
+                            <a class="item-recharge rollable">{{item.labels.recharge}}</a>
+                            {{else if item.data.recharge.value}}
+                            {{localize "SKJAALD.Charged"}}
+            
+                            {{else if item.hasUses}}
+                            <input type="text" value="{{item.data.uses.value}}" placeholder="0"/>/ {{item.data.uses.max}}
+                            {{/if}}
+                        </div>
+                        <div class="item-detail item-action">
+                            {{#if item.data.activation.type }}
+                            {{item.labels.activation}}
+                            {{/if}}
+                        </div>
+            
+                        {{else if section.isClass}}
+                        <div class="item-detail player-class">
+                            {{item.data.subclass}}
+                        </div>
+                        <div class="item-detail item-action">
+                            {{localize "SKJAALD.Level"}} {{item.data.levels}}
+                        </div>
+                        {{/if}}
+            
+                        {{#if section.columns}}
+                            {{#each section.columns}}
+                                <div class="item-detail {{css}}">
+                                    {{#with (getProperty item property)}}
+                                        {{#if ../editable}}
+                                            <input type="text" value="{{this}}" placeholder="&mdash;"
+                                                   data-dtype="{{../editable}}">
+                                        {{else}}
+                                            {{this}}
+                                        {{/if}}
+                                    {{/with}}
+                                </div>
+                            {{/each}}
+                        {{/if}}
+            
+                        {{#if ../../owner}}
+                        <div class="item-controls flexrow">
+                            {{#if section.crewable}}
+                            <a class="item-control item-toggle {{item.toggleClass}}"
+                               title="{{item.toggleTitle}}">
+                                <i class="fas fa-sun"></i>
+                            </a>
+                            {{/if}}
+                            <a class="item-control item-edit" title="{{localize 'SKJAALD.ItemEdit'}}"><i class="fas fa-edit"></i></a>
+                            <a class="item-control item-delete" title="{{localize 'SKJAALD.ItemDelete'}}"><i class="fas fa-trash"></i></a>
+                        </div>
+                        {{/if}}
+                    </li>
+                {{/each}}
+                </ol>
+            {{/each}}
+            </ol>
+    </div>
+    <h5 class="attribute-name container-box-header">
+        {{ localize "SKJAALD.OtherResources" }} 
+        <div class="item-controls resource-controls flexrow">
+            <a class="item-create resource-create" data-type="resource" title="{{localize 'SKJAALD.EffectCreate'}}">
+            <i class="fas fa-plus"></i> {{localize "SKJAALD.Add"}}
+            </a>
+        </div>
+    </h5>
+
+    
+</li>

@@ -1,0 +1,266 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    {{!-- Item Sheet Header --}}
+    <header class="sheet-header flexrow">
+        <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img"/>
+
+        <div class="header-details flexrow">
+            <h1 class="charname">
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'SKJAALD.ItemName' }}"/>
+            </h1>
+
+            <div class="item-subtitle">
+                <h4 class="item-type">{{itemType}}</h4>
+                <span class="item-status">{{itemStatus}}</span>
+            </div>
+
+            <ul class="summary flexrow">
+                <li>
+                    {{lookup config.equipmentTypes data.armor.type }}
+                </li>
+                <li>
+                    <select name="data.rarity">
+                        {{selectOptions config.itemRarity selected=data.rarity blank="&nbsp;"}}
+                    </select>
+                </li>
+                <li>
+                    <input type="text" name="data.source" value="{{data.source}}" placeholder="{{ localize 'SKJAALD.Source' }}"/>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    {{!-- Item Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="description">{{ localize "SKJAALD.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "SKJAALD.Details" }}</a>
+        <a class="item" data-tab="effects">{{ localize "SKJAALD.Effects" }}</a>
+    </nav>
+
+    {{!-- Item Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Description Tab --}}
+        {{> "systems/skjaald/templates/items/parts/item-description.html"}}
+
+        {{!-- Details Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+            <h3 class="form-header">{{ localize "SKJAALD.ItemEquipmentDetails" }}</h3>
+
+            {{!-- Equipment Type --}}
+            <div class="form-group">
+                <label>{{ localize "SKJAALD.ItemEquipmentType" }}</label>
+                <select name="data.armor.type">
+                    <option value=""></option>
+                    <optgroup label="{{ localize "SKJAALD.Armor" }}">
+                        {{selectOptions config.armorTypes selected=data.armor.type}}
+                    </optgroup>
+                    {{selectOptions config.miscEquipmentTypes selected=data.armor.type}}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>{{ localize "SKJAALD.ItemEquipmentBase" }}</label>
+                <select name="data.baseItem">
+                    {{selectOptions baseItems selected=data.baseItem blank=""}}
+                </select>
+            </div>
+
+            {{#unless isMountable}}
+            <div class="form-group">
+                <label>{{localize "SKJAALD.Attunement"}}</label>
+                <select name="data.attunement" data-dtype="Number">
+                    {{selectOptions config.attunements selected=data.attunement localize=true}}
+                </select>
+            </div>
+
+            {{!-- Equipment Status --}}
+            <div class="form-group stacked">
+                <label>{{ localize "SKJAALD.ItemEquipmentStatus" }}</label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.proficient" {{checked data.proficient}}/> {{ localize "SKJAALD.Proficient" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" disabled="disabled" name="data.equipped" {{checked data.equipped}}/> {{ localize "SKJAALD.Equipped" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.identified" {{checked data.identified}}/> {{ localize "SKJAALD.Identified" }}
+                </label>
+            </div>
+            {{/unless}}
+
+            {{!-- Armor Class --}}
+            {{#if hasAC}}
+            <div class="form-group">
+                <label>{{ localize "SKJAALD.ArmorClass" }}</label>
+                <div class="form-fields">
+                   <input type="text" name="data.armor.value" value="{{data.armor.value}}" data-dtype="Number"/>
+                </div>
+            </div>
+            {{/if}}
+
+            {{#if hasDexModifier}}
+            {{!-- Dexterity Modifier --}}
+            <div class="form-group">
+                <label>{{ localize "SKJAALD.ItemEquipmentDexMod" }}</label>
+                <div class="form-fields">
+                   <input type="text" name="data.armor.dex" value="{{data.armor.dex}}" data-dtype="Number" placeholder="{{ localize 'SKJAALD.Unlimited' }}"/>
+                </div>
+            </div>
+            {{/if}}
+
+            {{#if isArmor}}
+            {{!-- Required Strength --}}
+            <div class="form-group">
+                <label>{{ localize "SKJAALD.ItemRequiredStr" }}</label>
+                <div class="form-fields">
+                   <input type="text" name="data.strength" value="{{data.strength}}" data-dtype="Number" placeholder="{{ localize 'SKJAALD.None' }}"/>
+                </div>
+            </div>
+
+            {{!-- Denial Points --}}
+            <div class="form-group">
+                <label>{{ localize "SKJAALD.ItemDenialPoints" }}</label>
+                <div class="form-fields">
+                   <input type="text" name="data.denial" value="{{data.denial}}" data-dtype="Number" placeholder="{{ localize 'SKJAALD.None' }}"/>
+                </div>
+            </div>
+
+            {{!-- Protection Points --}}
+            <div class="form-group">
+                <label>{{ localize "SKJAALD.ItemProtectionPoints" }}</label>
+                <div class="form-fields">
+                   <input type="text" name="data.protection" value="{{data.protection}}" data-dtype="Number" placeholder="{{ localize 'SKJAALD.None' }}"/>
+                </div>
+            </div>
+
+            {{!-- Stealth Disadvantage --}}
+            <div class="form-group">
+                <label>{{ localize "SKJAALD.ItemEquipmentStealthDisav" }}</label>
+                <input type="checkbox" name="data.stealth" value="1" {{checked data.stealth}}/>
+            </div>
+            {{/if}}
+
+            {{#if isMountable}}
+            {{> 'systems/skjaald/templates/items/parts/item-mountable.html'}}
+            <div class="form-group">
+                <label>{{localize 'SKJAALD.Speed'}}</label>
+                <div class="form-fields">
+                    <input type="text" name="data.speed.value" value="{{data.speed.value}}"
+                           placeholder="0" data-dtype="Number">
+                    <span class="sep">{{localize 'SKJAALD.FeetAbbr'}}</span>
+                    <input type="text" name="data.speed.conditions"
+                           value="{{data.speed.conditions}}">
+                </div>
+            </div>
+            {{/if}}
+
+            <div class="form-group stacked">
+                <label>{{ localize "SKJAALD.Properties" }}</label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.quiet" {{checked data.quiet}}> {{ localize "SKJAALD.Quiet" }}</input>
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.heavy" {{checked data.heavy}}/> {{ localize "SKJAALD.Heavy" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.loud" {{checked data.loud}}/> {{ localize "SKJAALD.Loud" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.narrowing" {{checked data.narrowing}}/> {{ localize "SKJAALD.Narrowing" }}
+                </label>
+            </div>
+
+            <div class="form-group stacked">
+                <label class="checkbox">
+                    <input type="checkbox" name="data.concealing" {{checked data.concealing}}> {{ localize "SKJAALD.Concealing" }}</input>
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.glancing" {{checked data.glancing}}/> {{ localize "SKJAALD.Glancing" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.dampening" {{checked data.dampening}}/> {{ localize "SKJAALD.Dampening" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.nimble" {{checked data.nimble}}/> {{ localize "SKJAALD.Nimble" }}
+                </label>
+            </div>
+
+            <div class="form-group stacked">
+                <label class="checkbox">
+                    <input type="checkbox" name="data.wrist" {{checked data.wrist}}> {{ localize "SKJAALD.WristMounted" }}</input>
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.cover" {{checked data.cover}}/> {{ localize "SKJAALD.Cover" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.exotic" {{checked data.exotic}}/> {{ localize "SKJAALD.Exotic" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.supplementary" {{checked data.supplementary}}/> {{ localize "SKJAALD.Supplementary" }}
+                </label>
+            </div>
+
+            <div class="form-group stacked">
+                <label>{{ localize "SKJAALD.Slots" }}</label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.head" {{checked data.head}}> {{ localize "SKJAALD.Head" }}</input>
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.neck" {{checked data.neck}}/> {{ localize "SKJAALD.Neck" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.shoulders" {{checked data.shoulders}}/> {{ localize "SKJAALD.Shoulders" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.inner" {{checked data.inner}}/> {{ localize "SKJAALD.Inner" }}
+                </label>
+            </div>
+
+            <div class="form-group stacked">
+                <label class="checkbox">
+                    <input type="checkbox" name="data.outer" {{checked data.outer}}/> {{ localize "SKJAALD.Outer" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.torso" {{checked data.torso}}> {{ localize "SKJAALD.Torso" }}</input>
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.waist" {{checked data.waist}}> {{ localize "SKJAALD.Waist" }}</input>
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.arms" {{checked data.arms}}/> {{ localize "SKJAALD.Arms" }}
+                </label>
+            </div>
+
+            <div class="form-group stacked">
+                <label class="checkbox">
+                    <input type="checkbox" name="data.hands" {{checked data.hands}}/> {{ localize "SKJAALD.Hands" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.rings" {{checked data.rings}}> {{ localize "SKJAALD.Rings" }}</input>
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.thighs" {{checked data.thighs}}/> {{ localize "SKJAALD.Thighs" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.legs" {{checked data.legs}}> {{ localize "SKJAALD.Legs" }}</input>
+                </label>
+            </div>
+
+            <h3 class="form-header">{{ localize "SKJAALD.ItemEquipmentUsage" }}</h3>
+
+            {{!-- Item Activation Template --}}
+            {{> "systems/skjaald/templates/items/parts/item-activation.html"}}
+
+            <h3 class="form-header">{{ localize "SKJAALD.ItemEquipmentAction" }}</h3>
+
+            {{!-- Item Action Template --}}
+            {{> "systems/skjaald/templates/items/parts/item-action.html"}}
+        </div>
+
+        {{!-- Effects Tab --}}
+        <div class="tab effects flexcol" data-group="primary" data-tab="effects">
+            {{> "systems/skjaald/templates/actors/parts/active-effects.html"}}
+        </div>
+    </section>
+</form>
