@@ -481,11 +481,13 @@
   color: #191813;
 }
 .skjaald.sheet .items-list .item .item-name .item-image {
-  flex: 0 0 30px;
+  flex: 0 0 20px;
   height: 30px;
-  background-size: 30px;
+  background-size: 20px;
   border: none;
   margin-right: 5px;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 .skjaald.sheet .items-list .items-header {
   height: 28px;
@@ -997,7 +999,7 @@
   grid-template-rows: 100px 500px 100px 200px 1fr;
 }
 
-.skjaald.sheet.actor .spellsPage-grid{
+.skjaald.sheet.actor .spell-grid{
   display: grid;
   grid-template-areas: 
   "menu menu menu"
@@ -2033,10 +2035,17 @@
   text-align: right;
   color: #7a7971;
 }
-.skjaald.sheet.actor .spell-school,
+.skjaald.sheet.actor .spell-school{
+  flex: 0 0 63px;
+  font-size: 12px;
+  color: #7a7971;
+  text-align: center;
+  border-right: 1px solid #c9c7b8;
+}
+
 .skjaald.sheet.actor .spell-action,
 .skjaald.sheet.actor .spell-target {
-  flex: 0 0 100px;
+  flex: 0 0 46px;
   font-size: 12px;
   color: #7a7971;
   text-align: center;
@@ -2498,7 +2507,7 @@
 }
 .skjaald.sheet.actor.character .inventory .item-controls,
 .skjaald.sheet.actor.character .spellbook .item-controls {
-  flex: 0 0 68px;
+  flex: 0 0 38px;
 }
 .skjaald.sheet.actor.character .inventory .item-controls .item-toggle,
 .skjaald.sheet.actor.character .spellbook .item-controls .item-toggle {

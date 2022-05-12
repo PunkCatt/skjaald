@@ -152,6 +152,53 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       return (s.data.level > 0) && (s.data.preparation.mode === "prepared") && s.data.preparation.prepared;
     }).length;
 
+    //Sort Spells
+
+    const spellCantrip = {
+      cantrip: {label: "SKJAALD.Cantrips", items: [], dataset: {type: spells}},
+    }
+    const spellOne = {
+      one: {label: "SKJAALD.One", items: [], dataset: {type: spells}},
+    }
+    const spellTwo = {
+      two: {label: "SKJAALD.Two", items: [], dataset: {type: spells}},
+    }
+    const spellThree = {
+      three: {label: "SKJAALD.Three", items: [], dataset: {type: spells}},
+    }
+    const spellFour = {
+      four: {label: "SKJAALD.Four", items: [], dataset: {type: spells}},
+    }
+    const spellFive = {
+      five: {label: "SKJAALD.Five", items: [], dataset: {type: spells}},
+    }
+    const spellSix = {
+      six: {label: "SKJAALD.Six", items: [], dataset: {type: spells}},
+    }
+    const spellSeven = {
+      seven: {label: "SKJAALD.Seven", items: [], dataset: {type: spells}},
+    }
+    const spellEight = {
+      eight: {label: "SKJAALD.Eight", items: [], dataset: {type: spells}},
+    }
+    const spellNine = {
+      nine: {label: "SKJAALD.Nine", items: [], dataset: {type: spells}}
+    }
+
+    for (let s of spells){
+      console.log(s.labels.level);
+      if (s.labels.level == "Cantrip") spellCantrip.cantrip.items.push(s);
+      else if(s.labels.level == "1st Level") spellOne.one.items.push(s);
+      else if(s.labels.level == "2nd Level") spellTwo.two.items.push(s);
+      else if(s.labels.level == "3rd Level") spellThree.three.items.push(s);
+      else if(s.labels.level == "4th Level") spellFour.four.items.push(s);
+      else if(s.labels.level == "5th Level") spellFive.five.items.push(s);
+      else if(s.labels.level == "6th Level") spellSix.six.items.push(s);
+      else if(s.labels.level == "7th Level") spellSeven.seven.items.push(s);
+      else if(s.labels.level == "8th Level") spellEight.eight.items.push(s);
+      else if(s.labels.level == "9th Level") spellNine.nine.items.push(s);
+    }
+
     // Organize Features
     const features = {
       classes: { label: "SKJAALD.ItemTypeClassPl", items: [], hasActions: false, dataset: {type: "class"}, isClass: true },
@@ -216,6 +263,17 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     data.notes = Object.values(notes);
     data.backstory = Object.values(backstory);
     data.toolprofs = Object.values(toolprofs);
+    data.spellCantrip = Object.values(spellCantrip);
+    data.spellOne = Object.values(spellOne);
+    data.spellTwo = Object.values(spellTwo);
+    data.spellThree = Object.values(spellThree);
+    data.spellFour = Object.values(spellFour);
+    data.spellFive = Object.values(spellFive);
+    data.spellSix = Object.values(spellSix);
+    data.spellSeven = Object.values(spellSeven);
+    data.spellEight = Object.values(spellEight);
+    data.spellNine = Object.values(spellNine);
+
   }
 
   /* -------------------------------------------- */
