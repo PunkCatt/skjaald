@@ -21,6 +21,7 @@
         <a class="item" data-tab="biography">{{ localize "SKJAALD.Biography" }}</a>
         <a class="item" data-tab="notes">{{ localize "SKJAALD.Notes" }}</a>
         <a class="item" data-tab="inventory">{{ localize "SKJAALD.Equipment" }}</a>
+        <a class="item" data-tab="learning">{{ localize "SKJAALD.Learning" }}</a>
         <a class="item" data-tab="spellbook">{{ localize "SKJAALD.Spellbook" }}</a>
         <a class="item" data-tab="effects">{{ localize "SKJAALD.Effects" }}</a>
     </nav>
@@ -75,7 +76,7 @@
         </div>
 
         {{!-- Spellbook Tab --}}
-        <div class="tab spellbook flexcol" data-group="primary" data-tab="spellbook">
+        <div class="tab spellbook flexcol spellsPage-grid" data-group="primary" data-tab="spellbook">
             {{> "systems/skjaald/templates/actors/parts/actor-spellbook.html"}}
         </div>
 
@@ -87,6 +88,11 @@
         {{!-- Biography Tab --}}
         <div class="tab biography flexcol" data-group="primary" data-tab="biography">
             {{> "systems/skjaald/templates/actors/parts/actor-biography.html"}}
+        </div>
+
+        {{!-- Learning Tab --}}
+        <div class="tab learning flexcol" data-group="primary" data-tab="learning">
+            {{> "systems/skjaald/templates/actors/parts/actor-learning.html"}}
         </div>
     </section>
 </form>

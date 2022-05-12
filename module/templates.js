@@ -34,6 +34,8 @@ export const preloadHandlebarsTemplates = async function() {
     "systems/skjaald/templates/actors/parts/combat-attributes.html",
     "systems/skjaald/templates/actors/parts/actor-textblocks.html",
     "systems/skjaald/templates/actors/parts/actor-tool-profs.html",
+    "systems/skjaald/templates/actors/parts/actor-learning.html",
+
     
 
     // Item Sheet Partials

@@ -736,11 +736,11 @@
     "SKJAALD.SpellProgThird": "Third Caster",
     "SKJAALD.SpellProgression": "Spell Progression",
     "SKJAALD.SpellSaveDC": "Spell Save DC",
-    "SKJAALD.SpellSchool": "Spell School",
+    "SKJAALD.SpellSchool": "School",
     "SKJAALD.SpellScroll": "Spell Scroll",
-    "SKJAALD.SpellTarget": "Spell Target",
+    "SKJAALD.SpellTarget": "Target",
     "SKJAALD.SpellUnprepared": "Unprepared",
-    "SKJAALD.SpellUsage": "Spell Usage",
+    "SKJAALD.SpellUsage": "Usage",
     "SKJAALD.Spellbook": "Spellbook",
     "SKJAALD.StealthDisadvantage": "Stealth Disadvantage",
     "SKJAALD.SubclassName": "Subclass Name",
@@ -931,6 +931,7 @@
     "SKJAALD.Waist": "Waist",
     "SKJAALD.Rings": "Rings",
     "SKJAALD.Ring": "Ring",
+    "SKJAALD.Learning": "Learning",
 
     
     

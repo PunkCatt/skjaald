@@ -979,10 +979,105 @@
 .skjaald.sheet.actor .equipmentPage-grid {
   display: grid;
   grid-template-columns: 600px 1fr;
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-rows: 633px 1fr;
   grid-column-gap: 5px;
   grid-row-gap: 5px;
-  grid-template-areas: "holdings rationWater" "holdings money" "holdings heavy" "holdings other";
+  grid-template-areas: "holdings sidebar" "holdings sidebar";
+}
+.skjaald.sheet.actor .currencyRation-grid{
+  grid-area: sidebar;
+  display: grid;
+  grid-template-areas: 
+  "rationWater" 
+  "money" 
+  "heavy" 
+  "other";
+  grid-row-gap: 15px;
+  grid-column-gap: 15px;
+  grid-template-rows: 100px 500px 100px 200px 1fr;
+}
+
+.skjaald.sheet.actor .spellsPage-grid{
+  display: grid;
+  grid-template-areas: 
+  "menu menu menu"
+  "cantrips one two"
+  "three four five"
+  "six seven eight"
+  "six seven nine";
+  grid-row-gap: 5px;
+  grid-column-gap: 5px;
+  grid-template-rows: 60px 200px 200px 100px 100px 1fr;
+  grid-template-columns: repeat(3, 1fr);
+}
+.spellbook-filters{
+  grid-area: menu;
+}
+.spell-header{
+  background-image: url('./ui/frames/spells.png');
+  position: relative;
+  z-index: 1;
+
+}
+.cantrips{
+  grid-area: cantrips;
+}
+.cantrips .container-panel{
+  min-height: 195px;
+}
+.one{
+  grid-area: one;
+}
+.one .container-panel{
+  min-height: 195px;
+}
+.two{
+  grid-area: two;
+}
+.two .container-panel{
+  min-height: 195px;
+}
+.three{
+  grid-area: three;
+}
+.three .container-panel{
+  min-height: 195px;
+}
+.four{
+  grid-area: four;
+}
+.four .container-panel{
+  min-height: 195px;
+}
+.five{
+  grid-area: five;
+}
+.five .container-panel{
+  min-height: 195px;
+}
+.six{
+  grid-area: six;
+}
+.six .container-panel{
+  min-height: 195px;
+}
+.seven{
+  grid-area: seven;
+}
+.seven .container-panel{
+  min-height: 195px;
+}
+.eight{
+  grid-area: eight;
+}
+.eight .container-panel{
+  min-height: 95px;
+}
+.nine{
+  grid-area: nine;
+}
+.nine .container-panel{
+  min-height: 95px;
 }
 .skjaald.sheet.actor .container-box {
   display: flex;
@@ -2003,6 +2098,9 @@
 }
 .equipment-rationWater {
   grid-area: rationWater;
+}
+.skjaald.sheet.actor .sidebar .container-panel2{
+  flex-direction: row;
 }
 .equipment-money {
   grid-area: money;

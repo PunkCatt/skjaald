@@ -142,89 +142,89 @@
         </div>
     </div>
 
-    <div class="equipment-rationWater sheet-container-box">
-        <div class="container-panel">
-            <div class="sheet-container-header">{{ localize "SKJAALD.Rations" }}</div>
-            <div class="sheet-container-body">
-            <input type="hidden" name="" value="{{data.attributes.ration.value}}" data-dtype="Number"/>
-            <a class="proficiency-toggle skill-proficiency check-toggle-ration" title="Ration">{{{data.attributes.ration.icon1}}}</a>
-            <input type="hidden" name="" value="{{data.attributes.ration.value}}" data-dtype="Number"/>
-            <a class="proficiency-toggle skill-proficiency check-toggle-ration" title="Ration">{{{data.attributes.ration.icon2}}}</a>
-            <input type="hidden" name="" value="{{data.attributes.ration.value}}" data-dtype="Number"/>
-            <a class="proficiency-toggle skill-proficiency check-toggle-ration" title="Ration">{{{data.attributes.ration.icon3}}}</a>
-            <input type="hidden" name="" value="{{data.attributes.ration.value}}" data-dtype="Number"/>
-            <a class="proficiency-toggle skill-proficiency check-toggle-ration" title="Ration">{{{data.attributes.ration.icon4}}}</a>
-            <input type="hidden" name="" value="{{data.attributes.ration.value}}" data-dtype="Number"/>
-            <a class="proficiency-toggle skill-proficiency check-toggle-ration" title="Ration">{{{data.attributes.ration.icon5}}}</a>
+    <div class="sidebar currencyRation-grid">
+        <div class="equipment-rationWater sheet-container-box">
+            <div class="container-panel2">
+                <div class="sheet-container-header">{{ localize "SKJAALD.Rations" }}</div>
+                    <input type="hidden" name="" value="{{data.attributes.ration.value}}" data-dtype="Number"/>
+                    <a class="proficiency-toggle skill-proficiency check-toggle-ration" title="Ration">{{{data.attributes.ration.icon1}}}</a>
+                    <input type="hidden" name="" value="{{data.attributes.ration.value}}" data-dtype="Number"/>
+                    <a class="proficiency-toggle skill-proficiency check-toggle-ration" title="Ration">{{{data.attributes.ration.icon2}}}</a>
+                    <input type="hidden" name="" value="{{data.attributes.ration.value}}" data-dtype="Number"/>
+                    <a class="proficiency-toggle skill-proficiency check-toggle-ration" title="Ration">{{{data.attributes.ration.icon3}}}</a>
+                    <input type="hidden" name="" value="{{data.attributes.ration.value}}" data-dtype="Number"/>
+                    <a class="proficiency-toggle skill-proficiency check-toggle-ration" title="Ration">{{{data.attributes.ration.icon4}}}</a>
+                    <input type="hidden" name="" value="{{data.attributes.ration.value}}" data-dtype="Number"/>
+                    <a class="proficiency-toggle skill-proficiency check-toggle-ration" title="Ration">{{{data.attributes.ration.icon5}}}</a>
+                
+            </div>
+            <div class="container-panel2">
+                <div class="sheet-container-header">{{ localize "SKJAALD.Waterskin" }}</div>
+                <div class="sheet-container-body">
+                    <input type="hidden" name="" value="{{data.attributes.waterskin.value}}" data-dtype="Number"/>
+                    <a class="proficiency-toggle skill-proficiency check-toggle-waterskin" title="Ration">{{{data.attributes.waterskin.icon1}}}</a>
+                    <input type="hidden" name="" value="{{data.attributes.waterskin.value}}" data-dtype="Number"/>
+                    <a class="proficiency-toggle skill-proficiency check-toggle-waterskin" title="Ration">{{{data.attributes.waterskin.icon2}}}</a>
+                    <input type="hidden" name="" value="{{data.attributes.waterskin.value}}" data-dtype="Number"/>
+                    <a class="proficiency-toggle skill-proficiency check-toggle-waterskin" title="Ration">{{{data.attributes.waterskin.icon3}}}</a>
+                    <input type="hidden" name="" value="{{data.attributes.waterskin.value}}" data-dtype="Number"/>
+                    <a class="proficiency-toggle skill-proficiency check-toggle-waterskin" title="Ration">{{{data.attributes.waterskin.icon4}}}</a>
+                    <input type="hidden" name="" value="{{data.attributes.waterskin.value}}" data-dtype="Number"/>
+                    <a class="proficiency-toggle skill-proficiency check-toggle-waterskin" title="Ration">{{{data.attributes.waterskin.icon5}}}</a>
+                    </div>
             </div>
         </div>
-        <div class="container-panel">
-            <div class="sheet-container-header">{{ localize "SKJAALD.Waterskin" }}</div>
-            <div class="sheet-container-body">
-                <input type="hidden" name="" value="{{data.attributes.waterskin.value}}" data-dtype="Number"/>
-                <a class="proficiency-toggle skill-proficiency check-toggle-waterskin" title="Ration">{{{data.attributes.waterskin.icon1}}}</a>
-                <input type="hidden" name="" value="{{data.attributes.waterskin.value}}" data-dtype="Number"/>
-                <a class="proficiency-toggle skill-proficiency check-toggle-waterskin" title="Ration">{{{data.attributes.waterskin.icon2}}}</a>
-                <input type="hidden" name="" value="{{data.attributes.waterskin.value}}" data-dtype="Number"/>
-                <a class="proficiency-toggle skill-proficiency check-toggle-waterskin" title="Ration">{{{data.attributes.waterskin.icon3}}}</a>
-                <input type="hidden" name="" value="{{data.attributes.waterskin.value}}" data-dtype="Number"/>
-                <a class="proficiency-toggle skill-proficiency check-toggle-waterskin" title="Ration">{{{data.attributes.waterskin.icon4}}}</a>
-                <input type="hidden" name="" value="{{data.attributes.waterskin.value}}" data-dtype="Number"/>
-                <a class="proficiency-toggle skill-proficiency check-toggle-waterskin" title="Ration">{{{data.attributes.waterskin.icon5}}}</a>
+        <div class="equipment-money sheet-container-box">
+            <div class="container-panel">
+                <div class="sheet-container-header">{{ localize "SKJAALD.Copper" }}</div>
+                <div class="sheet-container-body">
+                    <input type="text" name="data.currency.cp" value="{{data.currency.cp}}" data-dtype="Number"/>
                 </div>
+            </div>
+            <div class="container-panel">
+                <div class="sheet-container-header">{{ localize "SKJAALD.Gold" }}</div>
+                <div class="sheet-container-body">
+                    <input type="text" name="data.currency.gp" value="{{data.currency.gp}}" data-dtype="Number"/>
+                </div>
+            </div>
+            <div class="container-panel">
+                <div class="sheet-container-header">{{ localize "SKJAALD.Silver" }}</div>
+                <div class="sheet-container-body">
+                    <input type="text" name="data.currency.sp" value="{{data.currency.sp}}" data-dtype="Number"/>
+                </div>
+            </div>
+            <div class="container-panel">
+                <div class="sheet-container-header">{{ localize "SKJAALD.Platinum" }}</div>
+                <div class="sheet-container-body">
+                    <input type="text" name="data.currency.pp" value="{{data.currency.pp}}" data-dtype="Number"/>
+                </div>
+            </div>
+            <div class="container-panel">
+                <div class="sheet-container-header">{{ localize "SKJAALD.Marks" }}</div>
+                <div class="sheet-container-body">
+                    <input type="text" name="data.currency.marks" value="{{data.currency.marks}}" data-dtype="Number"/>
+                </div>
+            </div>
+            <div class="container-panel">
+                <div class="sheet-container-header">{{ localize "SKJAALD.Other" }}</div>
+                <div class="sheet-container-body">
+                    <input type="text" name="data.currency.other" value="{{data.currency.other}}" data-dtype="Number"/>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <div class="equipment-money sheet-container-box">
-        <div class="container-panel">
-            <div class="sheet-container-header">{{ localize "SKJAALD.Copper" }}</div>
+        <div class="equipment-weight sheet-container-box container-panel">
+            <div class="sheet-container-header">{{ localize "SKJAALD.Weight" }}</div>
             <div class="sheet-container-body">
-                <input type="text" name="data.currency.cp" value="{{data.currency.cp}}" data-dtype="Number"/>
+                <textarea name="attr_backstory" title="@{backstory}"></textarea>
             </div>
         </div>
-        <div class="container-panel">
-            <div class="sheet-container-header">{{ localize "SKJAALD.Gold" }}</div>
-            <div class="sheet-container-body">
-                <input type="text" name="data.currency.gp" value="{{data.currency.gp}}" data-dtype="Number"/>
-            </div>
-        </div>
-        <div class="container-panel">
-            <div class="sheet-container-header">{{ localize "SKJAALD.Silver" }}</div>
-            <div class="sheet-container-body">
-                <input type="text" name="data.currency.sp" value="{{data.currency.sp}}" data-dtype="Number"/>
-            </div>
-        </div>
-        <div class="container-panel">
-            <div class="sheet-container-header">{{ localize "SKJAALD.Platinum" }}</div>
-            <div class="sheet-container-body">
-                <input type="text" name="data.currency.pp" value="{{data.currency.pp}}" data-dtype="Number"/>
-            </div>
-        </div>
-        <div class="container-panel">
-            <div class="sheet-container-header">{{ localize "SKJAALD.Marks" }}</div>
-            <div class="sheet-container-body">
-                <input type="text" name="data.currency.marks" value="{{data.currency.marks}}" data-dtype="Number"/>
-            </div>
-        </div>
-        <div class="container-panel">
-            <div class="sheet-container-header">{{ localize "SKJAALD.Other" }}</div>
-            <div class="sheet-container-body">
-                <input type="text" name="data.currency.other" value="{{data.currency.other}}" data-dtype="Number"/>
-            </div>
-        </div>
-    </div>
 
-    <div class="equipment-weight sheet-container-box container-panel">
-        <div class="sheet-container-header">{{ localize "SKJAALD.Weight" }}</div>
-        <div class="sheet-container-body">
-            <textarea name="attr_backstory" title="@{backstory}"></textarea>
-        </div>
-    </div>
-
-    <div class="equipment-other sheet-container-box container-panel">
-        <div class="sheet-container-header">{{ localize "SKJAALD.Equipment" }}</div>
-        <div class="sheet-container-body">
-            <textarea name="attr_backstory" title="@{backstory}"></textarea>
+        <div class="equipment-other sheet-container-box container-panel">
+            <div class="sheet-container-header">{{ localize "SKJAALD.Equipment" }}</div>
+            <div class="sheet-container-body">
+                <textarea name="attr_backstory" title="@{backstory}"></textarea>
+            </div>
         </div>
     </div>
 </div>
