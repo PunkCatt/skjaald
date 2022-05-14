@@ -186,7 +186,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     }
 
     for (let s of spells){
-      console.log(s.labels.level);
       if (s.labels.level == "Cantrip") spellCantrip.cantrip.items.push(s);
       else if(s.labels.level == "1st Level") spellOne.one.items.push(s);
       else if(s.labels.level == "2nd Level") spellTwo.two.items.push(s);

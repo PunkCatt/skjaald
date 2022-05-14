@@ -1,4 +1,4 @@
-<form class="{{cssClass}} flexcol" autocomplete="off">
+<form class="{{cssClass}} spells flexcol" autocomplete="off">
 
     {{!-- Item Sheet Header --}}
     <header class="sheet-header flexrow">
@@ -69,6 +69,26 @@
                 </select>
             </div>
 
+            {{!-- Resolution --}}
+            <div class="form-group">
+                <label>{{ localize "SKJAALD.SpellResolution" }}</label>
+                <select name="data.resolution">
+                    {{#select data.resolution}}
+                    <option value="none"> {{localize "SKJAALD.None"}}</option>
+                    {{#each config.spellResolution as |name res|}}
+                    <option value="{{res}}">{{localize name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+
+            {{!-- Spell Level Scaling --}}
+            <div class="form-group stacked">
+                <label>{{ localize "SKJAALD.LevelScaling" }}</label>
+                <input type="text" name="data.scaling.formula" value="{{data.scaling.formula}}" placeholder="{{ localize 'SKJAALD.ScalingFormula' }}"/>
+
+            </div>
+
             {{!-- Spell Components --}}
             <div class="spell-components form-group stacked">
                 <label>{{ localize "SKJAALD.SpellComponents" }}</label>
@@ -123,25 +143,18 @@
             {{!-- Item Activation Template --}}
             {{> "systems/skjaald/templates/items/parts/item-activation.html"}}
 
-            <h3 class="form-header">{{ localize "SKJAALD.SpellEffects" }}</h3>
-
-            {{!-- Item Action Template --}}
-            {{> "systems/skjaald/templates/items/parts/item-action.html"}}
-
-            {{!-- Spell Level Scaling --}}
-            <div class="form-group">
-                <label>{{ localize "SKJAALD.LevelScaling" }}</label>
-                <div class="form-fields">
-                    <select name="data.scaling.mode">
-                        {{#select data.scaling.mode}}
-                        {{#each config.spellScalingModes as |name key|}}
-                        <option value="{{key}}">{{name}}</option>
-                        {{/each}}
-                        {{/select}}
-                    </select>
-                    <input type="text" name="data.scaling.formula" value="{{data.scaling.formula}}" placeholder="{{ localize 'SKJAALD.ScalingFormula' }}"/>
+            <h3 class="form-header">
+                <div>
+                    {{ localize "SKJAALD.SpellEffects" }}
                 </div>
-            </div>
+                <div>
+                    <a class="spell-effect-control add-effect"><i class="fas fa-plus"></i></a>
+                </div>
+                </h3>
+
+                {{!-- Item Action Template --}}
+                {{> "systems/skjaald/templates/items/parts/item-action.html"}}
+
         </div>
 
         {{!-- Effects Tab --}}

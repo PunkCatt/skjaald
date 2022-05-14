@@ -28,7 +28,7 @@ export default class Item5e extends Item {
       const actorData = this.actor.data.data;
 
       // Spells - Use Actor spellcasting modifier
-      if (this.data.type === "spell") return actorData.attributes.spellcasting || "int";
+      if (this.data.type === "spell") return actorData.attributes.spellcasting.ability || "int";
 
       // Tools - default to Intelligence
       else if (this.data.type === "tool") return "int";
@@ -199,7 +199,6 @@ export default class Item5e extends Item {
 
     // Resoures
     if ( itemData.type === "resource" ) {
-      console.log("type is resource");
     }
 
     // Spell Level,  School, and Components
@@ -351,7 +350,7 @@ export default class Item5e extends Item {
 
     // Actor spell-DC based scaling
     if ( save.scaling === "spell" ) {
-      save.dc = this.isOwned ? getProperty(this.actor.data, "data.attributes.spelldc") : null;
+      save.dc = this.isOwned ? getProperty(this.actor.data, "data.attributes.spellcasting.spelldc") : null;
     }
 
     // Ability-score based scaling
@@ -512,7 +511,7 @@ export default class Item5e extends Item {
     const recharge = id.recharge || {};       // Recharge mechanic
     const uses = id?.uses ?? {};              // Limited uses
     const isSpell = this.type === "spell";    // Does the item require a spell slot?
-    const requireSpellSlot = isSpell && (id.level > 0) && CONFIG.SKJAALD.spellUpcastModes.includes(id.preparation.mode);
+    const requireSpellSlot = false;
 
     // Define follow-up actions resulting from the item usage
     let createMeasuredTemplate = hasArea;       // Trigger a template creation
@@ -617,17 +616,17 @@ export default class Item5e extends Item {
     }
 
     // Consume Spell Slots
-    if ( consumeSpellLevel ) {
-      if ( Number.isNumeric(consumeSpellLevel) ) consumeSpellLevel = `spell${consumeSpellLevel}`;
-      const level = this.actor?.data.data.spells[consumeSpellLevel];
-      const spells = Number(level?.value ?? 0);
-      if ( spells === 0 ) {
-        const label = game.i18n.localize(consumeSpellLevel === "pact" ? "SKJAALD.SpellProgPact" : `SKJAALD.SpellLevel${id.level}`);
-        ui.notifications.warn(game.i18n.format("SKJAALD.SpellCastNoSlots", {name: this.name, level: label}));
-        return false;
-      }
-      actorUpdates[`data.spells.${consumeSpellLevel}.value`] = Math.max(spells - 1, 0);
-    }
+    // if ( consumeSpellLevel ) {
+    //   if ( Number.isNumeric(consumeSpellLevel) ) consumeSpellLevel = `spell${consumeSpellLevel}`;
+    //   const level = this.actor?.data.data.spells[consumeSpellLevel];
+    //   const spells = Number(level?.value ?? 0);
+    //   if ( spells === 0 ) {
+    //     const label = game.i18n.localize(consumeSpellLevel === "pact" ? "SKJAALD.SpellProgPact" : `SKJAALD.SpellLevel${id.level}`);
+    //     ui.notifications.warn(game.i18n.format("SKJAALD.SpellCastNoSlots", {name: this.name, level: label}));
+    //     return false;
+    //   }
+    //   actorUpdates[`data.spells.${consumeSpellLevel}.value`] = Math.max(spells - 1, 0);
+    // }
 
     // Consume Limited Usage
     if ( consumeUsage ) {

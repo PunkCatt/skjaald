@@ -8,12 +8,11 @@
             <div class="spell-action">{{localize "SKJAALD.SpellUsage"}}</div>
     
             <div class="item-controls flexrow">
-                <a class="item-control item-create" title="{{localize 'SKJAALD.SpellCreate'}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
+                <a class="item-control item-create {{localize section.label}}" title="{{localize 'SKJAALD.SpellCreate'}}" {{#each section.dataset as |v k|}}data-type="spell"{{/each}}>
                     <i class="fas fa-plus"></i> {{localize "SKJAALD.Add"}}
                 </a>
             </div>
         </li>
-    {{log section}}
         <ol class="item-list">
         {{#each section.items as |item i|}}
             <li class="item flexrow" data-item-id="{{item._id}}">

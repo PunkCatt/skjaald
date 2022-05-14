@@ -2747,3 +2747,7 @@
 .armorDude select{
   width: 97px;
 }
+.spells .details .editor,
+.weapons .details .editor{
+  height: 25%;
+}

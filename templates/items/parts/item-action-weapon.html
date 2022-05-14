@@ -152,7 +152,7 @@
             <select name="data.attacks.{{a}}.consumetarget">
                 {{#select (lookup this "consumetarget")}}
                 <option value=""></option>
-                {{#each ../abilityConsumptionTargetsAmmo as |name key|}}
+                {{#each abilityConsumptionTargetsAmmo as |name key|}}
                 <option value="{{key}}">{{name}}</option>
                 {{/each}}
                 {{/select}}
@@ -163,7 +163,7 @@
             <select name="data.attacks.{{a}}.consumetarget">
                 {{#select (lookup this "consumetarget")}}
                 <option value=""></option>
-                {{#each ../abilityConsumptionTargetsAttribute as |name key|}}
+                {{#each ../../abilityConsumptionTargetsAttribute as |name key|}}
                 <option value="{{key}}">{{name}}</option>
                 {{/each}}
                 {{/select}}
@@ -197,34 +197,28 @@
     </div>
 
     {{!-- Attack Roll Bonus --}}
-    {{#if hasAttackRoll }}
     <div class="form-group">
         <label>{{ localize "SKJAALD.ItemAttackBonus" }}</label>
         <div class="form-fields">
             <input type="text" name="data.attacks.{{a}}.attackBonus" value="{{lookup this "attackBonus"}}"/>
         </div>
     </div>
-    {{/if}}
 
     {{!-- Critical Hit Threshold --}}
-    {{#if hasAttackRoll }}
     <div class="form-group">
         <label>{{ localize "SKJAALD.ItemCritThreshold" }}</label>
         <div class="form-fields">
-            {{ numberInput data.critical.threshold name="data.critical.threshold" placeholder="20" max=20 min=1 step=1 }}
+            <input type="number" name= "data.attacks.{{a}}.criticalThreshold" value="{{lookup this "criticalThreshold"}}" miin="1" max="20" step="1" placeholder="20"/>
         </div>
     </div>
-    {{/if}}
 
     {{!-- Critical Hit Damage --}}
-    {{#if hasAttackRoll }}
     <div class="form-group">
         <label>{{ localize "SKJAALD.ItemCritExtraDamage" }}</label>
         <div class="form-fields">
             <input type="text" name="data.attacks.{{a}}.criticaldamage" value="{{lookup this "criticaldamage"}}">
         </div>
     </div>
-    {{/if}}
 
     {{!-- Damage Formula --}}
     <h4 class="damage-header">
@@ -246,7 +240,7 @@
                 {{/each}}
                 {{/select}}
             </select>
-            <a class="damage-control delete-damage {{a}} {{i}}"><i class="fas fa-minus"></i></a>
+            <a class="damage-control delete-damage-spell {{a}} {{i}}"><i class="fas fa-minus"></i></a>
         </li>
         {{/each}}
     </ol>
@@ -277,10 +271,16 @@
         </div>
     </div>
 
-    {{!-- Chat Message Flavor --}}
     <div class="form-group stacked">
-        <label>{{ localize "SKJAALD.ChatFlavor" }}</label>
-        <input type="text" name="data.attacks.{{a}}.chatFlavor" value="{{lookup this "chatFlavor"}}"/>
+        <label>{{ localize "SKJAALD.Description" }}</label>
+    </div>
+
+    {{!-- Chat Message Flavor --}}
+    <div class="editor">
+        <div class="editor-content" data-edit="data.attacks.{{a}}.chatFlavor">{{lookup this 'chatFlavor'}}</div>
+        <a class="editor-edit">
+            <i class="fas fa-edit"></i>
+        </a>
     </div>
     {{/if}}
 {{/each}}

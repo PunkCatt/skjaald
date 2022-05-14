@@ -54,6 +54,7 @@
 </div>
 {{/if}}
 
+{{#unless (eq itemType 'Spell')}}
 {{!-- Ability Target --}}
 <div class="form-group input-select-select">
     <label>{{ localize "SKJAALD.Target" }}</label>
@@ -105,6 +106,7 @@
         </select>
     </div>
 </div>
+{{/unless}}
 
 {{!-- Effect Duration --}}
 <div class="form-group input-select">
@@ -140,7 +142,6 @@
         </select>
     </div>
 </div>
-
 {{!-- Consumption --}}
 <div class="form-group uses-per">
     <label>{{ localize "SKJAALD.ConsumeTitle" }}</label>

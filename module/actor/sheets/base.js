@@ -1486,11 +1486,18 @@ export default class ActorSheet5e extends ActorSheet {
     event.preventDefault();
     const header = event.currentTarget;
     const type = header.dataset.type;
-    const itemData = {
-      name: game.i18n.format("SKJAALD.ItemNew", {type: game.i18n.localize(`SKJAALD.ItemType${type.capitalize()}`)}),
-      type: type,
-      data: foundry.utils.deepClone(header.dataset)
-    };
+      const itemData = {
+        name: game.i18n.format("SKJAALD.ItemNew", {type: game.i18n.localize(`SKJAALD.ItemType${type.capitalize()}`)}),
+        type: type,
+        data: foundry.utils.deepClone(header.dataset)
+      };
+    if (type == "spell"){
+      var level = event.currentTarget.classList[2];
+      if (level == "Cantrip"){
+        level = 0;
+      }
+      itemData.data.level = level;
+    }
     delete itemData.data.type;
     return this.actor.createEmbeddedDocuments("Item", [itemData]);
   }

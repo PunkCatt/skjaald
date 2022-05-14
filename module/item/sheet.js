@@ -136,61 +136,68 @@ export default class ItemSheet5e extends ItemSheet {
    */
   _getItemConsumptionTargets(item, category) {
     const consume = item.data.consume || {};
+
+
     if ( !consume.type ) return [];
     const actor = this.item.actor;
+
     if ( !actor ) return {};
 
-    // Ammunition
-    if ( category === "ammo" ) {
-      return actor.itemTypes.consumable.reduce((ammo, i) => {
-        if ( i.data.data.consumableType === "ammo" ) {
-          ammo[i.id] = `${i.name} (${i.data.data.quantity})`;
-        }
-        return ammo;
-      }, {[item._id]: `${item.name} (${item.data.quantity})`});
-    }
+    
 
-    // Attributes
-    else if ( category === "attribute" ) {
-      const attributes = TokenDocument.implementation.getConsumedAttributes(actor.data.data);
-      attributes.bar.forEach(a => a.push("value"));
-      return attributes.bar.concat(attributes.value).reduce((obj, a) => {
-        let k = a.join(".");
-        obj[k] = k;
-        return obj;
-      }, {});
-    }
+      // Ammunition
+      if ( category === "ammo" ) {
 
-    // Materials
-    else if ( category === "material" ) {
-      return actor.items.reduce((obj, i) => {
-        if ( ["consumable", "loot"].includes(i.data.type) && !i.data.data.activation ) {
-          obj[i.id] = `${i.name} (${i.data.data.quantity})`;
-        }
-        return obj;
-      }, {});
-    }
+        return actor.itemTypes.consumable.reduce((ammo, i) => {
 
-    // Charges
-    else if ( category === "charges" ) {
-      return actor.items.reduce((obj, i) => {
+          if ( i.data.data.consumableType === "ammo" ) {
+            ammo[i.id] = `${i.name} (${i.data.data.quantity})`;
+          }
+          return ammo;
+        }, {[item._id]: `${item.name} (${item.data.quantity})`});
+      }
 
-        // Limited-use items
-        const uses = i.data.data.uses || {};
-        if ( uses.per && uses.max ) {
-          const label = uses.per === "charges"
-            ? ` (${game.i18n.format("SKJAALD.AbilityUseChargesLabel", {value: uses.value})})`
-            : ` (${game.i18n.format("SKJAALD.AbilityUseConsumableLabel", {max: uses.max, per: uses.per})})`;
-          obj[i.id] = i.name + label;
-        }
+      // Attributes
+      else if ( category === "attribute" ) {
+        const attributes = TokenDocument.implementation.getConsumedAttributes(actor.data.data);
+        attributes.bar.forEach(a => a.push("value"));
+        return attributes.bar.concat(attributes.value).reduce((obj, a) => {
+          let k = a.join(".");
+          obj[k] = k;
+          return obj;
+        }, {});
+      }
 
-        // Recharging items
-        const recharge = i.data.data.recharge || {};
-        if ( recharge.value ) obj[i.id] = `${i.name} (${game.i18n.format("SKJAALD.Recharge")})`;
-        return obj;
-      }, {});
-    }
-    else return {};
+      // Materials
+      else if ( category === "material" ) {
+        return actor.items.reduce((obj, i) => {
+          if ( ["consumable", "loot"].includes(i.data.type) && !i.data.data.activation ) {
+            obj[i.id] = `${i.name} (${i.data.data.quantity})`;
+          }
+          return obj;
+        }, {});
+      }
+
+      // Charges
+      else if ( category === "charges" ) {
+        return actor.items.reduce((obj, i) => {
+
+          // Limited-use items
+          const uses = i.data.data.uses || {};
+          if ( uses.per && uses.max ) {
+            const label = uses.per === "charges"
+              ? ` (${game.i18n.format("SKJAALD.AbilityUseChargesLabel", {value: uses.value})})`
+              : ` (${game.i18n.format("SKJAALD.AbilityUseConsumableLabel", {max: uses.max, per: uses.per})})`;
+            obj[i.id] = i.name + label;
+          }
+
+          // Recharging items
+          const recharge = i.data.data.recharge || {};
+          if ( recharge.value ) obj[i.id] = `${i.name} (${game.i18n.format("SKJAALD.Recharge")})`;
+          return obj;
+        }, {});
+      }
+      else return {};
   }
 
   /* -------------------------------------------- */
@@ -332,6 +339,7 @@ export default class ItemSheet5e extends ItemSheet {
     if ( this.isEditable ) {
       html.find(".damage-control").click(this._onDamageControl.bind(this));
       html.find(".attack-control").click(this._onAttackControl.bind(this));
+      html.find(".spell-effect-control").click(this._onEffectControl.bind(this));
       html.find(".trait-selector").click(this._onConfigureTraits.bind(this));
       html.find(".effect-control").click(ev => {
         if ( this.item.isOwned ) return ui.notifications.warn("Managing Active Effects within an Owned Item is not currently supported and will be added in a subsequent update.");
@@ -369,6 +377,19 @@ export default class ItemSheet5e extends ItemSheet {
       return this.item.update({[name]: attacks}, {});
     }
 
+    if ( a.classList.contains("add-damage-spell") ) {
+      await this._onSubmit(event);  // Submit any unsaved changes
+      const target = event.currentTarget.className;
+      const parts = target.split(' ');
+      const index = parts[2];
+
+      const name = "data.effects." + index + ".damageparts";     
+
+      const attacks = Object.values(this.item.data.data.effects[index].damageparts || []); 
+      attacks.push({0: "", 1: ""});
+      return this.item.update({[name]: attacks}, {});
+    }
+
     // Remove a damage component
     if ( a.classList.contains("delete-damage") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
@@ -387,7 +408,25 @@ export default class ItemSheet5e extends ItemSheet {
       attacks.splice(index2, 1);
       return this.item.update({ [name]: attacks}, {});
 
-      return this.item.update({"data.damage.parts": damage.parts});
+    }
+
+    if ( a.classList.contains("delete-damage-spell") ) {
+      await this._onSubmit(event);  // Submit any unsaved changes
+      const li = a.closest(".damage-part");
+
+
+      const target = event.currentTarget.className;
+      const parts = target.split(' ');
+      const index = parseInt(parts[2]);
+      const index2 = parseInt(parts[3]);
+      const name = "data.effects." + index + ".damageparts";
+
+
+
+      const attacks =  Object.values(this.item.data.data.effects[index].damageparts || []);
+      attacks.splice(index2, 1);
+      return this.item.update({ [name]: attacks}, {});
+
     }
   }
 
@@ -407,7 +446,7 @@ export default class ItemSheet5e extends ItemSheet {
     if ( a.classList.contains("add-attack") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
       const attacks = Object.values(this.item.data.data.attacks || []); 
-      attacks.push({name: "Weapon Attack", actionType: null});
+      attacks.push({name: "Weapon Attack", actionType: null, criticalThreshold: "20"});
       return this.item.update({"data.attacks": attacks}, {});
     }
 
@@ -422,6 +461,39 @@ export default class ItemSheet5e extends ItemSheet {
       return this.item.update({ "data.attacks": attacks}, {});
     }
   }
+
+    /* -------------------------------------------- */
+
+  /**
+ * Add or remove a weapon attack part from a weapon.
+ * @param {Event} event             The original click event.
+ * @returns {Promise<Item5e>|null}  Item with updates applied.
+ * @private
+ */
+   async _onEffectControl(event) {
+    event.preventDefault();
+    const a = event.currentTarget;
+
+    // Add new damage component
+    if ( a.classList.contains("add-effect") ) {
+      await this._onSubmit(event);  // Submit any unsaved 
+      const effects = Object.values(this.item.data.data.effects || []); 
+      effects.push({name: "Spell Effect", actionType: null});
+      return this.item.update({"data.effects": effects}, {});
+    }
+
+    // Remove a damage component
+    if ( a.classList.contains("delete-effect") ) {
+      await this._onSubmit(event);  // Submit any unsaved changes
+      const target = event.currentTarget.className;
+      const parts = target.split(' ');
+      const index = parseInt(parts[2]);
+      const effects =  Object.values(this.item.data.data.effects || []);
+      effects.splice(index, 1);
+      return this.item.update({ "data.effects": effects}, {});
+    }
+  }
+
 
   /* -------------------------------------------- */
 

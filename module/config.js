@@ -920,7 +920,19 @@ SKJAALD.spellSchools = {
   evo: "SKJAALD.SchoolEvo",
   ill: "SKJAALD.SchoolIll",
   nec: "SKJAALD.SchoolNec",
-  trs: "SKJAALD.SchoolTrs"
+  trs: "SKJAALD.SchoolTrs",
+  bio: "SKJAALD.SchoolBio",
+  nat: "SKJAALD.SchoolNat",
+  din: "SKJAALD.SchoolDin"
+};
+
+/**
+ * Times a spell can resolve.
+ * @enum {string}
+ */
+ SKJAALD.spellResolution = {
+  sp: "SKJAALD.ResolutionSpellPhase",
+  in: "SKJAALD.ResolutionInstant"
 };
 
 /**

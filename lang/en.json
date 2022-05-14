@@ -638,11 +638,14 @@
     "SKJAALD.SavePromptTitle": "{ability} Saving Throw",
     "SKJAALD.ScalingFormula": "Scaling Formula",
     "SKJAALD.SchoolAbj": "Abjuration",
+    "SKJAALD.SchoolBio": "Biomancy",
     "SKJAALD.SchoolCon": "Conjuration",
     "SKJAALD.SchoolDiv": "Divination",
+    "SKJAALD.SchoolDin": "Divine",
     "SKJAALD.SchoolEnc": "Enchantment",
     "SKJAALD.SchoolEvo": "Evocation",
     "SKJAALD.SchoolIll": "Illusion",
+    "SKJAALD.SchoolNat": "Nature",
     "SKJAALD.SchoolNec": "Necromancy",
     "SKJAALD.SchoolTrs": "Transmutation",
     "SKJAALD.Short": "Short",
@@ -942,6 +945,10 @@
     "SKJAALD.Seven": "7",
     "SKJAALD.Eight": "8",
     "SKJAALD.Nine": "9",
+    "SKJAALD.ResolutionSpellPhase": "Spell Phase",
+    "SKJAALD.ResolutionInstant": "Instant",
+    "SKJAALD.SpellResolution": "Resolution",
+    "SKJAALD.EffectDescription": "Effect Description",
 
 
     

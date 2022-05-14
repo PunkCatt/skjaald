@@ -601,6 +601,7 @@
         "alternateDamage": "",
         "attackBonus": 0,
         "chatFlavor": "",
+        "criticalThreshold": 20,
         "critical": null,
         "damage": {
           "parts": [],
@@ -704,6 +705,7 @@
       "templates": ["itemDescription", "activatedEffect", "action"],
       "level": 1,
       "school": "",
+      "effects": [],
       "components": {
         "value": "",
         "vocal": false,
@@ -733,6 +735,7 @@
         {
           "name":"Weapon Attack",
           "actiontype": null,
+          "criticalThreshold": "20",
           "damageparts": ["",""]
         }
       ],
