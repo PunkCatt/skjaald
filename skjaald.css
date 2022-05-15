@@ -1038,6 +1038,9 @@
 .spell-list .sheet-container-body{
   min-height: 315px;
 }
+.other-learning .sheet-container-body{
+  min-height: 455px;
+}
 .pillar{
   grid-area: pillar;
 }

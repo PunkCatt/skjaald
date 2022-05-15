@@ -101,11 +101,8 @@ export default class ItemSheet5e extends ItemSheet {
     }
 
     // regular learning calculation
-    console.log(data.itemType);
     if(data.itemType == "Proficiency" || data.itemType == "Other Learning"){
-      console.log("in regular learning calc");
       if(data.data.learning.currently){
-        console.log(data.data.learning.level);
         if (data.data.learning.level == 1){
           data.data.learning.hoursNeeded = 1000 - data.data.learning.hours;
         } else if (data.data.learning.level == 2){

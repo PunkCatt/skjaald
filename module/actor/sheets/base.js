@@ -1505,6 +1505,28 @@ export default class ActorSheet5e extends ActorSheet {
       itemData.data.level = level;
 
     }
+
+    if (type == "prof"){
+      if (event.currentTarget.classList[2] == "Tools"){
+        itemData.data.category = "Tool";
+      } else if (event.currentTarget.classList[2] == "Armor"){
+        itemData.data.category = "Armor";
+      } else if (event.currentTarget.classList[2] == "Weapons"){
+        itemData.data.category = "Weapon";
+      } else if (event.currentTarget.classList[2] == "Languages"){
+        itemData.data.category = "Language";
+      }
+    }
+    if (type == "otherLearn"){
+      console.log(event);
+      if (event.currentTarget.classList[2] == "Other"){
+        itemData.data.category = "other";
+      } else if (event.currentTarget.classList[2] == "Skills"){
+        itemData.data.category = "Skill";
+      }
+    }
+    console.log(type);
+
     delete itemData.data.type;
     return this.actor.createEmbeddedDocuments("Item", [itemData]);
   }
