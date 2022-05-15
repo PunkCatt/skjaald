@@ -309,6 +309,8 @@ export default class ActorSheet5e extends ActorSheet {
 
 
 
+
+
     // Return data to the sheet
     return data;
   }
@@ -1493,11 +1495,15 @@ export default class ActorSheet5e extends ActorSheet {
       };
     if (type == "spell"){
       var level = event.currentTarget.classList[2];
-      console.log(level);
-      if (level == "Cantrip"){
+      if (level == "Cantrips"){
         level = 0;
       }
+      if (level == "Spell"){
+        level = 0;
+        itemData.data.learningNow = true;
+      }
       itemData.data.level = level;
+
     }
     delete itemData.data.type;
     return this.actor.createEmbeddedDocuments("Item", [itemData]);

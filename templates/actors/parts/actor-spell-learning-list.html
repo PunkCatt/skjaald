@@ -4,11 +4,12 @@
             <div class="item-name flexrow">
                 <h3>{{localize section.label}}</h3>
             </div>
+            <div class="spell-action">{{localize "SKJAALD.HoursNeeded"}}</div>
+            <div class="spell-action">{{localize "SKJAALD.ArcanaNeeded"}}</div>
+            <div class="spell-action">{{localize "SKJAALD.Level"}}</div>
             <div class="spell-school">{{localize "SKJAALD.SpellSchool"}}</div>
-            <div class="spell-action">{{localize "SKJAALD.SpellUsage"}}</div>
-    
             <div class="item-controls flexrow">
-                <a class="item-control item-create {{localize section.label}}" title="{{localize 'SKJAALD.SpellCreate'}}" {{#each section.dataset as |v k|}}data-type="spell"{{/each}}>
+                <a class="item-control item-create {{localize section.label}} learn-a-spell" title="{{localize 'SKJAALD.SpellCreate'}}" {{#each section.dataset as |v k|}}data-type="spell"{{/each}}>
                     <i class="fas fa-plus"></i> {{localize "SKJAALD.Add"}}
                 </a>
             </div>
@@ -22,14 +23,12 @@
                         {{#if item.data.uses.per }}
                         <div class="item-detail spell-uses">Uses {{item.data.uses.value}} / {{item.data.uses.max}}</div>
                         {{/if}}
-                        <div class="spell-comps">
-                            {{#each labels.components}}
-                            <span class="spell-component {{this}}">{{this}}</span>
-                            {{/each}}
-                        </div>
+
                     </div>
+                    <div class="spell-action">{{data.learning.hoursNeeded}}</div>
+                    <div class="spell-action">{{data.learning.arcanaNeeded}}</div>
+                    <div class="spell-action">{{data.learning.level}}</div>
                     <div class="spell-school">{{labels.school}}</div>
-                    <div class="spell-action">{{labels.activation}}</div>
 
         
                     {{#if ../../owner}}

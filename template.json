@@ -538,7 +538,7 @@
     }
   },
   "Item": {
-    "types": ["weapon", "equipment", "consumable", "tool", "loot", "class", "spell", "feat", "backpack", "resource", "history", "toolprof"],
+    "types": ["weapon", "equipment", "consumable", "tool", "loot", "class", "spell", "feat", "backpack", "resource", "history", "prof", "otherLearn"],
     "templates": {
       "itemDescription": {
         "description": {
@@ -707,8 +707,12 @@
       "school": "",
       "effects": [],
       "learning": {
-        "currently": "false",
-        "level": ""
+        "currently": false,
+        "level": "",
+        "hours": 0,
+        "arcana": 0,
+        "hoursNeeded": 0,
+        "arcanaNeeded": 0
       },
       "learned": {
         "cantrip": false,

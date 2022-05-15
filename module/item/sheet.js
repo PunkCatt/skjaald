@@ -91,6 +91,15 @@ export default class ItemSheet5e extends ItemSheet {
     data.item = itemData;
     data.data = itemData.data;
 
+    //spell learning calculation
+    if(data.itemType == "Spell"){
+      if(data.data.learning.currently){
+      data.data.learning.hoursNeeded = ((parseInt(data.data.learning.level) * 10) + 10) - data.data.learning.hours;
+      data.data.learning.arcanaNeeded = ((parseInt(data.data.learning.level) * 100) + 100) - data.data.learning.arcana;
+      }
+      data.data.learningNow = false;
+    }
+
 
     return data;
   }

@@ -1035,6 +1035,9 @@
 .spell-list{
   grid-area: spell-list;
 }
+.spell-list .sheet-container-body{
+  min-height: 315px;
+}
 .pillar{
   grid-area: pillar;
 }

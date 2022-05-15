@@ -182,7 +182,9 @@
             <div class="form-group input-select">
                 <label>{{ localize "SKJAALD.SpellCurrentLearning" }}</label>
                 <div class="form-fields">
-                    <label class="checkbox prepared">
+                    <input type="hidden" name="data.learning.arcanaNeeded" value="{{data.learning.arcanaNeeded}}" data-dtype="Number"/>
+                    <input type="hidden" name="data.learning.hoursNeeded" value="{{data.learning.hoursNeeded}}" data-dtype="Number"/>
+                    <label class="checkbox learning">
                         <input type="checkbox" name="data.learning.currently" {{checked data.learning.currently}}/>
                     </label>
                     {{#if data.learning.currently}}

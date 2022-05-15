@@ -1968,7 +1968,6 @@ export default class Actor5e extends Actor {
    */
   convertCurrency() {
     const curr = foundry.utils.deepClone(this.data.data.currency);
-    console.log(CONFIG.SKJAALD.currencies);
     const conversion = Object.entries(CONFIG.SKJAALD.currencies);
     conversion.reverse();
     for ( let [c, data] of conversion ) {

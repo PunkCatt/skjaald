@@ -86,7 +86,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     };
 
     // Partition items by category
-    let [items, spells, feats, classes, history] = data.items.reduce((arr, item) => {
+    let [items, spells, feats, classes, history, otherLearn, prof] = data.items.reduce((arr, item) => {
 
       // Item details
       item.img = item.img || CONST.DEFAULT_TOKEN;
@@ -124,8 +124,10 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       else if ( item.type === "class" ) arr[3].push(item);
       else if ( Object.keys(inventory).includes(item.type ) ) arr[0].push(item);
       else if ( item.type === "history" ) arr[4].push(item);
+      else if ( item.type === "otherLearn" ) arr [5].push(item);
+      else if (item.type === "prof") arr[6].push(item);
       return arr;
-    }, [[], [], [], [], [], []]);
+    }, [[], [], [], [], [], [], []]);
 
     // Apply active item filters
     items = this._filterItems(items, this._filters.inventory);
@@ -145,6 +147,25 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       i.totalWeight = (i.data.quantity * i.data.weight).toNearest(0.1);
       inventory[i.type].items.push(i);
     }
+
+    //Learning Items
+
+    const regularLearning = {
+      skill: { label: "SKJAALD.Skills", items: [], dataset: {type: "otherLearn"}, type: otherLearn},
+      weapon: { label: "SKJAALD.Weapons", items: [], dataset: {type: "prof"}, type: prof},
+      armor: { label: "SKJAALD.Armor", items: [], dataset: {type: "prof"}, type: prof },
+      tool: { label: "SKJAALD.Tools", items: [], dataset: {type: "prof"}, type: prof },
+      language: { label: "SKJAALD.Languages", items: [], dataset: {type: "prof"}, type: prof },
+      other: { label: "SKJAALD.OtherLearning", items: [], dataset: {type: "otherLearn"}, type: otherLearn}
+    }
+
+    for (let l of otherLearn){
+      regularLearning.other.items.push(l);
+    }
+    for (let p of prof){
+      regularLearning.weapon.items.push(p);
+    }
+
 
     // Organize Spellbook and count the number of prepared spells (excluding always, at will, etc...)
     const spellbook = this._prepareSpellbook(data, spells);
@@ -189,19 +210,44 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     }
 
     for (let s of spells){
-      if (s.labels.level == "Cantrip") spellCantrip.cantrip.items.push(s);
-      else if(s.labels.level == "1st Level") spellOne.one.items.push(s);
-      else if(s.labels.level == "2nd Level") spellTwo.two.items.push(s);
-      else if(s.labels.level == "3rd Level") spellThree.three.items.push(s);
-      else if(s.labels.level == "4th Level") spellFour.four.items.push(s);
-      else if(s.labels.level == "5th Level") spellFive.five.items.push(s);
-      else if(s.labels.level == "6th Level") spellSix.six.items.push(s);
-      else if(s.labels.level == "7th Level") spellSeven.seven.items.push(s);
-      else if(s.labels.level == "8th Level") spellEight.eight.items.push(s);
-      else if(s.labels.level == "9th Level") spellNine.nine.items.push(s);
+      if (s.data.learning.currently || s.data.learningNow){
+        spellLearning.learning.items.push(s);
+        if ( s.data.learned.nine ) {spellNine.nine.items.push(s);}
+        else if( s.data.learned.eight ) spellEight.eight.items.push(s);
+        else if( s.data.learned.seven ) spellSeven.seven.items.push(s);
+        else if( s.data.learned.six ) spellSix.six.items.push(s);
+        else if( s.data.learned.five ) spellFive.five.items.push(s);
+        else if( s.data.learned.four ) spellFour.four.items.push(s);
+        else if( s.data.learned.three ) spellThree.three.items.push(s);
+        else if( s.data.learned.two ) spellTwo.two.items.push(s);
+        else if( s.data.learned.one ) spellOne.one.items.push(s);
+        else if( s.data.learned.cantrip ) spellCantrip.cantrip.items.push(s);
+
+      } else if ((s.data.learned.nine || s.data.learned.eight || s.data.learned.seven || s.data.learned.six || s.data.learned.five || s.data.learned.four || s.data.learned.three || s.data.learned.two || s.data.learned.one || s.data.learned.cantrip)){
+        if ( s.data.learned.nine ) {spellNine.nine.items.push(s);}
+        else if( s.data.learned.eight ) spellEight.eight.items.push(s);
+        else if( s.data.learned.seven ) spellSeven.seven.items.push(s);
+        else if( s.data.learned.six ) spellSix.six.items.push(s);
+        else if( s.data.learned.five ) spellFive.five.items.push(s);
+        else if( s.data.learned.four ) spellFour.four.items.push(s);
+        else if( s.data.learned.three ) spellThree.three.items.push(s);
+        else if( s.data.learned.two ) spellTwo.two.items.push(s);
+        else if( s.data.learned.one ) spellOne.one.items.push(s);
+        else if( s.data.learned.cantrip ) spellCantrip.cantrip.items.push(s);
+    } else{
+        if (s.labels.level == "Cantrip") spellCantrip.cantrip.items.push(s);
+        else if(s.labels.level == "1st Level") spellOne.one.items.push(s);
+        else if(s.labels.level == "2nd Level") spellTwo.two.items.push(s);
+        else if(s.labels.level == "3rd Level") spellThree.three.items.push(s);
+        else if(s.labels.level == "4th Level") spellFour.four.items.push(s);
+        else if(s.labels.level == "5th Level") spellFive.five.items.push(s);
+        else if(s.labels.level == "6th Level") spellSix.six.items.push(s);
+        else if(s.labels.level == "7th Level") spellSeven.seven.items.push(s);
+        else if(s.labels.level == "8th Level") spellEight.eight.items.push(s);
+        else if(s.labels.level == "9th Level") spellNine.nine.items.push(s);
+      }
     }
-    console.log(spellTwo);
-    console.log(spellOne)
+
 
     // Organize Features
     const features = {
@@ -277,6 +323,8 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     data.spellSeven = Object.values(spellSeven);
     data.spellEight = Object.values(spellEight);
     data.spellNine = Object.values(spellNine);
+    data.spellLearningList = Object.values(spellLearning);
+    data.regularLearning = Object.values(regularLearning);
 
   }
 
