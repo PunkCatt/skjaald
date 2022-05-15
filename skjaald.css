@@ -1014,10 +1014,17 @@
 }
 .skjaald.sheet.actor .learning-grid{
   display: grid;
-  grid-template-areas: "spell-learning other-learning";
+  grid-template-areas: "spell-learning classes" "spell-learning other-learning" "spell-learning other-learning" "spell-learning other-learning";
   grid-column-gap: 5px;
+  grid-row-gap: 5px;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 1fr;
+  grid-template-rows: repeat(4, 1fr);
+}
+.classes{
+  grid-area: classes;
+}
+.classes .sheet-container-body{
+  min-height: 135px;
 }
 .spell-learning{
   grid-area: spell-learning;
@@ -1039,7 +1046,7 @@
   min-height: 315px;
 }
 .other-learning .sheet-container-body{
-  min-height: 455px;
+  min-height: 317px;
 }
 .pillar{
   grid-area: pillar;

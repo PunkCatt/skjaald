@@ -266,8 +266,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     // Organize Features
     const features = {
       classes: { label: "SKJAALD.ItemTypeClassPl", items: [], hasActions: false, dataset: {type: "class"}, isClass: true },
-      combat: { label: "SKJAALD.FeatureCombat", items: [], dataset: {type: "feat"} },
-      noncombat: { label: "SKJAALD.FeatureNonCombat", items: [], dataset: {type: "feat"} },
     };
 
     const noncomfeatures = {
@@ -318,7 +316,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     data.inventory = Object.values(inventory);
     data.spellbook = spellbook;
     data.preparedSpells = nPrepared;
-    data.features = Object.values(features);
+    data.classes = Object.values(features);
     data.noncomfeatures = Object.values(noncomfeatures);
     data.comfeatures = Object.values(comfeatures);
     data.resources = Object.values(resources);

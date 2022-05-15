@@ -38,6 +38,8 @@ export const preloadHandlebarsTemplates = async function() {
     "systems/skjaald/templates/actors/parts/actor-spelllist.html",
     "systems/skjaald/templates/actors/parts/actor-spell-learning-list.html",
     "systems/skjaald/templates/actors/parts/actor-learning-list.html",
+    "systems/skjaald/templates/actors/parts/classes.html",
+
 
 
 
