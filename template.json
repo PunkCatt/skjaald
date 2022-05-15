@@ -770,6 +770,29 @@
       "kx":0,
       "px":0,
       "rx":0
+    },
+    "otherLearn": {
+      "templates": ["itemDescription"],
+      "category": "other",
+      "level": "",
+      "learning": {
+        "currently": true,
+        "hours": 0,
+        "hoursNeeded": 0,
+        "level": ""
+      }
+    },
+    "prof": {
+      "templates": ["itemDescription"],
+      "category": "Tool",
+      "level": "",
+      "base": "",
+      "learning": {
+        "currently": false,
+        "hours": 0,
+        "hoursNeeded": 0,
+        "level": ""
+      }
     }
   }
 }

@@ -160,10 +160,24 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     }
 
     for (let l of otherLearn){
-      regularLearning.other.items.push(l);
+      if ( l.data.category == "other"){
+        regularLearning.other.items.push(l);
+      } else if (l.data.category == "Skill"){
+        regularLearning.skill.items.push(l);
+      }
     }
     for (let p of prof){
-      regularLearning.weapon.items.push(p);
+      console.log(p.data);
+      if (p.data.category == "Tool"){
+        regularLearning.tool.items.push(p);
+      }
+      else if( p.data.category == "Armor"){
+        regularLearning.armor.items.push(p);
+      } else if (p.data.category == "Weapon"){
+        regularLearning.weapon.items.push(p);
+      } else if (p.data.category == "Language"){
+        regularLearning.language.items.push(p);
+      }
     }
 
 

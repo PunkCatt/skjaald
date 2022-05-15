@@ -16,7 +16,7 @@
 
             <ul class="summary flexrow">
                 <li>
-                    {{labels.featType}}
+                    {{data.category}}
                 </li>
                 <li>
                     <input type="text" name="data.requirements" value="{{data.requirements}}" placeholder="{{ localize 'SKJAALD.Requirements' }}"/>
@@ -32,7 +32,6 @@
     <nav class="sheet-navigation tabs" data-group="primary">
         <a class="item active" data-tab="description">{{ localize "SKJAALD.Description" }}</a>
         <a class="item" data-tab="details">{{ localize "SKJAALD.Details" }}</a>
-        <a class="item" data-tab="effects">{{ localize "SKJAALD.Effects" }}</a>
     </nav>
 
     {{!-- Item Sheet Body --}}
@@ -44,49 +43,32 @@
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
 
-            <h3 class="form-header">{{ localize "SKJAALD.FeatureUsage" }}</h3>
+            <h3 class="form-header">{{ localize "SKJAALD.LearningDetails" }}</h3>
 
-            <div class="form-group featureType">
-                <label>{{ localize "SKJAALD.Featuretype" }}</label>
-                <div class="form-fields">
-                    <span>{{ localize "SKJAALD.FeatureCombat" }}</span>
-                    <input type="checkbox" name="data.combatFeature" {{checked data.combatFeature}}
-                           data-dtype="boolean"/>
-                    <label class="checkbox">
-                        {{ localize "SKJAALD.NonCombat" }}
-                        <input type="checkbox" name="data.noncombatFeature" {{checked data.noncombatFeature}}/>
-                    </label>
-                </div>
+            <div class="form-group category">
+                <label>{{ localize "SKJAALD.Category" }}</label>
+                <select name="data.category">
+                    {{#select data.category}}
+                    <option value="other"> {{localize "SKJAALD.Other"}}</option>
+                    <option value="Skill">{{localize "SKJAALD.Skill"}}</option>
+                    {{/select}}
+                </select>
             </div>
+
             
-            {{!-- Item Activation Template --}}
-            {{> "systems/skjaald/templates/items/parts/item-activation.html"}}
-
-            {{!-- Recharge Requirement --}}
-            {{#if data.activation.type}}
-            <div class="form-group recharge">
-                <label>{{ localize "SKJAALD.FeatureActionRecharge" }}</label>
-                <div class="form-fields">
-                    <span>{{ localize "SKJAALD.FeatureRechargeOn" }}</span>
-                    <input type="text" name="data.recharge.value" value="{{data.recharge.value}}"
-                           data-dtype="Number" placeholder="{{ localize 'SKJAALD.FeatureRechargeResult' }}"/>
-                    <label class="checkbox">
-                        {{ localize "SKJAALD.Charged" }}
-                        <input type="checkbox" name="data.recharge.charged" {{checked data.recharge.charged}}/>
-                    </label>
-                </div>
+            <div class="form-group ">
+                <label>{{ localize "SKJAALD.Level" }}</label>
+                <select name="data.learning.level">
+                    {{#select data.learning.level}}
+                    {{#each config.proficiencyLevels as |name lev|}}
+                    <option value="{{lev}}">{{name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
             </div>
-            {{/if}}
 
-            <h3 class="form-header">{{ localize "SKJAALD.FeatureAttack" }}</h3>
-
-            {{!-- Item Action Template --}}
-            {{> "systems/skjaald/templates/items/parts/item-action.html"}}
-        </div>
-
-        {{!-- Effects Tab --}}
-        <div class="tab effects flexcol" data-group="primary" data-tab="effects">
-            {{> "systems/skjaald/templates/actors/parts/active-effects.html"}}
-        </div>
+            <input type="hidden" name="data.learning.conseqBonus" value="{{data.learning.conseqBonus}}" data-dtype="Number"/>
+            <input type="hidden" name="data.learning.hoursNeeded" value="{{data.learning.hoursNeeded}}" data-dtype="Number"/>
+            
     </section>
 </form>

@@ -11,6 +11,7 @@
     "ITEM.TypeSpell": "Spell",
     "ITEM.TypeTool": "Tool",
     "ITEM.TypeWeapon": "Weapon",
+    "ITEM.TypeProf": "Proficiency",
     
     "SKJAALD.title": "Skjaald Game System",
     "SKJAALD.AbbreviationCR": "CR",
@@ -968,7 +969,21 @@
     "SKJAALD.SpellLearning": "Spell Learning",
     "SKJAALD.ArcanaNeeded": "Arcana Needed",
     "SKJAALD.HoursNeeded": "Hours Needed",
-    
+    "SKJAALD.ConseqBonus": "Conseq Bonus",
+    "SKJAALD.Skills": "Skills",
+    "SKJAALD.Weapons": "Weapons",
+    "SKJAALD.Armor": "Armor",
+    "SKJAALD.Tools": "Tools",
+    "SKJAALD.Tool": "Tool",
+    "SKJAALD.OtherLearning": "Other",
+    "SKJAALD.ItemTypeProf": "Proficiency",
+    "SKJAALD.Category": "Category",
+    "SKJAALD.Language": "Language",
+    "SKJAALD.Weapon": "Weapon",
+    "SKJAALD.ItemProficiency": "Proficiency",
+    "ITEM.TypeOtherlearn": "Other Learning",
+    "SKJAALD.ItemTypeOtherLearn": "Other Learning",
+    "SKJAALD.Skill": "Skill",
 
     
     
