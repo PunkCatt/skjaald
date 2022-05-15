@@ -138,6 +138,67 @@
                 </div>
             </div>
 
+            <h3 class="form-header">{{ localize "SKJAALD.SpellLearning" }}</h3>
+
+
+            {{!-- Spell Components --}}
+            <div class="spell-components form-group stacked">
+                <label>{{ localize "SKJAALD.SpellLevelsLearned" }}</label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.learned.cantrip" {{checked data.learned.cantrip}}/> {{ localize "SKJAALD.Cantrip" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.learned.one" {{checked data.learned.one}}/> {{ localize "SKJAALD.LevelOne" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.learned.two" {{checked data.learned.two}}/> {{ localize "SKJAALD.LevelTwo" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.learned.three" {{checked data.learned.three}}/> {{ localize "SKJAALD.LevelThree" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.learned.four" {{checked data.learned.four}}/> {{ localize "SKJAALD.LevelFour" }}
+                </label>
+            </div>
+            <div class="spell-components form-group stacked">
+                <label class="checkbox">
+                    <input type="checkbox" name="data.learned.five" {{checked data.learned.five}}/> {{ localize "SKJAALD.LevelFive" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.learned.six" {{checked data.learned.six}}/> {{ localize "SKJAALD.LevelSix" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.learned.seven" {{checked data.learned.seven}}/> {{ localize "SKJAALD.LevelSeven" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.learned.eight" {{checked data.learned.eight}}/> {{ localize "SKJAALD.LevelEight" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.learned.nine" {{checked data.learned.nine}}/> {{ localize "SKJAALD.LevelNine" }}
+                </label>
+            </div>
+
+            {{!-- Learning Level --}}
+            <div class="form-group input-select">
+                <label>{{ localize "SKJAALD.SpellCurrentLearning" }}</label>
+                <div class="form-fields">
+                    <label class="checkbox prepared">
+                        <input type="checkbox" name="data.learning.currently" {{checked data.learning.currently}}/>
+                    </label>
+                    {{#if data.learning.currently}}
+                        <select name="data.learning.level">
+                            {{#select data.learning.level}}
+                            {{#each config.spellLevels as |name lev|}}
+                            <option value="{{lev}}">{{name}}</option>
+                            {{/each}}
+                            {{/select}}
+                        </select>
+
+                    {{/if}}
+                </div>
+            </div>
+
+
             <h3 class="form-header">{{ localize "SKJAALD.SpellCastingHeader" }}</h3>
 
             {{!-- Item Activation Template --}}

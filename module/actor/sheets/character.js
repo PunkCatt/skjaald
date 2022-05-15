@@ -184,6 +184,9 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     const spellNine = {
       nine: {label: "SKJAALD.Nine", items: [], dataset: {type: spells}}
     }
+    const spellLearning = {
+      learning: {label: "SKJAALD.SpellLearning", items: [], dataset: { type: spells}}
+    }
 
     for (let s of spells){
       if (s.labels.level == "Cantrip") spellCantrip.cantrip.items.push(s);
@@ -197,6 +200,8 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       else if(s.labels.level == "8th Level") spellEight.eight.items.push(s);
       else if(s.labels.level == "9th Level") spellNine.nine.items.push(s);
     }
+    console.log(spellTwo);
+    console.log(spellOne)
 
     // Organize Features
     const features = {

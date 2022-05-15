@@ -706,6 +706,22 @@
       "level": 1,
       "school": "",
       "effects": [],
+      "learning": {
+        "currently": "false",
+        "level": ""
+      },
+      "learned": {
+        "cantrip": false,
+        "one": false,
+        "two": false,
+        "three": false,
+        "four": false,
+        "five": false,
+        "six": false,
+        "seven": false,
+        "eight": false,
+        "nine": false
+      },
       "components": {
         "value": "",
         "vocal": false,

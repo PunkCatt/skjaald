@@ -36,6 +36,8 @@ export const preloadHandlebarsTemplates = async function() {
     "systems/skjaald/templates/actors/parts/actor-tool-profs.html",
     "systems/skjaald/templates/actors/parts/actor-learning.html",
     "systems/skjaald/templates/actors/parts/actor-spelllist.html",
+    "systems/skjaald/templates/actors/parts/actor-spell-learning-list.html",
+
 
 
     

@@ -223,7 +223,7 @@
         {{!-- Ability Modifier --}}
         <div class="form-group select">
             <label>{{ localize "SKJAALD.AbilityModifier" }}</label>
-            <select name="dataeffects.{{e}}..ability">
+            <select name="data.effects.{{e}}.ability">
                 {{#select (lookup this "ability")}}
                 <option value="">{{ localize "SKJAALD.Default" }}</option>
                 {{#each ../config.abilities as |ability a|}}
@@ -349,7 +349,7 @@
             <label>{{ localize "SKJAALD.ActionSave" }}</label>
             <div class="form-fields">
                 <select name="data.effects.{{e}}.saveability">
-                    {{#select (lookup this "savability")}}
+                    {{#select (lookup this "saveability")}}
                     <option value=""></option>
                     {{#each ../config.abilities as |ability a|}}
                     <option value="{{a}}">{{ability}}</option>

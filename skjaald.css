@@ -1012,6 +1012,44 @@
   grid-template-rows: 60px 200px 200px 100px 100px 1fr;
   grid-template-columns: repeat(3, 1fr);
 }
+.skjaald.sheet.actor .learning-grid{
+  display: grid;
+  grid-template-areas: "spell-learning other-learning";
+  grid-column-gap: 5px;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+}
+.spell-learning{
+  grid-area: spell-learning;
+  display: grid;
+  grid-template-areas:
+  "pillar"
+  "specialty"
+  "minor1"
+  "minor2"
+  "spell-list";
+  grid-template-rows: 30px 30px 30px 30px 1fr;
+  grid-template-columns: 1fr;
+  grid-row-gap:5px;
+}
+.spell-list{
+  grid-area: spell-list;
+}
+.pillar{
+  grid-area: pillar;
+}
+.speciality{
+  grid-area: specialty;
+}
+.minor-primary{
+  grid-area: minor1;
+}
+.minor-secondary{
+  grid-area: minor2;
+}
+.other-learning{
+  grid-area: other-learning;
+}
 .spellbook-filters{
   grid-area: menu;
 }
@@ -1090,6 +1128,59 @@
   min-width: 0;
   overflow: hidden;
 }
+.skjaald.sheet.actor .sheet-container-bar::before {
+  border-image: url('./ui/frames/pillar-frame.png') 65 50 65 50 fill stretch;
+  border-style: solid;
+  border-width: 15px 15px;
+  box-sizing: border-box;
+  content: '';
+  display: block;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+}
+.skjaald.sheet.actor .sheet-container-bar{
+  display: flex;
+  height: 30px;
+  position: relative;
+  z-index:0;
+
+}
+.sheet-container-bar .sheet-container-header{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 10px 0 12px;
+}
+.sheet-container-bar .sheet-container-body{
+  align-items: center;
+  align-self: stretch;
+  display: flex;
+  flex-grow: 1;
+  font-weight: bold;
+  justify-content: center;
+  position: relative;
+  vertical-align: middle;
+  padding-right:14px;
+  padding-left: 27px;
+}
+.sheet-container-bar .sheet-container-body::after{
+  background:  url('./ui/frames/pillar-divider.png');
+  display:inline-block;
+  position:absolute;
+  width:19px;
+  background-size: 100% 100%;
+  transform: rotate(180deg);
+  left:0px;
+  height: 30px;
+  left: -12px;
+  content: '';
+}
+
 .skjaald.sheet.actor .auto-dp-value {
   line-height: 25px;
   font-size: 25px;

@@ -1493,6 +1493,7 @@ export default class ActorSheet5e extends ActorSheet {
       };
     if (type == "spell"){
       var level = event.currentTarget.classList[2];
+      console.log(level);
       if (level == "Cantrip"){
         level = 0;
       }
