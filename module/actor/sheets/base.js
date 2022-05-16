@@ -1507,7 +1507,6 @@ export default class ActorSheet5e extends ActorSheet {
     }
 
     if (type == "prof"){
-      console.log(event.currentTarget.classList[2]);
       if (event.currentTarget.classList[2] == "Tools"){
         itemData.data.category = "Tool";
       } else if (event.currentTarget.classList[2] == "Armor"){
@@ -1521,7 +1520,7 @@ export default class ActorSheet5e extends ActorSheet {
     if (type == "otherLearn"){
       if (event.currentTarget.classList[2] == "Other"){
         itemData.data.category = "other";
-      } else if (event.currentTarget.classList[2] == "Skills"){
+      } else if (event.currentTarget.classList[2] == "Skill"){
         itemData.data.category = "Skill";
       }
     }

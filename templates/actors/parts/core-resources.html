@@ -31,18 +31,8 @@
     </h5>
 </li>
 
-<li class="attribute other-resources container-box container-panel">
-    <div class="attribute-value container-box-body auto-calc-value">
+<div class="attribute other-resources container-panel">
 
-    </div>
-    <h5 class="attribute-name container-box-header">
-        {{ localize "SKJAALD.OtherResources" }} 
-        <div class="item-controls resource-controls flexrow">
-            <a class="item-create resource-create" data-type="resource" title="{{localize 'SKJAALD.EffectCreate'}}">
-            <i class="fas fa-plus"></i> {{localize "SKJAALD.Add"}}
-            </a>
-        </div>
-    </h5>
-
+    {{> "systems/skjaald/templates/actors/parts/resource-list.html" sections=resourceList}}   
     
-</li>
+</div>

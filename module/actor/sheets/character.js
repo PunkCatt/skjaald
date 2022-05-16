@@ -69,10 +69,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
    */
   _prepareItems(data) {
 
-    // Categorize items as inventory, spellbook, features, and classes
-    const resources = {
-      resource: { label: "SKJAALD.ItemTypeResource", items: [], dataset: {type: "resource"} }
-    };
 
 
     // Categorize items as inventory, spellbook, features, and classes
@@ -134,6 +130,15 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     spells = this._filterItems(spells, this._filters.spellbook);
     feats = this._filterItems(feats, this._filters.features);
     
+    // resources
+    const resources = {
+      resource: { label: "SKJAALD.ItemTypeResource", items: [], dataset: {type: "consumable"} }
+    };
+
+    for( let i of items){
+      if (i.type == "consumable") resources.resource.items.push(i);
+    }
+
     // Attacks
     const attacks = {
       weapon: { label: "SKJAALD.WeaponAttacks", items: [], dataset: { type: 'weapon'}},
@@ -188,6 +193,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     }
 
     for (let l of otherLearn){
+      console.log(l.data.category);
       if ( l.data.category == "other"){
         regularLearning.other.items.push(l);
       } else if (l.data.category == "Skill"){
@@ -348,7 +354,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     data.classes = Object.values(features);
     data.noncomfeatures = Object.values(noncomfeatures);
     data.comfeatures = Object.values(comfeatures);
-    data.resources = Object.values(resources);
+    data.resourceList = Object.values(resources);
     data.events = Object.values(events);
     data.allies = Object.values(allies);
     data.notes = Object.values(notes);

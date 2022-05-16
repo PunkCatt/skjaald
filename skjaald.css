@@ -1830,6 +1830,11 @@
   margin-top: 0px;
   
 }
+.skjaald.sheet.actor .combat-resources .container-box-body{
+  min-height: 155px;
+  margin-top: 0px;
+  
+}
 .skjaald.sheet.actor .cast-ability {
   grid-area: castAbility;
 }
