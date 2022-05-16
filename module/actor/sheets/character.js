@@ -137,7 +137,20 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     // Tool Proficient
 
     const toolprofs = {
-      toolprofs:  { label: "SKJAALD.ItemToolProficiency", items: [], dataset: { type: "tool" } }
+      toolprofs:  { label: "SKJAALD.ItemToolProficiency", items: [], dataset: { type: "prof" } },
+      langprofs:  { label: "SKJAALD.ItemLanguageProficiency", items: [], dataset: { type: "prof" } },
+      weapprofs:  { label: "SKJAALD.ItemWeaponProficiency", items: [], dataset: { type: "prof" } },
+      armprofs:  { label: "SKJAALD.ItemArmorProficiency", items: [], dataset: { type: "prof" } }
+    }
+
+    for (let p of prof){
+      if(p.data.proficient > 0){
+        console.log(p.data.category);
+        if( p.data.category == "Tool") toolprofs.toolprofs.items.push(p);
+        if( p.data.category == "Armor") toolprofs.armprofs.items.push(p);
+        if( p.data.category == "Weapon") toolprofs.weapprofs.items.push(p);
+        if( p.data.category == "Language") toolprofs.langprofs.items.push(p);
+      }  
     }
 
     // Organize items
@@ -151,11 +164,11 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     //Learning Items
 
     const regularLearning = {
-      skill: { label: "SKJAALD.Skills", items: [], dataset: {type: "otherLearn"}, type: otherLearn},
-      weapon: { label: "SKJAALD.Weapons", items: [], dataset: {type: "prof"}, type: prof},
-      armor: { label: "SKJAALD.Armor", items: [], dataset: {type: "prof"}, type: prof },
-      tool: { label: "SKJAALD.Tools", items: [], dataset: {type: "prof"}, type: prof },
-      language: { label: "SKJAALD.Languages", items: [], dataset: {type: "prof"}, type: prof },
+      skill: { label: "SKJAALD.SkillsLearning", items: [], dataset: {type: "otherLearn"}, type: otherLearn},
+      weapon: { label: "SKJAALD.WeaponsLearning", items: [], dataset: {type: "prof"}, type: prof},
+      armor: { label: "SKJAALD.ArmorLearning", items: [], dataset: {type: "prof"}, type: prof },
+      tool: { label: "SKJAALD.ToolsLearning", items: [], dataset: {type: "prof"}, type: prof },
+      language: { label: "SKJAALD.LanguagesLearning", items: [], dataset: {type: "prof"}, type: prof },
       other: { label: "SKJAALD.OtherLearning", items: [], dataset: {type: "otherLearn"}, type: otherLearn}
     }
 
@@ -167,16 +180,17 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       }
     }
     for (let p of prof){
-      console.log(p.data);
-      if (p.data.category == "Tool"){
-        regularLearning.tool.items.push(p);
-      }
-      else if( p.data.category == "Armor"){
-        regularLearning.armor.items.push(p);
-      } else if (p.data.category == "Weapon"){
-        regularLearning.weapon.items.push(p);
-      } else if (p.data.category == "Language"){
-        regularLearning.language.items.push(p);
+      if (p.data.learning.currently || p.data.learningNow){
+        if (p.data.category == "Tool"){
+          regularLearning.tool.items.push(p);
+        }
+        else if( p.data.category == "Armor"){
+          regularLearning.armor.items.push(p);
+        } else if (p.data.category == "Weapon"){
+          regularLearning.weapon.items.push(p);
+        } else if (p.data.category == "Language"){
+          regularLearning.language.items.push(p);
+        }
       }
     }
 
@@ -324,7 +338,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     data.allies = Object.values(allies);
     data.notes = Object.values(notes);
     data.backstory = Object.values(backstory);
-    data.toolprofs = Object.values(toolprofs);
+    data.proficiencies = Object.values(toolprofs);
     data.spellCantrip = Object.values(spellCantrip);
     data.spellOne = Object.values(spellOne);
     data.spellTwo = Object.values(spellTwo);

@@ -693,9 +693,7 @@
   /* ----------------------------------------- */
   /*  Resources Grid                           */
   /* ----------------------------------------- */
-  /* ----------------------------------------- */
-  /*  Non-Combat Features                      */
-  /* ----------------------------------------- */
+
   /* ----------------------------------------- */
   /*  Combat Page Spell Stats                  */
   /* ----------------------------------------- */
@@ -726,6 +724,13 @@
   /*  TinyMCE                                  */
   /* ----------------------------------------- */
 }
+
+/* ----------------------------------------- */
+/*  Non-Combat Features                      */
+/* ----------------------------------------- */
+
+
+
 .skjaald.sheet.actor .sheet-header img.profile {
   flex: 0 0 160px;
   max-width: 160px;
@@ -888,8 +893,8 @@
   grid-area: attributes;
   display: grid;
   grid-template-columns: 75px 1fr;
-  grid-template-rows: auto auto auto auto auto;
-  grid-template-areas: "ability proficiency" "ability save" "ability skill" "tools tools" "language language";
+  grid-template-rows: 65px 143px 347px auto;
+  grid-template-areas: "ability proficiency" "ability save" "ability skill" "tools tools";
 }
 .skjaald.sheet.actor .stats-grid {
   grid-area: stats;
@@ -938,7 +943,7 @@
 }
 .skjaald.sheet.actor .combat-container {
   display: grid;
-  grid-template-columns: 275px 1fr 1fr;
+  grid-template-columns: 295px 1fr 1fr;
   grid-template-rows: 69px 143px 135px 100px 1fr;
   grid-row-gap: 10px;
   grid-column-gap: 5px;
@@ -1303,6 +1308,13 @@
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
+
+.attribute-grid .tools-otherskills .prof-list{
+  padding-top: 8px;
+  padding-left: 10px;
+  width: 100%;
+  padding-right: 10px;
+}
 .skjaald.sheet.actor .ability-scores {
   grid-area: ability;
   flex: 0 0 80px;
@@ -1496,6 +1508,11 @@
   width: 5 px;
 }
 .skjaald.sheet.actor .tools-otherskills {
+  grid-area: tools;
+  display: flex;
+  flex-direction: column;
+}
+.skjaald.sheet.actor .combat-effects {
   grid-area: tools;
   display: flex;
   flex-direction: column;
@@ -1792,6 +1809,11 @@
 .skjaald.sheet.actor .non-combat-features {
   grid-area: nonconfeatures;
   margin-left: 5px;
+
+}
+.skjaald.sheet.actor .non-combat-features .container-box-body{
+  min-height: 385px;
+  margin-top: 0px;
 }
 .skjaald.sheet.actor .cast-ability {
   grid-area: castAbility;
@@ -1992,7 +2014,7 @@
   color: #44191A;
 }
 .skjaald.sheet.actor .inventory-list .item .item-uses input {
-  width: 24px;
+  width: 15px;
   text-align: center;
 }
 .skjaald.sheet.actor .inventory-list .item .item-properties {
@@ -2008,10 +2030,9 @@
   flex: 0 0 100%;
 }
 .skjaald.sheet.actor .inventory-list .item-detail {
-  flex: 0 0 70px;
+  flex: 0 0 40px;
   font-size: 12px;
   text-align: center;
-  border-right: 1px solid #c9c7b8;
   word-break: break-word;
   white-space: nowrap;
   overflow: hidden;

@@ -38,31 +38,12 @@
                 </h4>
             </div>
 
-            {{#if section.hasActions}}
-            <div class="item-detail item-uses">
-                {{#if item.isOnCooldown}}
-                <a class="item-recharge rollable">{{item.labels.recharge}}</a>
-                {{else if item.data.recharge.value}}
-                {{localize "SKJAALD.Charged"}}
+                <div class="item-detail item-uses">
 
-                {{else if item.hasUses}}
-                <input type="text" value="{{item.data.uses.value}}" placeholder="0"/>/ {{item.data.uses.max}}
-                {{/if}}
-            </div>
-            <div class="item-detail item-action">
-                {{#if item.data.activation.type }}
-                {{item.labels.activation}}
-                {{/if}}
-            </div>
+                    <input type="text" value="{{item.data.uses.value}}" placeholder="0"/>/ {{item.data.uses.max}}
+                </div>
 
-            {{else if section.isClass}}
-            <div class="item-detail player-class">
-                {{item.data.subclass}}
-            </div>
-            <div class="item-detail item-action">
-                {{localize "SKJAALD.Level"}} {{item.data.levels}}
-            </div>
-            {{/if}}
+
 
             {{#if section.columns}}
                 {{#each section.columns}}

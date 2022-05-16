@@ -8,7 +8,7 @@
             <input class="ability-score" name="data.abilities.{{id}}.value" type="number" value="{{ability.value}}" placeholder="10"/>
         </li>
     {{/each}}
-    </ul>
+</ul>
 
     {{!-- Proficiency --}}
         <div class="proficiency">
@@ -17,7 +17,7 @@
     {{!-- Ability Saves --}}
         <div class="saves-list">
             {{#each data.abilities as |ability id|}}
-                <li class="skill flexrow {{#if ability.proficient}}proficient{{/if}}" data-skill="{{id}}">
+                <li class="skill flexrow {{#if ability.proficient}}proficient{{/if}}" data-skill="{{id}}"/>
                     <input type="hidden" name="data.abilities.{{id}}.proficient" value="{{ability.baseProf}}" data-dtype="Number"/>
                     <a class="proficiency-toggle ability-proficiency" title="{{ localize 'SKJAALD.Proficiency' }}">{{{ability.icon}}}</a>
                     <span class="ability-save" title="{{ localize 'SKJAALD.SavingThrow' }}">{{numberFormat ability.save decimals=0 sign=true}}</span>
@@ -37,7 +37,7 @@
                     <h4 class="skill-name rollable">{{label}}</h4>
                     <div class="skill-name-controls">
                         <a class="config-button" data-action="skill" title="{{localize 'SKJAALD.SkillConfigure'}}"><i class="fas fa-cog"></i></a>
-                      </div>
+                    </div>
                     <div class="skill-ability">
                         <select class="skill-ability-drop" name="data.skills.{{s}}.ability" data-type="String">
                             {{#select skill.ability}}
@@ -61,44 +61,5 @@
     {{!-- Tools --}}
         <div class="tools-otherskills container-panel">
             {{!-- Hit Points --}}
-            {{> "systems/skjaald/templates/actors/parts/actor-tool-profs.html" sections=toolprofs}}                   
+            {{> "systems/skjaald/templates/actors/parts/actor-tool-profs.html" sections=proficiencies}}                   
         </div>
-
-    {{!-- Other Proficiency --}}
-        <div class="prof-languages container-panel">
-            <div class="form-group {{data.traits.languages.cssClass}}">
-                <label>{{localize "SKJAALD.Languages"}}</label>
-                <a class="trait-selector" data-options="languages" data-target="data.traits.languages">
-                    <i class="fas fa-edit"></i>
-                </a>
-                <ul class="traits-list">
-                {{#each data.traits.languages.selected as |v k|}}
-                    <li class="tag {{k}}">{{v}}</li>
-                {{/each}}
-                </ul>
-            </div>
-
-            <div class="form-group {{data.traits.weaponProf.cssClass}}">
-                <label>{{localize "SKJAALD.TraitWeaponProf"}}</label>
-                <a class="proficiency-selector" data-type="weapon" data-target="data.traits.weaponProf">
-                    <i class="fas fa-edit"></i>
-                </a>
-                <ul class="traits-list">
-                {{#each data.traits.weaponProf.selected as |v k|}}
-                    <li class="tag {{k}}">{{v}}</li>
-                {{/each}}
-                </ul>
-            </div>
-            <div class="form-group {{data.traits.armorProf.cssClass}}">
-                <label>{{localize "SKJAALD.TraitArmorProf"}}</label>
-                <a class="proficiency-selector" data-type="armor" data-target="data.traits.armorProf">
-                    <i class="fas fa-edit"></i>
-                </a>
-                <ul class="traits-list">
-                {{#each data.traits.armorProf.selected as |v k|}}
-                    <li class="tag {{k}}">{{v}}</li>
-                {{/each}}
-                </ul>
-            </div>
-        </div>
-    

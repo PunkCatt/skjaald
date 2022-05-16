@@ -111,6 +111,8 @@ export default class ItemSheet5e extends ItemSheet {
           data.data.learning.hoursNeeded = 100000 - data.data.learning.hours;
         }
       }
+      data.data.learningNow = false;
+
     }
 
 
