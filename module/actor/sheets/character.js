@@ -134,6 +134,21 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     spells = this._filterItems(spells, this._filters.spellbook);
     feats = this._filterItems(feats, this._filters.features);
     
+    // Attacks
+    const attacks = {
+      weapon: { label: "SKJAALD.WeaponAttacks", items: [], dataset: { type: 'weapon'}},
+      spell: { label: "SKJAALD.MagicAttacks", items: [], dataset: { type: "spell"}}
+    }
+
+    for (let i of items){
+      if (i.type == "weapon") attacks.weapon.items.push(i);
+    }
+
+    for (let s of spells){
+      if (s.type == "spell") attacks.spell.items.push(s);
+    }
+
+
     // Tool Proficient
 
     const toolprofs = {
@@ -351,6 +366,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     data.spellNine = Object.values(spellNine);
     data.spellLearningList = Object.values(spellLearning);
     data.regularLearning = Object.values(regularLearning);
+    data.attacksSpellcasting = Object.values(attacks);
 
   }
 

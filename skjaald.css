@@ -1806,6 +1806,20 @@
 .skjaald.sheet.actor .other-resources {
   grid-area: other-resources;
 }
+.skjaald.sheet.actor .combatPage-Attacks{
+  flex-direction: column;
+  display: flex;
+  min-height: 65px;
+  position: relative;
+  z-index: 0;
+  min-width: 0;
+  overflow: hidden;
+}
+.skjaald.sheet .combat-attacks .attacks-list{
+  padding-top: 6px;
+  padding-left: 9px;
+  padding-right: 9px;
+}
 .skjaald.sheet.actor .non-combat-features {
   grid-area: nonconfeatures;
   margin-left: 5px;
@@ -1814,6 +1828,7 @@
 .skjaald.sheet.actor .non-combat-features .container-box-body{
   min-height: 385px;
   margin-top: 0px;
+  
 }
 .skjaald.sheet.actor .cast-ability {
   grid-area: castAbility;
