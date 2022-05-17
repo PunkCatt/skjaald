@@ -30,7 +30,7 @@
                 /
                 <input type="text" name="data.attributes.hp.hitDiceMax" value="{{data.attributes.hp.hitDiceMax}}" data-dtype="Number"/>
                 </div>
-                <h5 class="attribute-name container-box-header">
+                <h5 class="attribute-name container-box-header roll-hd rollable" data-hd-denom="{{data.attributes.hp.hitDiceDenom}}" data-action="rollHitDice">
                     {{ localize "SKJAALD.HitDice" }}
                 </h5>
             </li>
@@ -44,7 +44,7 @@
                     <input type="hidden" name="data.attributes.death.save3" value="{{data.attributes.death.save3}}"/>
                     <a class="proficiency-toggle skill-proficiency death-icon" >{{{data.attributes.death.icon3}}}</a>
                 </div>
-                <h5 class="attribute-name container-box-header">
+                <h5 class="attribute-name container-box-header rollable" data-action="rollDeathSave">
                     {{ localize "SKJAALD.DeathSave" }}
                 </h5>
             </li>

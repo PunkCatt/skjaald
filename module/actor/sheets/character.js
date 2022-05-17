@@ -56,6 +56,8 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       ? game.i18n.localize("SKJAALD.AbbreviationKgs")
       : game.i18n.localize("SKJAALD.AbbreviationLbs");
 
+     
+
     // Return data for rendering
     return sheetData;
   }
@@ -445,6 +447,8 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
         return this.actor.rollDeathSave({event: event});
       case "rollInitiative":
         return this.actor.rollInitiative({createCombatants: true});
+      case "rollHitDice":
+        return this.actor.rollHitDie({event: event})
     }
   }
 

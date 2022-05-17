@@ -2646,7 +2646,7 @@
   font-size: 13px;
 }
 .skjaald.sheet.actor.character .item-detail.player-class {
-  flex: 0 0 180px;
+  flex: 0 0 90px;
   text-align: right;
   padding-right: 10px;
 }

@@ -39,6 +39,20 @@
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
 
+
+            {{!-- Class Hit Dice --}}
+            <div class="form-group">
+                <label>{{localize "SKJAALD.ClassType"}}</label>
+                <div class="form-fields">
+                    <select name="data.classType">
+                        {{#select data.classType}}
+                        <option value="base">Base</option>
+                        <option value="prestige">Prestige</option>
+                        {{/select}}
+                    </select>
+                </div>
+            </div>
+
             {{!-- Class Levels --}}
             <div class="form-group">
                 <label>{{ localize "SKJAALD.ClassLevels" }}</label>
@@ -55,6 +69,8 @@
                 </div>
             </div>
 
+
+            {{#unless (eq data.classType "prestige")}}
             {{!-- Class Hit Dice --}}
             <div class="form-group">
                 <label>{{localize "SKJAALD.HitDice"}}</label>
@@ -68,24 +84,9 @@
                     </select>
                 </div>
             </div>
-
-            <div class="form-group">
-                <label>{{localize "SKJAALD.HitDiceUsed"}}</label>
-                <div class="form-fields">
-                    <input type="text" placeholder="0" name="data.hitDiceUsed" value="{{data.hitDiceUsed}}" data-dtype="Number"/>
-                </div>
-            </div>
+            {{/unless}}
 
             {{!-- Spellcasting --}}
-            <div class="form-group">
-                <label>{{localize 'SKJAALD.SpellProgression'}}</label>
-                <div class="form-fields">
-                    <select name="data.spellcasting.progression">
-                        {{selectOptions config.spellProgression selected=data.spellcasting.progression localize=true}}
-                    </select>
-                </div>
-            </div>
-
             <div class="form-group">
                 <label>{{localize "SKJAALD.SpellAbility"}}</label>
                 <div class="form-fields">
@@ -114,49 +115,6 @@
                 </div>
             </div>
 
-            {{!-- Level 1 skills --}}
-            <div class="form-group">
-                <label>{{localize "SKJAALD.ClassSkillsNumber"}}</label>
-                <div class="form-fields">
-                    <input type="text" placeholder="0" name="data.skills.number" value="{{data.skills.number}}" data-dtype="Number"/>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>
-                    {{localize "SKJAALD.ClassSkillsEligible"}}
-                    {{#if editable }}
-                    <a class="trait-selector class-skills" data-target="data.skills.choices" data-options="skills.choices">
-                        <i class="fas fa-edit"></i>
-                    </a>
-                    {{/if}}
-                </label>
-                <div class="form-fields">
-                    <ul class="traits-list">
-                        {{#each data.skills.choices}}
-                        <li class="tag {{this}}">{{lookup ../config.skills this}}</li>
-                        {{/each}}
-                    </ul>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>
-                    {{localize "SKJAALD.ClassSkillsChosen"}}
-                    {{#if editable }}
-                    <a class="trait-selector class-skills" data-target="data.skills" data-options="skills">
-                        <i class="fas fa-edit"></i>
-                    </a>
-                    {{/if}}
-                </label>
-                <div class="form-fields">
-                    <ul class="traits-list">
-                        {{#each data.skills.value}}
-                            <li class="tag {{this}}">{{lookup ../config.skills this}}</li>
-                        {{/each}}
-                    </ul>
-                </div>
-            </div>
         </div>
     </section>
 </form>

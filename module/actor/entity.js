@@ -454,8 +454,31 @@ export default class Actor5e extends Actor {
     
     actorData.data.attributes.spellcasting.spellbonus = actorData.data.abilities[actorData.data.attributes.spellcasting.ability].mod;
     
-
+    actorData.data.attributes.hp.hitDiceDenom = this._getHitDieDenom(actorData);
   }
+    
+    /* -------------------------------------------- */
+
+    /**
+   * Assign hit die denominator.
+   * @param {object} data                 Actor data to determine the attributions from.
+   * @returns {AttributionDescription[]}  List of attribution descriptions.
+   * @protected
+   */
+     _getHitDieDenom(data) {
+      const items = data.items;
+      for (let i of items){
+        console.log(i);
+        if (i.data.type == "class" && i.data.data.classType == "base"){
+          const hitDice = i.data.data.hitDice
+          return hitDice;
+        }
+      }
+      
+      return "d3";
+    }
+  
+
 
   /* -------------------------------------------- */
 
@@ -1324,14 +1347,30 @@ export default class Actor5e extends Actor {
         test: {
           label: game.i18n.localize("SKJAALD.ActionAbil"),
           callback: () => this.rollAbilityTest(abilityId, options)
-        },
-        save: {
-          label: game.i18n.localize("SKJAALD.ActionSave"),
-          callback: () => this.rollAbilitySave(abilityId, options)
         }
       }
     }).render(true);
   }
+
+    /**
+   * Roll a generic ability test or saving throw.
+   * Prompt the user for input on which variety of roll they want to do.
+   * @param {string} abilityId    The ability id (e.g. "str")
+   * @param {object} options      Options which configure how ability tests or saving throws are rolled
+   */
+     rollAbilitySave(abilityId, options={}) {
+      const label = CONFIG.SKJAALD.abilities[abilityId];
+      new Dialog({
+        title: `${game.i18n.format("SKJAALD.AbilityPromptTitle", {ability: label})}: ${this.name}`,
+        content: `<p>${game.i18n.format("SKJAALD.AbilityPromptText", {ability: label})}</p>`,
+        buttons: {
+          save: {
+            label: game.i18n.localize("SKJAALD.ActionSave"),
+            callback: () => this.rollAbilitySave(abilityId, options)
+          }
+        }
+      }).render(true);
+    }
 
   /* -------------------------------------------- */
 
@@ -1345,7 +1384,6 @@ export default class Actor5e extends Actor {
   rollAbilityTest(abilityId, options={}) {
     const label = CONFIG.SKJAALD.abilities[abilityId];
     const abl = this.data.data.abilities[abilityId];
-
     const parts = [];
     const data = this.getRollData();
 
@@ -1562,29 +1600,9 @@ export default class Actor5e extends Actor {
    * @param {boolean} [dialog]        Show a dialog prompt for configuring the hit die roll?
    * @returns {Promise<Roll|null>}    The created Roll instance, or null if no hit die was rolled
    */
-  async rollHitDie(denomination, {dialog=true}={}) {
+  async rollHitDie(event, {dialog=true}={}) {
 
-    // If no denomination was provided, choose the first available
-    let cls = null;
-    if ( !denomination ) {
-      cls = this.itemTypes.class.find(c => c.data.data.hitDiceUsed < c.data.data.levels);
-      if ( !cls ) return null;
-      denomination = cls.data.data.hitDice;
-    }
-
-    // Otherwise locate a class (if any) which has an available hit die of the requested denomination
-    else {
-      cls = this.items.find(i => {
-        const d = i.data.data;
-        return (d.hitDice === denomination) && ((d.hitDiceUsed || 0) < (d.levels || 1));
-      });
-    }
-
-    // If no class is available, display an error notification
-    if ( !cls ) {
-      ui.notifications.error(game.i18n.format("SKJAALD.HitDiceWarn", {name: this.name, formula: denomination}));
-      return null;
-    }
+    const denomination = event.event.target.getAttribute("data-hd-denom");
 
     // Prepare roll data
     const parts = [`1${denomination}`, "@abilities.con.mod"];
@@ -1607,11 +1625,7 @@ export default class Actor5e extends Actor {
     });
     if ( !roll ) return null;
 
-    // Adjust actor data
-    await cls.update({"data.hitDiceUsed": cls.data.data.hitDiceUsed + 1});
-    const hp = this.data.data.attributes.hp;
-    const dhp = Math.min(hp.max + (hp.tempmax ?? 0) - hp.value, roll.total);
-    await this.update({"data.attributes.hp.value": hp.value + dhp});
+
     return roll;
   }
 

@@ -308,12 +308,36 @@ export default class ActorSheet5e extends ActorSheet {
     data.armorOptionsLeg = this._getArmorForSlotsList(data, "legs", "legs");
 
 
+    //override initiative bonus
+    actorData.data.attributes.init.mod = parseInt(actorData.data.abilities.int.mod) + parseInt(actorData.data.abilities.dex.mod);
 
 
 
     // Return data to the sheet
     return data;
   }
+
+    /* -------------------------------------------- */
+
+  /**
+   * Produce a list of armor class attribution objects.
+   * @param {object} data                 Actor data to determine the attributions from.
+   * @returns {AttributionDescription[]}  List of attribution descriptions.
+   * @protected
+   */
+   _getHitDieDenom(data) {
+    console.log(data.items);
+    const items = data.items;
+    for (let i of items){
+      if (i.type == "class" && i.data.classType == "base"){
+        const hitDice = i.data.hitDice
+        return hitDice;
+      }
+    }
+    
+    return "d3";
+  }
+
 
   /* -------------------------------------------- */
 
@@ -435,6 +459,8 @@ export default class ActorSheet5e extends ActorSheet {
 
     return armor;
   }
+
+  
 
   /* -------------------------------------------- */
 
@@ -893,6 +919,8 @@ export default class ActorSheet5e extends ActorSheet {
 
       // Ability Checks
       html.find(".ability-name").click(this._onRollAbilityTest.bind(this));
+      html.find(".ability-save-name").click(this._onRollAbilitySave.bind(this));
+
 
       // Roll Skill Checks
       html.find(".skill-name").click(this._onRollSkillCheck.bind(this));
@@ -1622,10 +1650,23 @@ export default class ActorSheet5e extends ActorSheet {
   _onRollAbilityTest(event) {
     event.preventDefault();
     let ability = event.currentTarget.parentElement.dataset.ability;
-    this.actor.rollAbility(ability, {event: event});
+    this.actor.rollAbilityTest(ability, {event: event});
   }
 
   /* -------------------------------------------- */
+
+    /**
+   * Handle rolling an Ability saving throw.
+   * @param {Event} event      The originating click event.
+   * @private
+   */
+     _onRollAbilitySave(event) {
+      event.preventDefault();
+      let ability = event.currentTarget.classList[2];
+      this.actor.rollAbilitySave(ability, {event: event});
+    }
+  
+    /* -------------------------------------------- */
 
   /**
    * Handle rolling a Skill check.

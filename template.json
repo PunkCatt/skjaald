@@ -43,7 +43,8 @@
             "grit": 0,
             "tempmax": 0,
             "hitDicecurrent": 0,
-            "hitDiceMax": 1
+            "hitDiceMax": 1,
+            "hitDiceDenom": ""
           },
           "init": {
             "value": 0,
