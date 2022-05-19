@@ -276,7 +276,7 @@
         <label>{{ localize "SKJAALD.SkillChallenge" }}</label>
         <div class="form-fields">
             <select name="data.attacks.{{a}}.skillChallenge">
-                {{#select (lookup this "skillChellenge")}}
+                {{#select (lookup this "skillChallenge")}}
                 <option value=""></option>
                 {{#each ../config.skills as |skill s|}}
                 <option value="{{s}}">{{skill}}</option>
