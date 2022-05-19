@@ -89,6 +89,8 @@ export default class Item5e extends Item {
    */
   get hasDamage() {
 
+    if (this.data.type == "weapon"){ return true;}
+
       return !!(this.data.data.damage && this.data.data.damage.parts.length);
     
 
@@ -1066,11 +1068,12 @@ export default class Item5e extends Item {
    * @param {boolean} [config.critical]    Should damage be rolled as a critical hit?
    * @param {number} [config.spellLevel]   If the item is a spell, override the level for damage scaling
    * @param {boolean} [config.versatile]   If the item is a weapon, roll damage using the versatile formula
+   * @param {number} [config.id]           Attack id number associated with damage
    * @param {object} [config.options]      Additional options passed to the damageRoll function
    * @returns {Promise<Roll>}              A Promise which resolves to the created Roll instance, or null if the action
    *                                       cannot be performed.
    */
-  rollDamage({critical=false, event=null, spellLevel=null, versatile=false, options={}}={}) {
+  rollDamage({critical=false, event=null, spellLevel=null, versatile=false, attackID=null, options={}}={}) {
     if ( !this.hasDamage ) throw new Error("You may not make a Damage Roll with this Item.");
     const itemData = this.data.data;
     const actorData = this.actor.data.data;
@@ -1079,9 +1082,20 @@ export default class Item5e extends Item {
       speaker: ChatMessage.getSpeaker({actor: this.actor})
     };
 
+    var partArray = [];
+    const damageparts = itemData.attacks[attackID].damageparts;
+    for (let i in damageparts){
+      const damagepart = damageparts[i];
+      console.log(damagepart[0]);
+      partArray.push(damagepart[0]);
+    }
+
+
     // Get roll data
-    const parts = itemData.damage.parts.map(d => d[0]);
+    const parts = partArray;
     const rollData = this.getRollData();
+
+    console.log("come back here");
     if ( spellLevel ) rollData.item.level = spellLevel;
 
     // Configure the damage roll
@@ -1403,6 +1417,7 @@ export default class Item5e extends Item {
     const messageId = card.closest(".message").dataset.messageId;
     const message = game.messages.get(messageId);
     const action = button.dataset.action;
+    const attackID = button.dataset.id;
 
     // Validate permission to proceed with the roll
     const isTargetted = action === "save";
@@ -1431,7 +1446,8 @@ export default class Item5e extends Item {
           critical: event.altKey,
           event: event,
           spellLevel: spellLevel,
-          versatile: action === "versatile"
+          versatile: action === "versatile",
+          attackID: attackID
         });
         break;
       case "formula":

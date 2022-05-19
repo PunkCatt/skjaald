@@ -22,7 +22,7 @@
                 <button data-action="attack">{{ lookup this "name" }}</button>
                     {{log (lookup this 'damageparts')}}
                     {{#if (ne (lookup this 'damageparts') undefined)}}
-                        <button data-action="damage">
+                        <button data-action="damage" data-id="{{a}}">
                             {{#if isHealing}}{{ localize "SKJAALD.Healing" }}
                             {{else}}{{localize "SKJAALD.Damage" }}{{/if}}
                         </button>
