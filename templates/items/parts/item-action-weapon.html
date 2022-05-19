@@ -271,6 +271,32 @@
         </div>
     </div>
 
+    {{!-- Skill Challenge --}}
+    <div class="form-group input-select">
+        <label>{{ localize "SKJAALD.SkillChallenge" }}</label>
+        <div class="form-fields">
+            <select name="data.attacks.{{a}}.skillChallenge">
+                {{#select (lookup this "skillChellenge")}}
+                <option value=""></option>
+                {{#each ../config.skills as |skill s|}}
+                <option value="{{s}}">{{skill}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
+            <span>{{ localize "SKJAALD.VsDC" }}</span>
+            <input type="text" name="data.attacks.{{a}}.skilldc" value="{{lookup this "skilldc"}}" data-dtype="Number" placeholder="{{ localize 'SKJAALD.AbbreviationDC' }}"/>
+            <select name="data.attacks.{{a}}.skillscaling">
+                {{#select (lookup this "skillscaling")}}
+                <option value="none">{{ localize "SKJAALD.None" }}</option>
+                {{#each ../config.skills as |skill s|}}
+                <option value="{{s}}">{{skill}}</option>
+                {{/each}}
+                <option value="flat">{{ localize "SKJAALD.Flat" }}</option>
+                {{/select}}
+            </select>
+        </div>
+    </div>
+
     <div class="form-group stacked">
         <label>{{ localize "SKJAALD.Description" }}</label>
     </div>

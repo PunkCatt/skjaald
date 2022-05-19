@@ -64,7 +64,21 @@ export default class Item5e extends Item {
    * @type {boolean}
    */
   get hasAttack() {
+    const attacks = this.data.data.attacks;
+
+  if (this.data.type == "weapon"){
+
+    for (const attack of Object.entries(attacks)) {
+      if( ["mwak", "rwak", "msak", "rsak"].includes(attack[1].actionType) )
+      return true;
+    }
+
+    return false;
+
+  } else {
     return ["mwak", "rwak", "msak", "rsak"].includes(this.data.data.actionType);
+  }
+
   }
 
   /* -------------------------------------------- */
@@ -74,7 +88,11 @@ export default class Item5e extends Item {
    * @type {boolean}
    */
   get hasDamage() {
-    return !!(this.data.data.damage && this.data.data.damage.parts.length);
+
+      return !!(this.data.data.damage && this.data.data.damage.parts.length);
+    
+
+    
   }
 
   /* -------------------------------------------- */

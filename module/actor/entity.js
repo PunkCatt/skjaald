@@ -455,6 +455,8 @@ export default class Actor5e extends Actor {
     actorData.data.attributes.spellcasting.spellbonus = actorData.data.abilities[actorData.data.attributes.spellcasting.ability].mod;
     
     actorData.data.attributes.hp.hitDiceDenom = this._getHitDieDenom(actorData);
+
+    actorData.data.details.xp.value = actorData.data.attributes.acted.value;
   }
     
     /* -------------------------------------------- */
@@ -468,7 +470,6 @@ export default class Actor5e extends Actor {
      _getHitDieDenom(data) {
       const items = data.items;
       for (let i of items){
-        console.log(i);
         if (i.data.type == "class" && i.data.data.classType == "base"){
           const hitDice = i.data.data.hitDice
           return hitDice;

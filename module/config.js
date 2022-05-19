@@ -1063,7 +1063,7 @@ SKJAALD.cover = {
 SKJAALD.trackableAttributes = [
   "attributes.ac.value", "attributes.init.value", "attributes.movement", "attributes.senses", "attributes.spelldc",
   "attributes.spellLevel", "details.cr", "details.spellLevel", "details.xp.value", "skills.*.passive",
-  "abilities.*.value"
+  "abilities.*.value", "attributes.acted.value"
 ];
 
 /* -------------------------------------------- */

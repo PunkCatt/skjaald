@@ -13,40 +13,71 @@
     </div>
 
     <div class="card-buttons">
-        {{#if hasAttack}}<button data-action="attack">{{ localize "SKJAALD.Attack" }}</button>{{/if}}
+        
 
-        {{#if hasDamage}}
-        <button data-action="damage">
-            {{#if isHealing}}{{ localize "SKJAALD.Healing" }}
-            {{else}}{{localize "SKJAALD.Damage" }}{{/if}}
-        </button>
+        {{#if (eq item.type "weapon")}}
+
+            {{#if hasAttack}}
+                {{#each data.attacks as |attack a| }}
+                <button data-action="attack">{{ lookup this "name" }}</button>
+                    {{log (lookup this 'damageparts')}}
+                    {{#if (ne (lookup this 'damageparts') undefined)}}
+                        <button data-action="damage">
+                            {{#if isHealing}}{{ localize "SKJAALD.Healing" }}
+                            {{else}}{{localize "SKJAALD.Damage" }}{{/if}}
+                        </button>
+                    {{/if}}
+
+                {{/each}}
+            {{/if}}
+
+
         {{/if}}
 
-        {{#if isVersatile}}
-        <button data-action="versatile">{{ localize "SKJAALD.Versatile" }}</button>
-        {{/if}}
 
-        {{#if hasSave}}
-        <button data-action="save" data-ability="{{data.save.ability}}">
-            {{ localize "SKJAALD.SavingThrow" }} {{labels.save}}
-        </button>
-        {{/if}}
+        {{#unless (eq item.type 'weapon')}}
 
-        {{#if data.formula}}
-        <button data-action="formula">{{ localize "SKJAALD.OtherFormula"}}</button>
-        {{/if}}
 
-        {{#if hasAreaTarget}}
-        <button data-action="placeTemplate">{{ localize "SKJAALD.PlaceTemplate" }}</button>
-        {{/if}}
 
-        {{#if isTool}}
-        <button data-action="toolCheck" data-ability="{{data.ability.value}}">{{ localize "SKJAALD.Use" }} {{item.name}}</button>
-        {{/if}}
+                {{#if hasAttack}}<button data-action="attack">{{ localize "SKJAALD.Attack" }}</button>{{/if}}
 
-        {{#if hasAbilityCheck}}
-        <button data-action="abilityCheck" data-ability="{{data.ability}}">{{labels.abilityCheck}}</button>
-        {{/if}}
+                {{#if hasDamage}}
+                <button data-action="damage">
+                    {{#if isHealing}}{{ localize "SKJAALD.Healing" }}
+                    {{else}}{{localize "SKJAALD.Damage" }}{{/if}}
+                </button>
+                {{/if}}
+
+                {{#if isVersatile}}
+                <button data-action="versatile">{{ localize "SKJAALD.Versatile" }}</button>
+                {{/if}}
+
+                {{#if hasSave}}
+                <button data-action="save" data-ability="{{data.save.ability}}">
+                    {{ localize "SKJAALD.SavingThrow" }} {{labels.save}}
+                </button>
+                {{/if}}
+
+                {{#if data.formula}}
+                <button data-action="formula">{{ localize "SKJAALD.OtherFormula"}}</button>
+                {{/if}}
+
+                {{#if hasAreaTarget}}
+                <button data-action="placeTemplate">{{ localize "SKJAALD.PlaceTemplate" }}</button>
+                {{/if}}
+
+                {{#if isTool}}
+                <button data-action="toolCheck" data-ability="{{data.ability.value}}">{{ localize "SKJAALD.Use" }} {{item.name}}</button>
+                {{/if}}
+
+                {{#if hasAbilityCheck}}
+                <button data-action="abilityCheck" data-ability="{{data.ability}}">{{labels.abilityCheck}}</button>
+                {{/if}}
+
+
+        {{/unless}}
+
+        
     </div>
 
     <footer class="card-footer">

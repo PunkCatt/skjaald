@@ -308,8 +308,6 @@ export default class ActorSheet5e extends ActorSheet {
     data.armorOptionsLeg = this._getArmorForSlotsList(data, "legs", "legs");
 
 
-    //override initiative bonus
-    actorData.data.attributes.init.mod = parseInt(actorData.data.abilities.int.mod) + parseInt(actorData.data.abilities.dex.mod);
 
 
 
@@ -326,7 +324,6 @@ export default class ActorSheet5e extends ActorSheet {
    * @protected
    */
    _getHitDieDenom(data) {
-    console.log(data.items);
     const items = data.items;
     for (let i of items){
       if (i.type == "class" && i.data.classType == "base"){
@@ -1557,7 +1554,6 @@ export default class ActorSheet5e extends ActorSheet {
       if(event.currentTarget.classList[3] == "Learning"){
         itemData.data.learningNow = true;
       } else if (event.target.classList[3] == "Proficiency"){
-        console.log(itemData);
         itemData.data.proficient = 1;
       }
     }
