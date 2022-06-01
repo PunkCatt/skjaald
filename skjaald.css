@@ -1711,25 +1711,25 @@
  .sheet-pc-exhaustion-details li:nth-of-type(1) input[type=checkbox]:checked + span::after {
   display: none; }
  .sheet-pc-exhaustion-details li:not(:nth-of-type(1)) input[type=checkbox]:checked + span {
-  color: white; }
+  color: rgb(0, 0, 0); }
  .sheet-pc-exhaustion-details li:nth-of-type(2) input[type=checkbox]:checked + span::after {
   background: #b4cf01;
   height: 12px; }
  .sheet-pc-exhaustion-details li:nth-of-type(3) input[type=checkbox]:checked + span::after {
   background: #b4cf01;
-  height: 26px; }
+  height: 35px; }
  .sheet-pc-exhaustion-details li:nth-of-type(4) input[type=checkbox]:checked + span::after {
   background: #cfb401;
-  height: 40px; }
+  height: 53px; }
  .sheet-pc-exhaustion-details li:nth-of-type(5) input[type=checkbox]:checked + span::after {
   background: #cf7d01;
-  height: 54px; }
+  height: 66px; }
  .sheet-pc-exhaustion-details li:nth-of-type(6) input[type=checkbox]:checked + span::after {
   background: #cf4601;
-  height: 68px; }
+  height: 85px; }
  .sheet-pc-exhaustion-details li:nth-of-type(7) input[type=checkbox]:checked + span::after {
   background: #cf0101;
-  height: 82px; }
+  height: 102px; }
 .skjaald.sheet.actor .well-conditions {
   grid-area: well-conditions;
   flex-direction: column;
@@ -2895,4 +2895,26 @@
 .spells .details .editor,
 .weapons .details .editor{
   height: 25%;
+}
+
+.resources-grid .attribute-value input[type="text"]{
+  font-size: 15px;
+  width: 150%;
+  padding-right: 2px;
+  padding-left: 2px;
+}
+.skjaald.sheet.actor .resources-grid .attribute .attribute-value{
+  padding-bottom: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.proficiency .label{
+  padding-left: 25px;
+}
+.proficiency .number{
+  padding-left: 4px;
+}
+.proficiency .acted-label{
+  padding-left: 35px;
 }

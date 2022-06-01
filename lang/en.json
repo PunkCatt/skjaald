@@ -868,7 +868,7 @@
     "SKJAALD.WeaponPropertiesSwe": "Sweeping",
     "SKJAALD.WeaponPropertiesThr": "Thrown",
     "SKJAALD.WeaponPropertiesTwo": "Two-Handed",
-    "SKJAALD.WeaponPropertiesUnw": "unweilding",
+    "SKJAALD.WeaponPropertiesUnw": "Unweilding",
     "SKJAALD.WeaponPropertiesVer": "Versatile",
     "SKJAALD.WeaponPropertiesVis": "Viscous",
     "SKJAALD.WeaponSiege": "Siege Weapon",
@@ -962,7 +962,7 @@
     "SKJAALD.SpellResolution": "Resolution",
     "SKJAALD.EffectDescription": "Effect Description",
     "SKJAALD.SpellPillar": "Pillar Specialization",
-    "SKJAALD.SpellSpecialty": "Magical Traidition",
+    "SKJAALD.SpellSpecialty": "Magical Tradition",
     "SKJAALD.SpellMinor1": "Minor Magical Tradition",
     "SKJAALD.SpellMinor2": "Minor Magical Tradition",
     "SKJAALD.SpellCurrentLearning": "Currently Learning?",
@@ -982,7 +982,7 @@
     "SKJAALD.ItemTypeProf": "Proficiency",
     "SKJAALD.Category": "Category",
     "SKJAALD.Language": "Language",
-    "SKJAALD.LanguagesLearning": "Languages Learning",
+    "SKJAALD.LanguagesLearning": "Language Learning",
     "SKJAALD.Weapon": "Weapon",
     "SKJAALD.ItemProficiency": "Proficiency",
     "ITEM.TypeOtherlearn": "Other Learning",
@@ -995,7 +995,18 @@
     "SKJAALD.WeaponAttacks": "Weapon Attacks",
     "SKJAALD.MagicAttacks": "Magic Attacks",
     "SKJAALD.SkillChallenge": "Skill Challenge",
-    
+    "SKJAALD.WeaponBasicM": "Basic Melee",
+    "SKJAALD.WeaponBasicR": "Basic Ranged",
+    "SKJAALD.WeaponCombatM": "Combat Melee",
+    "SKJAALD.WeaponCombatR": "Combat Ranged",
+    "SKJAALD.WeaponEliteM": "Elite Melee",
+    "SKJAALD.WeaponEliteR": "Elite Ranged",
+    "SKJAALD.WeaponSpecialM": "Special Melee",
+    "SKJAALD.WeaponSpecialR": "Special Ranged",
+    "SKJAALD.MemoryEvent": "Memory Event",
+    "SKJAALD.Allies": "Allies",
+    "SKJAALD.SpellLevelsLearned": "Learned Levels",
+
 
     
     

@@ -12,7 +12,8 @@
 
     {{!-- Proficiency --}}
         <div class="proficiency">
-            <span>{{numberFormat data.attributes.prof decimals=0 sign=true}}      {{ localize "SKJAALD.Proficiency" }}</span>
+            <span class="number">{{numberFormat data.attributes.prof decimals=0 sign=true}}</span>
+            <span class="label">{{ localize "SKJAALD.Proficiency" }}</span>
         </div>
     {{!-- Ability Saves --}}
         <div class="saves-list">
