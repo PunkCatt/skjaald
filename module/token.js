@@ -135,4 +135,5 @@ export class Token5e extends Token {
     let posY = (number === 0) ? (this.h - h) : 0;
     bar.position.set(0, posY);
   }
+
 }

@@ -14,6 +14,7 @@ import ActorTypeConfig from "../../apps/actor-type.js";
 import {SKJAALD} from "../../config.js";
 import ActiveEffect5e from "../../active-effect.js";
 import ActorResourceAdd from "../../apps/create-resource.js";
+import ActorBioDescription from "../../apps/bio-description.js";
 
 
 /**
@@ -308,6 +309,10 @@ export default class ActorSheet5e extends ActorSheet {
     data.armorOptionsLeg = this._getArmorForSlotsList(data, "legs", "legs");
 
 
+    console.log(data.effects.inactive.effects);
+    if (data.effects.inactive.effects == ""){
+      data.effects.inactive.effects = "test";
+    }
 
 
 
@@ -900,6 +905,9 @@ export default class ActorSheet5e extends ActorSheet {
       html.find(".temp5").click(this._changeTemperature.bind(this));
       html.find(".temp6").click(this._changeTemperature.bind(this));
 
+      //textboxes
+      html.find(".bio-edit").click(this._editBioBox.bind(this));
+
       // Equipped Toggle
       html.find(".change-equip").change(this._toggleEquipped.bind(this));
 
@@ -1016,6 +1024,21 @@ export default class ActorSheet5e extends ActorSheet {
         app = new ActorResourceAdd(this.object);
       }
     }
+    app?.render(true);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+ * Handle spawning the TraitSelector application which allows a checkbox of multiple trait options.
+ * @param {Event} event   The click event which originated the selection.
+ * @private
+ */
+    _editBioBox(event) {
+    event.preventDefault();
+    const button = event.currentTarget.classList[2];
+    let app = new ActorBioDescription(this.object, null, button);
+
     app?.render(true);
   }
 

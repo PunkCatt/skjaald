@@ -6,7 +6,7 @@
  * @param {number} [options.criticalBonusDice=0]      A number of bonus damage dice that are added for critical hits
  * @param {number} [options.criticalMultiplier=2]     A critical hit multiplier which is applied to critical hits
  * @param {boolean} [options.multiplyNumeric=false]   Multiply numeric terms by the critical multiplier
- * @param {boolean} [options.powerfulCritical=false]  Apply the "powerful criticals" house rule to critical hits
+ * @param {boolean} [options.powerfulCritical=true]  Apply the "powerful criticals" house rule to critical hits
  * @param {string} [options.criticalBonusDamage]      An extra damage term that is applied only on a critical hit
  * @extends {Roll}
  */
@@ -53,7 +53,7 @@ export default class DamageRoll extends Roll {
           let cm = this.options.criticalMultiplier ?? 2;
 
           // Powerful critical - maximize damage and reduce the multiplier by 1
-          if ( this.options.powerfulCritical ) {
+          if (this.options.critical ) {
             flatBonus += (term.number * term.faces);
             cm = Math.max(1, cm-1);
           }
@@ -78,7 +78,7 @@ export default class DamageRoll extends Roll {
     }
 
     // Add powerful critical bonus
-    if ( this.options.powerfulCritical && (flatBonus > 0) ) {
+    if ( this.options.critical ) {
       this.terms.push(new OperatorTerm({operator: "+"}));
       this.terms.push(new NumericTerm({number: flatBonus}, {flavor: game.i18n.localize("SKJAALD.PowerfulCritical")}));
     }

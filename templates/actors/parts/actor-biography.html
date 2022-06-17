@@ -1,27 +1,27 @@
 <div class="bioPage-grid flexcol">
-    <div class="bioBoxes-grid flexcol">
+    <div class="bioBoxes1-grid flexcol">
         <div class="sheet-container-well bio-well-details container-panel">
             <div class="sheet-container-panel sheet-pc-details">
-                <div class="sheet-container-header">{{ localize "SKJAALD.CharacterDetails" }}</div>
+                <div class="sheet-container-header"><b><u>{{ localize "SKJAALD.CharacterDetails" }}</u></b></div>
                 <div class="sheet-container-body">
-                    <div class="sheet-pc-detail">
-                        <label>{{ localize "SKJAALD.Title" }}</label>
+                    <div class="sheet-pc-detail title">
+                        <label class="label">{{ localize "SKJAALD.Title" }}</label>
                         <input name="data.details.title" value={{data.details.title}}></input>
                     </div>
-                    <div class="sheet-pc-detail">
-                        <label>{{ localize "SKJAALD.Race" }}</label>
+                    <div class="sheet-pc-detail race">
+                        <label class="label">{{ localize "SKJAALD.Race" }}</label>
                         <input name="data.details.race" value="{{data.details.race}}"></input>
                     </div>
-                    <div class="sheet-pc-detail">
-                        <label>{{ localize "SKJAALD.Eyes" }}</label>
+                    <div class="sheet-pc-detail eyes">
+                        <label class="label">{{ localize "SKJAALD.Eyes" }}</label>
                         <input name="data.details.eyes" value="{{data.details.eyes}}"></input>
                     </div>
-                    <div class="sheet-pc-detail">
-                        <label>{{ localize "SKJAALD.Hair" }}</label>
+                    <div class="sheet-pc-detail hair">
+                        <label class="label">{{ localize "SKJAALD.Hair" }}</label>
                         <input name="data.details.hair" value="{{data.details.hair}}"></input>
                     </div>
-                    <div class="sheet-pc-detail">
-                        <label>{{ localize "SKJAALD.Alignment" }}</label>
+                    <div class="sheet-pc-detail alignment">
+                        <label class="label">{{ localize "SKJAALD.Alignment" }}</label>
                         <select name="data.details.alignment" >
                             {{#select data.details.alignment}}
                             <option value=""></option>
@@ -38,8 +38,8 @@
                             {{/select}}
                         </select>
                     </div>
-                    <div class="sheet-pc-detail">
-                        <label>{{ localize "SKJAALD.HonorMorality" }}</label>
+                    <div class="sheet-pc-detail honor-moral">
+                        <label class="label">{{ localize "SKJAALD.HonorMorality" }}</label>
                         <select name="data.details.honor">
                             {{#select data.details.honor}}
                             <option value="0">0</option>
@@ -91,8 +91,8 @@
                             {{/select}}
                         </select>
                     </div>
-                    <div class="sheet-pc-detail">
-                        <label>{{ localize "SKJAALD.Age" }}</label>
+                    <div class="sheet-pc-detail age">
+                        <label class="label">{{ localize "SKJAALD.Age" }}</label>
                         <select name="data.details.age">
                             {{#select data.details.age}}
                             <option value=""></option>
@@ -103,10 +103,10 @@
                             <option value="very_old">{{ localize "SKJAALD.VeryOld" }}</option>
                             {{/select}}
                         </select>
-                        <input type="text" name="data.details.agedetails" value="{{data.details.agedetails}}">
+                        <input class="age-text" type="text" name="data.details.agedetails" value="{{data.details.agedetails}}">
                     </div>
-                    <div class="sheet-pc-detail">
-                        <label>{{ localize "SKJAALD.Size" }}</label>
+                    <div class="sheet-pc-detail size">
+                        <label class="label">{{ localize "SKJAALD.Size" }}</label>
                         <select name="data.traits.size">
                             {{#select data.traits.size}}
                             <option value="tiny">{{ localize "SKJAALD.Tiny" }}</option>
@@ -118,12 +118,12 @@
                             {{/select}}
                         </select>
                     </div>
-                    <div class="sheet-pc-detail">
-                        <label>{{ localize "SKJAALD.Build" }}</label>
+                    <div class="sheet-pc-detail build">
+                        <label class="label">{{ localize "SKJAALD.Build" }}</label>
                         <input name="data.details.build" value="{{data.details.build}}"></input>
                     </div>
-                    <div class="sheet-pc-detail">
-                        <label>{{ localize "SKJAALD.Height" }}</label>
+                    <div class="sheet-pc-detail height">
+                        <label class="label">{{ localize "SKJAALD.Height" }}</label>
                         <select name="data.details.height">
                             {{#select data.details.height}}
                             <option value=""></option>
@@ -134,10 +134,10 @@
                             <option value="very_tall">{{ localize "SKJAALD.VeryTall" }}</option>
                             {{/select}}
                         </select>
-                        <input type="text" name="data.details.heightdetails" value="{{data.details.heightdetails}}">
+                        <input class="height-text" type="text" name="data.details.heightdetails" value="{{data.details.heightdetails}}">
                     </div>
-                    <div class="sheet-pc-detail">
-                        <label>{{ localize "SKJAALD.Weight" }}</label>
+                    <div class="sheet-pc-detail weight">
+                        <label class="label">{{ localize "SKJAALD.Weight" }}</label>
                         <select name="data.details.weight">
                             {{#select data.details.weight}}
                             <option value=""></option>
@@ -148,82 +148,86 @@
                             <option value="very_fat">{{ localize "SKJAALD.VeryFat" }}</option>
                             {{/select}}
                         </select>
-                        <input type="text" name="data.details.weightdetails" value="{{data.details.weightdetails}}">
+                        <input class="weight-text" type="text" name="data.details.weightdetails" value="{{data.details.weightdetails}}">
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="sheet-container-box bio-personality container-panel">
-            <div class="sheet-container-header">
-                {{ localize "SKJAALD.PersonalityTraits" }}    
-                <a class="item-control bio-edit personality" title="{{localize 'SKJAALD.ItemEdit'}}"><i class="fas fa-edit"></i></a>
-            </div>
-                {{ data.details.trait }}
-        </div>
-
-        <div class="sheet-container-box bio-ideals container-panel">
-            <div class="sheet-container-header">{{ localize "SKJAALD.Ideals" }}</div>
-            <div class="sheet-container-body">
-                <textarea name="data.details.ideal">{{data.details.ideal}}</textarea>
-            </div>
-        </div>
-
-        <div class="sheet-container-box bio-bonds container-panel">
-            <div class="sheet-container-header">{{ localize "SKJAALD.Bonds" }}</div>
-            <div class="sheet-container-body">
-                <textarea name="data.details.bond">{{data.details.bond}}</textarea>
-            </div>
-        </div>
-
-        <div class="sheet-container-box bio-flaws container-panel">
-            <div class="sheet-container-header">{{ localize "SKJAALD.Flaws" }}</div>
-            <div class="sheet-container-body">
-                <textarea name="data.details.flaw">{{data.details.flaw}}</textarea>
-            </div>
-        </div>
-
         <div class="sheet-container-box bio-phy-features container-panel">
-            <div class="sheet-container-header">{{ localize "SKJAALD.PhysicalFeatures" }}</div>
-            <div class="sheet-container-body">
-                <textarea name="data.details.appearance">{{data.details.appearance}}</textarea>
+            <div class="sheet-container-header"><b><u>
+                {{ localize "SKJAALD.PhysicalFeatures" }}</u></b> 
+                <a class="item-control bio-edit appearance" title="{{localize 'SKJAALD.ItemEdit'}}"><i class="fas fa-edit"></i></a>
             </div>
-        </div>
 
-        <div class="sheet-container-box bio-habits container-panel">
-            <div class="sheet-container-header">{{ localize "SKJAALD.Habits" }}</div>
-            <div class="sheet-container-body">
-                <textarea name="data.details.habits">{{data.details.habits}}</textarea>
-            </div>
+            {{{ data.details.appearance }}}
         </div>
 
         <div class="sheet-container-box bio-family container-panel">
-            <div class="sheet-container-header">{{ localize "SKJAALD.Family" }}</div>
-            <div class="sheet-container-body">
-                
-                <textarea name="data.details.family" >{{data.details.family}}</textarea>
+            <div class="sheet-container-header"><b><u>
+                {{ localize "SKJAALD.Family" }}</u></b> 
+                <a class="item-control bio-edit family" title="{{localize 'SKJAALD.ItemEdit'}}"><i class="fas fa-edit"></i></a>
             </div>
-        </div>
-
-        <div class="sheet-container-box bio-quest container-panel">
-            <div class="sheet-container-header">{{ localize "SKJAALD.Quest" }}</div>
-            <div class="sheet-container-body">
-                <textarea name="data.details.quest">{{data.details.quest}}</textarea>
-            </div>
+            {{{ data.details.family }}}
         </div>
 
         <div class="sheet-container-box bio-secrets container-panel">
-            <div class="sheet-container-header">{{ localize "SKJAALD.Secrets" }}</div>
-            <div class="sheet-container-body">
-                <textarea name="data.details.secrets">{{data.details.secrets}}</textarea>
+            <div class="sheet-container-header"><b><u>
+                {{ localize "SKJAALD.Secrets" }}</u></b> 
+                <a class="item-control bio-edit secrets" title="{{localize 'SKJAALD.ItemEdit'}}"><i class="fas fa-edit"></i></a>
+
             </div>
+            {{{ data.details.secrets }}}
+        </div>
+    </div>
+    <div class="bioBoxes2-grid flexcol">
+        <div class="sheet-container-box bio-personality container-panel">
+            <div class="sheet-container-header"><b><u>
+                {{ localize "SKJAALD.PersonalityTraits" }}</u></b>    
+                <a class="item-control bio-edit traits personality" title="{{localize 'SKJAALD.ItemEdit'}}"><i class="fas fa-edit"></i></a>
+            </div>
+                {{{ data.details.traits }}}
+        </div>
+        <div class="sheet-container-box bio-ideals container-panel">
+            <div class="sheet-container-header"><b><u>
+                {{ localize "SKJAALD.Ideals" }}</u></b> 
+                <a class="item-control bio-edit ideal" title="{{localize 'SKJAALD.ItemEdit'}}"><i class="fas fa-edit"></i></a>
+            </div>
+                {{{ data.details.ideal }}}
+        </div>
+        <div class="sheet-container-box bio-bonds container-panel">
+            <div class="sheet-container-header"><b><u>
+                {{ localize "SKJAALD.Bonds" }}</u></b> 
+                <a class="item-control bio-edit bond" title="{{localize 'SKJAALD.ItemEdit'}}"><i class="fas fa-edit"></i></a>
+            </div>
+                {{{ data.details.bond }}}
+        </div>
+        <div class="sheet-container-box bio-flaws container-panel">
+            <div class="sheet-container-header"><b><u>
+                {{ localize "SKJAALD.Flaws" }}</u></b> 
+                <a class="item-control bio-edit flaw" title="{{localize 'SKJAALD.ItemEdit'}}"><i class="fas fa-edit"></i></a>
+            </div>
+                {{{ data.details.flaw }}}
+        </div>
+        <div class="sheet-container-box bio-habits container-panel">
+            <div class="sheet-container-header"><b><u>
+                {{ localize "SKJAALD.Habits" }}</u></b> 
+                <a class="item-control bio-edit habits" title="{{localize 'SKJAALD.ItemEdit'}}"><i class="fas fa-edit"></i></a>
+            </div>
+
+            {{{ data.details.habits }}}
+        </div>
+        <div class="sheet-container-box bio-quest container-panel">
+            <div class="sheet-container-header"><b><u>
+                {{ localize "SKJAALD.Quest" }}</u></b> 
+                <a class="item-control bio-edit quest" title="{{localize 'SKJAALD.ItemEdit'}}"><i class="fas fa-edit"></i></a>
+
+            </div>
+            {{{ data.details.quest }}}
         </div>
     </div>
     <div class="bio-events container-panel">
-
-        <h4>{{ localize "SKJAALD.MemoriesEvents" }}</h4>
-
-        <section class="bioPage-Memory-events flexcol">
+        <section class="bioPage-memory-events flexcol">
             {{!-- Memories & Events --}}
             {{> "systems/skjaald/templates/actors/parts/actor-textblocks.html" sections=events}}
         </section>

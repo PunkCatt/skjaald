@@ -1006,6 +1006,9 @@
     "SKJAALD.MemoryEvent": "Memory Event",
     "SKJAALD.Allies": "Allies",
     "SKJAALD.SpellLevelsLearned": "Learned Levels",
+    "SKJAALD.BioEditTitle": "Edit {box}",
+    "SKJAALD.ClassType": "Class Type",
+
 
 
     

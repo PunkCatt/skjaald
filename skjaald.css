@@ -289,6 +289,15 @@
 .skjaald.sheet .editor .tox-toolbar__primary {
   background: none;
 }
+.biography-boxes{
+  min-height: 350px;
+}
+.biography-boxes .tox-tinymce{
+  min-height: 250px;
+}
+.editor .editor-content{
+  min-height: 150px;
+}
 .skjaald.sheet .warnings,
 .skjaald.sheet .info {
   flex: 0 0 100%;
@@ -964,16 +973,25 @@
   grid-template-rows: repeat(1, 1fr);
   grid-column-gap: 5px;
   grid-row-gap: 5px;
-  grid-template-areas: "bio bio events";
+  grid-template-areas: "bio1 bio2 events";
 }
-.skjaald.sheet.actor .bioBoxes-grid {
-  grid-area: bio;
+.skjaald.sheet.actor .bioBoxes1-grid {
+  grid-area: bio1;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(6, 1fr);
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: 300px auto auto 1fr;
   grid-column-gap: 5px;
   grid-row-gap: 5px;
-  grid-template-areas: "details personality" "details ideals" "details bonds" "secrets flaws" "physical habits" "family quest";
+  grid-template-areas: "details" "secrets" "physical" "family";
+}
+.skjaald.sheet.actor .bioBoxes2-grid {
+  grid-area: bio2;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: auto auto auto auto auto 1fr;
+  grid-column-gap: 5px;
+  grid-row-gap: 5px;
+  grid-template-areas: "personality" "ideals" "bonds" "flaws" "habits" "quest";
 }
 .skjaald.sheet.actor .notePage-grid {
   display: grid;
@@ -1871,38 +1889,75 @@
 }
 .skjaald.sheet.actor .bio-well-details {
   grid-area: details;
+  padding-left: 8px;
+  padding-top: 3px;
 }
 .skjaald.sheet.actor .bio-personality {
   grid-area: personality;
-  padding-left: 5px;
+  padding-left: 8px;
+  padding-top: 3px;
+  min-height: 115px;
 }
 
 .skjaald.sheet.actor .bio-ideals {
   grid-area: ideals;
+  padding-left: 8px;
+  padding-top: 3px;
+  min-height: 115px;
+
 }
 .skjaald.sheet.actor .bio-bonds {
   grid-area: bonds;
+  padding-left: 8px;
+  padding-top: 3px;
+  min-height: 115px;
+
 }
 .skjaald.sheet.actor .bio-flaws {
   grid-area: flaws;
+  padding-left: 8px;
+  padding-top: 3px;
+  min-height: 115px;
+
 }
 .skjaald.sheet.actor .bio-phy-features {
   grid-area: physical;
+  padding-left: 8px;
+  padding-top: 3px;
+  min-height: 115px;
+
 }
 .skjaald.sheet.actor .bio-habits {
   grid-area: habits;
+  padding-left: 8px;
+  padding-top: 3px;
+  min-height: 115px;
+
 }
 .skjaald.sheet.actor .bio-family {
   grid-area: family;
+  padding-left: 8px;
+  padding-top: 3px;
+  min-height: 115px;
+
 }
 .skjaald.sheet.actor .bio-quest {
   grid-area: quest;
+  padding-left: 8px;
+  padding-top: 3px;
+  min-height: 115px;
+
 }
 .skjaald.sheet.actor .bio-secrets {
   grid-area: secrets;
+  padding-left: 8px;
+  padding-top: 3px;
+  min-height: 115px;
+
 }
 .skjaald.sheet.actor .bio-events {
   grid-area: events;
+  width: 100%;
 }
 .skjaald.sheet.actor .counters {
   flex: none;
@@ -1972,9 +2027,17 @@
 .skjaald.sheet.actor .traits input {
   text-align: right;
 }
-.skjaald.sheet.actor .traits i.fas {
+.skjaald.sheet.actor .traits i.fas,
+.skjaald.sheet.actor .ideal i.fas,
+.skjaald.sheet.actor .bond i.fas,
+.skjaald.sheet.actor .flaw i.fas,
+.skjaald.sheet.actor .appearance i.fas,
+.skjaald.sheet.actor .habits i.fas,
+.skjaald.sheet.actor .family i.fas,
+.skjaald.sheet.actor .quest i.fas,
+.skjaald.sheet.actor .secrets i.fas {
   float: right;
-  margin-right: 3px;
+  margin-right: 8px;
   text-align: right;
   color: #999;
 }
@@ -2533,10 +2596,10 @@
   border: 1px solid #6e0000;
 }
 .dice-roll .dice-total.critical {
-  color: green;
+  color: #C5B317;
 }
 .dice-roll .dice-total.fumble {
-  color: red;
+  color: #7414C4;
 }
 /* ----------------------------------------- */
 /*  Basic Structure                          */
@@ -2917,4 +2980,187 @@
 }
 .proficiency .acted-label{
   padding-left: 35px;
+}
+.skjaald.sheet.actor .bio-events .bioPage-memory-events .inventory-list{
+  width: 100%;
+  padding-top: 5px;
+  padding-left: 8px;
+  padding-right:8px;
+}
+.sheet-pc-details .sheet-container-body{
+  padding-top: 5px;
+}
+.sheet-pc-details .sheet-container-body .age-text{
+  width: 60px;
+  outline: 1px solid #111;
+}
+.sheet-pc-details .sheet-container-body .height-text{
+  width: 60px;
+  outline: 1px solid #111;
+
+}
+.sheet-pc-details .sheet-container-body .weight-text{
+  width: 60px;
+  outline: 1px solid #111;
+
+}
+
+.sheet-pc-details .title{
+  padding-bottom: 3px;
+}
+.sheet-pc-details .title .label{
+  padding-right: 5px;
+}
+.sheet-pc-details .sheet-container-body .title input{
+  width: 215px;
+}
+.sheet-pc-details .race{
+  padding-bottom: 3px;
+}
+.sheet-pc-details .race .label{
+  padding-right: 2px;
+}
+.sheet-pc-details .sheet-container-body .race input{
+  width: 215px;
+}
+
+.sheet-pc-details .eyes{
+  padding-bottom: 3px;
+}
+
+.sheet-pc-details .eyes .label{
+  padding-right: 4px;
+}
+.sheet-pc-details .sheet-container-body .eyes input{
+  width: 215px;
+}
+
+.sheet-pc-details .hair{
+  padding-bottom: 3px;
+}
+.sheet-pc-details .hair .label{
+  padding-right: 5px;
+}
+.sheet-pc-details .sheet-container-body .hair input{
+  width: 215px;
+}
+
+.sheet-pc-details .alignment{
+  padding-bottom: 3px;
+}
+.sheet-pc-details .alignment .label{
+  padding-right: 0px;
+}
+.sheet-pc-details .sheet-container-body .alignment select{
+  width: 186px;
+}
+
+.sheet-pc-details .honor-moral{
+  padding-bottom: 3px;
+}
+.sheet-pc-details .honor-moral .label{
+  padding-right: 2px;
+}
+.sheet-pc-details .sheet-container-body .honor-moral select{
+  width: 77px;
+}
+
+.sheet-pc-details .age{
+  padding-bottom: 3px;
+}
+.sheet-pc-details .age .label{
+  padding-right: 10px;
+}
+.sheet-pc-details .sheet-container-body .age input{
+  width: 103px;
+}
+
+.sheet-pc-details .build{
+  padding-bottom: 2px;
+}
+.sheet-pc-details .build .label{
+  padding-right: 3px;
+}
+.sheet-pc-details .sheet-container-body .build input{
+  width: 212px;
+}
+
+.sheet-pc-details .size{
+  padding-bottom: 3px;
+}
+.sheet-pc-details .size .label{
+  padding-right: 8px;
+}
+.sheet-pc-details .sheet-container-body .size select{
+  width: 213px;
+}
+
+.sheet-pc-details .height{
+  padding-bottom: 3px;
+}
+.sheet-pc-details .height .label{
+  padding-right: 7px;
+}
+.sheet-pc-details .sheet-container-body .height select{
+  width: 87px;
+}
+.sheet-pc-details .sheet-container-body .height input{
+  width: 108px;
+}
+
+.sheet-pc-details .weight{
+  padding-bottom: 3px;
+}
+.sheet-pc-details .weight .label{
+  padding-right: 5px;
+}
+.sheet-pc-details .sheet-container-body .weight select{
+  width: 87px;
+}
+
+.sheet-pc-details .sheet-container-body .weight input{
+  width: 108px;
+}
+.skjaald.sheet.actor .notes-people .inventory-list,
+.skjaald.sheet.actor .notes-additional .inventory-list{
+  width: 400px;
+  padding-top: 5px;
+  padding-left: 8px;
+  padding-right: 5px;
+}
+.skjaald.sheet.actor .notes-backstory .inventory-list{
+  width: 806px;
+  padding-top: 5px;
+  padding-left: 8px;
+  padding-right: 5px;
+}
+.skjaald.sheet.actor .death-saves .proficiency-toggle{
+  font-size: 18px;
+  padding-left: 1px;
+  padding-right: 1px;
+}
+.skjaald.sheet.actor .death-saves .attribute-value{
+  margin-top: 5px
+}
+.skjaald.sheet.actor .combat-container .actions{
+  padding-left: 8px;
+  padding-top: 3px;
+}
+.skjaald.sheet.actor .exhaustEffects{
+  padding-left: 8px;
+  padding-right: 5px;
+}
+
+/* status effect hud */
+#token-hud .status-effects {
+  grid-template-columns: repeat(8, 40px);
+  gap: 4px 8px;
+  width: auto;
+  top: -100px;
+  padding: 4px 8px;
+}
+
+#token-hud .status-effects .effect-control {
+  width: unset;
+  height: unset;
 }
