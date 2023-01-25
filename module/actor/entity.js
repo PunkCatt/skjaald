@@ -2190,7 +2190,6 @@ export default class Actor5e extends Actor {
     return roll;
   }
 
-
   /* -------------------------------------------- */
 
   /**
