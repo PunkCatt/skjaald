@@ -2014,9 +2014,6 @@ export default class Actor5e extends Actor {
     const item = this.items.get(itemId);
     const itemName = item.data.name;
 
-    //Identify Perfect Student
-    const perfectStudent = item.data.data.perfectstudent;
-
     // Evaluate a global saving throw bonus
     const parts = ['1d20', '1d100','1d100', '@prof', "@mod", '@conseq'];
     const data = this.getRollData();
@@ -2042,6 +2039,8 @@ export default class Actor5e extends Actor {
 
 
     // Take action depending on the result
+    const actorID = speaker.actor;
+    const actor = game.actors.get(actorID).data;
     const total = roll._total;
     const success = roll.total >= 10;
     const d20 = roll.dice[0].total;
@@ -2056,7 +2055,7 @@ export default class Actor5e extends Actor {
     let roll1 = roll.terms[0].results[0].result;
     let roll2 = roll.terms[2].results[0].result;
     var selectedRoll = 0;
-    let percentile1 = roll.terms[4].results[0].result;
+    let percentile = roll.terms[4].results[0].result;
     var calculatedRoll;
     var dc = 0;
     var profBonus = 0;
@@ -2084,8 +2083,16 @@ export default class Actor5e extends Actor {
     var advantageMode = roll.options.advantageMode;
     var arcanabonus = data.skills.arc.total;
     var wizLevel = 0;
+    var baseHours = 0;
+    var templateModifier = -1000;
+    var baseArcana = 0;
+    var hours = 1;
+    var templatePaths = item.data.data.templatePaths; 
+    var templatePathName = "";
+    var noTemplatePaths = false;
+    var itemList = actor.items;
 
-    console.log(data);
+    console.log(itemList);
 
     // Calculate DC for roll
     dc = 10 + (2 * spellLevel);
@@ -2161,14 +2168,123 @@ export default class Actor5e extends Actor {
     // Check DC Pass/Fail
     if(totalArcana >= dc){
       pass = true;
+      console.log("Passed DC");
+    } else{
+      console.log("Failed DC");
+      console.log("TO DO: Chat Message for failed learning roll");
+      return;
     }
 
     // resolve crit
+    if (crit == true){
+      totalArcana += percentile;
+      hours = 4;
+    }
 
     // template knowledge - add/subtract from base arcana value - does not effect hours - no modifier if there are no templates to spell
       // modifier # template spells known - not known
 
-    // base values (include crit)
+    // iterate through template paths
+    for (const [key, value] of Object.entries(templatePaths)){
+      console.log(value);
+      var spells = value.spells;
+      var unknownSpells = 0;
+      var knownSpells = 0;
+      // iterate through template spells
+      for (const [key2, value2] of Object.entries(spells)){
+        console.log(value2);
+        var spellName = value2.name;
+        var spellKnown = false;
+        //iternate through items to find spells
+        itemList.forEach(item => {
+          console.log(item);
+          // if item is a spell check if match
+          if (item.data.type == "spell"){
+            console.log(spellName);
+            console.log(item.data.name);
+            // if spell matches template spell
+            if ((item.data.name).toLowerCase() === spellName.toLowerCase()){
+              console.log("spell exists on list");
+              var minimumLevel = value2.minLevel;
+              var learned = item.data.data.learned;
+              //if minimum level is N/A add to known else factor in minimum level
+              if(minimumLevel == -1){
+                if(learned.cantrip === true || learned.one === true || learned.two === true || learned.three === true || learned.four === true || learned.five === true || learned.six === true || learned.seven === true || learned.eight === true || learned.nine === true || learned.ten === true || learned.eleven === true || learned.twelve === true || learned.thirteen === true){
+                  spellKnown = true;
+                }
+              } else{
+                var maxLevelKnown = -1;
+                if(learned.cantrip === true){
+                  maxLevelKnown = 0;
+                }
+                if(learned.one === true){
+                  maxLevelKnown = 1;
+                }
+                if(learned.two === true){
+                  maxLevelKnown = 2;
+                }
+                if(learned.three === true){
+                  maxLevelKnown = 3;
+                }
+                if(learned.four === true){
+                  maxLevelKnown = 4;
+                }
+                if(learned.five === true){
+                  maxLevelKnown = 5;
+                }
+                if(learned.six === true){
+                  maxLevelKnown = 6;
+                }
+                if(learned.seven === true){
+                  maxLevelKnown = 7;
+                }
+                if(learned.eight === true){
+                  maxLevelKnown = 8;
+                }
+                if(learned.nine === true){
+                  maxLevelKnown = 9;
+                }
+                if(learned.ten === true){
+                  maxLevelKnown = 10;
+                }
+                if(learned.eleven === true){
+                  maxLevelKnown = 11;
+                }
+                if(learned.twelve === true){
+                  maxLevelKnown = 12;
+                }
+                if(learned.thirteen === true){
+                  maxLevelKnown = 13;
+                }
+                if (maxLevelKnown >= minimumLevel){
+                  spellKnown += 1;
+                }
+              }
+
+            }
+          }
+        })
+        if(spellKnown === true){
+          knownSpells += 1;
+        }else{
+          unknownSpells += 1;
+        }
+      }
+      console.log("knownSpells: " + knownSpells);
+      console.log("unkownSpells: " + unknownSpells);
+      var currentModifier = knownSpells - unknownSpells;
+      console.log(currentModifier);
+      if (currentModifier > templateModifier){
+        templateModifier = currentModifier;
+        templatePathName = value.name;
+      }
+    }
+
+    console.log("template Modifier: " + templateModifier);
+    console.log("template Path Name: " + templatePathName);
+
+
+    // base values (include crit & template)
 
     // resolve pillars from base
 
