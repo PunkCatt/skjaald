@@ -1,0 +1,95 @@
+<div class="learning-grid">
+    <div class="spell-learning">
+        <div class="sheet-container-box spell-list">
+            <div class="container-panel">
+                <div class="sheet-container-body">
+                    <section>
+                        {{> "systems/skjaald/templates/actors/parts/actor-spell-learning-list.html" sections=spellLearningList}}
+                    </section>
+                </div>
+            </div>
+        </div>
+        <div class="sheet-container-bar pillar">
+            <div class="sheet-container-header">
+                <span>{{localize "SKJAALD.SpellPillar"}}</span>
+            </div>
+            <div class="sheet-container-body">
+                <select name="data.spell.pillar">
+                    {{#select data.spell.pillar}}
+                    <option value="none"> {{localize "SKJAALD.None"}}</option>
+                    {{#each config.spellPillars as |name sch|}}
+                    <option value="{{sch}}">{{localize name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+        </div>
+        <div class="sheet-container-bar sheet-container-bar-left specialty">
+            <div class="sheet-container-header">
+                <span>{{localize "SKJAALD.SpellSpecialty"}}</span>
+            </div>
+            <div class="sheet-container-body">
+                <select name="data.spell.specialty">
+                    {{#select data.spell.specialty}}
+                    <option value="none"> {{localize "SKJAALD.None"}}</option>
+                    {{#each config.spellSchools as |name sch|}}
+                    <option value="{{sch}}">{{localize name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+        </div>
+        <div class="sheet-container-bar sheet-container-bar-left minor-primary">
+            <div class="sheet-container-header">
+                {{localize "SKJAALD.SpellMinor1"}}
+            </div>
+            <div class="sheet-container-body">
+                <select name="data.spell.minor1">
+                    {{#select data.spell.minor1}}
+                    <option value="none"> {{localize "SKJAALD.None"}}</option>
+                    {{#each config.spellSchools as |name sch|}}
+                    <option value="{{sch}}">{{localize name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+        </div>
+        <div class="sheet-container-bar sheet-container-bar-left minor-secondary">
+            <div class="sheet-container-header">
+                {{localize "SKJAALD.SpellMinor2"}}
+            </div>
+            <div class="sheet-container-body">
+                <select name="data.spell.minor2">
+                    {{#select data.spell.minor2}}
+                    <option value="none"> {{localize "SKJAALD.None"}}</option>
+                    {{#each config.spellSchools as |name sch|}}
+                    <option value="{{sch}}">{{localize name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="classes">
+        <div class="sheet-container-box classes">
+            <div class="container-panel">
+                <div class="sheet-container-body">
+                    <section>
+                        {{> "systems/skjaald/templates/actors/parts/classes.html" sections=classes}}
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="other-learning">
+        <div class="sheet-container-box other-learning">
+            <div class="container-panel">
+                <div class="sheet-container-body">
+                    <section>
+                        {{> "systems/skjaald/templates/actors/parts/actor-learning-list.html" sections=regularLearning}}
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

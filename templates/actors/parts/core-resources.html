@@ -1,0 +1,38 @@
+<li class="attribute resource1 container-box container-panel">
+    <div class="attribute-value container-box-body auto-calc-value">
+        <input type="text" name="data.resources.primary.value" value="{{data.resources.primary.value}}"/>
+        /
+        <input type="text" name="data.resources.primary.max" value="{{data.resources.primary.max}}" />
+    </div>
+    <h5 class="attribute-name container-box-header">
+        <input type="text" name="data.resources.primary.label" value="{{data.resources.primary.label}}" />
+    </h5>
+</li>
+
+<li class="attribute resource2 container-box container-panel">
+    <div class="attribute-value container-box-body auto-calc-value" data-property="attributes.hp">
+        <input type="text" name="data.resources.secondary.value" value="{{data.resources.secondary.value}}"/>
+        /
+        <input type="text" name="data.resources.secondary.max" value="{{data.resources.secondary.max}}" />
+    </div>
+    <h5 class="attribute-name container-box-header">
+        <input type="text" name="data.resources.secondary.label" value="{{data.resources.secondary.label}}" />
+    </h5>
+</li>
+
+<li class="attribute resource3 container-box container-panel">
+    <div class="attribute-value container-box-body auto-calc-value" data-property="attributes.hp">
+        <input type="text" name="data.resources.tertiary.value" value="{{data.resources.tertiary.value}}"/>
+        /
+        <input type="text" name="data.resources.tertiary.max" value="{{data.resources.tertiary.max}}" />
+    </div>
+    <h5 class="attribute-name container-box-header">
+        <input type="text" name="data.resources.tertiary.label" value="{{data.resources.tertiary.label}}" />
+    </h5>
+</li>
+
+<div class="attribute other-resources container-panel">
+
+    {{> "systems/skjaald/templates/actors/parts/resource-list.html" sections=resourceList}}   
+    
+</div>

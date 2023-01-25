@@ -1,0 +1,66 @@
+<li class="attribute cast-ability container-box container-panel">
+    <div class="attribute-value container-box-body auto-calc-value pellcasting-ability">
+        <select name="data.attributes.spellcasting.ability" data-type="String">
+            {{#select data.attributes.spellcasting.ability}}
+            <option value="">{{localize "SKJAALD.None"}}</option>
+            {{#each data.abilities as |abl a|}}
+            <option value="{{a}}">{{abl.label}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+    </div>
+    <h5 class="attribute-name container-box-header">
+        {{ localize "SKJAALD.SpellAbility" }}
+    </h5>
+</li>
+<li class="attribute spell-save-dc container-box container-panel">
+    <div class="attribute-value container-box-body auto-calc-value">
+        <span>{{data.attributes.spellcasting.spelldc}}</span>
+    </div>
+    <h5 class="attribute-name container-box-header">
+        {{ localize "SKJAALD.SpellSaveDC" }}
+    </h5>
+</li>
+<li class="attribute spell-attack-bonus container-box container-panel">
+    <div class="attribute-value container-box-body auto-calc-value" >
+        <span>{{data.attributes.spellcasting.spellbonus}}</span>
+    </div>
+    <h5 class="attribute-name container-box-header">
+        {{ localize "SKJAALD.SpellAttackBonus" }}
+    </h5>
+</li>
+<li class="attribute spell-burnout container-box container-panel">
+    <div class="attribute-value container-box-body auto-calc-value" >
+        <select class="" name="data.attributes.spellcasting.burnout" data-type="String">
+            {{#select data.attributes.spellcasting.burnout}}
+            <option value=""></option>
+            <option value="d12">d12</option>
+            <option value="d10">d10</option>
+            <option value="d8">d8</option>
+            <option value="d6">d6</option>
+            <option value="d4">d4</option>>
+            {{/select}}
+        </select>
+    </div>
+    <h5 class="attribute-name container-box-header">
+        {{ localize "SKJAALD.SpellBurnout" }}
+    </h5>
+</li>
+<li class="attribute spell-memorized container-box container-panel">
+    <div class="attribute-value container-box-body auto-calc-value">
+        <input type="text" name="data.attributes.spellcasting.memorized.cantrips" value="{{data.attributes.spellcasting.memorized.cantrips}}"/>
+        /
+        <input type="text" name="data.attributes.spellcasting.memorized.spells" value="{{data.attributes.spellcasting.memorized.spells}}" />
+    </div>
+    <h5 class="attribute-name container-box-header">
+        {{ localize "SKJAALD.CantripSpellMemorized" }}
+    </h5>
+</li>
+<li class="attribute free-cantrips container-box container-panel">
+    <div class="attribute-value container-box-body auto-calc-value">
+        <input type="text" name="data.attributes.spellcasting.freecantrips" value="{{data.attributes.spellcasting.freecantrips}}" />
+    </div>
+    <h5 class="attribute-name container-box-header">
+        {{ localize "SKJAALD.FreeCantrips" }}
+    </h5>
+</li>

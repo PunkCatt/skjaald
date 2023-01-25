@@ -1,0 +1,215 @@
+<div class="equipmentPage-grid flexcol">
+    <div class="equipment-holdings sheet-container-box container-panel">
+        <div class="sheet-container-body">
+            <div class="armorDude">
+                <label class="head">{{ localize "SKJAALD.Head" }}</label>
+                <label class="neck">{{ localize "SKJAALD.Neck" }}</label>
+                <label class="shoulders">{{ localize "SKJAALD.Shoulders" }}</label>
+                <label class="inner">{{ localize "SKJAALD.Inner" }}</label>
+                <label class="outer">{{ localize "SKJAALD.Outer" }}</label>
+                <label class="torso">{{ localize "SKJAALD.Torso" }}</label>
+                <label class="waist">{{ localize "SKJAALD.Waist" }}</label>
+                <label class="arms">{{ localize "SKJAALD.Arms" }}</label>
+                <label class="hands">{{ localize "SKJAALD.Hands" }}</label>
+                <label class="rings">{{ localize "SKJAALD.Rings" }}</label>
+                <label class="thighs">{{ localize "SKJAALD.Thighs" }}</label>
+                <label class="legs">{{ localize "SKJAALD.Legs" }}</label>
+
+
+                <select class="head-drop change-equip {{data.attributes.wornArmor.head}}" name="data.attributes.wornArmor.head">
+                    {{#select data.attributes.wornArmor.head }}
+                    <option value="none">{{ localize "SKJAALD.None" }}</option>
+                    {{#each armorOptionsHead }}
+                    <option value="{{@key}}">{{this}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+                <select class="neck-drop change-equip {{data.attributes.wornArmor.neck}}" name="data.attributes.wornArmor.neck">
+                    {{#select data.attributes.wornArmor.neck }}
+                    <option value="none">{{ localize "SKJAALD.None" }}</option>
+                    {{#each armorOptionsNeck as |name type|}}
+                    <option value="{{@key}}">{{this}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+                <select class="shoulders-drop change-equip {{data.attributes.wornArmor.shoulders}}" name="data.attributes.wornArmor.shoulders">
+                    {{#select data.attributes.wornArmor.shoulders }}
+                    <option value="none">{{ localize "SKJAALD.None" }}</option>
+                    {{#each armorOptionsShoulders as |name type|}}
+                    <option value="{{@key}}">{{this}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+                <select class="inner-drop change-equip {{data.attributes.wornArmor.inner}}" name="data.attributes.wornArmor.inner">
+                    {{#select data.attributes.wornArmor.inner }}
+                    <option value="none">{{ localize "SKJAALD.None" }}</option>
+                    {{#each armorOptionsInner as |name type|}}
+                    <option value="{{@key}}">{{this}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+                <select class="outer-drop change- {{data.attributes.wornArmor.outer}}" name="data.attributes.wornArmor.outer">
+                    {{#select data.attributes.wornArmor.outer }}
+                    <option value="none">{{ localize "SKJAALD.None" }}</option>
+                    {{#each armorOptionsOuter as |name type|}}
+                    <option value="{{@key}}">{{this}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+                <select class="torso-drop change-equip  {{data.attributes.wornArmor.torso}}" name="data.attributes.wornArmor.torso">
+                    {{#select data.attributes.wornArmor.torso }}
+                    <option value="none">{{ localize "SKJAALD.None" }}</option>
+                    {{#each armorOptionsTorso as |name type|}}
+                    <option value="{{@key}}">{{this}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+                <select class="waist-drop change-equip {{data.attributes.wornArmor.waist}}" name="data.attributes.wornArmor.waist">
+                    {{#select data.attributes.wornArmor.waist }}
+                    <option value="none">{{ localize "SKJAALD.None" }}</option>
+                    {{#each armorOptionsWaist as |name type|}}
+                    <option value="{{@key}}">{{this}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+                <select class="arms-drop change-equip {{data.attributes.wornArmor.arms}}" name="data.attributes.wornArmor.arms">
+                    {{#select data.attributes.wornArmor.arms }}
+                    <option value="none">{{ localize "SKJAALD.None" }}</option>
+                    {{#each armorOptionsArm as |name type|}}
+                    <option value="{{@key}}">{{this}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+                <select class="hands-drop change-equip {{data.attributes.wornArmor.hands}}" name="data.attributes.wornArmor.hands">
+                    {{#select data.attributes.wornArmor.hands }}
+                    <option value="none">{{ localize "SKJAALD.None" }}</option>
+                    {{#each armorOptionsHand as |name type|}}
+                    <option value="{{@key}}">{{this}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+                <select class="ring1-drop change-equip {{data.attributes.wornArmor.ring1}}" name="data.attributes.wornArmor.ring1">
+                    {{#select data.attributes.wornArmor.ring1 }}
+                    <option value="none">{{ localize "SKJAALD.None" }}</option>
+                    {{#each armorOptionsRing1 as |name type|}}
+                    <option value="{{@key}}">{{this}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+                <select class="ring2-drop change-equip {{data.attributes.wornArmor.ring2}}" name="data.attributes.wornArmor.ring2">
+                    {{#select data.attributes.wornArmor.ring2 }}
+                    <option value="none">{{ localize "SKJAALD.None" }}</option>
+                    {{#each armorOptionsRing2 as |name type|}}
+                    <option value="{{@key}}">{{this}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+                <select class="ring3-drop change-equip {{data.attributes.wornArmor.ring3}}" name="data.attributes.wornArmor.ring3">
+                    {{#select data.attributes.wornArmor.ring3 }}
+                    <option value="none">{{ localize "SKJAALD.None" }}</option>
+                    {{#each armorOptionsRing3 as |name type|}}
+                    <option value="{{@key}}">{{this}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+                <select class="ring4-drop change-equip {{data.attributes.wornArmor.ring4}}" name="data.attributes.wornArmor.ring4">
+                    {{#select data.attributes.wornArmor.ring4 }}
+                    <option value="none">{{ localize "SKJAALD.None" }}</option>
+                    {{#each armorOptionsRing4 as |name type|}}
+                    <option value="{{@key}}">{{this}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+                <select class="thighs-drop change-equip {{data.attributes.wornArmor.thighs}}" name="data.attributes.wornArmor.thighs">
+                    {{#select data.attributes.wornArmor.thighs }}
+                    <option value="none">{{ localize "SKJAALD.None" }}</option>
+                    {{#each armorOptionsThigh as |name type|}}
+                    <option value="{{@key}}">{{this}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+                <select class="legs-drop change-equip {{data.attributes.wornArmor.legs}}" name="data.attributes.wornArmor.legs">
+                    {{#select data.attributes.wornArmor.legs }}
+                    <option value="none">{{ localize "SKJAALD.None" }}</option>
+                    {{#each armorOptionsLeg as |name type|}}
+                    <option value="{{@key}}">{{this}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+            {{> "systems/skjaald/templates/actors/parts/actor-equipment.html" sections=inventory}}
+        </div>
+    </div>
+
+    <div class="sidebar currencyRation-grid">
+        <div class="equipment-rationWater sheet-container-box">
+            <div class="container-panel2">
+                <div class="sheet-container-header">{{ localize "SKJAALD.Rations" }}</div>
+                    <input type="hidden" name="" value="{{data.attributes.ration.value}}" data-dtype="Number"/>
+                    <a class="proficiency-toggle skill-proficiency check-toggle-ration" title="Ration">{{{data.attributes.ration.icon1}}}</a>
+                    <input type="hidden" name="" value="{{data.attributes.ration.value}}" data-dtype="Number"/>
+                    <a class="proficiency-toggle skill-proficiency check-toggle-ration" title="Ration">{{{data.attributes.ration.icon2}}}</a>
+                    <input type="hidden" name="" value="{{data.attributes.ration.value}}" data-dtype="Number"/>
+                    <a class="proficiency-toggle skill-proficiency check-toggle-ration" title="Ration">{{{data.attributes.ration.icon3}}}</a>
+                    <input type="hidden" name="" value="{{data.attributes.ration.value}}" data-dtype="Number"/>
+                    <a class="proficiency-toggle skill-proficiency check-toggle-ration" title="Ration">{{{data.attributes.ration.icon4}}}</a>
+                    <input type="hidden" name="" value="{{data.attributes.ration.value}}" data-dtype="Number"/>
+                    <a class="proficiency-toggle skill-proficiency check-toggle-ration" title="Ration">{{{data.attributes.ration.icon5}}}</a>
+                
+            </div>
+            <div class="container-panel2">
+                <div class="sheet-container-header">{{ localize "SKJAALD.Waterskin" }}</div>
+                <div class="sheet-container-body">
+                    <input type="hidden" name="" value="{{data.attributes.waterskin.value}}" data-dtype="Number"/>
+                    <a class="proficiency-toggle skill-proficiency check-toggle-waterskin" title="Ration">{{{data.attributes.waterskin.icon1}}}</a>
+                    <input type="hidden" name="" value="{{data.attributes.waterskin.value}}" data-dtype="Number"/>
+                    <a class="proficiency-toggle skill-proficiency check-toggle-waterskin" title="Ration">{{{data.attributes.waterskin.icon2}}}</a>
+                    <input type="hidden" name="" value="{{data.attributes.waterskin.value}}" data-dtype="Number"/>
+                    <a class="proficiency-toggle skill-proficiency check-toggle-waterskin" title="Ration">{{{data.attributes.waterskin.icon3}}}</a>
+                    <input type="hidden" name="" value="{{data.attributes.waterskin.value}}" data-dtype="Number"/>
+                    <a class="proficiency-toggle skill-proficiency check-toggle-waterskin" title="Ration">{{{data.attributes.waterskin.icon4}}}</a>
+                    <input type="hidden" name="" value="{{data.attributes.waterskin.value}}" data-dtype="Number"/>
+                    <a class="proficiency-toggle skill-proficiency check-toggle-waterskin" title="Ration">{{{data.attributes.waterskin.icon5}}}</a>
+                    </div>
+            </div>
+        </div>
+        <div class="equipment-money sheet-container-box">
+            <div class="container-panel2 copper">
+                <div class="sheet-container-header">{{ localize "SKJAALD.Copper" }}</div>
+                <div class="sheet-container-body">
+                    <input type="text" name="data.currency.cp" value="{{data.currency.cp}}" data-dtype="Number"/>
+                </div>
+            </div>
+            <div class="container-panel2 gold">
+                <div class="sheet-container-header">{{ localize "SKJAALD.Gold" }}</div>
+                <div class="sheet-container-body">
+                    <input type="text" name="data.currency.gp" value="{{data.currency.gp}}" data-dtype="Number"/>
+                </div>
+            </div>
+            <div class="container-panel2 silver">
+                <div class="sheet-container-header">{{ localize "SKJAALD.Silver" }}</div>
+                <div class="sheet-container-body">
+                    <input type="text" name="data.currency.sp" value="{{data.currency.sp}}" data-dtype="Number"/>
+                </div>
+            </div>
+            <div class="container-panel2 platinum">
+                <div class="sheet-container-header">{{ localize "SKJAALD.Platinum" }}</div>
+                <div class="sheet-container-body">
+                    <input type="text" name="data.currency.pp" value="{{data.currency.pp}}" data-dtype="Number"/>
+                </div>
+            </div>
+            <div class="container-panel2 marks">
+                <div class="sheet-container-header">{{ localize "SKJAALD.Marks" }}</div>
+                <div class="sheet-container-body">
+                    <input type="text" name="data.currency.marks" value="{{data.currency.marks}}" data-dtype="Number"/>
+                </div>
+            </div>
+            <div class="container-panel2 other">
+                <div class="sheet-container-header">{{ localize "SKJAALD.Other" }}</div>
+                <div class="sheet-container-body">
+                    <input type="text" name="data.currency.other" value="{{data.currency.other}}" data-dtype="Number"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

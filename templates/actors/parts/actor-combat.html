@@ -1,0 +1,41 @@
+
+    <div class="tab attributes flexrow" data-group="primary" data-tab="combat">
+        <div class="combat-container">
+
+            <section class="attribute-grid flexcol">
+                {{!-- Attributes --}}
+                {{> "systems/skjaald/templates/actors/parts/combat-attributes.html"}}
+            </section>
+
+
+            <section class="stats-grid-combat flexcol">
+                {{!-- Stats --}}
+                {{> "systems/skjaald/templates/actors/parts/combat-stats.html"}}
+            </section>
+
+            <section class="health-grid flexcol">
+                {{!-- Hit Points --}}
+                {{> "systems/skjaald/templates/actors/parts/combat-health.html"}}
+            </section>
+
+            <section class="resources-grid flexcol">
+                {{!-- Resources --}}
+                {{> "systems/skjaald/templates/actors/parts/combat-resources.html" sections=resources}}
+            </section>
+
+            <section class="spell-resources-grid flexcol">
+                {{!-- Spell Resources --}}
+                {{> "systems/skjaald/templates/actors/parts/combat-spell-stats.html"}}
+            </section>
+
+            <section class="combatPage-Attacks flexcol">
+                {{!-- Spell Resources --}}
+                {{> "systems/skjaald/templates/actors/parts/combat-attacks.html" sections=attacksSpellcasting}}
+            </section>
+
+            <section class="combatPage-Combat-Features flexcol">
+                {{!-- Spell Resources --}}
+                {{> "systems/skjaald/templates/actors/parts/non-combat-features.html" sections=comfeatures}}
+            </section>
+        </div>
+    </div>

@@ -1,0 +1,312 @@
+{{#each data.attacks as |attack a| }}
+
+    <h3 class="form-header">
+        <input type="text" name="data.attacks.{{a}}.name" value="{{lookup this "name"}}"/>
+        <a class="attack-control delete-attack {{a}}"><i class="fas fa-minus"></i></a>
+    </h3>
+
+
+    {{!-- Action Type --}}
+    <div class="form-group select">
+        <label>{{ localize "SKJAALD.ItemActionType" }}</label>
+        <select name="data.attacks.{{a}}.actionType">
+            {{#select (lookup this "actionType")}}
+            <option value=""></option>
+            {{#each ../config.itemActionTypes as |name type|}}
+            <option value="{{type}}">{{name}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+    </div>
+    {{#if (lookup this "actionType")}}
+
+    {{!-- Ability Modifier --}}
+    <div class="form-group select">
+        <label>{{ localize "SKJAALD.AbilityModifier" }}</label>
+        <select name="data.attacks.{{a}}.ability">
+            {{#select (lookup this "ability")}}
+            <option value="">{{ localize "SKJAALD.Default" }}</option>
+            {{#each ../config.abilities as |ability a|}}
+            <option value="{{a}}">{{ability}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+    </div>
+
+    <div class="form-group input-select">
+        <label>{{ localize "SKJAALD.ItemActivationCost" }}</label>
+        <div class="form-fields">
+            <input type="text" name="data.attacks.{{a}}.activationcost" value="{{lookup this "activationcost"}}" data-dtype="Number" placeholder="-"/>
+            <select name="data.attacks.{{a}}.activationtype">
+                {{#select (lookup this "activationtype")}}
+                <option value=""></option>
+                {{#each ../config.abilityActivationTypes as |name key|}}
+                <option value="{{key}}">{{name}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group input-select-select">
+        <label>{{ localize "SKJAALD.Target" }}</label>
+        <div class="form-fields">
+            <input type="text" name="data.attacks.{{a}}.targetvalue" value="{{lookup this "targetvalue"}}" data-dtype="Number" placeholder="-"/>
+            <select name="data.attacks.{{a}}.targetunits">
+                {{#select (lookup this "targetunits")}}
+                <option value=""></option>
+                {{#each ../config.distanceUnits as |name key|}}
+                <option value="{{key}}">{{name}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
+            <select name="data.attacks.{{a}}.targettype">
+                {{#select (lookup this "targettype")}}
+                <option value=""></option>
+                {{#each ../config.targetTypes as |name key|}}
+                <option value="{{key}}">{{name}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
+        </div>
+    </div>
+
+    {{!-- Ability Target Width --}}
+    {{#if isLine}}
+    <div class="form-group input-select-select">
+        <label>{{ localize "SKJAALD.TargetWidth" }}</label>
+        <div class="form-fields">
+            <input type="text" name="data.target.width" value="{{data.target.width}}" data-dtype="Number" placeholder="-"/>
+        </div>
+    </div>
+    {{/if}}
+
+    {{!-- Ability Range --}}
+    <div class="form-group input-select">
+        <label>{{ localize "SKJAALD.Range" }}</label>
+        <div class="form-fields">
+            <input type="text" name="data.attacks.{{a}}.rangevalue" value="{{lookup this "rangevalue"}}" data-dtype="Number" placeholder="{{ localize 'SKJAALD.Normal' }}"/>
+            <span class="sep">/</span>
+            <input type="text" name="data.attacks.{{a}}.rangelong" value="{{lookup this "rangelong"}}" data-dtype="Number" placeholder="{{ localize 'SKJAALD.Max' }}"/>
+            <select name="data.attacks.{{a}}.rangeunits">
+                {{#select (lookup this "rangeunits")}}
+                <option value=""></option>
+                {{#each ../config.distanceUnits as |name key|}}
+                <option value="{{key}}">{{name}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
+        </div>
+    </div>
+
+
+    {{!-- Effect Duration --}}
+    <div class="form-group input-select">
+        <label>{{ localize "SKJAALD.Duration" }}</label>
+        <div class="form-fields">
+            <input type="text" name="data.attacks.{{a}}.durationvalue" value="{{lookup this "durationvalue"}}" data-dtype="Number" placeholder="-"/>
+            <select name="data.attacks.{{a}}.durationunits">
+                {{#select (lookup this "durationunits")}}
+                <option value=""></option>
+                {{#each ../config.timePeriods as |name key|}}
+                <option value="{{key}}">{{name}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
+        </div>
+    </div>
+
+    {{!-- Limited Uses --}}
+    <div class="form-group uses-per">
+        <label>{{ localize "SKJAALD.LimitedUses" }}</label>
+        <div class="form-fields">
+            <input type="text" name="data.attacks.{{a}}.usesvalue" value="{{lookup this "usesvalue"}}" data-dtype="Number"/>
+            <span class="sep">{{ localize "SKJAALD.of" }}</span>
+            <input type="text" name="data.attacks.{{a}}.usesmax" value="{{lookup this "usesmax"}}"/>
+            <span class="sep">{{ localize "SKJAALD.per" }}</span>
+            <select name="data.attacks.{{a}}.usesper">
+                {{#select (lookup this "usesper")}}
+                <option value=""></option>
+                {{#each ../config.limitedUsePeriods as |name key|}}
+                <option value="{{key}}">{{name}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
+        </div>
+    </div>
+
+    {{!-- Consumption --}}
+    <div class="form-group uses-per {{a}}">
+        <label>{{ localize "SKJAALD.ConsumeTitle" }}</label>
+        <div class="form-fields">
+            <select name="data.attacks.{{a}}.consumetype">
+                {{#select (lookup this "consumetype")}}
+                <option value=""></option>
+                {{#each ../config.abilityConsumptionTypes as |name key|}}
+                <option value="{{key}}">{{name}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
+
+            {{#if (eq (lookup this "consumetype")  'ammo')}}
+            <select name="data.attacks.{{a}}.consumetarget">
+                {{#select (lookup this "consumetarget")}}
+                <option value=""></option>
+                {{#each abilityConsumptionTargetsAmmo as |name key|}}
+                <option value="{{key}}">{{name}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
+            {{/if}}
+            
+            {{#if (eq (lookup this "consumetype")  'attribute')}}
+            <select name="data.attacks.{{a}}.consumetarget">
+                {{#select (lookup this "consumetarget")}}
+                <option value=""></option>
+                {{#each ../../abilityConsumptionTargetsAttribute as |name key|}}
+                <option value="{{key}}">{{name}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
+            {{/if}}
+            
+            {{#if (eq (lookup this "consumetype")  'charges')}}
+            <select name="data.attacks.{{a}}.consumetarget">
+                {{#select (lookup this "consumetarget")}}
+                <option value=""></option>
+                {{#each ../abilityConsumptionTargetsCharges as |name key|}}
+                <option value="{{key}}">{{name}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
+            {{/if}}
+            
+            {{#if (eq (lookup this "consumetype")  'material')}}
+            <select name="data.attacks.{{a}}.consumetarget">
+                {{#select (lookup this "consumetarget")}}
+                <option value=""></option>
+                {{#each ../abilityConsumptionTargetsMaterial as |name key|}}
+                <option value="{{key}}">{{name}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
+            {{/if}}
+
+            <input type="text" name="data.attacks.{{a}}.consumeamount" value="{{lookup this "consumeamount"}}" data-dtype="Number"/>
+        </div>
+    </div>
+
+    {{!-- Attack Roll Bonus --}}
+    <div class="form-group">
+        <label>{{ localize "SKJAALD.ItemAttackBonus" }}</label>
+        <div class="form-fields">
+            <input type="text" name="data.attacks.{{a}}.attackBonus" value="{{lookup this "attackBonus"}}"/>
+        </div>
+    </div>
+
+    {{!-- Critical Hit Threshold --}}
+    <div class="form-group">
+        <label>{{ localize "SKJAALD.ItemCritThreshold" }}</label>
+        <div class="form-fields">
+            <input type="number" name= "data.attacks.{{a}}.criticalThreshold" value="{{lookup this "criticalThreshold"}}" miin="1" max="20" step="1" placeholder="20"/>
+        </div>
+    </div>
+
+    {{!-- Critical Hit Damage --}}
+    <div class="form-group">
+        <label>{{ localize "SKJAALD.ItemCritExtraDamage" }}</label>
+        <div class="form-fields">
+            <input type="text" name="data.attacks.{{a}}.criticaldamage" value="{{lookup this "criticaldamage"}}">
+        </div>
+    </div>
+
+    {{!-- Damage Formula --}}
+    <h4 class="damage-header">
+        {{#unless isHealing }}{{ localize "SKJAALD.Damage" }}{{ else }}{{ localize "SKJAALD.Healing" }}{{/unless}} {{ localize "SKJAALD.Formula" }}
+        <a class="damage-control add-damage {{a}}"><i class="fas fa-plus"></i></a>
+    </h4>
+    <ol class="damage-parts form-group">
+        {{#each (lookup this "damageparts") as |part i| }}
+        <li class="damage-part flexrow" data-damage-part="{{i}}">
+            <input type="text" name="data.attacks.{{a}}.damageparts.{{i}}.0" value="{{lookup this "0"}}"/>
+            <select name="data.attacks.{{a}}.damageparts.{{i}}.1">
+                {{#select (lookup this "1") }}
+                <option value="">{{ localize "SKJAALD.None" }}</option>
+                {{#each ../../config.damageTypes as |name type|}}
+                <option value="{{type}}">{{name}}</option>
+                {{/each}}
+                {{#each ../../config.healingTypes as |name type|}}
+                <option value="{{type}}">{{name}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
+            <a class="damage-control delete-damage-spell {{a}} {{i}}"><i class="fas fa-minus"></i></a>
+        </li>
+        {{/each}}
+    </ol>
+
+    {{!-- Saving Throw --}}
+    <div class="form-group input-select">
+        <label>{{ localize "SKJAALD.ActionSave" }}</label>
+        <div class="form-fields">
+            <select name="data.attacks.{{a}}.saveability">
+                {{#select (lookup this "saveability")}}
+                <option value=""></option>
+                {{#each ../config.abilities as |ability a|}}
+                <option value="{{a}}">{{ability}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
+            <span>{{ localize "SKJAALD.VsDC" }}</span>
+            <input type="text" name="data.attacks.{{a}}.savedc" value="{{lookup this "savedc"}}" data-dtype="Number" placeholder="{{ localize 'SKJAALD.AbbreviationDC' }}"/>
+            <select name="data.attacks.{{a}}.savescaling">
+                {{#select (lookup this "savescaling")}}
+                <option value="spell">{{ localize "SKJAALD.Spellcasting" }}</option>
+                {{#each ../config.abilities as |ability a|}}
+                <option value="{{a}}">{{ability}}</option>
+                {{/each}}
+                <option value="flat">{{ localize "SKJAALD.Flat" }}</option>
+                {{/select}}
+            </select>
+        </div>
+    </div>
+
+    {{!-- Skill Challenge --}}
+    <div class="form-group input-select">
+        <label>{{ localize "SKJAALD.SkillChallenge" }}</label>
+        <div class="form-fields">
+            <select name="data.attacks.{{a}}.skillChallenge">
+                {{#select (lookup this "skillChallenge")}}
+                <option value=""></option>
+                {{#each ../config.skills as |skill s|}}
+                <option value="{{s}}">{{skill}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
+            <span>{{ localize "SKJAALD.VsDC" }}</span>
+            <input type="text" name="data.attacks.{{a}}.skilldc" value="{{lookup this "skilldc"}}" data-dtype="Number" placeholder="{{ localize 'SKJAALD.AbbreviationDC' }}"/>
+            <select name="data.attacks.{{a}}.skillscaling">
+                {{#select (lookup this "skillscaling")}}
+                <option value="none">{{ localize "SKJAALD.None" }}</option>
+                {{#each ../config.skills as |skill s|}}
+                <option value="{{s}}">{{skill}}</option>
+                {{/each}}
+                <option value="flat">{{ localize "SKJAALD.Flat" }}</option>
+                {{/select}}
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group stacked">
+        <label>{{ localize "SKJAALD.Description" }}</label>
+    </div>
+
+    {{!-- Chat Message Flavor --}}
+    <div class="editor">
+        <div class="editor-content" data-edit="data.attacks.{{a}}.chatFlavor">{{lookup this 'chatFlavor'}}</div>
+        <a class="editor-edit">
+            <i class="fas fa-edit"></i>
+        </a>
+    </div>
+    {{/if}}
+{{/each}}

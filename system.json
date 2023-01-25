@@ -1,0 +1,136 @@
+{
+  "name": "skjaald",
+  "title": "Skjaald - A Low Magic Homebrew System",
+  "description": "A world where Dragons hold the key to magic. Full of exploration and danger the primary continent of Skjaald stands in a state of constantly changing power struggles of 6 kingdoms.",
+  "author": "Todd Cain & PunkCat",
+  "authors": [],
+  "url": "https://github.com/PunkCatt/skjaald",
+  "flags": {},
+  "version": "0.0.37",
+  "minimumCoreVersion": "0.9.255",
+  "compatibleCoreVersion": "0.9.255",
+  "scripts": [],
+  "esmodules": [
+    "skjaald.js"
+  ],
+  "styles": [
+    "skjaald.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "packs": [
+    {
+      "name": "skjaald",
+      "label": "Skjaald",
+      "system": "skjaald",
+      "path": "./packs/skjaald.db",
+      "entity": "Item",
+      "private": false,
+      "type": "Item"
+    },
+    {
+      "name": "heroes",
+      "label": "Starter Heroes",
+      "system": "skjaald",
+      "path": "./packs/heroes.db",
+      "entity": "Actor",
+      "private": false,
+      "type": "Actor"
+    },
+    {
+      "name": "monsters",
+      "label": "Monsters (SRD)",
+      "system": "skjaald",
+      "path": "./packs/monsters.db",
+      "entity": "Actor",
+      "private": false,
+      "type": "Actor"
+    },
+    {
+      "name": "items",
+      "label": "Items (SRD)",
+      "system": "skjaald",
+      "path": "./packs/items.db",
+      "entity": "Item",
+      "private": false,
+      "type": "Item"
+    },
+    {
+      "name": "tradegoods",
+      "label": "Trade Goods (SRD)",
+      "system": "skjaald",
+      "path": "./packs/tradegoods.db",
+      "entity": "Item",
+      "private": false,
+      "type": "Item"
+    },
+    {
+      "name": "spells",
+      "label": "Spells (SRD)",
+      "system": "skjaald",
+      "path": "./packs/spells.db",
+      "entity": "Item",
+      "private": false,
+      "type": "Item"
+    },
+    {
+      "name": "classes",
+      "label": "Classes (SRD)",
+      "system": "skjaald",
+      "path": "./packs/classes.db",
+      "entity": "Item",
+      "private": false,
+      "type": "Item"
+    },
+    {
+      "name": "classfeatures",
+      "label": "Class Features (SRD)",
+      "system": "skjaald",
+      "path": "./packs/classfeatures.db",
+      "entity": "Item",
+      "private": false,
+      "type": "Item"
+    },
+    {
+      "name": "races",
+      "label": "Racial Features (SRD)",
+      "system": "skjaald",
+      "path": "./packs/races.db",
+      "entity": "Item",
+      "private": false,
+      "type": "Item"
+    },
+    {
+      "name": "monsterfeatures",
+      "label": "Monster Features (SRD)",
+      "system": "skjaald",
+      "path": "./packs/monsterfeatures.db",
+      "entity": "Item",
+      "private": false,
+      "type": "Item"
+    },
+    {
+      "name": "rules",
+      "label": "Rules (SRD)",
+      "system": "skjaald",
+      "path": "./packs/rules.db",
+      "entity": "JournalEntry",
+      "private": false,
+      "type": "JournalEntry"
+    }
+  ],
+  "system": [],
+  "dependencies": [],
+  "socket": true,
+  "manifest": "https://raw.githubusercontent.com/PunkCatt/skjaald/master/system.json",
+  "download": "https://github.com/PunkCatt/skjaald/archive/refs/heads/master.zip",
+  "protected": false,
+  "gridDistance": 5,
+  "gridUnits": "ft",
+  "primaryTokenAttribute": "attributes.hp"
+}

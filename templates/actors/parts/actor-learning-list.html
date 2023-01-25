@@ -1,0 +1,54 @@
+<ol class="items-list inventory-list">
+    {{#each sections as |section|}}
+        <li class="items-header spellbook-header flexrow">
+            <div class="item-name flexrow">
+                <h3>{{localize section.label}}</h3>
+            </div>
+            <div class="spell-school">{{localize "SKJAALD.Level"}}</div>
+            <div class="spell-school">{{localize "SKJAALD.HoursNeeded"}}</div>
+            <div class="spell-action">{{localize "SKJAALD.ConseqBonus"}}</div>
+    
+            <div class="item-controls flexrow">
+                <a class="item-control item-create {{localize section.label}}" title="{{localize 'SKJAALD.SpellCreate'}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
+                    <i class="fas fa-plus"></i> {{localize "SKJAALD.Add"}}
+                </a>
+            </div>
+        </li>
+        <ol class="item-list">
+        {{#each section.items as |item i|}}
+            <li class="item flexrow" data-item-id="{{item._id}}">
+                <div class="item-name flexrow rollable" data-action="rollLearning">
+                    <div class="item-image-no-roll" tabindex="0" role="button" aria-label="{{item.name}}" style="background-image: url('{{item.img}}')"></div>
+                    <h4>{{item.name}}</h4>
+
+                    <div class="spell-comps">
+                        {{#each labels.components}}
+                        <span class="spell-component {{this}}">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                <div class="spell-school">
+                    {{#if (eq data.learning.level "1")}}P{{/if}}
+                    {{#if (eq data.learning.level "2")}}E{{/if}}
+                    {{#if (eq data.learning.level "3")}}M{{/if}}
+                </div>
+                <div class="spell-school">{{data.learning.hoursNeeded}}</div>
+                <div class="spell-action">{{data.learning.conseqBonus}}</div>
+
+    
+                {{#if ../../owner}}
+                <div class="item-controls flexrow">
+                    {{#if section.canPrepare}}
+                    <a class="item-control item-toggle {{item.toggleClass}}" title="{{item.toggleTitle}}"><i class="fas fa-sun"></i></a>
+                    {{/if}}
+                    <a class="item-control item-edit" title="{{localize 'SKJAALD.ItemEdit'}}"><i class="fas fa-edit"></i></a>
+                    <a class="item-control item-delete" title="{{localize 'SKJAALD.ItemDelete'}}"><i class="fas fa-trash"></i></a>
+                </div>
+                {{/if}}
+            </li>
+        {{/each}}
+        </ol>
+
+    {{/each}}
+    </ol>
+    

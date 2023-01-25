@@ -1,0 +1,120 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    {{!-- Item Sheet Header --}}
+    <header class="sheet-header flexrow">
+        <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img"/>
+
+        <div class="header-details flexrow">
+            <h1 class="charname">
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'SKJAALD.ClassName' }}"/>
+            </h1>
+
+            <div class="item-subtitle">
+                <h4 class="item-type">{{itemType}}</h4>
+                <span class="item-status">{{itemStatus}}</span>
+            </div>
+
+            <ul class="summary flexrow">
+                <li>
+                    <input type="text" name="data.source" value="{{data.source}}" placeholder="{{ localize 'SKJAALD.Source' }}"/>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    {{!-- Item Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="description">{{ localize "SKJAALD.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "SKJAALD.Details" }}</a>
+    </nav>
+
+    {{!-- Item Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Description Tab --}}
+        <div class="tab flexrow active" data-group="primary" data-tab="description">
+            {{editor content=data.description.value target="data.description.value" button=true owner=owner editable=editable}}
+        </div>
+
+        {{!-- Details Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+
+
+            {{!-- Class Hit Dice --}}
+            <div class="form-group">
+                <label>{{localize "SKJAALD.ClassType"}}</label>
+                <div class="form-fields">
+                    <select name="data.classType">
+                        {{#select data.classType}}
+                        <option value="base">Base</option>
+                        <option value="prestige">Prestige</option>
+                        {{/select}}
+                    </select>
+                </div>
+            </div>
+
+            {{!-- Class Levels --}}
+            <div class="form-group">
+                <label>{{ localize "SKJAALD.ClassLevels" }}</label>
+                <div class="form-fields">
+                    <input type="text" name="data.levels" value="{{data.levels}}" data-dtype="Number"/>
+                </div>
+            </div>
+
+            {{!-- Subclass Name --}}
+            <div class="form-group">
+                <label>{{ localize "SKJAALD.SubclassName" }}</label>
+                <div class="form-fields">
+                    <input type="text" name="data.subclass" value="{{data.subclass}}"/>
+                </div>
+            </div>
+
+
+            {{#unless (eq data.classType "prestige")}}
+            {{!-- Class Hit Dice --}}
+            <div class="form-group">
+                <label>{{localize "SKJAALD.HitDice"}}</label>
+                <div class="form-fields">
+                    <select name="data.hitDice">
+                        {{#select data.hitDice}}
+                        {{#each config.hitDieTypes}}
+                        <option value="{{this}}">{{this}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </div>
+            </div>
+            {{/unless}}
+
+            {{!-- Spellcasting --}}
+            <div class="form-group">
+                <label>{{localize "SKJAALD.SpellAbility"}}</label>
+                <div class="form-fields">
+                    <select name="data.spellcasting.ability">
+                        {{selectOptions config.abilities selected=data.spellcasting.ability blank=""}}
+                    </select>
+                </div>
+            </div>
+
+            {{!-- Proficiencies --}}
+            <div class="form-group">
+                <label>
+                    {{ localize "SKJAALD.ClassSaves" }}
+                    {{#if editable}}
+                    <a class="trait-selector class-saves" data-target="data.saves" data-options="saves">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    {{/if}}
+                </label>
+                <div class="form-fields">
+                    <ul class="traits-list">
+                        {{#each data.saves}}
+                            <li class="tag {{this}}">{{lookup ../config.abilities this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</form>

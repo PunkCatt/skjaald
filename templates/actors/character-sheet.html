@@ -1,0 +1,98 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    {{!-- Sheet Header --}}
+    <header class="sheet-header flexrow">
+
+        <section class="header-details flexrow">
+            {{> "systems/skjaald/templates/actors/parts/actor-warnings.html"}}
+
+            <h1 class="charname">
+                <input name="name" type="text" value="{{actor.name}}" placeholder="{{ localize 'SKJAALD.Name' }}"/>
+            </h1>
+        </section>
+        <img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img"/>
+
+    </header>
+
+    {{!-- Character Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="attributes">{{ localize "SKJAALD.Core" }}</a>
+        <a class="item" data-tab="combat">{{ localize "SKJAALD.Combat" }}</a>
+        <a class="item" data-tab="biography">{{ localize "SKJAALD.Biography" }}</a>
+        <a class="item" data-tab="notes">{{ localize "SKJAALD.Notes" }}</a>
+        <a class="item" data-tab="inventory">{{ localize "SKJAALD.Equipment" }}</a>
+        <a class="item" data-tab="learning">{{ localize "SKJAALD.Learning" }}</a>
+        <a class="item" data-tab="spellbook">{{ localize "SKJAALD.Spellbook" }}</a>
+        <a class="item" data-tab="effects">{{ localize "SKJAALD.Effects" }}</a>
+    </nav>
+
+
+    {{!-- Character Sheet Body --}}
+    <section class="sheet-body">
+        <div class="tab attributes flexrow" data-group="primary" data-tab="attributes">
+            <div class="core-container">
+                <div class="attribute-grid">
+                    {{!-- Ability Scores --}}
+                    {{> "systems/skjaald/templates/actors/parts/actor-attributes.html"}}
+                </div>
+                <section class="stats-grid flexcol">
+                    {{!-- Stats --}}
+                    {{> "systems/skjaald/templates/actors/parts/core-stats.html"}}
+                </section>
+                <section class="health-grid flexcol">
+
+                    {{!-- Core Health --}}
+                    {{> "systems/skjaald/templates/actors/parts/core-health.html"}}
+                </section>
+                <section class="conditions-grid flexcol">
+                  
+                    {{!-- Core Conditions --}}
+                    {{> "systems/skjaald/templates/actors/parts/core-conditions.html"}}
+                </section>
+                <section class="resources-grid flexcol">
+                    {{!-- Resources --}}
+                    {{> "systems/skjaald/templates/actors/parts/core-resources.html" sections=resources}}
+                </section>
+                <section>
+                {{!-- Non-Combat Features --}}
+                {{> "systems/skjaald/templates/actors/parts/non-combat-features.html" sections=noncomfeatures}}
+                </section>
+
+            </div>
+        </div>
+        {{!-- Combat Tab --}}
+        <div class="tab combat flexcol" data-group="primary" data-tab="combat">
+            {{> "systems/skjaald/templates/actors/parts/actor-combat.html"}}
+        </div>
+
+        {{!-- Inventory Tab --}}
+        <div class="tab inventory flexcol" data-group="primary" data-tab="inventory">
+            {{> "systems/skjaald/templates/actors/parts/actor-inventory.html" sections=features}}
+        </div>
+
+        {{!-- Features Tab --}}
+        <div class="tab features flexcol" data-group="primary" data-tab="notes">
+            {{> "systems/skjaald/templates/actors/parts/actor-notes.html" sections=features}}
+        </div>
+
+        {{!-- Spellbook Tab --}}
+        <div class="tab spellbook flexcol" data-group="primary" data-tab="spellbook">
+            {{> "systems/skjaald/templates/actors/parts/actor-spellbook.html"}}
+        </div>
+
+        {{!-- Effects Tab --}}
+        <div class="tab effects flexcol" data-group="primary" data-tab="effects">
+            {{> "systems/skjaald/templates/actors/parts/active-effects.html"}}
+        </div>
+
+        {{!-- Biography Tab --}}
+        <div class="tab biography flexcol" data-group="primary" data-tab="biography">
+            {{> "systems/skjaald/templates/actors/parts/actor-biography.html"}}
+        </div>
+
+        {{!-- Learning Tab --}}
+        <div class="tab learning flexcol" data-group="primary" data-tab="learning">
+            {{> "systems/skjaald/templates/actors/parts/actor-learning.html"}}
+        </div>
+    </section>
+</form>

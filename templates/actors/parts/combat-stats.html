@@ -1,0 +1,67 @@
+
+
+        <li class="attribute armor container-box container-panel-armor">
+            <div class="attribute-value container-box-body auto-calc-value ac">
+                <input class="duplicate" type="text" name="data.attributes.ac.foo2" value="{{data.attributes.ac.foo}}" data-dtype="Number" placeholder="0"/>
+            </div>
+            <h5 class="attribute-name container-box-header ac-header">
+                {{ localize "SKJAALD.ArmorClass" }}
+            </h5>
+        </li>
+
+        <li class="attribute denialpoints container-panel">
+            <h5 class="container-box-footer">
+                {{ localize "SKJAALD.Max" }}: 
+                    <span>{{data.attributes.maxdp.value}}</span>
+            </h5>    
+            <div class="attribute-value container-box-body auto-dp-value dp" data-property="attributes.dp">
+                <input class="duplicate" type="text" name="data.attributes.dp.value2" value="{{data.attributes.dp.value}}" data-dtype="Number"/>
+            </div>
+            <h4 class="attribute-name container-box-header">
+                {{ localize "SKJAALD.DenialPoints" }}
+            </h4>
+        </li>
+
+        <li class="attribute speed container-panel">
+            <div class="attribute-value container-box-body auto-calc-value speed-input">
+                <input type="text" value="{{data.attributes.movement.walk}}" data-dtype="Number"/>
+            </div>
+            <h4 class="attribute-name container-box-header speed-header">
+                {{ localize "SKJAALD.Speed" }}
+            </h4>
+        </li>
+
+        <li class="attribute initiative container-panel">
+            <div class="attribute-value container-box-body auto-calc-value">
+                <span> {{data.attributes.init.mod}}
+            </div>
+            <h5 class="attribute-name container-box-header speed-header rollable" data-action="rollInitiative">
+                {{ localize "SKJAALD.Initiative" }}
+            </h5>
+        </li>
+
+        <li class="attribute actions container-panel">
+            <div class="action">
+                <input type="hidden" name="data.attributes.acted.action.value" value="{{data.attributes.acted.action.value}}"/>
+                <a class="proficiency-toggle skill-proficiency check-toggle" >{{{data.attributes.acted.action.icon}}}</a>
+                <span>{{ localize "SKJAALD.Action" }}</span>
+            </div>
+            <div class="halfaction">
+                <input type="hidden" name="data.attributes.acted.halfaction.value" value="{{data.attributes.acted.halfaction.value}}"/>
+                <a class="proficiency-toggle skill-proficiency check-toggle" >{{{data.attributes.acted.halfaction.icon}}}</a>
+                <span>{{ localize "SKJAALD.Halfaction" }}</span>
+            </div>
+            <div class="reaction">
+                <input type="hidden" name="data.attributes.acted.reaction.value" value="{{data.attributes.acted.reaction.value}}"/>
+                <a class="proficiency-toggle skill-proficiency check-toggle" >{{{data.attributes.acted.reaction.icon}}}</a>
+                <span>{{ localize "SKJAALD.Reaction" }}</span>
+            </div>
+            <div class="movement">
+                <input type="hidden" name="data.attributes.acted.movement.value" value="{{data.attributes.acted.movement.value}}"/>
+                <a class="proficiency-toggle skill-proficiency check-toggle" >{{{data.attributes.acted.movement.icon}}}</a>
+                <span>{{ localize "SKJAALD.Movement" }}</span>
+            </div>
+        </li>
+        
+
+    

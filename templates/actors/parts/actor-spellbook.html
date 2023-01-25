@@ -1,0 +1,122 @@
+<div class="spell-grid">
+    <div class="inventory-filters spellbook-filters flexrow">
+        <div class="form-group spellcasting-ability">
+            {{#unless isNPC}}
+            <label>{{localize "SKJAALD.Spellcasting"}}</label>
+            {{else}}
+            <label>{{localize "SKJAALD.Level"}}</label>
+            <input class="spellcasting-level" type="text" name="data.details.spellLevel"
+                value="{{data.details.spellLevel}}" data-dtype="Number" placeholder="0"/>
+            {{/unless}}
+
+        </div>
+
+        <ul class="filter-list flexrow" data-filter="spellbook">
+            <li class="filter-item" data-filter="action">{{localize "SKJAALD.Action"}}</li>
+            <li class="filter-item" data-filter="bonus">{{localize "SKJAALD.BonusAction"}}</li>
+            <li class="filter-item" data-filter="reaction">{{localize "SKJAALD.Reaction"}}</li>
+            <li class="filter-item" data-filter="concentration">{{localize "SKJAALD.AbbreviationConc"}}</li>
+            <li class="filter-item" data-filter="ritual">{{localize "SKJAALD.Ritual"}}</li>
+            <li class="filter-item" data-filter="prepared">{{localize "SKJAALD.Prepared"}}{{#if preparedSpells}} ({{preparedSpells}}){{/if}}</li>
+        </ul>
+    </div>
+
+    <div class="sheet-container-box cantrips">
+            <div class="container-panel">
+                <div class="sheet-container-body">
+                    <section>
+                        {{> "systems/skjaald/templates/actors/parts/actor-spelllist.html" sections=spellCantrip}}
+                    </section>
+                </div>
+            </div>
+    </div>
+    <div class="sheet-container-box one">
+        <div class="container-panel">
+            <div class="sheet-container-body">
+                <section>
+                    {{> "systems/skjaald/templates/actors/parts/actor-spelllist.html" sections=spellOne}}
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="sheet-container-box two">
+        <div class="container-panel">
+            <div class="sheet-container-body">
+                <section>
+                    {{> "systems/skjaald/templates/actors/parts/actor-spelllist.html" sections=spellTwo}}
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="sheet-container-box three">
+        <div class="container-panel">
+            <div class="sheet-container-body">
+                <section>
+                    {{> "systems/skjaald/templates/actors/parts/actor-spelllist.html" sections=spellThree}}
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="sheet-container-box four">
+        <div class="container-panel">
+            <div class="sheet-container-body">
+                <section>
+                    {{> "systems/skjaald/templates/actors/parts/actor-spelllist.html" sections=spellFour}}
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="sheet-container-box five">
+        <div class="container-panel">
+            <div class="sheet-container-body">
+                <section>
+                    {{> "systems/skjaald/templates/actors/parts/actor-spelllist.html" sections=spellFive}}
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="sheet-container-box six">
+        <div class="container-panel">
+            <div class="sheet-container-body">
+                <section>
+                    {{> "systems/skjaald/templates/actors/parts/actor-spelllist.html" sections=spellSix}}
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="sheet-container-box seven">
+        <div class="container-panel">
+            <div class="sheet-container-body">
+                <section>
+                    {{> "systems/skjaald/templates/actors/parts/actor-spelllist.html" sections=spellSeven}}
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="sheet-container-box eight">
+        <div class="container-panel">
+            <div class="sheet-container-body">
+                <section>
+                    {{> "systems/skjaald/templates/actors/parts/actor-spelllist.html" sections=spellEight}}
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="sheet-container-box nine">
+        <div class="container-panel">
+            <div class="sheet-container-body">
+                <section>
+                    {{> "systems/skjaald/templates/actors/parts/actor-spelllist.html" sections=spellNine}}
+                </section>
+            </div>
+        </div>
+    </div>
+</div>

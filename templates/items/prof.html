@@ -1,0 +1,221 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    {{!-- Item Sheet Header --}}
+    <header class="sheet-header flexrow">
+        <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img"/>
+
+        <div class="header-details flexrow">
+            <h1 class="charname">
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'SKJAALD.ItemName' }}"/>
+            </h1>
+
+            <div class="item-subtitle">
+                <h4 class="item-type">{{itemType}}</h4>
+                <span class="item-status">{{itemStatus}}</span>
+            </div>
+
+            <ul class="summary flexrow">
+                <li>
+                    <select name="data.rarity">
+                        {{selectOptions config.itemRarity selected=data.rarity blank="&nbsp;"}}
+                    </select>
+                </li>
+                <li>
+                    <input type="text" name="data.source" value="{{data.source}}" placeholder="{{ localize 'SKJAALD.Source' }}"/>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    {{!-- Item Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="description">{{ localize "SKJAALD.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "SKJAALD.Details" }}</a>
+    </nav>
+
+    {{!-- Item Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Description Tab --}}
+        {{> "systems/skjaald/templates/items/parts/item-description.html"}}
+
+        {{!-- Details Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+
+            <div class="form-group category">
+                <label>{{ localize "SKJAALD.Category" }}</label>
+                <select name="data.category">
+                    {{#select data.category}}
+                    <option value="Tool"> {{localize "SKJAALD.Tool"}}</option>
+                    <option value="Armor">{{localize "SKJAALD.Armor"}}</option>
+                    <option value="Language">{{localize "SKJAALD.Language"}}</option>
+                    <option value="Weapon">{{localize "SKJAALD.Weapon"}}</option>
+                    {{/select}}
+                </select>
+            </div>
+
+
+            {{#if (eq data.category 'Tool')}}
+                {{!-- Tool Type --}}
+                <div class="form-group">
+                    <label>{{ localize "SKJAALD.ItemToolType" }}</label>
+                    <select name="data.toolType">
+                        {{selectOptions config.toolTypes selected=data.toolType blank=""}}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>{{ localize "SKJAALD.ItemToolBase" }}</label>
+                    <select name="data.base">
+                        {{selectOptions baseItems selected=data.baseItem blank=""}}
+                    </select>
+                </div>
+
+                {{!-- Tool Proficiency --}}
+                <div class="form-group">
+                    <label>{{ localize "SKJAALD.ItemToolProficiency" }}</label>
+                    <select name="data.proficient" data-dtype="Number">
+                        {{selectOptions config.proficiencyLevels selected=data.proficient}}
+                    </select>
+                </div>
+
+                {{!-- Ability Check --}}
+                <div class="form-group">
+                    <label>{{ localize "SKJAALD.DefaultAbilityCheck" }}</label>
+                    <select name="data.ability">
+                        {{selectOptions config.abilities selected=data.ability}}
+                    </select>
+                </div>
+
+                {{!-- Tool Bonus --}}
+                <div class="form-group">
+                    <label>{{ localize "SKJAALD.ItemToolBonus" }}</label>
+                    <input type="text" name="data.bonus" value="{{data.bonus}}"/>
+                </div>
+
+                {{!-- Chat Message Flavor --}}
+                <div class="form-group stacked">
+                    <label>{{ localize "SKJAALD.ChatFlavor" }}</label>
+                    <input type="text" name="data.chatFlavor" value="{{data.chatFlavor}}"/>
+                </div>
+            {{/if}}
+
+            {{#if (eq data.category 'Language')}}
+                {{!-- Tool Type --}}
+
+
+                <div class="form-group">
+                    <label>{{ localize "SKJAALD.Language" }}</label>
+                    <select name="data.language">
+                        {{#select data.language}}
+                        <option value="none"> {{localize "SKJAALD.None"}}</option>
+                        {{#each config.languages as |name lang|}}
+                        <option value="{{lang}}">{{localize name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </div>
+
+                {{!-- Proficiency --}}
+                <div class="form-group">
+                    <label>{{ localize "SKJAALD.ItemProficiency" }}</label>
+                    <select name="data.proficient" data-dtype="Number">
+                        {{selectOptions config.proficiencyLevels selected=data.proficient}}
+                    </select>
+                </div>
+            {{/if}}
+
+            {{#if (eq data.category 'Armor')}}
+                {{!-- Tool Type --}}
+
+                <div class="form-group">
+                    <label>{{ localize "SKJAALD.ItemEquipmentBase" }}</label>
+                    <select name="data.base">
+                        {{selectOptions baseItems selected=data.baseItem blank=""}}
+                    </select>
+                </div>
+
+                {{!-- Proficiency --}}
+                <div class="form-group">
+                    <label>{{ localize "SKJAALD.ItemProficiency" }}</label>
+                    <select name="data.proficient" data-dtype="Number">
+                        {{selectOptions config.proficiencyLevels selected=data.proficient}}
+                    </select>
+                </div>
+            {{/if}}
+
+            {{#if (eq data.category 'Weapon')}}
+                {{!-- Tool Type --}}
+
+                <div class="form-group">
+                    <label>{{ localize "SKJAALD.ItemWeaponBase" }}</label>
+                    <select name="data.base">
+                        {{selectOptions baseItems selected=data.baseItem blank=""}}
+                    </select>
+                </div>
+
+                {{!-- Proficiency --}}
+                <div class="form-group">
+                    <label>{{ localize "SKJAALD.ItemProficiency" }}</label>
+                    <select name="data.proficient" data-dtype="Number">
+                        {{selectOptions config.proficiencyLevels selected=data.proficient}}
+                    </select>
+                </div>
+            {{/if}}
+            
+            <h3 class="form-header">
+                <div>
+                    {{ localize "SKJAALD.Learning" }}
+                </div>
+            </h3>
+
+            {{!-- Learning Level --}}
+            <div class="form-group input-select">
+                <label>{{ localize "SKJAALD.SpellCurrentLearning" }}</label>
+                <div class="form-fields">
+                    <label class="checkbox learning">
+                        <input class="confirm" type="checkbox" name="data.learning.currently" {{checked data.learning.currently}}/>
+                    </label>
+                    {{#if data.learning.currently}}
+                        <select name="data.learning.level">
+                            {{#select data.learning.level}}
+                            {{#each config.proficiencyLevels as |name lev|}}
+                            <option value="{{lev}}">{{name}}</option>
+                            {{/each}}
+                            {{/select}}
+                        </select>
+                    {{/if}}
+                </div>
+            </div>
+          
+            {{#if data.learning.currently}}
+            <div class="form-group ">
+                <label>{{ localize "SKJAALD.ConseqBonus" }}</label>
+                <input type="number" name="data.learning.conseqBonus" value="{{data.learning.conseqBonus}}"/>
+            </div>
+
+            <div class="form-group learning-hours">
+                <label>{{ localize "SKJAALD.LearningHours" }}</label>
+                <input type="hidden" name="data.learning.hoursNeeded" value="{{data.learning.hoursNeeded}}" data-dtype="Number"/>
+                <input class="hours-input" type="number" name="data.learning.hours" value="{{data.learning.hours}}"/> / <input class="hours-input" type="number" name="data.learning.hoursTotal" value="{{data.learning.hoursTotal}}"/>
+            </div>
+            {{/if}}
+            {{#if data.learning.currently}}
+                {{#if (or (eq race 'Gnome') (eq race 'gnome'))}}
+                <div class="form-group input-select">
+                    <label>{{ localize "SKJAALD.PerfectStudent" }}</label>
+                    <div class="form-fields">
+                        <label class="checkbox learning">
+                            <input type="checkbox" name="data.perfectstudent" {{checked data.perfectstudent}}/>
+                        </label>
+                        {{#if data.perfectstudent}}
+                        <input type="number" name="data.learning.perfectStudentUses" value="{{data.learning.perfectStudentUses}}" data-dtype="Number"/> /<input type="number" name="data.learning.perfectStudentTotal" value="{{data.learning.perfectStudentTotal}}" data-dtype="Number"/>
+                        {{/if}}
+                        
+                    </div>
+                </div>
+                {{/if}}
+            {{/if}}
+        </div>
+    </section>
+</form>

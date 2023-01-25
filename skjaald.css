@@ -1,0 +1,3257 @@
+/* Deprecated vars */
+/* ----------------------------------------- */
+/*  Fonts                                    */
+/* ----------------------------------------- */
+@font-face {
+  font-family: 'Modesto Condensed';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../../fonts/modesto-condensed/modesto-condensed.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Modesto Condensed';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../../fonts/modesto-condensed/modesto-condensed-bold.woff2') format('woff2');
+}
+.modesto {
+  font-family: "Modesto Condensed", "Palatino Linotype", serif;
+  font-size: 20px;
+  font-weight: 700;
+}
+/* ----------------------------------------- */
+/*  Sheet Styles                             */
+/* ----------------------------------------- */
+/* ----------------------------------------- */
+/*  Flexbox                                  */
+/* ----------------------------------------- */
+.flexrow {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.flexrow > * {
+  flex: 1;
+}
+.flexrow .flex1 {
+  flex: 1;
+}
+.flexrow .flex2 {
+  flex: 2;
+}
+.flexrow .flex3 {
+  flex: 3;
+}
+.flexrow .flex4 {
+  flex: 4;
+}
+.flexcol {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+.flexcol > * {
+  flex: 1;
+}
+.flexcol .flex1 {
+  flex: 1;
+}
+.flexcol .flex2 {
+  flex: 2;
+}
+.flexcol .flex3 {
+  flex: 3;
+}
+.flexcol .flex4 {
+  flex: 4;
+}
+/* ----------------------------------------- */
+/*  All skjaald Apps                           */
+/* ----------------------------------------- */
+.skjaald {
+  /* ----------------------------------------- */
+  /*  Element Styles                           */
+  /* ----------------------------------------- */
+  /* Form Groups */
+  /* Tags */
+}
+.skjaald .window-content {
+  font-size: 13px;
+}
+.skjaald input[type="text"],
+.skjaald input[type="number"],
+.skjaald select {
+  height: calc(100% - 2px);
+  border: 1px solid #7a7971;
+  background: rgba(0, 0, 0, 0.05);
+  color: #191813;
+}
+.skjaald input[type="text"]:hover,
+.skjaald input[type="number"]:hover,
+.skjaald input[type="text"]:focus,
+.skjaald input[type="number"]:focus {
+  border: 1px solid #111;
+  box-shadow: 0 0 8px red;
+}
+.skjaald input:disabled,
+.skjaald select:disabled,
+.skjaald textarea:disabled {
+  color: #4b4a44;
+  border: 1px solid transparent !important;
+  outline: none !important;
+}
+.skjaald input:disabled:hover,
+.skjaald select:disabled:hover,
+.skjaald textarea:disabled:hover,
+.skjaald input:disabled:focus,
+.skjaald select:disabled:focus,
+.skjaald textarea:disabled:focus {
+  box-shadow: none !important;
+  border: 1px solid transparent !important;
+  outline: none !important;
+}
+.skjaald button {
+  background: rgba(0, 0, 0, 0.1);
+  border: 2px groove #eeede0;
+}
+.skjaald .form-group label {
+  flex: 2;
+  color: #4b4a44;
+  font-weight: bold;
+}
+.skjaald .form-group .form-fields {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.skjaald .form-group .form-fields > * {
+  flex: 1;
+}
+.skjaald .form-group .form-fields .flex1 {
+  flex: 1;
+}
+.skjaald .form-group .form-fields .flex2 {
+  flex: 2;
+}
+.skjaald .form-group .form-fields .flex3 {
+  flex: 3;
+}
+.skjaald .form-group .form-fields .flex4 {
+  flex: 4;
+}
+.skjaald .form-group .form-fields > * {
+  margin: 0 3px 0 0;
+}
+.skjaald .form-group .form-fields > *:last-child {
+  margin-right: 0;
+}
+.skjaald .form-group.stacked > label {
+  flex: 0 0 100%;
+  margin: 0;
+}
+.skjaald .form-group.stacked label.checkbox,
+.skjaald .form-group.stacked label.radio {
+  flex: auto;
+  text-align: left;
+}
+.skjaald .form-header {
+  margin: 0 0 0.25em 0;
+  padding: 2px 0;
+  border-top: 2px groove #eeede0;
+  border-bottom: 2px groove #eeede0;
+  font-family: "Modesto Condensed", "Palatino Linotype", serif;
+  font-size: 20px;
+  font-weight: 700;
+}
+.skjaald .tag {
+  display: inline-block;
+  margin: 0 2px 0 0;
+  padding: 0 3px;
+  font-size: 10px;
+  line-height: 16px;
+  border: 1px solid #999;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.05);
+}
+/* ----------------------------------------- */
+/*  Hit Dice Config Sheet Specifically       */
+/* ----------------------------------------- */
+.skjaald.hd-config .form-group button.increment,
+.skjaald.hd-config .form-group button.decrement {
+  flex: 0 0 1rem;
+  line-height: 1rem;
+}
+.skjaald.hd-config .form-group button.decrement {
+  margin-right: 0;
+}
+.skjaald.hd-config .form-group span.sep {
+  margin: 0;
+}
+.skjaald.hd-config .form-group input {
+  flex: 0 0 2rem;
+  text-align: center;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+/* ----------------------------------------- */
+/*  Entity Sheets Specifically               */
+/* ----------------------------------------- */
+.skjaald.sheet {
+  /* ----------------------------------------- */
+  /*  Element Styles                           */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  TinyMCE                                  */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Notifications                            */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Sheet Header                             */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Sheet Navigation                         */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Sheet Body                               */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  List Filters                             */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Trait Lists                              */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Items Lists                              */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Active Effects                           */
+  /* ----------------------------------------- */
+}
+.skjaald.sheet .window-content {
+  overflow-y: hidden;
+  padding: 5px;
+  font-size: 13px;
+  color: #191813;
+  overflow: scroll;
+  background-color: whitesmoke;
+
+}
+.skjaald.sheet .window-content form {
+  height: 100%;
+  background-color: whitesmoke;
+}
+.skjaald.sheet .window-content .tab {
+  height: 100%;
+  align-content: flex-start;
+  background-color: whitesmoke;
+
+}
+.skjaald.sheet input[type="text"],
+.skjaald.sheet input[type="number"] {
+  background: none;
+  border: 1px solid transparent;
+}
+.skjaald.sheet input[type="text"]:hover,
+.skjaald.sheet input[type="number"]:hover,
+.skjaald.sheet input[type="text"]:focus,
+.skjaald.sheet input[type="number"]:focus {
+  border: 1px solid #111;
+}
+.skjaald.sheet select {
+  flex: 1;
+  font-size: 12px;
+  height: 22px;
+  background: transparent;
+}
+.skjaald.sheet .editable .rollable:hover {
+  cursor: pointer;
+}
+.skjaald.sheet .editable h4.rollable:hover,
+.skjaald.sheet .editable .rollable:hover > h4 {
+  color: #000;
+  text-shadow: 0 0 10px red;
+}
+.skjaald.sheet span.sep {
+  flex: none;
+  margin: 0 1px;
+  display: inline;
+  position: relative;
+  color: #7a7971;
+  font-weight: normal;
+}
+.skjaald.sheet .editor {
+  height: 100%;
+}
+.skjaald.sheet .editor .tox-toolbar-overlord,
+.skjaald.sheet .editor .tox-toolbar__primary {
+  background: none;
+}
+.biography-boxes{
+  min-height: 350px;
+}
+.biography-boxes .tox-tinymce{
+  min-height: 250px;
+}
+.editor .editor-content{
+  min-height: 150px;
+}
+.skjaald.sheet .warnings,
+.skjaald.sheet .info {
+  flex: 0 0 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.skjaald.sheet .warnings .notification,
+.skjaald.sheet .info .notification {
+  font-family: 'Signika', sans-serif;
+  font-weight: normal;
+  font-size: 13px;
+  box-shadow: none;
+  padding: 2px 8px;
+  margin-bottom: 2px;
+}
+.skjaald.sheet .sheet-header {
+  flex: 0 0 100px;
+  border-bottom: 2px groove #eeede0;
+  /* Character Name */
+  /* Profile Image */
+  /* Header Summary Details */
+}
+.skjaald.sheet .sheet-header .header-details {
+  font-family: "Modesto Condensed", "Palatino Linotype", serif;
+  font-size: 20px;
+  font-weight: 700;
+}
+.skjaald.sheet .sheet-header .header-details .summary select {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  font-family: "Modesto Condensed", "Palatino Linotype", serif;
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: capitalize;
+  font-weight: 100;
+}
+.skjaald.sheet .sheet-header h1 {
+  flex: 1;
+  border-bottom: none;
+  height: 60px;
+  margin: 0;
+  padding: 5px;
+}
+.skjaald.sheet .sheet-header h1 input {
+  display: block;
+  height: 50px;
+  font-size: 32px;
+  margin: 0;
+}
+.skjaald.sheet .sheet-header img.profile {
+  flex: 0 0 100px;
+  max-width: 100px;
+  height: 100px;
+  object-fit: contain;
+  border: none;
+}
+.skjaald.sheet .sheet-header .summary {
+  flex: 0 0 100%;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 2px groove #eeede0;
+  border-bottom: none;
+}
+.skjaald.sheet .sheet-header .summary li {
+  height: calc(100% - 6px);
+  float: left;
+  margin: 2px 0;
+  padding: 0;
+  border-right: 2px groove #eeede0;
+  line-height: 34px;
+  color: #4b4a44;
+}
+.skjaald.sheet .sheet-header .summary li:last-child {
+  border-right: none;
+}
+.skjaald.sheet .sheet-navigation {
+  flex: 0 0 30px;
+  margin-bottom: 5px;
+  font-family: "Modesto Condensed", "Palatino Linotype", serif;
+  font-size: 20px;
+  font-weight: 700;
+}
+.skjaald.sheet .sheet-navigation .item {
+  height: 30px;
+  line-height: 32px;
+  margin: 0 24px;
+  border-bottom: 3px solid #b5b3a4;
+}
+.skjaald.sheet .sheet-navigation .item.active {
+  border-bottom: 3px solid #44191A;
+}
+.skjaald.sheet .sheet-body {
+  flex: 1;
+}
+.skjaald.sheet .filter-list {
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  line-height: 16px;
+  max-width: 70%;
+}
+.skjaald.sheet .filter-list .filter-icon {
+  flex: none;
+  font-size: 14px;
+  color: #7a7971;
+}
+.skjaald.sheet .filter-list .filter-item {
+  text-align: center;
+  font-size: 12px;
+  margin: 0 6px 0 0;
+  border-bottom: 3px solid #b5b3a4;
+  white-space: nowrap;
+}
+.skjaald.sheet .filter-list .filter-item:last-child {
+  margin: 0;
+}
+.skjaald.sheet .filter-list .filter-item:hover {
+  text-shadow: 0 0 4px red;
+  border-bottom: 3px solid #7a7971;
+}
+.skjaald.sheet .filter-list .filter-item.active {
+  border-bottom: 3px solid #44191A;
+}
+.skjaald.sheet .traits {
+  margin: 5px 0 0;
+}
+.skjaald.sheet .traits .trait-selector,
+.skjaald.sheet .traits .proficiency-selector {
+  flex: 0 0 16px;
+  padding: 2px 0;
+  color: #999;
+  font-size: 10px;
+}
+.skjaald.sheet .traits .traits-list {
+  flex: 0 0 100%;
+  line-height: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.skjaald.sheet .items-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  color: #7a7971;
+}
+.skjaald.sheet .items-list .item-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.skjaald.sheet .items-list .item-name {
+  flex: 2;
+  margin: 0;
+  overflow: hidden;
+  font-size: 13px;
+  text-align: left;
+  align-items: center;
+}
+.skjaald.sheet .items-list .item-name h3,
+.skjaald.sheet .items-list .item-name h4 {
+  margin: 0;
+  white-space: nowrap;
+  overflow-x: hidden;
+}
+.skjaald.sheet .items-list .item-controls {
+  flex: 0 0 60px;
+  justify-content: space-between;
+}
+.skjaald.sheet .items-list .item-controls a {
+  font-size: 12px;
+  text-align: center;
+}
+.skjaald.sheet .items-list .item {
+  align-items: center;
+  padding: 0 2px;
+  border-bottom: 1px solid #c9c7b8;
+}
+.skjaald.sheet .items-list .item:last-child {
+  border-bottom: none;
+}
+.skjaald.sheet .items-list .item .item-name {
+  color: #191813;
+}
+.skjaald.sheet .items-list .item .item-name .item-image {
+  flex: 0 0 20px;
+  height: 30px;
+  background-size: 20px;
+  border: none;
+  margin-right: 5px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.skjaald.sheet .items-list .item .item-name .item-image-no-roll {
+  flex: 0 0 20px;
+  height: 30px;
+  background-size: 20px;
+  border: none;
+  margin-right: 5px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.skjaald.sheet .items-list .items-header {
+  height: 28px;
+  margin: 2px 0;
+  padding: 0;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.05);
+  border: 2px groove #eeede0;
+  font-weight: bold;
+}
+.skjaald.sheet .items-list .items-header > * {
+  font-size: 12px;
+  text-align: center;
+}
+.skjaald.sheet .items-list .items-header h3 {
+  padding-left: 5px;
+  font-family: "Modesto Condensed", "Palatino Linotype", serif;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: left;
+  font-size: 16px;
+}
+.skjaald.sheet .effects .item .effect-source,
+.skjaald.sheet .effects .item .effect-duration,
+.skjaald.sheet .effects .item .effect-controls {
+  text-align: center;
+  border-left: 1px solid #c9c7b8;
+  border-right: 1px solid #c9c7b8;
+  font-size: 12px;
+}
+.skjaald.sheet .effects .item .effect-controls {
+  border: none;
+}
+/* ----------------------------------------- */
+/* Trait Selector
+/* ----------------------------------------- */
+.trait-selector .trait-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.trait-selector .trait-list li ol.trait-list {
+  margin-left: 1.5em;
+}
+.trait-selector input[type="text"] {
+  height: 24px;
+  margin: 2px;
+}
+/* ----------------------------------------- */
+/*  Property Attribution                     */
+/* ----------------------------------------- */
+.property-attribution {
+  display: none;
+  position: absolute;
+  padding: 3px;
+  border: 1px solid #000;
+  border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+  color: #c9c7b8;
+  text-align: left;
+  z-index: 1;
+}
+.property-attribution table {
+  margin: 0;
+  border: 0;
+}
+.property-attribution table tr {
+  background-color: inherit;
+}
+.property-attribution table td {
+  padding: 3px;
+}
+.property-attribution table tr.total > td {
+  font-weight: 600;
+  padding-top: 5px;
+  border-top: 1px solid #7a7971;
+}
+.property-attribution table td.attribution-value {
+  width: 20%;
+  padding-right: 5px;
+  text-align: right;
+  font-weight: 600;
+}
+.property-attribution table td::before {
+  opacity: 0.6;
+}
+.property-attribution table td.mode-1::before {
+  content: "×";
+}
+.property-attribution table td.mode-2::before {
+  content: "+";
+}
+.property-attribution table td.mode-2.negative::before {
+  content: "−";
+  margin-right: -1px;
+}
+.property-attribution table td.mode-3::before {
+  content: "↓";
+}
+.property-attribution table td.mode-4::before {
+  content: "↑";
+}
+/* ----------------------------------------- */
+/*  Actor Type Config Sheet Specifically     */
+/* ----------------------------------------- */
+.actor-type .trait-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+.actor-type .trait-list li {
+  flex-basis: 50%;
+  flex-grow: 1;
+}
+.actor-type .trait-list li.form-group {
+  flex-basis: 100%;
+}
+.actor-type label.radio {
+  display: flex;
+  flex: auto;
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: normal;
+}
+.actor-type label.radio > input[type="radio"] {
+  margin: 0 5px 0 0;
+}
+.actor-type li.custom-type input[type="radio"] {
+  display: none;
+}
+/* ----------------------------------------- */
+/*  Armor Config Sheet Specifically          */
+/* ----------------------------------------- */
+.skjaald.actor-armor-config .ac-field input {
+  font-size: 3em;
+  text-align: center;
+}
+/* ----------------------------------------- */
+/*  Add Feature Prompt Specifically          */
+/* ----------------------------------------- */
+.skjaald.select-items-prompt .dialog-content {
+  margin-bottom: 1em;
+}
+.skjaald.select-items-prompt .items-list {
+  margin-top: 0.5em;
+}
+.skjaald.select-items-prompt .item-name > label,
+.skjaald.select-items-prompt .item-image,
+.skjaald.select-items-prompt .item-image-no-roll,
+.skjaald.select-items-prompt input {
+  cursor: pointer;
+}
+.skjaald.select-items-prompt .item-name > label {
+  align-items: center;
+}
+.skjaald.select-items-prompt .window-content {
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.noclick{
+  pointer-events: none;
+}
+.skjaald.sheet.actor {
+  /* ----------------------------------------- */
+  /*  Sheet Header                             */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  General Styles                           */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Grid Setup                           */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Standard Container Setup                 */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Attributes                               */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Proficiency                              */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Ability Scores                           */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Ability Saves                           */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Skills                                   */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Other Proficiences                       */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Stats                                    */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Health                                   */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  well-Conditions Grid                     */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Resources Grid                           */
+  /* ----------------------------------------- */
+
+  /* ----------------------------------------- */
+  /*  Combat Page Spell Stats                  */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Combat Page Attacks & Features           */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Bio Page                                 */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Statuses                                 */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Traits                                   */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Inventory Lists                          */
+  /* ----------------------------------------- */
+  /* Inventory List Filters */
+  /* Encumbrance Bar */
+  /* ----------------------------------------- */
+  /*  Spellbook                                */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Features Tab                             */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  TinyMCE                                  */
+  /* ----------------------------------------- */
+}
+
+/* ----------------------------------------- */
+/*  Non-Combat Features                      */
+/* ----------------------------------------- */
+
+
+
+.skjaald.sheet.actor .sheet-header img.profile {
+  flex: 0 0 160px;
+  max-width: 160px;
+  height: 160px;
+}
+.skjaald.sheet.actor .sheet-header h1.charname {
+  flex: 0.55;
+  height: 60px;
+  padding: 0;
+  margin-left: 47px;
+  margin-top: 14px;
+}
+.skjaald.sheet.actor .sheet-header h1.charname input {
+  height: 40px;
+  margin: 10px 0;
+}
+.skjaald.sheet.actor .sheet-header .header-exp {
+  flex: 0 0 150px;
+  margin-right: 3px;
+  height: 60px;
+  justify-content: flex-end;
+  text-align: right;
+}
+.skjaald.sheet.actor .sheet-header .summary {
+  height: 30px;
+  border-bottom: 2px groove #eeede0;
+  font-size: 18px;
+}
+.skjaald.sheet.actor .sheet-header .summary input,
+.skjaald.sheet.actor .sheet-header .summary span {
+  display: block;
+  height: 24px;
+  line-height: 24px;
+}
+.skjaald.sheet.actor .sheet-header .summary select {
+  position: relative;
+  top: -4px;
+}
+.skjaald.sheet.actor .sheet-header .attributes {
+  flex: 0 0 100%;
+  margin: 0;
+}
+.skjaald.sheet.actor .sheet-header .attributes .attribute {
+  height: 70px;
+  margin: 0;
+  border: none;
+  border-right: 2px groove #eeede0;
+  border-radius: 0;
+}
+.skjaald.sheet.actor .sheet-header .attributes .attribute:last-child {
+  border-right: none;
+}
+.skjaald.sheet.actor .sheet-header .attributes .attribute .attribute-name {
+  position: relative;
+}
+.skjaald.sheet.actor .sheet-header .attributes .attribute .attribute-value {
+  height: 30px;
+  line-height: 30px;
+}
+.skjaald.sheet.actor .sheet-header .attributes .attribute .config-button {
+  position: absolute;
+  display: none;
+  right: -6px;
+  top: -3px;
+  font-size: 10px;
+  font-weight: normal;
+}
+.skjaald.sheet.actor .sheet-header .attributes .attribute:hover .config-button {
+  display: block;
+}
+.skjaald.sheet.actor .sheet-header .attributes .attribute input.temphp {
+  width: 48%;
+}
+.skjaald.sheet.actor .sheet-header .attributes .attribute .property-attribution {
+  min-width: 150px;
+  top: 50px;
+  font-family: Signika, sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1rem;
+}
+.skjaald.sheet.actor h4.box-title {
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1;
+  margin-left: 2px;
+  margin-right: 2px;
+  padding: 0 5px 5px;
+  text-align: center;
+  text-transform: uppercase;
+  min-height: 21px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.skjaald.sheet.actor .container-panel:before {
+  border-image: url(https://imgsrv.roll20.net/?src=https%3A//raw.githubusercontent.com/Roll20/roll20-character-sheets/master/5e%2520Darker%2520Dungeons/img/sheet-box-border.png) 50 50 50 50 fill stretch;
+  border-style: solid;
+  border-width: 15px 15px;
+  box-sizing: border-box;
+  content: '';
+  display: block;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+}
+.skjaald.sheet.actor .container-panel-armor:before {
+  border-image: url('./ui/frames/AC Dark Clear.png') 65 50 65 50 fill stretch;
+  border-style: solid;
+  border-width: 15px 15px;
+  box-sizing: border-box;
+  content: '';
+  display: block;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+}
+.skjaald.sheet.actor .container-panel2:before {
+  border-image: url(https://imgsrv.roll20.net/?src=https%3A//raw.githubusercontent.com/Roll20/roll20-character-sheets/master/5e%2520Darker%2520Dungeons/img/sheet-box-border.png) 50 50 50 50 fill stretch;
+  border-style: solid;
+  border-width: 11px 11px;
+  box-sizing: border-box;
+  content: '';
+  display: block;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+}
+.skjaald.sheet.actor .equipment-rationWater .container-panel2:before,
+.skjaald.sheet.actor .equipment-money .container-panel2:before {
+  border-image: url(https://imgsrv.roll20.net/?src=https%3A//raw.githubusercontent.com/Roll20/roll20-character-sheets/master/5e%2520Darker%2520Dungeons/img/sheet-box-border.png) 50 50 50 50 fill stretch;
+  border-style: solid;
+  border-width: 11px 11px;
+  box-sizing: border-box;
+  content: '';
+  display: block;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+  height: 40px;
+}
+.skjaald.sheet.actor .equipment-rationWater .container-panel2 .sheet-container-header,
+.skjaald.sheet.actor .equipment-money .container-panel2 .sheet-container-header{
+  padding-left: 20px;
+  padding-top:10px;
+  padding-right: 5px;
+}
+.skjaald.sheet.actor .equipment-rationWater .container-panel2 .check-toggle-ration,
+.skjaald.sheet.actor .equipment-rationWater .container-panel2 .sheet-container-body,
+.skjaald.sheet.actor .equipment-money .container-panel2 .sheet-container-body{
+  padding-left: 2px;
+  padding-top: 11px;
+  padding-right: 3px;
+}
+.skjaald.sheet.actor .equipment-rationWater .container-panel2 .check-toggle-waterskin{
+  padding-right: 5px;
+}
+.skjaald.sheet.actor .container-panel {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  position: relative;
+  z-index: 0;
+}
+.skjaald.sheet.actor .container-panel2 {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  position: relative;
+  z-index: 0;
+}
+.skjaald.sheet.actor .core-container {
+  display: grid;
+  grid-template-columns: 295px 1fr 1fr;
+  grid-template-rows: 69px 143px 135px 1fr;
+  grid-row-gap: 10px;
+  grid-column-gap: 5px;
+  grid-template-areas: "attributes stats stats" "attributes health health" "attributes conditions conditions" "attributes resources nonconfeatures";
+}
+.skjaald.sheet.actor .attribute-grid {
+  grid-area: attributes;
+  display: grid;
+  grid-template-columns: 75px 1fr;
+  grid-template-rows: 65px 143px 347px auto;
+  grid-template-areas: "ability proficiency" "ability save" "ability skill" "tools tools";
+}
+.skjaald.sheet.actor .stats-grid {
+  grid-area: stats;
+  display: grid;
+  grid-template-rows: 21px 21px 21px;
+  grid-template-columns: repeat(7, 1fr);
+  grid-column-gap: 5px;
+  grid-row-gap: 5px;
+  grid-template-areas: "ac dp speed inspire inspire exhaust exhaust exhaust" "ac dp speed legend legend exhaust exhaust exhaust" "ac dp speed fate fate exhaust exhaust exhaust";
+}
+
+.skjaald.sheet.actor .stats-grid-combat {
+  grid-area: stats;
+  display: grid;
+  grid-template-rows: 73px;
+  grid-template-columns: repeat(7, 1fr);
+  grid-column-gap: 5px;
+  grid-row-gap: 5px;
+  grid-template-areas: "ac dp speed initiative actions actions actions actions";
+}
+.skjaald.sheet.actor .health-grid {
+  grid-area: health;
+  display: grid;
+  grid-template-rows: 69px 69px;
+  grid-template-columns: repeat(6, 1fr);
+  grid-column-gap: 5px;
+  grid-row-gap: 5px;
+  grid-template-areas: "maxhp hp hp Ex-effects Ex-effects Ex-effects" "hit hit death Ex-effects Ex-effects Ex-effects";
+}
+.skjaald.sheet.actor .conditions-grid {
+  grid-area: conditions;
+  display: grid;
+  grid-template-rows: 135px;
+  grid-template-columns: repeat(5, 1fr);
+  grid-column-gap: 5px;
+  grid-template-areas: "well-conditions well-conditions well-conditions well-conditions health-conditions";
+}
+.skjaald.sheet.actor .resources-grid {
+  grid-area: resources;
+  display: grid;
+  grid-template-rows: 69px auto;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 5px;
+  grid-row-gap: 5px;
+  grid-template-areas: "resource1 resource2 resource3" "other-resources other-resources other-resources";
+}
+.skjaald.sheet.actor .combat-container {
+  display: grid;
+  grid-template-columns: 295px 1fr 1fr;
+  grid-template-rows: 69px 143px 135px 100px 1fr;
+  grid-row-gap: 10px;
+  grid-column-gap: 5px;
+  grid-template-areas: "attributes stats stats" "attributes health health" "attributes resources spellStats" "attributes resources comFeatures" "attributes attacks comFeatures";
+}
+.skjaald.sheet.actor .spell-resources-grid {
+  grid-area: spellStats;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 5px;
+  grid-row-gap: 5px;
+  grid-template-areas: "castAbility spellSaveDC spellAttackBonus" "spellBurnout spellMemorized freeCantrips";
+}
+.skjaald.sheet.actor .bioPage-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  grid-column-gap: 5px;
+  grid-row-gap: 5px;
+  grid-template-areas: "bio1 bio2 events";
+}
+.skjaald.sheet.actor .bioBoxes1-grid {
+  grid-area: bio1;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: 300px auto auto 1fr;
+  grid-column-gap: 5px;
+  grid-row-gap: 5px;
+  grid-template-areas: "details" "secrets" "physical" "family";
+}
+.skjaald.sheet.actor .bioBoxes2-grid {
+  grid-area: bio2;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: auto auto auto auto auto 1fr;
+  grid-column-gap: 5px;
+  grid-row-gap: 5px;
+  grid-template-areas: "personality" "ideals" "bonds" "flaws" "habits" "quest";
+}
+.skjaald.sheet.actor .notePage-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 5px;
+  grid-row-gap: 5px;
+  grid-template-areas: "people notes" "backstory backstory";
+}
+.skjaald.sheet.actor .equipmentPage-grid {
+  display: grid;
+  grid-template-columns: 600px 1fr;
+  grid-template-rows: 633px 1fr;
+  grid-column-gap: 5px;
+  grid-row-gap: 5px;
+  grid-template-areas: "holdings sidebar" "holdings sidebar";
+}
+.skjaald.sheet.actor .currencyRation-grid{
+  grid-area: sidebar;
+  display: grid;
+  grid-template-areas: 
+  "rationWater" 
+  "money" 
+  "heavy" 
+  "other";
+  grid-row-gap: 15px;
+  grid-column-gap: 15px;
+  grid-template-rows: 100px 500px 100px 200px 1fr;
+}
+.equipment-money {
+  grid-area: money;
+  display: grid;
+  grid-template-areas:
+  "copper"
+  "gold"
+  "silver"
+  "platinum"
+  "marks"
+  "other";
+  grid-row-gap: 15px;
+  grid-column-gap: 15px;
+  grid-template-rows: 30px 30px 30px 30px 30px 30px;
+}
+.equipment-rationWater {
+  grid-area: rationWater;
+  display: grid;
+  grid-template-areas:
+  "ration"
+  "water";
+  grid-row-gap: 15px;
+  grid-column-gap: 15px;
+  grid-template-rows: 30px 30px;
+}
+
+
+.skjaald.sheet.actor .spell-grid{
+  display: grid;
+  grid-template-areas: 
+  "menu menu menu"
+  "cantrips one two"
+  "three four five"
+  "six seven eight"
+  "six seven nine";
+  grid-row-gap: 5px;
+  grid-column-gap: 5px;
+  grid-template-rows: 60px 200px 200px 100px 100px 1fr;
+  grid-template-columns: repeat(3, 1fr);
+}
+.skjaald.sheet.actor .learning-grid{
+  display: grid;
+  grid-template-areas: "spell-learning classes" "spell-learning other-learning" "spell-learning other-learning" "spell-learning other-learning";
+  grid-column-gap: 5px;
+  grid-row-gap: 5px;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+}
+.classes{
+  grid-area: classes;
+}
+.classes .sheet-container-body{
+  min-height: 135px;
+}
+.spell-learning{
+  grid-area: spell-learning;
+  display: grid;
+  grid-template-areas:
+  "pillar"
+  "specialty"
+  "minor1"
+  "minor2"
+  "spell-list";
+  grid-template-rows: 30px 30px 30px 30px 1fr;
+  grid-template-columns: 1fr;
+  grid-row-gap:5px;
+}
+.spell-list{
+  grid-area: spell-list;
+}
+.spell-list .sheet-container-body{
+  min-height: 315px;
+}
+.other-learning .sheet-container-body{
+  min-height: 317px;
+}
+.pillar{
+  grid-area: pillar;
+}
+.speciality{
+  grid-area: specialty;
+}
+.minor-primary{
+  grid-area: minor1;
+}
+.minor-secondary{
+  grid-area: minor2;
+}
+.other-learning{
+  grid-area: other-learning;
+}
+.spellbook-filters{
+  grid-area: menu;
+}
+.spell-header{
+  background-image: url('./ui/frames/spells.png');
+  position: relative;
+  z-index: 1;
+
+}
+.cantrips{
+  grid-area: cantrips;
+}
+.cantrips .container-panel{
+  min-height: 195px;
+}
+.one{
+  grid-area: one;
+}
+.one .container-panel{
+  min-height: 195px;
+}
+.two{
+  grid-area: two;
+}
+.two .container-panel{
+  min-height: 195px;
+}
+.three{
+  grid-area: three;
+}
+.three .container-panel{
+  min-height: 195px;
+}
+.four{
+  grid-area: four;
+}
+.four .container-panel{
+  min-height: 195px;
+}
+.five{
+  grid-area: five;
+}
+.five .container-panel{
+  min-height: 195px;
+}
+.six{
+  grid-area: six;
+}
+.six .container-panel{
+  min-height: 195px;
+}
+.seven{
+  grid-area: seven;
+}
+.seven .container-panel{
+  min-height: 195px;
+}
+.eight{
+  grid-area: eight;
+}
+.eight .container-panel{
+  min-height: 95px;
+}
+.nine{
+  grid-area: nine;
+}
+.nine .container-panel{
+  min-height: 95px;
+}
+.skjaald.sheet.actor .container-box {
+  display: flex;
+  flex-direction: column-reverse;
+  min-height: 65px;
+  position: relative;
+  z-index: 0;
+  min-width: 0;
+  overflow: hidden;
+}
+.skjaald.sheet.actor .sheet-container-bar::before {
+  border-image: url('./ui/frames/pillar-frame.png') 65 50 65 50 fill stretch;
+  border-style: solid;
+  border-width: 15px 15px;
+  box-sizing: border-box;
+  content: '';
+  display: block;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+}
+.skjaald.sheet.actor .sheet-container-bar{
+  display: flex;
+  height: 30px;
+  position: relative;
+  z-index:0;
+
+}
+.sheet-container-bar .sheet-container-header{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 10px 0 12px;
+}
+.sheet-container-bar .sheet-container-body{
+  align-items: center;
+  align-self: stretch;
+  display: flex;
+  flex-grow: 1;
+  font-weight: bold;
+  justify-content: center;
+  position: relative;
+  vertical-align: middle;
+  padding-right:14px;
+  padding-left: 27px;
+}
+.sheet-container-bar .sheet-container-body::after{
+  background:  url('./ui/frames/pillar-divider.png');
+  display:inline-block;
+  position:absolute;
+  width:19px;
+  background-size: 100% 100%;
+  transform: rotate(180deg);
+  left:0px;
+  height: 30px;
+  left: -12px;
+  content: '';
+}
+
+.skjaald.sheet.actor .auto-dp-value {
+  line-height: 25px;
+  font-size: 25px;
+  justify-content: center;
+}
+.skjaald.sheet.actor .auto-calc-value {
+  line-height: 25px;
+  font-size: 25px;
+  justify-content: center;
+  margin-top: 10px;
+}
+.skjaald.sheet.actor .container-box-header {
+  font-size: 10px;
+  font-weight: bold;
+  line-height: 1;
+  margin-left: 2px;
+  margin-right: 2px;
+  padding: 0 5px 5px;
+  text-align: center;
+  text-transform: uppercase;
+  min-height: 21px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin-bottom: -3px;
+  margin-top: 7px;
+}
+.skjaald.sheet.actor .container-box-footer {
+  font-size: 12px;
+  padding-top: 10px;
+  color: #bab8b8;
+  font-weight: bold;
+  line-height: 10px;
+  text-transform: uppercase;
+  box-sizing: border-box;
+  min-height: 21px;
+  margin-bottom: -5px;
+  text-align: center;
+  margin-top: -5px;
+}
+.skjaald.sheet.actor .container-box-body {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  padding: 5px 10px 0;
+}
+.skjaald.sheet.actor .tab.attributes {
+  overflow: hidden;
+}
+.skjaald.sheet.actor ul.attributes {
+  flex: 0 0 60px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.skjaald.sheet.actor ul.attributes li.attribute {
+  height: 60px;
+  margin: 0 5px 0 0;
+  border: 2px groove #eeede0;
+  border-radius: 4px;
+  text-align: center;
+}
+.skjaald.sheet.actor ul.attributes li.attribute:last-child {
+  margin: 0;
+}
+.skjaald.sheet.actor ul.attributes li.attribute .attribute-value {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 28px;
+  line-height: 28px;
+  font-family: "Modesto Condensed", "Palatino Linotype", serif;
+  font-size: 20px;
+  font-weight: 700;
+}
+.skjaald.sheet.actor ul.attributes li.attribute .attribute-value > * {
+  font-weight: 400;
+  font-size: 24px;
+}
+.skjaald.sheet.actor ul.attributes li.attribute .attribute-value.multiple input {
+  flex: 0 0 33%;
+}
+.skjaald.sheet.actor ul.attributes li.attribute .attribute-footer {
+  flex: 0 0 18px;
+  margin-top: -1px;
+  line-height: 18px;
+  font-family: "Signika", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+.skjaald.sheet.actor .attributable {
+  position: relative;
+}
+.skjaald.sheet.actor .attributable:hover .tooltip {
+  display: block;
+}
+.skjaald.sheet.actor .proficiency {
+  grid-area: proficiency;
+  background-image: url('./ui/Proficiency/lightEmpty.png');
+  flex: 0 0 180px;
+  height: 50px;
+  list-style: none;
+  margin: 0 5px 3px;
+  padding: 15px 20px 2px;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.attribute-grid .tools-otherskills .prof-list{
+  padding-top: 8px;
+  padding-left: 10px;
+  width: 100%;
+  padding-right: 10px;
+}
+.skjaald.sheet.actor .ability-scores {
+  grid-area: ability;
+  flex: 0 0 80px;
+  height: 550px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: "Modesto Condensed", "Palatino Linotype", serif;
+  font-size: 20px;
+  font-weight: 700;
+  padding-left: 5px;
+  padding-top: 5px;
+}
+.skjaald.sheet.actor .ability-scores .ability {
+  height: 70px;
+  text-align: center;
+}
+.skjaald.sheet.actor .ability-scores .ability:last-child {
+  border-bottom: none;
+  margin-bottom: -3px;
+}
+.skjaald.sheet.actor .ability-scores .ability input.ability-score {
+  height: 25px;
+  width: 36px;
+  margin: 0 auto;
+  line-height: 32px;
+  font-size: 20px;
+  position: relative;
+  top: 15px;
+}
+.skjaald.sheet.actor .ability-scores .ability .ability-modifiers {
+  height: 24px;
+  margin: -8px 0 0;
+}
+.skjaald.sheet.actor .ability-scores .ability .ability-modifiers span.ability-mod {
+  flex: 0 0 30px;
+  height: 20px;
+  font-size: 30px;
+  line-height: 20px;
+  position: relative;
+  top: 13px;
+  left: -3px;
+}
+.skjaald.sheet.actor .ability-scores [data-ability="str"] {
+  background-image: url('./ui/attributes/lightEmpty/strength.png');
+  background-size: cover;
+  max-width: 70px;
+  min-height: 82px;
+}
+.skjaald.sheet.actor .ability-scores [data-ability="dex"] {
+  background-image: url('./ui/attributes/lightEmpty/Dexterity.png');
+  background-size: cover;
+  max-width: 70px;
+  min-height: 82px;
+}
+.skjaald.sheet.actor .ability-scores [data-ability="con"] {
+  background-image: url('./ui/attributes/lightEmpty/Constitution.png');
+  background-size: cover;
+  max-width: 70px;
+  min-height: 82px;
+}
+.skjaald.sheet.actor .ability-scores [data-ability="int"] {
+  background-image: url('./ui/attributes/lightEmpty/Intelligence.png');
+  background-size: cover;
+  max-width: 70px;
+  min-height: 82px;
+}
+.skjaald.sheet.actor .ability-scores [data-ability="wis"] {
+  background-image: url('./ui/attributes/lightEmpty/Wisdom.png');
+  background-size: cover;
+  max-width: 70px;
+  min-height: 82px;
+}
+.skjaald.sheet.actor .ability-scores [data-ability="cha"] {
+  background-image: url('./ui/attributes/lightEmpty/Charisma.png');
+  background-size: cover;
+  max-width: 70px;
+  min-height: 82px;
+}
+.skjaald.sheet.actor .proficiency-toggle {
+  color: #b5b3a4;
+  font-size: 12px;
+  flex: 0 0 16px;
+}
+.skjaald.sheet.actor .proficient .proficiency-toggle {
+  color: #4b4a44;
+}
+.skjaald.sheet.actor .locked .proficiency-toggle {
+  color: #b5b3a4;
+  text-shadow: none;
+  cursor: default;
+}
+.skjaald.sheet.actor .ability-save {
+  flex: 0 0 20px;
+}
+.skjaald.sheet.actor .column2 {
+  flex: 0 0 210px;
+  padding-left: 0px;
+}
+.skjaald.sheet.actor .saves-list {
+  grid-area: save;
+  flex: 0 0 180px;
+  height: 120px;
+  list-style: none;
+  margin: 0 5px 5px;
+  padding: 2px 10px 2px;
+  background-image: url('./ui/frames/saves.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.skjaald.sheet.actor .saves-list li.skill {
+  height: 18px;
+  padding: 3px 2px;
+}
+.skjaald.sheet.actor .saves-list li.skill:nth-child(even) {
+  background: rgba(0, 0, 0, 0.05);
+}
+.skjaald.sheet.actor .saves-list li.skill h4 {
+  flex: 1px;
+  margin: 0;
+  font-size: 11px;
+  line-height: 18px;
+}
+.skjaald.sheet.actor .saves-list li.skill .skill-proficiency {
+  flex: 0 0 16px;
+  line-height: 18px;
+}
+.skjaald.sheet.actor .saves-list li.skill .skill-ability {
+  flex: 0 0 26px;
+  text-transform: capitalize;
+  width: 50px;
+}
+.skjaald.sheet.actor .saves-list li.skill .skill-mod {
+  flex: 0 0 20px;
+}
+.skjaald.sheet.actor .saves-list li.skill .skill-passive {
+  flex: 0 0 26px;
+  text-align: center;
+  color: #7a7971;
+}
+.skjaald.sheet.actor .skills-list {
+  grid-area: skill;
+  flex: 0 0 180px;
+  height: 335px;
+  list-style: none;
+  margin: 3px 3px 0;
+  padding: 3px 10px 2px;
+  background-image: url('./ui/frames/tallBoxEmpty.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.skjaald.sheet.actor .skills-list li.skill {
+  height: 18px;
+  padding: 3px 2px;
+}
+.skjaald.sheet.actor .skills-list li.skill:nth-child(even) {
+  background: rgba(0, 0, 0, 0.05);
+}
+.skjaald.sheet.actor .skills-list li.skill h4 {
+  flex: 1px;
+  margin: 0;
+  font-size: 11px;
+  line-height: 18px;
+}
+.skjaald.sheet.actor .skills-list li.skill .skill-proficiency {
+  flex: 0 0 16px;
+  line-height: 18px;
+}
+.skjaald.sheet.actor .skills-list li.skill .skill-ability {
+  flex: 0 0 26px;
+  text-transform: capitalize;
+}
+.skjaald.sheet.actor .skills-list li.skill .skill-ability select {
+  width: 28px;
+  Border: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: '';
+}
+.skjaald.sheet.actor .skills-list li.skill .skill-mod {
+  flex: 0 0 20px;
+}
+.skjaald.sheet.actor .skills-list li.skill .skill-passive {
+  flex: 0 0 26px;
+  text-align: center;
+  color: #7a7971;
+}
+.skjaald.sheet.actor .skill-name-controls {
+  flex: 0 0 10px;
+  width: 5 px;
+}
+.skjaald.sheet.actor .tools-otherskills {
+  grid-area: tools;
+  display: flex;
+  flex-direction: column;
+}
+.skjaald.sheet.actor .combat-effects {
+  grid-area: tools;
+  display: flex;
+  flex-direction: column;
+}
+.skjaald.sheet.actor .prof-languages {
+  grid-area: language;
+}
+.initiative {
+  grid-area: initiative;
+}
+.actions {
+  grid-area: actions;
+}
+.skjaald.sheet.actor .armor {
+  grid-area: ac;
+  display: block;
+  min-height: 65px;
+  position: relative;
+  font-size: 13px;
+}
+.skjaald.sheet.actor .ac {
+  margin-top: 5px;
+}
+.skjaald.sheet.actor .ac input {
+  width: 36px;
+  height: 21px;
+  text-align: center;
+}
+.skjaald.sheet.actor .ac-header {
+  margin-top: 5px;
+}
+.skjaald.sheet.actor .denialpoints {
+  grid-area: dp;
+}
+.skjaald.sheet.actor .dp input {
+  width: 36px;
+  height: 23px;
+  text-align: center;
+}
+.skjaald.sheet.actor .speed {
+  grid-area: speed;
+  display: flex;
+  min-height: 65px;
+  position: relative;
+  font-size: 13px;
+}
+.skjaald.sheet.actor .speed-input {
+  margin-top: 6px;
+}
+.skjaald.sheet.actor .speed input {
+  text-align: center;
+}
+.skjaald.sheet.actor .speed-header {
+  margin-top: 3px;
+}
+.skjaald.sheet.actor .fate {
+  grid-area: fate;
+  box-sizing: border-box;
+  flex: auto;
+  flex-direction: row;
+}
+.skjaald.sheet.actor .fate .container-box-body,
+.skjaald.sheet.actor .legend .container-box-body,
+.skjaald.sheet.actor .inspiration .container-box-body {
+  padding-top: 2px;
+}
+.skjaald.sheet.actor .fate .attribute-name,
+.skjaald.sheet.actor .legend .attribute-name,
+.skjaald.sheet.actor .inspiration .attribute-name {
+  margin-bottom: auto;
+  width: 93px;
+}
+.skjaald.sheet.actor .fate .container-box-header,
+.skjaald.sheet.actor .legend .container-box-header,
+.skjaald.sheet.actor .inspiration .container-box-header {
+  justify-content: left;
+  margin-left: 5px;
+  margin-top: 2px;
+}
+.legend .proficiency-toggle,
+.fate .proficiency-toggle,
+.inspiration .proficiency-toggle {
+  margin-top: 4px;
+  margin-right: 2px;
+}
+.skjaald.sheet.actor .legend {
+  grid-area: legend;
+  box-sizing: border-box;
+  flex: auto;
+  flex-direction: row;
+}
+.skjaald.sheet.actor .inspiration {
+  grid-area: inspire;
+  box-sizing: border-box;
+  flex: auto;
+  flex-direction: row;
+}
+.skjaald.sheet.actor .exhaustion {
+  grid-area: exhaust;
+}
+.skjaald.sheet.actor .exhaustion .textbox {
+  width: 36px;
+  padding-top: 6px;
+  font-size: 25px;
+  padding-right: 0px;
+}
+.skjaald.sheet.actor .exhaustion input {
+  text-align: center;
+}
+.skjaald.sheet.actor .exhaustion .sheet-container-footer {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 5px;
+}
+.skjaald.sheet.actor .exhaustion .sheet-container-body {
+  height: 33px;
+}
+.skjaald.sheet.actor .exhaustion .sheet-container-body,
+.skjaald.sheet.actor .exhaustion .sheet-container-footer {
+  display: flex;
+  flex-direction: row;
+}
+.skjaald.sheet.actor .maxhp {
+  grid-area: maxhp;
+}
+.skjaald.sheet.actor .hp {
+  grid-area: hp;
+}
+.skjaald.sheet.actor .hit-dice {
+  grid-area: hit;
+}
+.skjaald.sheet.actor .death-saves {
+  grid-area: death;
+}
+.skjaald.sheet.actor .exhaustEffects {
+  grid-area: Ex-effects;
+}
+
+.noncombat-list {
+  width: 222px;
+}
+
+ .sheet-pc-exhaustion-details label {
+  cursor: pointer;
+  margin: 0; }
+ .sheet-pc-exhaustion-details ul {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+ .sheet-pc-exhaustion-details .sheet-pc-exhaustion-dot {
+  background: white;
+  border-radius: 100%;
+  border: 1px solid #272727;
+  display: inline-block;
+  height: 8px;
+  margin-right: 4px;
+  position: relative;
+  width: 8px; }
+ .sheet-pc-exhaustion-details li + li {
+  margin-top: 2px; }
+ .sheet-pc-exhaustion-details li [type=checkbox] {
+  display: none; }
+ .sheet-pc-exhaustion-details li span {
+  border-radius: 4px;
+  display: flex;
+  font-size: 11px;
+  line-height: 8px;
+  padding: 2px 3px; }
+   .sheet-pc-exhaustion-details li span strong {
+    margin-right: 3px; }
+ .sheet-pc-exhaustion-details .sheet-radio span:hover {
+  position: relative; }
+   .sheet-pc-exhaustion-details .sheet-radio span:hover::before {
+    content: '';
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #e5fffb;
+    z-index: -1; }
+ .sheet-pc-exhaustion-details li input[type=checkbox]:checked + span {
+  position: relative; }
+   .sheet-pc-exhaustion-details li input[type=checkbox]:checked + span::after {
+    background: #b4cf01;
+    border-radius: 5px;
+    bottom: 0;
+    content: '';
+    height: 26px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    z-index: -1; }
+   .sheet-pc-exhaustion-details li input[type=checkbox]:checked + span .sheet-pc-exhaustion-dot {
+    background: #8c8c8c; }
+ .sheet-pc-exhaustion-details li:nth-of-type(1) input[type=checkbox]:checked + span::after {
+  display: none; }
+ .sheet-pc-exhaustion-details li:not(:nth-of-type(1)) input[type=checkbox]:checked + span {
+  color: rgb(0, 0, 0); }
+ .sheet-pc-exhaustion-details li:nth-of-type(2) input[type=checkbox]:checked + span::after {
+  background: #b4cf01;
+  height: 12px; }
+ .sheet-pc-exhaustion-details li:nth-of-type(3) input[type=checkbox]:checked + span::after {
+  background: #b4cf01;
+  height: 35px; }
+ .sheet-pc-exhaustion-details li:nth-of-type(4) input[type=checkbox]:checked + span::after {
+  background: #cfb401;
+  height: 53px; }
+ .sheet-pc-exhaustion-details li:nth-of-type(5) input[type=checkbox]:checked + span::after {
+  background: #cf7d01;
+  height: 66px; }
+ .sheet-pc-exhaustion-details li:nth-of-type(6) input[type=checkbox]:checked + span::after {
+  background: #cf4601;
+  height: 85px; }
+ .sheet-pc-exhaustion-details li:nth-of-type(7) input[type=checkbox]:checked + span::after {
+  background: #cf0101;
+  height: 102px; }
+.skjaald.sheet.actor .well-conditions {
+  grid-area: well-conditions;
+  flex-direction: column;
+}
+.skjaald.sheet.actor .well-conditions .container-box-header{
+  display: grid;
+  grid-column-gap: 5px;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-bottom: 2px solid #202020;
+}
+
+.well-conditions .sheet-container-body{
+  display: grid;
+  grid-column-gap: 5px;
+  grid-template-columns: repeat(4, 1fr);
+  height: 100%;
+}
+
+ .sheet-list-conditions {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+.sheet-list-conditions .sheet-radio {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  line-height: 14px;
+  text-align: center; }
+.sheet-list-conditions .sheet-radio span {
+  border-radius: 4px;
+  flex-grow: 1;
+  font-size: 11px; }
+.sheet-list-conditions .sheet-radio span:hover {
+  background: #e5fffb; }
+.sheet-list-conditions .sheet-radio input {
+  display: none; }
+.sheet-list-conditions .sheet-radio input[type=checkbox]:checked + span {
+  background: #cf0101;
+  color: white; }
+.sheet-list-conditions li:nth-of-type(1) input[type=checkbox]:checked + span {
+  background: #46cf01; }
+.sheet-list-conditions li:nth-of-type(2) input[type=checkbox]:checked + span {
+  background: #7dcf01; }
+.sheet-list-conditions li:nth-of-type(3) input[type=checkbox]:checked + span {
+  background: #b4cf01; }
+.sheet-list-conditions li:nth-of-type(4) input[type=checkbox]:checked + span {
+  background: #cfb401; }
+.sheet-list-conditions li:nth-of-type(5) input[type=checkbox]:checked + span {
+  background: #cf7d01; }
+.sheet-list-conditions li:nth-of-type(6) input[type=checkbox]:checked + span {
+  background: #cf4601; }
+
+
+.skjaald.sheet.actor .health-conditions {
+  grid-area: health-conditions;
+}
+.skjaald.sheet.actor .resource1 {
+  grid-area: resource1;
+}
+.skjaald.sheet.actor .resource2 {
+  grid-area: resource2;
+}
+.skjaald.sheet.actor .resource3 {
+  grid-area: resource3;
+}
+.skjaald.sheet.actor .other-resources {
+  grid-area: other-resources;
+}
+.skjaald.sheet.actor .combatPage-Attacks{
+  flex-direction: column;
+  display: flex;
+  min-height: 65px;
+  position: relative;
+  z-index: 0;
+  min-width: 0;
+  overflow: hidden;
+}
+.skjaald.sheet .combat-attacks .attacks-list{
+  padding-top: 6px;
+  padding-left: 9px;
+  padding-right: 9px;
+}
+.skjaald.sheet.actor .non-combat-features {
+  grid-area: nonconfeatures;
+  margin-left: 5px;
+
+}
+.skjaald.sheet.actor .non-combat-features .container-box-body{
+  min-height: 385px;
+  margin-top: 0px;
+  
+}
+.skjaald.sheet.actor .combat-resources .container-box-body{
+  min-height: 155px;
+  margin-top: 0px;
+  
+}
+.skjaald.sheet.actor .cast-ability {
+  grid-area: castAbility;
+}
+.skjaald.sheet.actor .spell-save-dc {
+  grid-area: spellSaveDC;
+}
+.skjaald.sheet.actor .spell-attack-bonus {
+  grid-area: spellAttackBonus;
+}
+.skjaald.sheet.actor .spell-burnout {
+  grid-area: spellBurnout;
+}
+.skjaald.sheet.actor .spell-memorized {
+  grid-area: spellMemorized;
+}
+.skjaald.sheet.actor .free-cantrips {
+  grid-area: freeCantrips;
+}
+.skjaald.sheet.actor .combatPage-Attacks {
+  grid-area: attacks;
+}
+.skjaald.sheet.actor .combatPage-Combat-Features {
+  grid-area: comFeatures;
+}
+.skjaald.sheet.actor .bio-top {
+  flex: 0 0 180px;
+  height: 120px;
+  list-style: none;
+  margin: 0 5px 5px;
+  padding: 2px 10px 2px;
+  background-image: url('./ui/frames/bio-top.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.skjaald.sheet.actor .bio-well-details {
+  grid-area: details;
+  padding-left: 8px;
+  padding-top: 3px;
+}
+.skjaald.sheet.actor .bio-personality {
+  grid-area: personality;
+  padding-left: 8px;
+  padding-top: 3px;
+  min-height: 115px;
+}
+
+.skjaald.sheet.actor .bio-ideals {
+  grid-area: ideals;
+  padding-left: 8px;
+  padding-top: 3px;
+  min-height: 115px;
+
+}
+.skjaald.sheet.actor .bio-bonds {
+  grid-area: bonds;
+  padding-left: 8px;
+  padding-top: 3px;
+  min-height: 115px;
+
+}
+.skjaald.sheet.actor .bio-flaws {
+  grid-area: flaws;
+  padding-left: 8px;
+  padding-top: 3px;
+  min-height: 115px;
+
+}
+.skjaald.sheet.actor .bio-phy-features {
+  grid-area: physical;
+  padding-left: 8px;
+  padding-top: 3px;
+  min-height: 115px;
+
+}
+.skjaald.sheet.actor .bio-habits {
+  grid-area: habits;
+  padding-left: 8px;
+  padding-top: 3px;
+  min-height: 115px;
+
+}
+.skjaald.sheet.actor .bio-family {
+  grid-area: family;
+  padding-left: 8px;
+  padding-top: 3px;
+  min-height: 115px;
+
+}
+.skjaald.sheet.actor .bio-quest {
+  grid-area: quest;
+  padding-left: 8px;
+  padding-top: 3px;
+  min-height: 115px;
+
+}
+.skjaald.sheet.actor .bio-secrets {
+  grid-area: secrets;
+  padding-left: 8px;
+  padding-top: 3px;
+  min-height: 115px;
+
+}
+.skjaald.sheet.actor .bio-events {
+  grid-area: events;
+  width: 100%;
+}
+.skjaald.sheet.actor .counters {
+  flex: none;
+  padding: 5px 0;
+  margin: 0;
+  border-bottom: 2px groove #eeede0;
+}
+.skjaald.sheet.actor .counters .counter {
+  height: 20px;
+  line-height: 20px;
+}
+.skjaald.sheet.actor .counters .counter h4 {
+  flex: auto;
+  margin: 0;
+  font-size: 13px;
+  font-weight: bold;
+  color: #4b4a44;
+}
+.skjaald.sheet.actor .counters .counter .counter-value {
+  flex: none;
+  text-align: right;
+}
+.skjaald.sheet.actor .counters .counter .counter-value > * {
+  display: inline;
+}
+.skjaald.sheet.actor .counters .counter input[type="text"],
+.skjaald.sheet.actor .counters .counter input[type="number"] {
+  height: 20px;
+  max-width: 20px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+.skjaald.sheet.actor .counters .counter input[type="checkbox"] {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  top: 4px;
+}
+.skjaald.sheet.actor .counters .counter span.sep {
+  font-size: 12px;
+}
+.skjaald.sheet.actor .center-pane {
+  height: 100%;
+  padding: 0 5px 0 3px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+.skjaald.sheet.actor .traits .form-group,
+.skjaald.sheet.actor .traits .form-group-stacked {
+  margin: 0 0 3px 0;
+  justify-content: space-between;
+}
+.skjaald.sheet.actor .traits .config-button {
+  flex: 1;
+}
+.skjaald.sheet.actor .traits label {
+  flex: none;
+  line-height: 20px;
+  font-weight: bold;
+  margin: 0 10px 0 0;
+}
+.skjaald.sheet.actor .traits select {
+  max-width: 200px;
+}
+.skjaald.sheet.actor .traits input {
+  text-align: right;
+}
+.skjaald.sheet.actor .traits i.fas,
+.skjaald.sheet.actor .ideal i.fas,
+.skjaald.sheet.actor .bond i.fas,
+.skjaald.sheet.actor .flaw i.fas,
+.skjaald.sheet.actor .appearance i.fas,
+.skjaald.sheet.actor .habits i.fas,
+.skjaald.sheet.actor .family i.fas,
+.skjaald.sheet.actor .quest i.fas,
+.skjaald.sheet.actor .secrets i.fas {
+  float: right;
+  margin-right: 8px;
+  text-align: right;
+  color: #999;
+}
+.skjaald.sheet.actor .traits i.fas:hover {
+  color: #111;
+  text-shadow: 0 0 10px red;
+}
+.skjaald.sheet.actor .traits .inactive {
+  color: #7a7971;
+}
+.skjaald.sheet.actor .tab.features,
+.skjaald.sheet.actor .tab.inventory,
+.skjaald.sheet.actor .tab.spellbook {
+  overflow-y: hidden;
+}
+.skjaald.sheet.actor .inventory-filters {
+  margin: 0 8px;
+  flex: 0 0 20px;
+  justify-content: flex-end;
+}
+.skjaald.sheet.actor .inventory-filters .currency {
+  flex: 0 0 100%;
+  list-style: none;
+  margin: 4px 0 8px;
+  padding: 0;
+  font-size: 12px;
+}
+.skjaald.sheet.actor .inventory-filters .currency label {
+  flex: 0;
+  margin-left: 8px;
+  text-align: right;
+  line-height: 20px;
+  color: #7a7971;
+}
+.skjaald.sheet.actor .inventory-filters .currency input[type="text"] {
+  flex: 0 0 48px;
+  text-align: center;
+  margin-left: 8px;
+  border-bottom: 2px groove #eeede0;
+}
+.skjaald.sheet.actor .inventory-list {
+  padding: 0 5px;
+}
+.skjaald.sheet.actor .inventory-list .item .item-name {
+  cursor: pointer;
+}
+.skjaald.sheet.actor .inventory-list .item .item-name.rollable:hover .item-image {
+  background-image: url("../../icons/svg/d20-grey.svg") !important;
+}
+.skjaald.sheet.actor .inventory-list .item .item-name.rollable:hover .item-image-no-roll {
+  background-image: url("../../icons/svg/d20-grey.svg") !important;
+}
+.skjaald.sheet.actor .inventory-list .item .item-name.rollable .item-image:hover {
+  background-image: url("../../icons/svg/d20-black.svg") !important;
+}
+.skjaald.sheet.actor .inventory-list .item .item-name.rollable .item-image-no-roll:hover {
+  background-image: url("../../icons/svg/d20-black.svg") !important;
+}
+.skjaald.sheet.actor .inventory-list .item .item-name i.attuned {
+  color: #7a7971;
+}
+.skjaald.sheet.actor .inventory-list .item .item-name i.not-attuned {
+  color: #44191A;
+}
+.skjaald.sheet.actor .inventory-list .item .item-uses input {
+  width: 15px;
+  text-align: center;
+}
+.skjaald.sheet.actor .inventory-list .item .item-properties {
+  margin-top: 3px;
+}
+.skjaald.sheet.actor .inventory-list .item .item-recharge {
+  flex: 0 0 80px;
+  text-align: right;
+  font-size: 11px;
+  white-space: nowrap;
+}
+.skjaald.sheet.actor .inventory-list .inventory-header .item-controls a.item-create {
+  flex: 0 0 100%;
+}
+.skjaald.sheet.actor .inventory-list .item-detail {
+  flex: 0 0 40px;
+  font-size: 12px;
+  text-align: center;
+  word-break: break-word;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.skjaald.sheet.actor .inventory-list .item-detail:last-child {
+  border-right: none;
+}
+.skjaald.sheet.actor .inventory-list .item-detail.item-action {
+  flex: 0 0 100px;
+}
+.skjaald.sheet.actor .inventory-list .item-detail.attunement {
+  flex: 0 0 24px;
+}
+.skjaald.sheet.actor .inventory-list .item-weight {
+  flex: 0 0 60px;
+  border-left: 1px solid #c9c7b8;
+  border-right: 1px solid #c9c7b8;
+}
+.skjaald.sheet.actor .inventory-list .item-controls {
+  flex: 0 0 44px;
+}
+.skjaald.sheet.actor .inventory-list .item-summary {
+  flex: 0 0 100%;
+  font-size: 12px;
+  line-height: 16px;
+  padding: 0.25em 0.5em;
+  color: #191813;
+  border-top: 1px solid #c9c7b8;
+}
+.skjaald.sheet.actor .encumbrance {
+  flex: 0 0 12px;
+  background: #7a7971;
+  margin: 1px 15px 0 1px;
+  border: 1px solid #191813;
+  border-radius: 3px;
+  position: relative;
+}
+.skjaald.sheet.actor .encumbrance .encumbrance-bar {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  background: #6c8aa5;
+  height: 8px;
+  border: 1px solid #cde4ff;
+  border-radius: 2px;
+}
+.skjaald.sheet.actor .encumbrance .encumbrance-label {
+  height: 10px;
+  padding: 0 5px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 13px;
+  line-height: 12px;
+  text-align: right;
+  color: #EEE;
+  text-shadow: 0 0 5px #000;
+}
+.skjaald.sheet.actor .encumbrance .encumbrance-breakpoint {
+  display: block;
+  position: absolute;
+}
+.skjaald.sheet.actor .encumbrance .encumbrance-breakpoint.encumbrance-33 {
+  left: 33%;
+}
+.skjaald.sheet.actor .encumbrance .encumbrance-breakpoint.encumbrance-66 {
+  left: 66%;
+}
+.skjaald.sheet.actor .encumbrance .arrow-up {
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 4px solid #666;
+}
+.skjaald.sheet.actor .encumbrance .arrow-down {
+  top: 0;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid #666;
+}
+.skjaald.sheet.actor .encumbrance.encumbered .arrow-up {
+  border-bottom: 4px solid #000;
+}
+.skjaald.sheet.actor .encumbrance.encumbered .arrow-down {
+  border-top: 4px solid #000;
+}
+.skjaald.sheet.actor .spellcasting-ability {
+  flex: 0 0 240px;
+  margin: 0;
+}
+.skjaald.sheet.actor .spellcasting-ability label,
+.skjaald.sheet.actor .spellcasting-ability span {
+  flex: none;
+}
+.skjaald.sheet.actor .spellcasting-ability input {
+  flex: 0 0 28px;
+  text-align: center;
+}
+.skjaald.sheet.actor .spellcasting-ability select {
+  margin: 0 5px;
+  flex: 0 0 120px;
+}
+.skjaald.sheet.actor .spell-slots,
+.skjaald.sheet.actor .spell-comps {
+  flex: none;
+  padding: 0 5px;
+  font-size: 12px;
+  color: #7a7971;
+  border-right: 1px solid #c9c7b8;
+}
+.skjaald.sheet.actor .spell-slots input {
+  display: inline;
+  max-width: 20px;
+}
+.skjaald.sheet.actor .spell-slots .sep {
+  font-size: 13px;
+  font-weight: normal;
+}
+.skjaald.sheet.actor .spellbook .spell-uses {
+  padding-right: 5px;
+  text-align: right;
+  color: #7a7971;
+}
+.skjaald.sheet.actor .spell-school{
+  flex: 0 0 63px;
+  font-size: 12px;
+  color: #7a7971;
+  text-align: center;
+  border-right: 1px solid #c9c7b8;
+}
+
+.skjaald.sheet.actor .spell-action,
+.skjaald.sheet.actor .spell-target {
+  flex: 0 0 46px;
+  font-size: 12px;
+  color: #7a7971;
+  text-align: center;
+  border-right: 1px solid #c9c7b8;
+}
+.skjaald.sheet.actor .spell-component {
+  line-height: 14px;
+}
+.skjaald.sheet.actor .spell-component.C,
+.skjaald.sheet.actor .spell-component.R {
+  display: inline-block;
+  text-align: center;
+  padding-top: 1px;
+  width: 16px;
+  color: #c9c7b8;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid transparent;
+  border-radius: 8px;
+}
+.skjaald.sheet.actor .spellbook-empty .item-controls {
+  flex: 1;
+}
+.skjaald.sheet.actor .features i.original-class {
+  color: #4b4a44;
+}
+.skjaald.sheet.actor .editor {
+  padding: 0 8px;
+}
+#actor-flags .window-content {
+  overflow-y: hidden;
+}
+#actor-flags form {
+  height: 100%;
+}
+#actor-flags .form-body {
+  height: calc(100% - 40px);
+  padding-right: 8px;
+  margin-bottom: 4px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+/* ----------------------------------------- */
+/*  Notes Tab                                */
+/* ----------------------------------------- */
+.notes-people {
+  grid-area: people;
+}
+.notes-additional {
+  grid-area: notes;
+}
+.notes-backstory {
+  grid-area: backstory;
+}
+/* ----------------------------------------- */
+/*  Equipment Tab                            */
+/* ----------------------------------------- */
+.equipment-holdings {
+  grid-area: holdings;
+}
+
+.skjaald.sheet.actor .sidebar .container-panel2{
+  flex-direction: row;
+}
+.equipment-money .copper{
+  grid-area: copper;
+  height:30px;
+}
+.equipment-money .silver{
+  grid-area: silver;
+}
+.equipment-money .gold{
+  grid-area: gold;
+}
+.equipment-money .platinum{
+  grid-area: platinum;
+}
+.equipment-money .marks{
+  grid-area: marks;
+}
+.equipment-money .other{
+  grid-area: other;
+}
+.equipment-weight {
+  grid-area: heavy;
+}
+.equipment-other {
+  grid-area: other;
+}
+.skjaald.sheet.item {
+  min-height: 400px;
+  max-height: 95%;
+  min-width: 480px;
+  /* ----------------------------------------- */
+  /*  Sheet Header                             */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Item Details Form                        */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Item Actions                             */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Item Actions                             */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Loot Sheet (No Tabs)                     */
+  /* ----------------------------------------- */
+}
+.skjaald.sheet.item .sheet-header img.profile {
+  border: 2px solid #000;
+}
+.skjaald.sheet.item .sheet-header .item-subtitle {
+  flex: 0 0 100px;
+  height: 60px;
+  margin: 0;
+  padding: 5px;
+  text-align: right;
+  color: #7a7971;
+}
+.skjaald.sheet.item .sheet-header .item-subtitle .item-type {
+  font-size: 24px;
+  line-height: 26px;
+  margin: 0;
+}
+.skjaald.sheet.item .sheet-header .item-subtitle .item-status {
+  font-size: 16px;
+  line-height: 24px;
+}
+.skjaald.sheet.item .sheet-navigation {
+  margin-bottom: 5px;
+}
+.skjaald.sheet.item .sheet-navigation .item {
+  font-size: 18px;
+}
+.skjaald.sheet.item .sheet-body {
+  overflow: hidden;
+}
+.skjaald.sheet.item .sheet-body .tab {
+  padding: 0 5px;
+  overflow: hidden auto;
+}
+.skjaald.sheet.item .sheet-body .item-properties {
+  flex: 0 0 120px;
+  margin: 5px 5px 5px 0;
+  padding-right: 5px;
+  border-right: 2px groove #eeede0;
+}
+.skjaald.sheet.item .sheet-body .item-properties .form-group {
+  margin: 0;
+}
+.skjaald.sheet.item .sheet-body .item-properties .form-group label {
+  line-height: 20px;
+}
+.skjaald.sheet.item .sheet-body .item-properties .form-group input {
+  text-align: right;
+}
+.skjaald.sheet.item .sheet-body .item-properties .properties-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.skjaald.sheet.item .sheet-body .item-properties .properties-list li {
+  margin: 3px 0;
+  padding: 0 2px;
+  background: rgba(0, 0, 0, 0.05);
+  border: 2px groove #eeede0;
+  text-align: center;
+  font-size: 12px;
+  line-height: 18px;
+}
+.skjaald.sheet.item .details input[type="text"],
+.skjaald.sheet.item .details input[type="number"],
+.skjaald.sheet.item .details select {
+  height: 24px;
+  border: 1px solid #7a7971;
+  background: rgba(0, 0, 0, 0.05);
+}
+.skjaald.sheet.item .details .form-group span {
+  text-align: center;
+  line-height: 24px;
+}
+.skjaald.sheet.item .details .form-group.input-select select {
+  flex: 1.8;
+}
+.skjaald.sheet.item .details .form-group.input-select-select select {
+  flex: 1.5;
+}
+.skjaald.sheet.item .details .form-group.uses-per .form-fields {
+  flex-wrap: nowrap;
+}
+.skjaald.sheet.item .details .form-group.uses-per input {
+  flex: 0 0 32px;
+}
+.skjaald.sheet.item .details .form-group.uses-per span {
+  flex: 0 0 16px;
+  margin: 0 4px 0 0;
+}
+.skjaald.sheet.item .details span.sep {
+  flex: 0 0 8px;
+}
+.skjaald.sheet.item .details .prepared {
+  flex: 1.3 !important;
+  text-align: right;
+  padding-right: 10px;
+}
+.skjaald.sheet.item .details .spell-materials {
+  flex: 0 0 100%;
+  margin: 0.25em 0;
+  justify-content: flex-end;
+}
+.skjaald.sheet.item .details .spell-materials label {
+  flex: 0 0 64px;
+  text-align: right;
+  margin-right: 5px;
+  font-size: 12px;
+  line-height: 24px;
+}
+.skjaald.sheet.item .details .spell-materials input[type="text"] {
+  flex: 0 0 48px;
+  margin-right: 10px;
+}
+.skjaald.sheet.item h4.damage-header {
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  line-height: 24px;
+  color: #4b4a44;
+}
+.skjaald.sheet.item .damage-parts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.skjaald.sheet.item .damage-parts .damage-part {
+  flex: 0 0 100%;
+  padding: 0;
+}
+.skjaald.sheet.item .damage-parts .damage-part input {
+  flex: 3;
+}
+.skjaald.sheet.item .damage-parts .damage-part select {
+  margin-left: 5px;
+  flex: 1;
+}
+.skjaald.sheet.item .damage-control {
+  width: 18px;
+  flex: 0 0 18px;
+  line-height: 24px;
+  float: right;
+  text-align: right;
+  color: #7a7971;
+}
+.skjaald.sheet.item .recharge.form-group span {
+  text-align: right;
+  padding-right: 3px;
+}
+.skjaald.sheet.item .recharge.form-group input[type="text"] {
+  flex: 0 0 32px;
+  text-align: center;
+}
+.skjaald.sheet.item .recharge.form-group label.checkbox {
+  flex: none;
+}
+.skjaald.sheet.item .recharge.form-group label.checkbox input {
+  width: 16px;
+  height: 16px;
+  top: 4px;
+}
+.skjaald.sheet.item .weapon-properties label.checkbox {
+  flex: 0 0 98px;
+}
+.skjaald.sheet.item .loot-header {
+  margin-bottom: 10px;
+}
+/* ----------------------------------------- */
+/*  Chat Cards
+/* ----------------------------------------- */
+.skjaald.chat-card {
+  font-style: normal;
+  font-size: 12px;
+}
+.skjaald.chat-card .card-header {
+  padding: 3px 0;
+  border-top: 2px groove #FFF;
+  border-bottom: 2px groove #FFF;
+}
+.skjaald.chat-card .card-header img {
+  flex: 0 0 36px;
+  margin-right: 5px;
+}
+.skjaald.chat-card .card-header h3 {
+  flex: 1;
+  margin: 0;
+  line-height: 36px;
+  font-family: "Modesto Condensed", "Palatino Linotype", serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #4b4a44;
+}
+.skjaald.chat-card .card-header h3:hover {
+  color: #111;
+  text-shadow: 0 0 10px red;
+}
+.skjaald.chat-card .card-content {
+  margin: 5px 0;
+}
+.skjaald.chat-card .card-content h3 {
+  font-size: 12px;
+  margin: 0;
+  font-weight: bold;
+}
+.skjaald.chat-card .card-content > * {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+.skjaald.chat-card .card-buttons {
+  margin: 5px 0;
+}
+.skjaald.chat-card .card-buttons span {
+  display: block;
+  line-height: 28px;
+  text-align: center;
+  border: 1px solid #CCC;
+}
+.skjaald.chat-card .card-buttons button {
+  font-size: 12px;
+  height: 24px;
+  line-height: 20px;
+  margin: 2px 0;
+}
+.skjaald.chat-card .card-footer {
+  padding: 3px 0 0;
+  border-top: 2px groove #FFF;
+}
+.skjaald.chat-card .card-footer span {
+  border-right: 2px groove #FFF;
+  padding: 0 3px 0 0;
+  font-size: 10px;
+}
+.skjaald.chat-card .card-footer span:last-child {
+  border-right: none;
+  padding-right: 0;
+}
+.dice-roll .dice-total.success {
+  color: inherit;
+  background: #c7d0c0;
+  border: 1px solid #006c00;
+}
+.dice-roll .dice-total.failure {
+  color: inherit;
+  background: #ffdddd;
+  border: 1px solid #6e0000;
+}
+.dice-roll .dice-total.critical {
+  color: #C5B317;
+}
+.dice-roll .dice-total.fumble {
+  color: #7414C4;
+}
+/* ----------------------------------------- */
+/*  Basic Structure                          */
+/* ----------------------------------------- */
+.skjaald.sheet.actor.character {
+  min-width: 825px;
+  min-height: 680px;
+  max-width: 825px;
+  /* ----------------------------------------- */
+  /*  Sheet Header                             */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Sheet Body                               */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Item Controls                            */
+  /* ----------------------------------------- */
+}
+.skjaald.sheet.actor.character .sheet-header {
+  background-image: url('./ui/headerLight.png');
+  background-size: cover;
+  min-height: 140px;
+}
+.skjaald.sheet.actor.character .sheet-header img.profile {
+  flex: 0 0 250px;
+  max-width: 250px;
+  height: 130px;
+}
+.skjaald.sheet.actor.character .sheet-header .charlevel {
+  flex: 0 0 20px;
+  height: 20px;
+  font-size: 18px;
+  color: #7a7971;
+  white-space: nowrap;
+}
+.skjaald.sheet.actor.character .sheet-header .experience {
+  flex: 0 0 32px;
+  margin-bottom: -5px;
+  align-items: center;
+  font-size: 18px;
+}
+.skjaald.sheet.actor.character .sheet-header .experience span.max {
+  color: #7a7971;
+  flex: none;
+  margin-left: 3px;
+}
+.skjaald.sheet.actor.character .sheet-header .xpbar {
+  flex: 0 0 8px;
+  width: 100%;
+  margin-bottom: 5px;
+  background: #7a7971;
+  border: 1px solid #000;
+  border-radius: 3px;
+}
+.skjaald.sheet.actor.character .sheet-header .xpbar .bar {
+  height: 4px;
+  margin: 1px;
+  display: block;
+  background: #afebff;
+  border: 1px solid #000;
+  border-radius: 2px;
+}
+.skjaald.sheet.actor.character .sheet-header .attributes a.rest {
+  border: 1px solid #b5b3a4;
+  border-radius: 2px;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 0 3px;
+  margin: 0 3px;
+}
+.skjaald.sheet.actor.character .sheet-header .attributes .hit-dice {
+  font-size: 24px;
+}
+.skjaald.sheet.actor.character .sheet-header .attributes .initiative .attribute-footer input {
+  width: 32px;
+}
+.skjaald.sheet.actor.character .sheet-header .summary .proficiency {
+  text-align: right;
+  padding-right: 5px;
+}
+.skjaald.sheet.actor.character .resource .attribute-value > input {
+  flex: 0 0 25%;
+}
+.skjaald.sheet.actor.character .resource .attribute-value label.recharge {
+  height: 32px;
+  position: relative;
+  font-family: "Signika", sans-serif;
+  font-size: 11px;
+  text-align: center;
+  color: #4b4a44;
+  align-items: center;
+}
+.skjaald.sheet.actor.character .resource .attribute-value label.recharge input[type="checkbox"] {
+  height: 14px;
+  width: 14px;
+  margin: 0;
+  top: -6px;
+}
+.skjaald.sheet.actor.character ul.skills-list {
+  flex: 0 0 212px;
+}
+.skjaald.sheet.actor.character ul.skills-list li.skill {
+  padding: 3px;
+}
+.skjaald.sheet.actor.character ul.skills-list li.skill h4 {
+  flex: 1px;
+  margin: 0;
+  font-size: 13px;
+}
+.skjaald.sheet.actor.character .item-detail.player-class {
+  flex: 0 0 90px;
+  text-align: right;
+  padding-right: 10px;
+}
+.skjaald.sheet.actor.character .inventory .item-controls,
+.skjaald.sheet.actor.character .spellbook .item-controls {
+  flex: 0 0 38px;
+}
+.skjaald.sheet.actor.character .inventory .item-controls .item-toggle,
+.skjaald.sheet.actor.character .spellbook .item-controls .item-toggle {
+  color: #b5b3a4;
+}
+.skjaald.sheet.actor.character .inventory .item-controls .item-toggle.active,
+.skjaald.sheet.actor.character .spellbook .item-controls .item-toggle.active {
+  color: #4b4a44;
+}
+.skjaald.sheet.actor.character .inventory .item-controls .item-toggle.fixed,
+.skjaald.sheet.actor.character .spellbook .item-controls .item-toggle.fixed {
+  color: #44191A;
+}
+.skjaald.sheet.actor.character .inventory .item-controls .item-toggle.fixed:hover,
+.skjaald.sheet.actor.character .spellbook .item-controls .item-toggle.fixed:hover {
+  text-shadow: none;
+}
+/* ----------------------------------------- */
+/*  Basic Structure                          */
+/* ----------------------------------------- */
+.skjaald.sheet.actor.npc {
+  min-width: 600px;
+  min-height: 680px;
+}
+.skjaald.sheet.actor.npc .header-exp {
+  flex: 0 0 80px;
+  justify-content: center;
+}
+.skjaald.sheet.actor.npc .header-exp .cr {
+  flex: 0 0 32px;
+  line-height: 28px;
+  margin-bottom: -5px;
+  font-size: 24px;
+}
+.skjaald.sheet.actor.npc .header-exp .cr input {
+  width: 32px;
+  padding: 0;
+  text-align: center;
+}
+.skjaald.sheet.actor.npc .header-exp .experience,
+.skjaald.sheet.actor.npc .header-exp .proficiency {
+  flex: 0 0 18px;
+  color: #7a7971;
+  font-size: 16px;
+}
+.skjaald.sheet.actor.npc .header-exp .proficiency {
+  margin-top: -0.3em;
+}
+.skjaald.sheet.actor.npc .summary {
+  font-size: 18px;
+}
+.skjaald.sheet.actor.npc .summary .creature-type {
+  display: flex;
+  justify-content: space-between;
+  width: 1em;
+  padding: 0 3px;
+}
+.skjaald.sheet.actor.npc .summary .creature-type span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.skjaald.sheet.actor.npc .summary .creature-type .config-button {
+  display: none;
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 2em;
+}
+.skjaald.sheet.actor.npc .summary .creature-type:hover .config-button {
+  display: block;
+}
+.skjaald.sheet.actor.vehicle {
+  min-width: 720px;
+  min-height: 680px;
+}
+.skjaald.sheet.actor.vehicle .features .item-controls {
+  flex: 0 0 68px;
+}
+.skjaald.sheet.actor.vehicle .features .item-controls .item-toggle {
+  color: #b5b3a4;
+}
+.skjaald.sheet.actor.vehicle .features .item-controls .item-toggle.active {
+  color: #4b4a44;
+}
+.skjaald.sheet.actor.vehicle .counters .counter.creature-cap .counter-value {
+  flex: 1;
+}
+.skjaald.sheet.actor.vehicle .counters .counter.creature-cap input {
+  max-width: none;
+  text-align: right;
+}
+.skjaald.sheet.actor.vehicle .counters .counter.cargo-cap input {
+  max-width: 40px;
+  text-align: right;
+}
+.armorDude{
+  min-height: 625px;
+  background-image: url('./ui/icons/armorDude.png');
+  background-repeat: no-repeat;
+  background-position: 43% 50%;
+}
+.armorDude .head{
+  position: absolute;
+  top: 42px;
+  left: 376px;
+}
+.armorDude .head-drop{
+  position: absolute;
+  top: 41px;
+  left: 409px;
+}
+.armorDude .neck{
+  position: absolute;
+  top: 85px;
+  left: 181px;
+}
+.armorDude .neck-drop{
+  position:absolute;
+  top: 86px;
+  left: 76px;
+}
+.armorDude .shoulders-drop{
+  position: absolute;
+  top: 99px;
+  left: 485px;
+} 
+.armorDude .shoulders{
+  position:absolute;
+  top:96px;
+  left:422px;
+}
+.armorDude .torso{
+  position: absolute;
+  top: 136px;
+  left: 117px;
+}
+.armorDude .torso-drop{
+  position: absolute;
+  top: 137px;
+  left: 15px;
+}
+.armorDude .outer{
+  position: absolute;
+  top: 177px;
+  left: 449px;
+}
+.armorDude .outer-drop{
+  position: absolute;
+  top: 177px;
+  left: 488px;
+}
+.armorDude .inner{
+  position: absolute;
+  top: 200px;
+  left: 133px;
+}
+.armorDude .inner-drop{
+  position: absolute;
+  top: 199px;
+  left: 30px;
+}
+.armorDude .waist{
+  position: absolute;
+  top: 247px;
+  left: 122px;
+}
+.armorDude .waist-drop{
+  position: absolute;
+  top: 246px;
+  left: 19px;
+}
+.armorDude .arms{
+  position: absolute;
+  top: 238px;
+  left: 448px;
+}
+.armorDude .arms-drop{
+  position: absolute;
+  top: 237px;
+  left: 481px;
+}
+.armorDude .rings{
+  position: absolute;
+  top: 305px;
+  left: 89px;
+}
+.armorDude .ring1-drop{
+  position: absolute;
+  top:323px;
+  left:8px;
+}
+.armorDude .ring2-drop{
+  position: absolute;
+  top: 347px;
+  left: 8px;
+}
+.armorDude .ring3-drop{
+  position: absolute;
+  top: 323px;
+  left: 107px;
+}
+.armorDude .ring4-drop{
+  position: absolute;
+  top: 347px;
+  left: 107px;
+}
+.armorDude .hands{
+  position: absolute;
+  top: 304px;
+  left: 454px;
+}
+.armorDude .hands-drop{
+  position: absolute;
+  top: 305px;
+  left: 496px;
+}
+.armorDude .thighs{
+  position: absolute;
+  top: 382px;
+  left: 155px
+}
+.armorDude .thighs-drop{
+  position: absolute;
+  top: 382px;
+  left: 53px;
+}
+.armorDude .legs{
+  position: absolute;
+  top: 477px;
+  left: 394px;
+}
+.armorDude .legs-drop{
+  position: absolute;
+  top: 475px;
+  left: 458px;
+}
+.armorDude select{
+  width: 97px;
+}
+.spells .details .editor,
+.weapons .details .editor{
+  height: 25%;
+}
+
+.resources-grid .attribute-value input[type="text"]{
+  font-size: 15px;
+  width: 150%;
+  padding-right: 2px;
+  padding-left: 2px;
+}
+.skjaald.sheet.actor .resources-grid .attribute .attribute-value{
+  padding-bottom: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.proficiency .label{
+  padding-left: 25px;
+}
+.proficiency .number{
+  padding-left: 4px;
+}
+.proficiency .acted-label{
+  padding-left: 35px;
+}
+.skjaald.sheet.actor .bio-events .bioPage-memory-events .inventory-list{
+  width: 100%;
+  padding-top: 5px;
+  padding-left: 8px;
+  padding-right:8px;
+}
+.sheet-pc-details .sheet-container-body{
+  padding-top: 5px;
+}
+.sheet-pc-details .sheet-container-body .age-text{
+  width: 60px;
+  outline: 1px solid #111;
+}
+.sheet-pc-details .sheet-container-body .height-text{
+  width: 60px;
+  outline: 1px solid #111;
+
+}
+.sheet-pc-details .sheet-container-body .weight-text{
+  width: 60px;
+  outline: 1px solid #111;
+
+}
+
+.sheet-pc-details .title{
+  padding-bottom: 3px;
+}
+.sheet-pc-details .title .label{
+  padding-right: 5px;
+}
+.sheet-pc-details .sheet-container-body .title input{
+  width: 215px;
+}
+.sheet-pc-details .race{
+  padding-bottom: 3px;
+}
+.sheet-pc-details .race .label{
+  padding-right: 2px;
+}
+.sheet-pc-details .sheet-container-body .race input{
+  width: 215px;
+}
+
+.sheet-pc-details .eyes{
+  padding-bottom: 3px;
+}
+
+.sheet-pc-details .eyes .label{
+  padding-right: 4px;
+}
+.sheet-pc-details .sheet-container-body .eyes input{
+  width: 215px;
+}
+
+.sheet-pc-details .hair{
+  padding-bottom: 3px;
+}
+.sheet-pc-details .hair .label{
+  padding-right: 5px;
+}
+.sheet-pc-details .sheet-container-body .hair input{
+  width: 215px;
+}
+
+.sheet-pc-details .alignment{
+  padding-bottom: 3px;
+}
+.sheet-pc-details .alignment .label{
+  padding-right: 0px;
+}
+.sheet-pc-details .sheet-container-body .alignment select{
+  width: 186px;
+}
+
+.sheet-pc-details .honor-moral{
+  padding-bottom: 3px;
+}
+.sheet-pc-details .honor-moral .label{
+  padding-right: 2px;
+}
+.sheet-pc-details .sheet-container-body .honor-moral select{
+  width: 77px;
+}
+
+.sheet-pc-details .age{
+  padding-bottom: 3px;
+}
+.sheet-pc-details .age .label{
+  padding-right: 10px;
+}
+.sheet-pc-details .sheet-container-body .age input{
+  width: 103px;
+}
+
+.sheet-pc-details .build{
+  padding-bottom: 2px;
+}
+.sheet-pc-details .build .label{
+  padding-right: 3px;
+}
+.sheet-pc-details .sheet-container-body .build input{
+  width: 212px;
+}
+
+.sheet-pc-details .size{
+  padding-bottom: 3px;
+}
+.sheet-pc-details .size .label{
+  padding-right: 8px;
+}
+.sheet-pc-details .sheet-container-body .size select{
+  width: 213px;
+}
+
+.sheet-pc-details .height{
+  padding-bottom: 3px;
+}
+.sheet-pc-details .height .label{
+  padding-right: 7px;
+}
+.sheet-pc-details .sheet-container-body .height select{
+  width: 87px;
+}
+.sheet-pc-details .sheet-container-body .height input{
+  width: 108px;
+}
+
+.sheet-pc-details .weight{
+  padding-bottom: 3px;
+}
+.sheet-pc-details .weight .label{
+  padding-right: 5px;
+}
+.sheet-pc-details .sheet-container-body .weight select{
+  width: 87px;
+}
+
+.sheet-pc-details .sheet-container-body .weight input{
+  width: 108px;
+}
+.skjaald.sheet.actor .notes-people .inventory-list,
+.skjaald.sheet.actor .notes-additional .inventory-list{
+  width: 400px;
+  padding-top: 5px;
+  padding-left: 8px;
+  padding-right: 5px;
+}
+.skjaald.sheet.actor .notes-backstory .inventory-list{
+  width: 806px;
+  padding-top: 5px;
+  padding-left: 8px;
+  padding-right: 5px;
+}
+.skjaald.sheet.actor .death-saves .proficiency-toggle{
+  font-size: 18px;
+  padding-left: 1px;
+  padding-right: 1px;
+}
+.skjaald.sheet.actor .death-saves .attribute-value{
+  margin-top: 5px
+}
+.skjaald.sheet.actor .combat-container .actions{
+  padding-left: 8px;
+  padding-top: 3px;
+}
+.skjaald.sheet.actor .exhaustEffects{
+  padding-left: 8px;
+  padding-right: 5px;
+}
+
+.learning-hours .hours-input{
+  width: 50px;
+}
+
+/* status effect hud */
+#token-hud .status-effects {
+  grid-template-columns: repeat(8, 40px);
+  gap: 4px 8px;
+  width: auto;
+  top: -100px;
+  padding: 4px 8px;
+}
+
+#token-hud .status-effects .effect-control {
+  width: unset;
+  height: unset;
+}
+

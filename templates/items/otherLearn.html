@@ -1,0 +1,99 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    {{!-- Item Sheet Header --}}
+    <header class="sheet-header flexrow">
+        <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img"/>
+
+        <div class="header-details flexrow">
+            <h1 class="charname">
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'SKJAALD.ItemName' }}"/>
+            </h1>
+
+            <div class="item-subtitle">
+                <h4 class="item-type">{{itemType}}</h4>
+                <span class="item-status">{{itemStatus}}</span>
+            </div>
+
+            <ul class="summary flexrow">
+                <li>
+                    {{data.category}}
+                </li>
+                <li>
+                    <input type="text" name="data.requirements" value="{{data.requirements}}" placeholder="{{ localize 'SKJAALD.Requirements' }}"/>
+                </li>
+                <li>
+                    <input type="text" name="data.source" value="{{data.source}}" placeholder="{{ localize 'SKJAALD.Source' }}"/>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    {{!-- Item Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="description">{{ localize "SKJAALD.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "SKJAALD.Details" }}</a>
+    </nav>
+
+    {{!-- Item Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Description Tab --}}
+        {{> "systems/skjaald/templates/items/parts/item-description.html"}}
+
+        {{!-- Details Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+
+            <h3 class="form-header">{{ localize "SKJAALD.LearningDetails" }}</h3>
+
+                {{#if (or (eq race 'Gnome') (eq race 'gnome'))}}
+                <div class="form-group input-select">
+                    <label>{{ localize "SKJAALD.PerfectStudent" }}</label>
+                    <div class="form-fields">
+                        <label class="checkbox learning">
+                            <input type="checkbox" name="data.perfectstudent" {{checked data.perfectstudent}}/>
+                        </label>
+                        {{#if data.perfectstudent}}
+                        <input type="number" name="data.learning.perfectStudentUses" value="{{data.learning.perfectStudentUses}}" data-dtype="Number"/> /<input type="number" name="data.learning.perfectStudentTotal" value="{{data.learning.perfectStudentTotal}}" data-dtype="Number"/>
+                        {{/if}}
+                    </div>
+                </div>
+                {{/if}}
+
+            <div class="form-group category">
+                <label>{{ localize "SKJAALD.Category" }}</label>
+                <select name="data.category">
+                    {{#select data.category}}
+                    <option value="other"> {{localize "SKJAALD.Other"}}</option>
+                    <option value="Skill">{{localize "SKJAALD.Skill"}}</option>
+                    {{/select}}
+                </select>
+            </div>
+
+            
+            <div class="form-group ">
+                <label>{{ localize "SKJAALD.Level" }}</label>
+                <select name="data.learning.level">
+                    {{#select data.learning.level}}
+                    {{#each config.proficiencyLevels as |name lev|}}
+                    <option value="{{lev}}">{{name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+
+            <div class="form-group ">
+                <label>{{ localize "SKJAALD.ConseqBonus" }}</label>
+                <input type="number" name="data.learning.conseqBonus" value="{{data.learning.conseqBonus}}" data-dtype="Number"/>
+            </div>
+
+            <div class="form-group ">
+                <label>{{ localize "SKJAALD.LearningHours" }}</label>
+                <input type="hidden" name="data.learning.hoursNeeded" value="{{data.learning.hoursNeeded}}" data-dtype="Number"/>
+                <input class="hours-input" type="number" name="data.learning.hours" value="{{data.learning.hours}}"/> / <input class="hours-input" type="number" name="data.learning.hoursTotal" value="{{data.learning.hoursTotal}}"/>
+
+            </div>
+
+            
+ 
+    </section>
+</form>

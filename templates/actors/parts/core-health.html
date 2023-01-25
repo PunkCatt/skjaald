@@ -1,0 +1,100 @@
+
+
+            <li class="attribute maxhp container-box container-panel">
+                <div class="attribute-value container-box-body auto-calc-value health-calc">
+                    <input type="text" name="data.attributes.hp.grit" value="{{data.attributes.hp.grit}}" data-dtype="Number"/>
+                </div>
+                <div class="attribute-name container-box-header">
+                    {{ localize "SKJAALD.Grit" }}
+                </div>
+            </li>
+
+            <li class="attribute hp container-box container-panel">
+                <div class="attribute-value container-box-body auto-calc-value health-cal">
+                <input type="text" name="data.attributes.hp.value" value="{{data.attributes.hp.value}}" data-dtype="Number"/>
+                /
+                <input type="text" name="data.attributes.hp.max" value="{{data.attributes.hp.max}}" data-dtype="Number"/>
+                </div>
+                <h5 class="attribute-name container-box-header">
+                    {{ localize "SKJAALD.HitPoints" }}
+                </h5>
+                <class="container-box-footer">
+                    <span>Current</span>
+                    <span>Max</span>
+                    </class>
+            </li>
+
+            <li class="attribute hit-dice container-box container-panel">
+                <div class="attribute-value container-box-body auto-calc-value" data-property="attributes.hp">
+                <input type="text" name="data.attributes.hp.hitDicecurrent" value="{{data.attributes.hp.hitDicecurrent}}" data-dtype="Number"/>
+                /
+                <input type="text" name="data.attributes.hp.hitDiceMax" value="{{data.attributes.hp.hitDiceMax}}" data-dtype="Number"/>
+                </div>
+                <h5 class="attribute-name container-box-header roll-hd rollable" data-hd-denom="{{data.attributes.hp.hitDiceDenom}}" data-action="rollHitDice">
+                    {{ localize "SKJAALD.HitDice" }}
+                </h5>
+            </li>
+
+            <li class="attribute death-saves container-box container-panel">
+                <div class="attribute-value container-box-body auto-calc-value">
+                    <input type="hidden" name="data.attributes.death.save1" value="{{data.attributes.death.save1}}"/>
+                    <a class="proficiency-toggle skill-proficiency death-icon" >{{{data.attributes.death.icon1}}}</a>
+                    <input type="hidden" name="data.attributes.death.save2" value="{{data.attributes.death.save2}}"/>
+                    <a class="proficiency-toggle skill-proficiency death-icon" >{{{data.attributes.death.icon2}}}</a>
+                    <input type="hidden" name="data.attributes.death.save3" value="{{data.attributes.death.save3}}"/>
+                    <a class="proficiency-toggle skill-proficiency death-icon" >{{{data.attributes.death.icon3}}}</a>
+                </div>
+                <h5 class="attribute-name container-box-header rollable" data-action="rollDeathSave">
+                    {{ localize "SKJAALD.DeathSave" }}
+                </h5>
+            </li>
+
+            <li class="attribute exhaustEffects sheet-pc-exhaustion-details container-box container-panel">
+                <ul class="sheet-list-conditions sheet-container-body">
+                    <li>
+                        <label class="sheet-radio health0 noclick">
+                            <input type="checkbox" {{checked data.attributes.exhaustion.exhaust0}}>
+                            <span><strong>0:</strong> None</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="sheet-radio health1 noclick">
+                            <input type="checkbox"  {{checked data.attributes.exhaustion.exhaust1}}>
+                            <span><strong>1:</strong> Disadvantage on Ability Checks</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="sheet-radio health2 noclick">
+                            <input type="checkbox" {{checked data.attributes.exhaustion.exhaust2}}>
+                            <span><strong>2:</strong> Disadvantage on Saving Throws and Attacks</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="sheet-radio health3 noclick">
+                            <input type="checkbox" {{checked data.attributes.exhaustion.exhaust3}}>
+                            <span><strong>3:</strong> Movement Speed is Halved</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="sheet-radio health4 noclick">
+                            <input type="checkbox" {{checked data.attributes.exhaustion.exhaust4}}>
+                            <span><strong>4:</strong> Maximum HP is Halved</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="sheet-radio health5 noclick">
+                            <input type="checkbox"  {{checked data.attributes.exhaustion.exhaust5}}>
+                            <span><strong>5:</strong> Movementt Speed Reduced to 0</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="sheet-radio health6 noclick">
+                            <input type="checkbox"  {{checked data.attributes.exhaustion.exhaust6}} >
+                            <span><strong>6:</strong> Unconcious</span>
+                        </label>
+                    </li>
+                </ul>
+                <h5 class="attribute-name container-box-header sheet-container-header">
+                    {{ localize "SKJAALD.ExhaustionEffects" }}
+                </h5>
+            </li>

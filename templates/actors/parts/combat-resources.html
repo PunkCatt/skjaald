@@ -1,0 +1,39 @@
+<li class="attribute resource1 container-box container-panel">
+    <div class="attribute-value container-box-body auto-calc-value">
+        <input class="duplicate" type="text" name="data.resources.primary.value2" value="{{data.resources.primary.value}}"/>
+        /
+        <input class="duplicate" type="text" name="data.resources.primary.max2" value="{{data.resources.primary.max}}" />
+    </div>
+    <h5 class="attribute-name container-box-header">
+        <input class="duplicate" type="text" name="data.resources.primary.label2" value="{{data.resources.primary.label}}" />
+    </h5>
+</li>
+
+<li class="attribute resource2 container-box container-panel">
+    <div class="attribute-value container-box-body auto-calc-value" data-property="attributes.hp">
+        <input class="duplicate" type="text" name="data.resources.secondary.value2" value="{{data.resources.secondary.value}}"/>
+        /
+        <input class="duplicate" type="text" name="data.resources.secondary.max2" value="{{data.resources.secondary.max}}" />
+    </div>
+    <h5 class="attribute-name container-box-header">
+        <input class="duplicate" type="text" name="data.resources.secondary.label2" value="{{data.resources.secondary.label}}" />
+    </h5>
+</li>
+
+<li class="attribute resource3 container-box container-panel">
+    <div class="attribute-value container-box-body auto-calc-value" data-property="attributes.hp">
+        <input class="duplicate" type="text" name="data.resources.tertiary.value2" value="{{data.resources.tertiary.value}}"/>
+        /
+        <input class="duplicate" type="text" name="data.resources.tertiary.max2" value="{{data.resources.tertiary.max}}" />
+    </div>
+    <h5 class="attribute-name container-box-header">
+        <input class="duplicate" type="text" name="data.resources.tertiary.label2" value="{{data.resources.tertiary.label}}" />
+    </h5>
+</li>
+
+<div class="attribute other-resources container-panel">
+
+        {{> "systems/skjaald/templates/actors/parts/resource-list.html" sections=resourceList}}    
+
+
+</div>

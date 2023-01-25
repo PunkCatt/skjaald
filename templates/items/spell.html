@@ -1,0 +1,295 @@
+<form class="{{cssClass}} spells flexcol" autocomplete="off">
+
+    {{!-- Item Sheet Header --}}
+    <header class="sheet-header flexrow">
+        <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img"/>
+
+        <div class="header-details flexrow">
+            <h1 class="charname">
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'SKJAALD.SpellName' }}"/>
+            </h1>
+
+            <div class="item-subtitle">
+                <h4 class="item-type">{{itemType}}</h4>
+                <span class="item-status">{{itemStatus}}</span>
+            </div>
+
+            <ul class="summary flexrow">
+                <li>
+                    {{labels.level}}
+                </li>
+                <li>
+                    {{labels.school}}
+                </li>
+                <li>
+                    <input type="text" name="data.source" value="{{data.source}}" placeholder="{{ localize 'SKJAALD.Source' }}"/>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    {{!-- Item Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="description">{{ localize "SKJAALD.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "SKJAALD.Details" }}</a>
+        <a class="item" data-tab="effects">{{ localize "SKJAALD.Effects" }}</a>
+    </nav>
+
+    {{!-- Item Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Description Tab --}}
+        {{> "systems/skjaald/templates/items/parts/item-description.html"}}
+
+        {{!-- Details Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+            <h3 class="form-header">{{ localize "SKJAALD.SpellDetails" }}</h3>
+
+
+
+            {{!-- Spell School --}}
+            <div class="spell-components form-group stacked spell-school">
+                <label>{{ localize "SKJAALD.SpellSchool" }}</label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.school.abj" {{checked data.school.Abj}}/> {{ localize "SKJAALD.SchoolAbj" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.school.bld" {{checked data.school.bld}}/> {{ localize "SKJAALD.SchoolBld" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.school.bio" {{checked data.school.bio}}/> {{ localize "SKJAALD.SchoolBio" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.school.con" {{checked data.school.con}}/> {{ localize "SKJAALD.SchoolCon" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.school.div" {{checked data.school.div}}/> {{ localize "SKJAALD.SchoolDiv" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.school.din" {{checked data.school.din}}/> {{ localize "SKJAALD.SchoolDin" }}
+                </label>
+
+            </div>
+            <div class="spell-components form-group stacked">
+                <label class="checkbox">
+                    <input type="checkbox" name="data.school.enc" {{checked data.school.enc}}/> {{ localize "SKJAALD.SchoolEnc" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.school.evo" {{checked data.school.evo}}/> {{ localize "SKJAALD.SchoolEvo" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.school.ill" {{checked data.school.ill}}/> {{ localize "SKJAALD.SchoolIll" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.school.nat" {{checked data.school.nat}}/> {{ localize "SKJAALD.SchoolNat" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.school.nec" {{checked data.schoo.nec}}/> {{ localize "SKJAALD.SchoolNec" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.school.trs" {{checked data.school.trs}}/> {{ localize "SKJAALD.SchoolTrs" }}
+                </label>
+            </div>
+
+
+            {{!-- Resolution --}}
+            <div class="form-group">
+                <label>{{ localize "SKJAALD.SpellResolution" }}</label>
+                <select name="data.resolution">
+                    {{#select data.resolution}}
+                    <option value="none"> {{localize "SKJAALD.None"}}</option>
+                    {{#each config.spellResolution as |name res|}}
+                    <option value="{{res}}">{{localize name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+
+            {{!-- Spell Level Scaling --}}
+            <div class="form-group stacked">
+                <label>{{ localize "SKJAALD.LevelScaling" }}</label>
+                <input type="text" name="data.scaling.formula" value="{{data.scaling.formula}}" placeholder="{{ localize 'SKJAALD.ScalingFormula' }}"/>
+
+            </div>
+
+            {{!-- Spell Components --}}
+            <div class="spell-components form-group stacked">
+                <label>{{ localize "SKJAALD.SpellComponents" }}</label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.components.vocal" {{checked data.components.vocal}}/> {{ localize "SKJAALD.ComponentVerbal" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.components.somatic" {{checked data.components.somatic}}/> {{ localize "SKJAALD.ComponentSomatic" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.components.material" {{checked data.components.material}}/> {{ localize "SKJAALD.ComponentMaterial" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.components.concentration" {{checked data.components.concentration}}/> {{ localize "SKJAALD.Concentration" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.components.ritual" {{checked data.components.ritual}}/> {{ localize "SKJAALD.Ritual" }}
+                </label>
+            </div>
+
+            {{!-- Material Components --}}
+            <div class="form-group stacked">
+                <label>{{ localize "SKJAALD.SpellMaterials" }}</label>
+                <input class="materials" type="text" name="data.materials.value" value="{{data.materials.value}}"/>
+                {{#if data.materials.value}}
+                <div class="spell-materials flexrow">
+                    <label>{{ localize "SKJAALD.Supply" }}</label>
+                    <input type="text" name="data.materials.supply" value="{{data.materials.supply}}" data-dtype="Number" Placeholder="0"/>
+                    <label>{{ localize "SKJAALD.CostGP" }}</label>
+                    <input type="text" name="data.materials.cost" value="{{data.materials.cost}}" data-dtype="Number" Placeholder="-"/>
+                    <label>{{ localize "SKJAALD.Consumed" }}</label>
+                    <input type="checkbox" name="data.materials.consumed" {{checked data.materials.consumed}}/>
+                </div>
+                {{/if}}
+            </div>
+
+            {{!-- Preparation Mode --}}
+            <div class="form-group input-select">
+                <label>{{ localize "SKJAALD.SpellPreparationMode" }}</label>
+                <div class="form-fields">
+                    <label class="checkbox prepared">
+                        {{ localize "SKJAALD.SpellPrepared" }} <input type="checkbox" name="data.preparation.prepared" {{checked data.preparation.prepared}}/>
+                    </label>
+                    <select name="data.preparation.mode">
+                        {{ selectOptions config.spellPreparationModes selected=data.preparation.mode }}
+                    </select>
+                </div>
+            </div>
+
+            <h3 class="form-header">{{ localize "SKJAALD.SpellLearning" }}</h3>
+
+            {{!-- Complexity Level --}}
+            <div class="form-group">
+                <label>{{ localize "SKJAALD.SpellComplexity" }}</label>
+                <select name="data.complexity">
+                    {{#select data.complexity}}
+                    {{#each config.spellComplexity as |name com|}}
+                    <option value="{{com}}">{{localize name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+
+            {{!-- Spell Levels --}}
+            <div class="spell-components form-group stacked">
+                <label>{{ localize "SKJAALD.SpellLevelsLearned" }}</label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.learned.cantrip" {{checked data.learned.cantrip}}/> {{ localize "SKJAALD.Cantrip" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.learned.one" {{checked data.learned.one}}/> {{ localize "SKJAALD.LevelOne" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.learned.two" {{checked data.learned.two}}/> {{ localize "SKJAALD.LevelTwo" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.learned.three" {{checked data.learned.three}}/> {{ localize "SKJAALD.LevelThree" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.learned.four" {{checked data.learned.four}}/> {{ localize "SKJAALD.LevelFour" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.learned.five" {{checked data.learned.five}}/> {{ localize "SKJAALD.LevelFive" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.learned.six" {{checked data.learned.six}}/> {{ localize "SKJAALD.LevelSix" }}
+                </label>
+            </div>
+            <div class="spell-components form-group stacked">
+                <label class="checkbox">
+                    <input type="checkbox" name="data.learned.seven" {{checked data.learned.seven}}/> {{ localize "SKJAALD.LevelSeven" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.learned.eight" {{checked data.learned.eight}}/> {{ localize "SKJAALD.LevelEight" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.learned.nine" {{checked data.learned.nine}}/> {{ localize "SKJAALD.LevelNine" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.learned.ten" {{checked data.learned.ten}}/> {{ localize "SKJAALD.LevelTen" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.learned.eleven" {{checked data.learned.eleven}}/> {{ localize "SKJAALD.LevelEleven" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.learned.twelve" {{checked data.learned.twelve}}/> {{ localize "SKJAALD.LevelTwelve" }}
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.learned.thirteen" {{checked data.learned.thirteen}}/> {{ localize "SKJAALD.LevelThirteen" }}
+                </label>
+            </div>
+
+            {{!-- Learning Level --}}
+            <div class="form-group input-select">
+                <label>{{ localize "SKJAALD.SpellCurrentLearning" }}</label>
+                <div class="form-fields">
+                    <label class="checkbox learning">
+                        <input type="checkbox" name="data.learning.currently" {{checked data.learning.currently}}/>
+                    </label>
+                    {{#if data.learning.currently}}
+                        <select name="data.learning.level">
+                            {{#select data.learning.level}}
+                            {{#each config.spellLevels as |name lev|}}
+                            <option value="{{lev}}">{{name}}</option>
+                            {{/each}}
+                            {{/select}}
+                        </select>
+                    {{/if}}
+                </div>
+            </div>
+
+            {{#if data.learning.currently}}
+            <div class="form-group ">
+                <label>{{ localize "SKJAALD.HoursNeeded" }}</label>
+                <input type="number" name="data.learning.hoursNeeded" value="{{data.learning.hoursNeeded}}"/>
+            </div>
+            <div class="form-group ">
+                <label>{{ localize "SKJAALD.ArcanaNeeded" }}</label>
+                <input type="number" name="data.learning.arcanaNeeded" value="{{data.learning.arcanaNeeded}}"/>
+            </div>
+
+            
+
+            {{!-- Template Paths --}}
+            <div class="form-group">
+                <div>
+                    <label>{{ localize "SKJAALD.SpellTemplatePaths" }}</label>  <a class="spell-template-control add-path"><i class="fas fa-plus"></i></a>
+                </div>
+            </div>
+    
+            {{!-- Template Paths Template --}}
+            {{> "systems/skjaald/templates/actors/parts/template-paths.html"}}
+            
+            {{/if}}
+
+
+            <h3 class="form-header">{{ localize "SKJAALD.SpellCastingHeader" }}</h3>
+
+            {{!-- Item Activation Template --}}
+            {{> "systems/skjaald/templates/items/parts/item-activation.html"}}
+
+            <h3 class="form-header">
+            <div>
+                {{ localize "SKJAALD.SpellEffects" }}
+            </div>
+            <div>
+                <a class="spell-effect-control add-effect"><i class="fas fa-plus"></i></a>
+            </div>
+            </h3>
+
+            {{!-- Item Action Template --}}
+            {{> "systems/skjaald/templates/items/parts/item-action.html"}}
+
+        </div>
+
+        {{!-- Effects Tab --}}
+        <div class="tab effects flexcol" data-group="primary" data-tab="effects">
+            {{> "systems/skjaald/templates/actors/parts/active-effects.html"}}
+        </div>
+    </section>
+</form>
