@@ -232,6 +232,41 @@ export default class D20Roll extends Roll {
     if (form.intensity != undefined){
       this.options.intensity = form.intensity.value;
     }
+    if (form.useSpellCharge != undefined){
+      console.log(form.useSpellCharge);
+      this.options.useSpellCharge = form.useSpellCharge.checked;
+    }
+    if (form.spellbookBonus != undefined){
+      this.options.spellbookBonus = form.spellbookBonus.checked;
+    }
+    if (form.scrollBonus != undefined){
+      this.options.scrollBonus = form.scrollBonus.checked;
+    }
+    if (form.instructorAdditiveBonusArcana != undefined){
+      this.options.instructorAdditiveBonusArcana = form.instructorAdditiveBonusArcana.value;
+    }
+    if (form.instructorMultipleBonusArcana != undefined){
+      this.options.instructorMultipleBonusArcana = form.instructorMultipleBonusArcana.value;
+    }
+    if (form.instructorAdditiveBonusHour != undefined){
+      this.options.instructorAdditiveBonusHour = form.instructorAdditiveBonusHour.value;
+    }
+    if (form.instructorMultipleBonusHour != undefined){
+      this.options.instructorMultipleBonusHour = form.instructorMultipleBonusHour.value;
+    }
+    if (form.otherAdditiveBonusArcana != undefined){
+      this.options.otherAdditiveBonusArcana = form.otherAdditiveBonusArcana.value;
+    }
+    if (form.otherMultipleBonusArcana != undefined){
+      this.options.otherMultipleBonusArcana = form.otherMultipleBonusArcana.value;
+    }
+    if (form.otherAdditiveBonusHour != undefined){
+      this.options.otherAdditiveBonusHour = form.otherAdditiveBonusHour.value;
+    }
+    if (form.otherMultipleBonusHour != undefined){
+      this.options.otherMultipleBonusHour = form.otherMultipleBonusHour.value;
+    }
+    
     
 
     // Apply advantage or disadvantage

@@ -1633,6 +1633,8 @@ export default class Actor5e extends Actor {
 
 
     // Take action depending on the result
+    console.log(roll);
+    
     const total = roll._total;
     const success = roll.total >= 10;
     const d20 = roll.dice[0].total;
@@ -2039,6 +2041,7 @@ export default class Actor5e extends Actor {
 
 
     // Take action depending on the result
+    console.log(roll);
     const actorID = speaker.actor;
     const actor = game.actors.get(actorID).data;
     const total = roll._total;
@@ -2074,16 +2077,11 @@ export default class Actor5e extends Actor {
     var arcanabonus = 0; // arcana modifier?
     var wizLevel = 0;
     var totalArcana = 0;
-    var modArcanaAdd = 0;
-    var modArcanaMult = 0;
-    var modHoursAdd = 0;
-    var modHourMult = 0;
-    var tempCalc = 0;
     var pass = false;
     var advantageMode = roll.options.advantageMode;
     var arcanabonus = data.skills.arc.total;
     var wizLevel = 0;
-    var baseHours = 0;
+    var baseHours = 1;
     var templateModifier = -1000;
     var baseArcana = 0;
     var hours = 1;
@@ -2092,7 +2090,8 @@ export default class Actor5e extends Actor {
     var noTemplatePaths = false;
     var itemList = actor.items;
 
-    console.log(itemList);
+    console.log(data);
+    console.log(item);
 
     // Calculate DC for roll
     dc = 10 + (2 * spellLevel);
@@ -2145,13 +2144,13 @@ export default class Actor5e extends Actor {
     // Get Wizard Level
     var classes = data.classes;
     for (const key in classes) {
-      console.log(`${key}: ${classes[key]}`);
       if (key == "Wizard" || key == "wizard"){
         console.log("Wizard Class Found");
         if(wizLevel == 0){
           console.log("Wizard Level Found");
           wizLevel = `${classes[key].levels}`;
-          console.log("wiz Level: " + wizLevel);
+          wizLevel = parseInt(wizLevel);
+          console.log("wiz Level: ");
         } else{
           console.log("Error Multiple Wizard Levels Found");
           console.log("TO DO: Alert message for Wizard Level Error - multiple classes found?");
@@ -2186,25 +2185,19 @@ export default class Actor5e extends Actor {
 
     // iterate through template paths
     for (const [key, value] of Object.entries(templatePaths)){
-      console.log(value);
       var spells = value.spells;
       var unknownSpells = 0;
       var knownSpells = 0;
       // iterate through template spells
       for (const [key2, value2] of Object.entries(spells)){
-        console.log(value2);
         var spellName = value2.name;
         var spellKnown = false;
         //iternate through items to find spells
         itemList.forEach(item => {
-          console.log(item);
           // if item is a spell check if match
           if (item.data.type == "spell"){
-            console.log(spellName);
-            console.log(item.data.name);
             // if spell matches template spell
             if ((item.data.name).toLowerCase() === spellName.toLowerCase()){
-              console.log("spell exists on list");
               var minimumLevel = value2.minLevel;
               var learned = item.data.data.learned;
               //if minimum level is N/A add to known else factor in minimum level
@@ -2270,29 +2263,222 @@ export default class Actor5e extends Actor {
           unknownSpells += 1;
         }
       }
-      console.log("knownSpells: " + knownSpells);
-      console.log("unkownSpells: " + unknownSpells);
       var currentModifier = knownSpells - unknownSpells;
-      console.log(currentModifier);
       if (currentModifier > templateModifier){
         templateModifier = currentModifier;
         templatePathName = value.name;
       }
     }
 
-    console.log("template Modifier: " + templateModifier);
-    console.log("template Path Name: " + templatePathName);
-
-
     // base values (include crit & template)
+    if (templateModifier == -1000){
+      baseArcana = totalArcana;
+      templateModifier = 0;
+      noTemplatePaths = true;
+    }else {
+     baseArcana = totalArcana + templateModifier;
+    }
+
+    console.log("templateModifier: " + templateModifier);
+    console.log("baseArcana: " + baseArcana);
+    console.log("base hours: " + baseHours);
+
 
     // resolve pillars from base
 
-    // resolve aids from base
+    var knownPillar =  data.spell.pillar;
+    console.log(knownPillar);
+    var knownSpec = data.spell.specialty;
+    console.log(knownSpec);
+    var knownMinor1 = data.spell.minor1;
+    var knownMinor2 = data.spell.minor2;
+    console.log(knownMinor1);
+    console.log(knownMinor2);
+    var pillarMatch = false;
+    var specMatch = false;
+    var minorMatch = false;
+    var spellSchools = item.data.data.school;
+    var checkedSpellSchools = [];
+    var pillarArcanaAdd = 0;
+    var pillarArcanaMult = 0;
+    var pillarHourAdd = 0;
+    var pillarHourMult = 0;
+    var pillarArcana = 0;
+    var pillarHours = 0;
+
+    // Get list of spell schools
+    for (const [key, value] of Object.entries(spellSchools)){
+      if(value){
+        checkedSpellSchools.push(key);
+      }
+    }
+    // Check for Pillar Match
+    if (knownPillar !== "none"){
+      console.log("Pillar selected");
+      var spellPillar = [];
+      if(item.data.data.school.abj || item.data.data.school.evo){
+        spellPillar.push("arc");
+        console.log("Arcane Pillar");
+      }
+      if (item.data.data.school.con|| item.data.data.school.trs){
+        spellPillar.push("mas");
+        console.log("Mass Pillar");
+      }
+      if(item.data.data.school.nec || item.data.data.school.bio){
+        spellPillar.push("ess");
+        console.log("Essence Pillar");
+      }
+      if(item.data.data.school.enc || item.data.data.school.ill || item.data.data.school.div){
+        spellPillar.push("psi");
+        console.log("Psionic Pillar");
+      }
+      if(item.data.data.school.nat){
+        spellPillar.push("nat");
+        console.log("Nature");
+      }
+      if(item.data.data.school.din){
+        spellPillar.push("div");
+        console.log("Divine");
+      }
+      spellPillar.forEach(pillar => {
+        if(pillar === knownPillar){
+          pillarMatch = true;
+          console.log("Pillar Bonus!");
+        }
+      })
+    } else{
+      console.log("No Pillar");
+    }
+
+    //resolve specialization
+    if (knownSpec !== "none"){
+      console.log("Specialization selected");
+      checkedSpellSchools.forEach(school => {
+        if (school == knownSpec){
+          specMatch = true;
+          console.log("Specialty Bonus!"); 
+        }
+      })
+    } else{
+      console.log("No Specialization");
+    }
+
+    //resolve minors - in both minors only apply minor bonus once
+    if (knownMinor1 !== "none" || knownMinor2 !== "none"){
+      console.log("Minor(s) selected");
+      checkedSpellSchools.forEach(school => {
+        if (school == knownMinor1 || knownMinor2){
+          minorMatch = true;
+          console.log("Minor Bonus!"); 
+        }
+      })
+    } else{
+      console.log("No Minors");
+    }
+
+    //Apply pillars to base
+    if(pillarMatch){
+      pillarArcanaAdd += wizLevel;
+      pillarHourMult += 1.5;
+    }
+    if(specMatch){
+      pillarArcanaMult += 2;
+      pillarHourMult += 2;
+    }
+    if(minorMatch){
+      pillarArcanaAdd += wizLevel;
+      pillarHourMult += 1.5;
+    }
+
+    if(pillarArcanaMult != 0){
+      pillarArcana = (baseArcana * pillarArcanaMult) + pillarArcanaAdd;
+    } else{
+      pillarArcana = baseArcana + pillarArcanaAdd;
+    }
+    if(pillarHourMult != pillarHours){
+      pillarHours = (baseHours * pillarHourMult) + pillarHourAdd;
+    } else{
+      pillarHours = baseHours + pillarHourAdd;
+    }
+    console.log("Pillar hours: " + pillarHours);
+    console.log("Pillar Arcana: " + pillarArcana);
+
+    // resolve aids 
+    var aidBonusArcanaAdd = 0;
+    var aidBonusArcanaMult = 0;
+    var aidBonusHoursAdd = 0;
+    var aidBonusHoursMult = 0;
+    var aidArcana = 0;
+    var aidHours = 0;
+
+    //scroll bonus
+    if(roll.options.scrollBonus){
+      aidBonusHoursMult += 3;
+    }
+
+    //spellbook bonus
+    if(roll.options.spellbookBonus){
+      aidBonusArcanaMult += 3;
+      aidBonusHoursMult += 3;
+    }
+
+    //instructor Bonus
+    if(roll.options.instructorAdditiveBonusArcana != ""){
+      aidBonusArcanaAdd += parseInt(roll.options.instructorAdditiveBonusArcana);
+    }
+    if(roll.options.instructorAdditiveBonusHour != ""){
+      aidBonusHoursAdd += parseInt(roll.options.instructorAdditiveBonusHour);
+    }
+    if(roll.options.instructorMultipleBonusArcana != ""){
+      aidBonusArcanaMult += parseInt(roll.options.instructorMultipleBonusArcana);
+    }
+    if(roll.options.instructorMultipleBonusHour != ""){
+      aidBonusHoursMult += parseInt(roll.options.instructorMultipleBonusHour);
+    }
+
+    // other aid Bonus
+    if(roll.options.otherAdditiveBonusArcana != ""){
+      aidBonusArcanaAdd += parseInt(roll.options.otherAdditiveBonusArcana);
+    }
+    if(roll.options.otherAdditiveBonusHour != ""){
+      aidBonusHoursAdd += parseInt(roll.options.otherAdditiveBonusHour);
+    }
+    if(roll.options.otherMultipleBonusArcana != ""){
+      aidBonusArcanaMult += parseInt(roll.options.otherMultipleBonusArcana);
+    }
+    if(roll.options.otherMultipleBonusHour != ""){
+      aidBonusHoursMult += parseInt(roll.options.otherMultipleBonusHour);
+    }
+
+    if(aidBonusHoursMult != 0){
+      aidHours = (baseHours * aidBonusHoursMult) + aidBonusHoursAdd;
+    } else{
+      if(aidBonusHoursAdd == 0){
+        aidHours = 0;
+      }else{
+        aidHours = baseHours + aidBonusHoursAdd;
+      }
+    }
+
+    if(aidBonusArcanaMult != 0){
+      aidArcana = (baseArcana * aidBonusArcanaMult) + aidBonusArcanaAdd;
+    } else{
+      if(aidBonusArcanaAdd == 0){
+        aidArcana = 0;
+      }else{
+        aidArcana = baseArcana + aidBonusArcanaAdd;
+      }
+    }
+
+
+    console.log("Aid Arcana: " + aidArcana);
+    console.log("Aid Hours: " + aidHours);
 
     // add together pillar and aids
-
-    // if no pillars or aids - total is base
+    var totalArcana = aidArcana + pillarArcana;
+    var totalHours = aidHours + pillarHours;
+    console.log(totalArcana);
+    console.log(totalHours);
 
     // Complexity - very end of calculations
       // divides final amount of arcana by complexity level ( 3 or 4 levels) - spell details

@@ -51,7 +51,7 @@
             <div class="spell-components form-group stacked spell-school">
                 <label>{{ localize "SKJAALD.SpellSchool" }}</label>
                 <label class="checkbox">
-                    <input type="checkbox" name="data.school.abj" {{checked data.school.Abj}}/> {{ localize "SKJAALD.SchoolAbj" }}
+                    <input type="checkbox" name="data.school.abj" {{checked data.school.abj}}/> {{ localize "SKJAALD.SchoolAbj" }}
                 </label>
                 <label class="checkbox">
                     <input type="checkbox" name="data.school.bld" {{checked data.school.bld}}/> {{ localize "SKJAALD.SchoolBld" }}
@@ -84,7 +84,7 @@
                     <input type="checkbox" name="data.school.nat" {{checked data.school.nat}}/> {{ localize "SKJAALD.SchoolNat" }}
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" name="data.school.nec" {{checked data.schoo.nec}}/> {{ localize "SKJAALD.SchoolNec" }}
+                    <input type="checkbox" name="data.school.nec" {{checked data.school.nec}}/> {{ localize "SKJAALD.SchoolNec" }}
                 </label>
                 <label class="checkbox">
                     <input type="checkbox" name="data.school.trs" {{checked data.school.trs}}/> {{ localize "SKJAALD.SchoolTrs" }}
@@ -264,7 +264,7 @@
     
             {{!-- Template Paths Template --}}
             {{> "systems/skjaald/templates/actors/parts/template-paths.html"}}
-            
+
             {{/if}}
 
 
