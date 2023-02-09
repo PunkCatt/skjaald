@@ -99,11 +99,14 @@ export default class DamageRoll extends Roll {
   /** @inheritdoc */
   toMessage(messageData={}, options={}) {
     messageData.flavor = messageData.flavor || this.options.flavor;
+    console.log('in to message');
+    console.log(messageData);
     if ( this.isCritical ) {
       const label = game.i18n.localize("SKJAALD.CriticalHit");
       messageData.flavor = messageData.flavor ? `${messageData.flavor} (${label})` : label;
     }
     options.rollMode = options.rollMode ?? this.options.rollMode;
+    console.log(messageData);
     return super.toMessage(messageData, options);
   }
 
@@ -125,12 +128,19 @@ export default class DamageRoll extends Roll {
    */
   async configureDialog({title, defaultRollMode, defaultCritical=false, template, allowCritical=true}={}, options={}) {
 
+    console.log(options);
+    var focusRoll = options.focusRoll;
+    var focuses = options.focuses;
+
     // Render the Dialog inner HTML
     const content = await renderTemplate(template ?? this.constructor.EVALUATION_TEMPLATE, {
       formula: `${this.formula} + @bonus`,
       defaultRollMode,
-      rollModes: CONFIG.Dice.rollModes
+      rollModes: CONFIG.Dice.rollModes,
+      focuses: focuses,
+      focusRoll: focusRoll
     });
+
 
     // Create the Dialog window and await submission of the form
     return new Promise(resolve => {
@@ -141,11 +151,11 @@ export default class DamageRoll extends Roll {
           critical: {
             condition: allowCritical,
             label: game.i18n.localize("SKJAALD.CriticalHit"),
-            callback: html => resolve(this._onDialogSubmit(html, true))
+            callback: html => resolve(this._onDialogSubmit(html, true, focusRoll, focuses ))
           },
           normal: {
             label: game.i18n.localize(allowCritical ? "SKJAALD.Normal" : "SKJAALD.Roll"),
-            callback: html => resolve(this._onDialogSubmit(html, false))
+            callback: html => resolve(this._onDialogSubmit(html, false, focusRoll, focuses))
           }
         },
         default: defaultCritical ? "critical" : "normal",
@@ -173,10 +183,13 @@ export default class DamageRoll extends Roll {
       this.terms = this.terms.concat(bonus.terms);
     }
 
+
     // Apply advantage or disadvantage
     this.options.critical = isCritical;
     this.options.rollMode = form.rollMode.value;
     this.configureDamage();
+    console.log(html);
+
     return this;
   }
 

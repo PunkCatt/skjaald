@@ -265,6 +265,19 @@ SKJAALD.timePeriods = {
 /* -------------------------------------------- */
 
 /**
+ * The various lengths of time over which effects can occur.
+ * @enum {string}
+ */
+SKJAALD.rechargeTimePeriods = {
+  minute: "SKJAALD.TimeMinute",
+  hour: "SKJAALD.TimeHour",
+  day: "SKJAALD.TimeDay",
+  week: "SKJAALD.TimeWeek"
+};
+
+/* -------------------------------------------- */
+
+/**
  * Various ways in which an item or ability can be activated.
  * @enum {string}
  */
@@ -282,6 +295,25 @@ SKJAALD.abilityActivationTypes = {
   crew: "SKJAALD.VehicleCrewAction"
 };
 
+/**
+ * The various lengths of time over which effects can occur.
+ * @enum {string}
+ */
+SKJAALD.ammoDieSizes = {
+  zero: "SKJAALD.RechargeAmmoDie0",
+  one: "SKJAALD.RechargeAmmoDie1",
+  d2: "SKJAALD.RechargeAmmoDieD2",
+  d4: "SKJAALD.RechargeAmmoDieD4",
+  d6: "SKJAALD.RechargeAmmoDieD6",
+  d8: "SKJAALD.RechargeAmmoDieD8",
+  d10: "SKJAALD.RechargeAmmoDieD10",
+  d12: "SKJAALD.RechargeAmmoDieD12",
+  d20: "SKJAALD.RechargeAmmoDieD20",
+  d100: "SKJAALD.RechargeAmmoDieD100"
+};
+
+/* -------------------------------------------- */
+
 /* -------------------------------------------- */
 
 /**
@@ -292,7 +324,8 @@ SKJAALD.abilityConsumptionTypes = {
   ammo: "SKJAALD.ConsumeAmmunition",
   attribute: "SKJAALD.ConsumeAttribute",
   material: "SKJAALD.ConsumeMaterial",
-  charges: "SKJAALD.ConsumeCharges"
+  charges: "SKJAALD.ConsumeCharges",
+  itemuse: "SKJAALD.ConsumeItemUse"
 };
 
 /* -------------------------------------------- */
@@ -369,10 +402,7 @@ SKJAALD.itemActionTypes = {
   rwak: "SKJAALD.ActionRWAK",
   msak: "SKJAALD.ActionMSAK",
   rsak: "SKJAALD.ActionRSAK",
-  save: "SKJAALD.ActionSave",
-  heal: "SKJAALD.ActionHeal",
-  abil: "SKJAALD.ActionAbil",
-  util: "SKJAALD.ActionUtil",
+  ability: "SKJAALD.ActionAbility",
   other: "SKJAALD.ActionOther"
 };
 
@@ -593,7 +623,7 @@ SKJAALD.consumableTypes = {
   poison: "SKJAALD.ConsumablePoison",
   food: "SKJAALD.ConsumableFood",
   scroll: "SKJAALD.ConsumableScroll",
-  wand: "SKJAALD.ConsumableWand",
+  focus: "SKJAALD.ConsumableFocus",
   rod: "SKJAALD.ConsumableRod",
   trinket: "SKJAALD.ConsumableTrinket"
 };
@@ -1012,6 +1042,7 @@ SKJAALD.spellLevels = {
   7: "SKJAALD.SpellLevel7",
   8: "SKJAALD.SpellLevel8",
   9: "SKJAALD.SpellLevel9"
+
 };
 
 /**
@@ -1124,9 +1155,9 @@ SKJAALD.cover = {
  * @type {string[]}
  */
 SKJAALD.trackableAttributes = [
-  "attributes.ac.value", "attributes.init.value", "attributes.movement", "attributes.senses", "attributes.spelldc",
-  "attributes.spellLevel", "details.cr", "details.spellLevel", "details.xp.value", "skills.*.passive",
-  "abilities.*.value", "attributes.acted.value"
+  "attributes.ac.flat", "attributes.init.value", "attributes.movement", "attributes.senses", "attributes.spellcasting.spelldc",
+  "skills.*.passive", "abilities.*.value", "attributes.acted.value", "attributes.hp.grit", "attributes.hp.hitDicecurrent", "attributes.hp.value", 
+  "attributes.dp.value", "attributes.ration.value", "attributes.waterskin.value", "detials.honor", "details.morality"
 ];
 
 /* -------------------------------------------- */
@@ -1136,9 +1167,9 @@ SKJAALD.trackableAttributes = [
  * @type {string[]}
  */
 SKJAALD.consumableResources = [
-  "item.quantity", "item.weight", "item.duration.value", "currency", "details.xp.value", "abilities.*.value",
-  "attributes.senses", "attributes.movement", "attributes.ac.flat", "item.armor.value", "item.target", "item.range",
-  "item.save.dc"
+  "item.quantity", "item.weight", "item.duration.value", "currency", "abilities.*.value", "attributes.hp.grit", "attributes.hp.hitDicecurrent",
+  "attributes.senses", "attributes.movement", "attributes.ac.flat", "item.armor.value", "item.target", "item.range", "attributes.hp.value",
+  "item.save.dc", "attributes.dp.value", "attributes.ration.value", "attributes.waterskin.value", "skills.*.passive", "details.honor", "details.morality"
 ];
 
 /* -------------------------------------------- */

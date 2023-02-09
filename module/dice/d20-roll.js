@@ -138,13 +138,14 @@ export default class D20Roll extends Roll {
    * @param {boolean} [data.chooseModifier]   Choose which ability modifier should be applied to the roll?
    * @param {boolean} [data.skillLearning]
    * @param {boolean} [data.spellLearning]
+   * @param {boolean} [data.rollFocus]
    * @param {string} [data.defaultAbility]    For tool rolls, the default ability modifier applied to the roll
    * @param {string} [data.template]          A custom path to an HTML template to use instead of the default
    * @param {object} options                  Additional Dialog customization options
    * @returns {Promise<D20Roll|null>}         A resulting D20Roll object constructed with the dialog, or null if the
    *                                          dialog was closed
    */
-  async configureDialog({title, defaultRollMode, defaultAction=D20Roll.ADV_MODE.NORMAL, chooseModifier=false, skillLearning=false, spellLearning=false,
+  async configureDialog({title, defaultRollMode, defaultAction=D20Roll.ADV_MODE.NORMAL, chooseModifier=false, skillLearning=false, spellLearning=false, rollFocus=false,
     defaultAbility, template}={}, options={}) {
 
     // Render the Dialog inner HTML
@@ -155,6 +156,7 @@ export default class D20Roll extends Roll {
       chooseModifier,
       skillLearning,
       spellLearning,
+      rollFocus,
       defaultAbility,
       abilities: CONFIG.SKJAALD.abilities
     });
@@ -173,15 +175,15 @@ export default class D20Roll extends Roll {
         buttons: {
           advantage: {
             label: game.i18n.localize("SKJAALD.Advantage"),
-            callback: html => resolve(this._onDialogSubmit(html, D20Roll.ADV_MODE.ADVANTAGE, skillLearning, spellLearning))
+            callback: html => resolve(this._onDialogSubmit(html, D20Roll.ADV_MODE.ADVANTAGE, skillLearning, spellLearning, rollFocus))
           },
           normal: {
             label: game.i18n.localize("SKJAALD.Normal"),
-            callback: html => resolve(this._onDialogSubmit(html, D20Roll.ADV_MODE.NORMAL, skillLearning, spellLearning))
+            callback: html => resolve(this._onDialogSubmit(html, D20Roll.ADV_MODE.NORMAL, skillLearning, spellLearning, rollFocus))
           },
           disadvantage: {
             label: game.i18n.localize("SKJAALD.Disadvantage"),
-            callback: html => resolve(this._onDialogSubmit(html, D20Roll.ADV_MODE.DISADVANTAGE, skillLearning, spellLearning))
+            callback: html => resolve(this._onDialogSubmit(html, D20Roll.ADV_MODE.DISADVANTAGE, skillLearning, spellLearning, rollFocus))
           }
         },
         default: defaultButton,
@@ -199,7 +201,7 @@ export default class D20Roll extends Roll {
    * @returns {D20Roll}              This damage roll.
    * @private
    */
-  _onDialogSubmit(html, advantageMode, skillLearning, spellLearning) {
+  _onDialogSubmit(html, advantageMode, skillLearning, spellLearning, rollFocus) {
     const form = html[0].querySelector("form");
 
     // Append a Trainer bonus term
@@ -233,7 +235,6 @@ export default class D20Roll extends Roll {
       this.options.intensity = form.intensity.value;
     }
     if (form.useSpellCharge != undefined){
-      console.log(form.useSpellCharge);
       this.options.useSpellCharge = form.useSpellCharge.checked;
     }
     if (form.spellbookBonus != undefined){

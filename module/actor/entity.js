@@ -1499,23 +1499,16 @@ export default class Actor5e extends Actor {
    */
   async rollDeathSave(options={}) {
 
-    // Display a warning if we are not at zero HP or if we already have reached 3
-    const death = this.data.data.attributes.death;
-    if ( (this.data.data.attributes.hp.value > 0) || (death.failure >= 3) || (death.success >= 3)) {
-      ui.notifications.warn(game.i18n.localize("SKJAALD.DeathSaveUnnecessary"));
-      return null;
-    }
-
     // Evaluate a global saving throw bonus
     const parts = [];
     const data = this.getRollData();
     const speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
 
-    // Diamond Soul adds proficiency
-    if ( this.getFlag("skjaald", "diamondSoul") ) {
-      parts.push("@prof");
-      data.prof = new Proficiency(this.data.data.attributes.prof, 1).term;
-    }
+    // // Diamond Soul adds proficiency
+    // if ( this.getFlag("skjaald", "diamondSoul") ) {
+    //   parts.push("@prof");
+    //   data.prof = new Proficiency(this.data.data.attributes.prof, 1).term;
+    // }
 
     // Include a global actor ability save bonus
     const bonuses = foundry.utils.getProperty(this.data.data, "bonuses.abilities") || {};
@@ -1545,41 +1538,41 @@ export default class Actor5e extends Actor {
 
     let chatString;
 
-    // Save success
-    if ( success ) {
-      let successes = (death.success || 0) + 1;
+    // // Save success
+    // if ( success ) {
+    //   let successes = (death.success || 0) + 1;
 
-      // Critical Success = revive with 1hp
-      if ( d20 === 20 ) {
-        await this.update({
-          "data.attributes.death.success": 0,
-          "data.attributes.death.failure": 0,
-          "data.attributes.hp.value": 1
-        });
-        chatString = "SKJAALD.DeathSaveCriticalSuccess";
-      }
+    //   // Critical Success = revive with 1hp
+    //   if ( d20 === 20 ) {
+    //     await this.update({
+    //       "data.attributes.death.success": 0,
+    //       "data.attributes.death.failure": 0,
+    //       "data.attributes.hp.value": 1
+    //     });
+    //     chatString = "SKJAALD.DeathSaveCriticalSuccess";
+    //   }
 
-      // 3 Successes = survive and reset checks
-      else if ( successes === 3 ) {
-        await this.update({
-          "data.attributes.death.success": 0,
-          "data.attributes.death.failure": 0
-        });
-        chatString = "SKJAALD.DeathSaveSuccess";
-      }
+    //   // 3 Successes = survive and reset checks
+    //   else if ( successes === 3 ) {
+    //     await this.update({
+    //       "data.attributes.death.success": 0,
+    //       "data.attributes.death.failure": 0
+    //     });
+    //     chatString = "SKJAALD.DeathSaveSuccess";
+    //   }
 
-      // Increment successes
-      else await this.update({"data.attributes.death.success": Math.clamped(successes, 0, 3)});
-    }
+    //   // Increment successes
+    //   else await this.update({"data.attributes.death.success": Math.clamped(successes, 0, 3)});
+    // }
 
-    // Save failure
-    else {
-      let failures = (death.failure || 0) + (d20 === 1 ? 2 : 1);
-      await this.update({"data.attributes.death.failure": Math.clamped(failures, 0, 3)});
-      if ( failures >= 3 ) {  // 3 Failures = death
-        chatString = "SKJAALD.DeathSaveFailure";
-      }
-    }
+    // // Save failure
+    // else {
+    //   let failures = (death.failure || 0) + (d20 === 1 ? 2 : 1);
+    //   await this.update({"data.attributes.death.failure": Math.clamped(failures, 0, 3)});
+    //   if ( failures >= 3 ) {  // 3 Failures = death
+    //     chatString = "SKJAALD.DeathSaveFailure";
+    //   }
+    // }
 
     // Display success/failure chat message
     if ( chatString ) {
@@ -1674,8 +1667,9 @@ export default class Actor5e extends Actor {
     let intensity = parseInt(roll.options.intensity);
     let pass = false;
     let finalChat = "";
+    var advantageMode = roll.options.advantageMode;
+    var doubleAdvantage = false;
 
-    console.log(skillLevel);
 
     // set prof bonus
     if (skillLevel == 1){
@@ -1708,10 +1702,10 @@ export default class Actor5e extends Actor {
       //Get hours trained
       if(roll.options.hours ===""){
       //ui notification
-      ui.notifications.info(`So you're training for 0 hours? hmmmmm....`, {permanent: false});
+      ui.notifications.info(`Welp, you can't get much done in 0 hours, can you.`, {permanent: false});
       hours = 0;
       //chat message
-      chatString = "So you're training for 0 hours? hmmmmm....";
+      chatString = "Welp, you can't get much done in 0 hours, can you.";
       let chatData = { content: game.i18n.format(chatString, {name: this.name}), speaker };
       ChatMessage.applyRollMode(chatData, roll.options.rollMode);
       await ChatMessage.create(chatData);
@@ -1719,46 +1713,124 @@ export default class Actor5e extends Actor {
     } else {
       hours = parseInt(roll.options.hours);
     }
+    // get conseq bonus
+    consecBonus = parseInt((item.data.data.learning.conseqBonus));
 
-    // update conseq bonus
-    if(lastLearned == item.data._id){ // check if conseq bonus applies to roll
-      consecBonus = parseInt((item.data.data.learning.conseqBonus)) + 1;
-      await item.update({"data.learning.conseqBonus": (parseInt(item.data.data.learning.conseqBonus) + 1)});
-    } 
-    else{
-      //save last learned
-      const oldLastLearn = lastLearned;
-      // update the lastLearnedID & name
-      await this.update({"data.attributes.learning.lastLearnedID": [item.data._id], "data.attributes.learning.lastLearnedName": [item.data.name]});
-      // remove conseq bonus from previous skill
-      if (oldLastLearn != ""){ // check if last item has a value - Has character learned something before or is there nothing to update yet
-        let lastItem = this.items.get(oldLastLearn[0]);
-        if (lastItem != undefined){ // check if last item has been deleted
-          await lastItem.update({"data.learning.conseqBonus": 0});
-        }
-      }
-      //increment conseqBonus
-      item.update({"data.learning.conseqBonus": (item.data.data.learning.conseqBonus + 1)});
-    }
 
     //determine trainer Bonus
     var trainerBonus = roll.terms[14].total;
     if (roll.terms[13].operator === "-"){
       trainerBonus = -trainerBonus;
     }
-    
- 
+
+    // determine if need to modify advantageMode
+    if(intensity == 2){
+      advantageMode += 1;
+    }
+
+    // resolve advantage/disadvantage
+
+    if (advantageMode == 1){
+      // Advantage Roll
+        //d20
+        if(roll1 > roll2){
+          selectedRoll = roll1;
+          otherRoll = roll2;
+        } else if (roll2 > roll1){
+          selectedRoll = roll2;
+          otherRoll = roll1;
+        } else if (roll1 == roll2){
+          selectedRoll = roll1;
+          otherRoll = roll2;
+        } else{
+          console.log("error selecting advantage roll");
+        }
+        //d100
+        if(percentile > percentile2){
+          selectedPercentile = percentile;
+          otherPercentile = percentile2;
+        } else if (percentile2 > percentile){
+          selectedPercentile = percentile2;
+          otherPercentile = percentile;
+        } else if (percentile == percentile2){
+          selectedPercentile = percentile;
+          otherPercentile = percentile2;
+        } else{
+          console.log("error selecting advantage roll");
+        }
+    } else if(advantageMode == 0){
+      //Normal Roll
+      selectedRoll = roll1;
+      selectedPercentile = percentile;
+    } else if(advantageMode == -1){
+      // Disadvantage Roll
+      //d20
+      if(roll1 < roll2){
+        selectedRoll = roll1;
+        otherRoll = roll2;
+      } else if (roll1 > roll2){
+        selectedRoll = roll2;
+        otherRoll = roll1;
+      } else if (roll1 == roll2){
+        selectedRoll = roll1;
+        otherRoll = roll2;
+      } else{
+        console.log("error selecting disadvantage roll");
+      }
+      //d100
+      if(percentile < percentile2){
+        selectedPercentile = percentile;
+        otherPercentile = percentile2;
+      } else if (percentile > percentile2){
+        selectedPercentile = percentile2;
+        otherPercentile = percentile;
+      } else if (percentile == percentile2){
+        selectedPercentile = percentile;
+        otherPercentile = percentile2;
+      } else{
+        console.log("error selecting disadvantage roll");
+      }
+    } else if(advantageMode == 2){
+      // Double Advantage
+      doubleAdvantage = true;
+      if(roll1 > roll2){
+        selectedRoll = roll1;
+        otherRoll = roll2;
+      } else if (roll2 > roll1){
+        selectedRoll = roll2;
+        otherRoll = roll1;
+      } else if (roll1 == roll2){
+        selectedRoll = roll1;
+        otherRoll = roll2;
+      } else{
+        console.log("error selecting double advantage roll");
+      }
+      //d100
+      if(percentile > percentile2){
+        selectedPercentile = percentile;
+        otherPercentile = percentile2;
+      } else if (percentile2 > percentile){
+        selectedPercentile = percentile2;
+        otherPercentile = percentile;
+      } else if (percentile == percentile2){
+        selectedPercentile = percentile;
+        otherPercentile = percentile2;
+      } else{
+        console.log("error selecting double advantage roll");
+      }
+    } else{
+      console.log("AdvantageMode Error...");
+      ui.notifications.info("Something went wrong when calculating your advantage/disadvantage type.... Damnit, Catharine!", {permanent: false});
+      chatString = "Spell Learning: " + spellName + "<br><br>ALERT! TECHNICAL ERROR! What'd you mess up this time Catharine?";
+      let chatData = { content: game.i18n.format(chatString, {name: this.name}), speaker };
+      ChatMessage.applyRollMode(chatData, roll.options.rollMode);
+      await ChatMessage.create(chatData); 
+    }
 
     //Deterimine Pass/Fail 
     
     if(intensity == 0){
       // Light training
-
-
-      selectedRoll = roll1;
-      selectedPercentile = percentile;
-      otherRoll = roll2;
-      otherPercentile = percentile2;
 
       calculatedRoll = selectedRoll + selectedPercentile + abilityMod + profBonus + consecBonus + trainerBonus;
 
@@ -1792,20 +1864,46 @@ export default class Actor5e extends Actor {
           hours = hours;
         }
         pass=true;
-        finalChat += "Successful Light Training!<br>d100: " + selectedPercentile + "<br>d20: " + selectedRoll + "<br>Trainer Bonus: "+ trainerBonus + "<br>Consecutive Bonus: " + consecBonus + "<br>Ability Mod: " + abilityMod + "<br>Proficiency: " + profBonus + "<br>Total: " + calculatedRoll + "<br>";
-        finalChat += "<br><br>You've comepleted " + hours + " hours of training";
+        finalChat += "<b><u>Learning: " + itemName + "</u></b>";
+        finalChat += "<br>Successful Light Training!";
+        finalChat += "<br><br>You've completed " + hours + " hours of training";
+        if(advantageMode == -1){
+          finalChat += "<br><br>Rolled with Disadvantage";
+        }else if(advantageMode == 1){
+          finalChat += "<br><br>Rolled with Advantage";
+        }else if(advantageMode == 2){
+          finalChat += "<br><br>Rolled with 2x Advantage";
+        }
+        finalChat += "<br><br>d100: " + selectedPercentile + "<br>d20: " + selectedRoll + "<br>Trainer Bonus: "+ trainerBonus + "<br>Consecutive Bonus: " + consecBonus + "<br>Ability Mod: " + abilityMod + "<br>Proficiency: " + profBonus + "<br>Total: " + calculatedRoll + "<br>";
+        
+        if(advantageMode == -1 || advantageMode == 1 || advantageMode == 2){
+          finalChat += "<br><br><u>Other Rolls:</u><br>d100: " + otherPercentile + "<br>d20: " + otherRoll;
+        }
       }else{
         console.log("Failed DC");
-        hours = hours * 0.5;
+        hours = hours * .5;
         if(doubleCrit == true){
           hours = hours + (hours * 100);
         }else if(crit == true){
           hours = hours + hours;
         }else{
-          hours = .5 * hours;
+          hours = hours;
         }
-        finalChat += "Failed Light Training....<br>d100: " + selectedPercentile + "<br>d20: " + selectedRoll + "<br>Trainer Bonus: "+ trainerBonus + "<br>Consecutive Bonus: " + consecBonus + "<br>Ability Mod: " + abilityMod + "<br>Proficiency: " + profBonus + "<br>Total: " + calculatedRoll + "<br>";
-        finalChat += "<br><br>You've comepleted " + hours + " hours of training";
+        finalChat += "<b><u>Learning: " + itemName + "</u></b><br>";
+        finalChat += "Failed Light Training....";
+        finalChat += "<br><br>You've completed " + hours + " hours of training";
+        if(advantageMode == -1){
+          finalChat += "<br><br>Rolled with Disadvantage";
+        }else if(advantageMode == 1){
+          finalChat += "<br><br>Rolled with Advantage";
+        }else if(advantageMode == 2){
+          finalChat += "<br><br>Rolled with 2x Advantage";
+        }
+        finalChat += "<br><br>d100: " + selectedPercentile + "<br>d20: " + selectedRoll + "<br>Trainer Bonus: "+ trainerBonus + "<br>Consecutive Bonus: " + consecBonus + "<br>Ability Mod: " + abilityMod + "<br>Proficiency: " + profBonus + "<br>Total: " + calculatedRoll + "<br>";
+        
+        if(advantageMode == -1 || advantageMode == 1 || advantageMode == 2){
+          finalChat += "<br><br><u>Other Rolls:</u><br>d100: " + otherPercentile + "<br>d20: " + otherRoll;
+        }
       }
     } else if(intensity == 1){
       // Heavy Training
@@ -1815,7 +1913,6 @@ export default class Actor5e extends Actor {
         minHours = true;
       } else {
         ui.notifications.info(`Hey! ` + hours + " hours doesn't qualify as Heavy Training! You must spend at least 5 hours training for it to be conisdered Heavy.", {permanent: false});
-        console.log("[TO DO: add error message] Not enough hours for type of training");
         //chat message
         chatString = "Hey! " + hours + " hours doesn't qualify as Heavy Training! You must spend at least 5 hours training for it to be conisdered Heavy.";
         let chatData = { content: game.i18n.format(chatString, {name: this.name}), speaker };
@@ -1823,12 +1920,7 @@ export default class Actor5e extends Actor {
         await ChatMessage.create(chatData); 
         return;
       }
-
-      selectedRoll = roll1;
-      selectedPercentile = percentile;
-      otherRoll = roll2;
-      otherPercentile = percentile2;
-
+      console.log(selectedRoll)
       if(selectedRoll == 20 || selectedPercentile == 100){
         crit = true;
       }
@@ -1848,19 +1940,46 @@ export default class Actor5e extends Actor {
             hours = hours * 5;
         }
         pass = true;
-        finalChat += "Successful Heavy Training!<br>d100: " + selectedPercentile + "<br>d20: " + selectedRoll + "<br>Trainer Bonus: "+ trainerBonus + "<br>Consecutive Bonus: " + consecBonus + "<br>Ability Mod: " + abilityMod + "<br>Proficiency: " + profBonus + "<br>Total: " + calculatedRoll + "<br>";
-        finalChat += "<br><br>You've comepleted " + hours + " hours of training";
+        finalChat += "<b><u>Learning: " + itemName + "</u></b><br>";
+        finalChat += "Successful Heavy Training!";
+        finalChat += "<br>You've completed " + hours + " hours of training";
+        if(advantageMode == -1){
+          finalChat += "<br><br>Rolled with Disadvantage";
+        }else if(advantageMode == 1){
+          finalChat += "<br><br>Rolled with Advantage";
+        }else if(advantageMode == 2){
+          finalChat += "<br><br>Rolled with 2x Advantage";
+        }
+        finalChat += "<br><br>d100: " + selectedPercentile + "<br>d20: " + selectedRoll + "<br>Trainer Bonus: "+ trainerBonus + "<br>Consecutive Bonus: " + consecBonus + "<br>Ability Mod: " + abilityMod + "<br>Proficiency: " + profBonus + "<br>Total: " + calculatedRoll + "<br>";
+        
+        if(advantageMode == -1 || advantageMode == 1 || advantageMode == 2){
+          finalChat += "<br><br><u>Other Rolls:</u><br>d100: " + otherPercentile + "<br>d20: " + otherRoll;
+        }
      }else{
         console.log("failed DC");
+        hours = hours * .5;
         if(doubleCrit == true){
-            hours = ((hours * .5) * 5) + (100 * hours);
+            hours = hours + (100 * hours);
         }else if(crit == true){
-            hours = (hours * .5) * 5;
+            hours = hours + hours;
         }else{
-            hours = .5 * hours;
+            hours = hours;
         }
-        finalChat += "Failed Heavy Training....<br>d100: " + selectedPercentile + "<br>d20: " + selectedRoll + "<br>Trainer Bonus: "+ trainerBonus + "<br>Consecutive Bonus: " + consecBonus + "<br>Ability Mod: " + abilityMod + "<br>Proficiency: " + profBonus + "<br>Total: " + calculatedRoll + "<br>";
-        finalChat += "<br><br>You've comepleted " + hours + " hours of training";
+        finalChat += "<b><u>Learning: " + itemName + "</u></b><br>";
+        finalChat += "Failed Heavy Training....";
+        finalChat += "<br>You've completed " + hours + " hours of training";
+        if(advantageMode == -1){
+          finalChat += "<br><br>Rolled with Disadvantage";
+        }else if(advantageMode == 1){
+          finalChat += "<br><br>Rolled with Advantage";
+        }else if(advantageMode == 2){
+          finalChat += "<br><br>Rolled with 2x Advantage";
+        }
+        finalChat += "<br><br>d100: " + selectedPercentile + "<br>d20: " + selectedRoll + "<br>Trainer Bonus: "+ trainerBonus + "<br>Consecutive Bonus: " + consecBonus + "<br>Ability Mod: " + abilityMod + "<br>Proficiency: " + profBonus + "<br>Total: " + calculatedRoll + "<br>";
+        
+        if(advantageMode == -1 || advantageMode == 1 || advantageMode == 2){
+          finalChat += "<br><br><u>Other Rolls:</u><br>d100: " + otherPercentile + "<br>d20: " + otherRoll;
+        }
       }
 
     } else if(intensity == 2){
@@ -1885,7 +2004,6 @@ export default class Actor5e extends Actor {
                 return;
             }else{
                 fatigue = fatigue + exhaustion;
-                console.log(data);
                 this.update({"data.attributes.exhaustion.fatigue.value": fatigue});
             }
             if(hours >= 8){
@@ -1900,27 +2018,7 @@ export default class Actor5e extends Actor {
               await ChatMessage.create(chatData); 
               return;
             }
-            if(roll1 > roll2){
-                selectedRoll = roll1;
-                otherRoll = roll2;
-            }else if(roll2 > roll1){
-                selectedRoll = roll2;
-                otherRoll = roll1;
-            }else{
-                selectedRoll = roll1;
-                otherRoll = roll2;
-            }
-            if(percentile > percentile2){
-                selectedPercentile = percentile;
-                otherPercentile = percentile2;
-            }else if(percentile2 > percentile){
-                selectedPercentile = percentile2;
-                otherPercentile = percentile;
-            }else{
-                selectedPercentile = percentile;
-                otherPercentile = percentile2;
-            }
-
+            
             if(selectedRoll == 20 || selectedPercentile == 100){
                 crit = true;
             }
@@ -1929,6 +2027,9 @@ export default class Actor5e extends Actor {
             }
 
             calculatedRoll = selectedRoll + selectedPercentile + abilityMod + profBonus + consecBonus + trainerBonus;
+            if(doubleAdvantage){
+              calculatedRoll += 2;
+            }
 
             if(calculatedRoll >= 100){
                 console.log("Passed DC");
@@ -1940,19 +2041,55 @@ export default class Actor5e extends Actor {
                     hours = hours * 10;
                 }
                 pass = true;
-                finalChat += "Successful Exhuastive Training!<br>d100: " + selectedPercentile + "<br>d20: " + selectedRoll + "<br>Trainer Bonus: "+ trainerBonus + "<br>Consecutive Bonus: " + consecBonus + "<br>Ability Mod: " + abilityMod + "<br>Proficiency: " + profBonus + "<br>Total: " + calculatedRoll + "<br>";
-                finalChat += "<br><br>You've comepleted " + hours + " hours of training<br>Fatigue levels Gained: " + exhaustion;        
+                finalChat += "<b><u>Learning: " + itemName + "</u></b><br>";
+                finalChat += "Successful Exhuastive Training!";
+                finalChat += "<br>You've completed " + hours + " hours of training<br>Fatigue levels Gained: " + exhaustion;   
+                if(advantageMode == -1){
+                  finalChat += "<br><br>Rolled with Disadvantage";
+                }else if(advantageMode == 1){
+                  finalChat += "<br><br>Rolled with Advantage";
+                }else if(advantageMode == 2){
+                  finalChat += "<br><br>Rolled with 2x Advantage";
+                }  
+                finalChat += "<br><br>d100: " + selectedPercentile + "<br>d20: " + selectedRoll + "<br>Trainer Bonus: "+ trainerBonus + "<br>Consecutive Bonus: " + consecBonus + "<br>Ability Mod: " + abilityMod + "<br>Proficiency: " + profBonus;
+                if(doubleAdvantage){
+                  finalChat += "<br>Advantage Bonus: 2";
+                }
+                finalChat += "<br>Total: " + calculatedRoll + "<br>";
+                
+                if(advantageMode == -1 || advantageMode == 1 || advantageMode == 2){
+                  finalChat += "<br><br><u>Other Rolls:</u><br>d100: " + otherPercentile + "<br>d20: " + otherRoll;
+                }   
             }else{
                 console.log("failed DC");
+                hours = hours * .5;
                 if(doubleCrit == true){
-                    hours = ((hours * .5) * 10) + (100 * hours);
+                    hours = hours + (100 * hours);
                 }else if(crit == true){
-                    hours = (hours * .5) * 10;
+                    hours = hours + hours;
                 }else{
-                    hours = .5 * hours;
+                    hours = hours;
                 }
-                finalChat += "Failed Exhuastive Training!<br>d100: " + selectedPercentile + "<br>d20: " + selectedRoll + "<br>Trainer Bonus: "+ trainerBonus + "<br>Consecutive Bonus: " + consecBonus + "<br>Ability Mod: " + abilityMod + "<br>Proficiency: " + profBonus + "<br>Total: " + calculatedRoll + "<br>";
-                finalChat += "<br><br>You've comepleted " + hours + " hours of training<br>Fatigue levels Gained: " + exhaustion;
+                finalChat += "<b><u>Learning: " + itemName + "</u></b>";
+                finalChat += "<br>Failed Exhaustive Training..."
+                finalChat += "<br>You've completed " + hours + " hours of training<br>Fatigue levels Gained: " + exhaustion + "<br>";
+
+                if(advantageMode == -1){
+                  finalChat += "<br>Rolled with Disadvantage";
+                }else if(advantageMode == 1){
+                  finalChat += "<br>Rolled with Advantage";
+                }else if(advantageMode == 2){
+                  finalChat += "<br>Rolled with 2x Advantage";
+                }
+                finalChat += "<br>d100: " + selectedPercentile + "<br>d20: " + selectedRoll + "<br>Trainer Bonus: "+ trainerBonus + "<br>Consecutive Bonus: " + consecBonus + "<br>Ability Mod: " + abilityMod + "<br>Proficiency: " + profBonus;
+                if(doubleAdvantage){
+                  finalChat += "<br>Advantage Bonus: 2";
+                }
+                finalChat += "<br>Total: " + calculatedRoll;
+
+                if(advantageMode == -1 || advantageMode == 1 || advantageMode == 2){
+                  finalChat += "<br><br><u>Other Rolls:</u><br>d100: " + otherPercentile + "<br>d20: " + otherRoll;
+                }
             }
 
     } else{
@@ -1961,7 +2098,6 @@ export default class Actor5e extends Actor {
 
     //update hours needed based on roll
     newHoursNeeded = originalHours - hours;
-    console.log(newHoursNeeded);
     if (newHoursNeeded < 0){
       newHoursNeeded = 0;
     }
@@ -1981,9 +2117,8 @@ export default class Actor5e extends Actor {
       skillLevelWord = "A Master";
     }
 
-    console.log(item.data);
     if(newHoursNeeded == 0){
-      chatString = "Wooooooo! Congratulations! You are now " + skillLevelWord + " at " + itemName + ".<br><br>Please Note: You will need to manually make this change to your character sheet. This automation has not been set up yet.";
+      chatString = "Wooooooo! Congratulations! You are now " + skillLevelWord + " at " + itemName + ".";
       let chatData = { content: game.i18n.format(chatString, {name: this.name}), speaker };
       ChatMessage.applyRollMode(chatData, roll.options.rollMode);
       await ChatMessage.create(chatData); 
@@ -1997,6 +2132,27 @@ export default class Actor5e extends Actor {
     let chatData = { content: game.i18n.format(finalChat, {name: this.name}), speaker };
     ChatMessage.applyRollMode(chatData, roll.options.rollMode);
     await ChatMessage.create(chatData); 
+
+    // update conseq bonus
+    if(lastLearned == item.data._id){ // check if conseq bonus applies to roll
+      consecBonus = parseInt((item.data.data.learning.conseqBonus)) + 1;
+      await item.update({"data.learning.conseqBonus": (parseInt(item.data.data.learning.conseqBonus) + 1)});
+    } 
+    else{
+      //save last learned
+      const oldLastLearn = lastLearned;
+      // update the lastLearnedID & name
+      await this.update({"data.attributes.learning.lastLearnedID": [item.data._id], "data.attributes.learning.lastLearnedName": [item.data.name]});
+      // remove conseq bonus from previous skill
+      if (oldLastLearn != ""){ // check if last item has a value - Has character learned something before or is there nothing to update yet
+        let lastItem = this.items.get(oldLastLearn[0]);
+        if (lastItem != undefined){ // check if last item has been deleted
+          await lastItem.update({"data.learning.conseqBonus": 0});
+        }
+      }
+      //increment conseqBonus
+      item.update({"data.learning.conseqBonus": (item.data.data.learning.conseqBonus + 1)});
+    }
 
     return roll;
   }
@@ -2063,8 +2219,8 @@ export default class Actor5e extends Actor {
     var dc = 0;
     var profBonus = 0;
     var rollOutput;
-    var originalHours = item.data.data.learning.hoursNeeded;
-    var originalArcana = 0;
+    var totalHoursNeeded = item.data.data.learning.hoursTotal;
+    var totalArcanaNeeded = item.data.data.learning.arcanaTotal;
     var newHoursNeeded = 0;
     var newArcanaNeeded = 0;
     var hoursLearned = 0;
@@ -2089,22 +2245,31 @@ export default class Actor5e extends Actor {
     var templatePathName = "";
     var noTemplatePaths = false;
     var itemList = actor.items;
+    var spellName = item.data.name;
 
-    console.log(data);
-    console.log(item);
 
     // Calculate DC for roll
     dc = 10 + (2 * spellLevel);
+
+    // check for use spell charge
+    var useSpellCharge = roll.options.useSpellCharge;
+
+    if(useSpellCharge === false){
+      advantageMode -= 1;
+    }
 
     // resolve advantage/disadvantage
     if (advantageMode == 1){
       // Advantage Roll
         if(roll1 > roll2){
           selectedRoll = roll1;
+          otherRoll = roll2;
         } else if (roll2 > roll1){
           selectedRoll = roll2;
+          otherRoll = roll1;
         } else if (roll1 == roll2){
           selectedRoll = roll1;
+          otherRoll = roll2;
         } else{
           console.log("error selecting advantage roll");
         }
@@ -2115,52 +2280,78 @@ export default class Actor5e extends Actor {
       // Disadvantage Roll
       if(roll1 < roll2){
         selectedRoll = roll1;
+        otherRoll = roll2;
       } else if (roll1 > roll2){
         selectedRoll = roll2;
+        otherRoll = roll1;
       } else if (roll1 == roll2){
         selectedRoll = roll1;
+        otherRoll = roll2;
+      } else{
+        console.log("error selecting disadvantage roll");
+      }
+    } else if(advantageMode == -2){
+      // Double Disadvantage
+      if(roll1 < roll2){
+        selectedRoll = roll1;
+        otherRoll = roll2;
+      } else if (roll1 > roll2){
+        selectedRoll = roll2;
+        otherRoll = roll1;
+      } else if (roll1 == roll2){
+        selectedRoll = roll1;
+        otherRoll = roll2;
       } else{
         console.log("error selecting disadvantage roll");
       }
     } else{
       console.log("AdvantageMode Error...");
+      ui.notifications.info("Something went wrong when calculating your advantage/disadvantage type.... Damnit, Catharine!", {permanent: false});
+      chatString = "Spell Learning: " + spellName + "<br><br>ALERT! TECHNICAL ERROR! What'd you mess up this time Catharine?";
+      let chatData = { content: game.i18n.format(chatString, {name: this.name}), speaker };
+      ChatMessage.applyRollMode(chatData, roll.options.rollMode);
+      await ChatMessage.create(chatData); 
     }
-
-    console.log("Selected Roll: " + selectedRoll + " Other Roll: " + roll1 + "/" + roll2);
 
     // check for crit
     if(selectedRoll == 20){
-      console.log("Crit");
+      console.log("Crit!");
       crit = true;
     }
 
     //calculate final arcana value
+    if(advantageMode == -2){
+      totalArcana = selectedRoll + arcanabonus - 2;
+    } else{
     totalArcana = selectedRoll + arcanabonus;
-    console.log("calculatedRoll: " + selectedRoll);
-    console.log("arcanabonus: " + arcanabonus);
+    }
 
-    console.log("total arcana: " + totalArcana);
 
     // Get Wizard Level
     var classes = data.classes;
     for (const key in classes) {
       if (key == "Wizard" || key == "wizard"){
-        console.log("Wizard Class Found");
         if(wizLevel == 0){
-          console.log("Wizard Level Found");
           wizLevel = `${classes[key].levels}`;
           wizLevel = parseInt(wizLevel);
-          console.log("wiz Level: ");
         } else{
           console.log("Error Multiple Wizard Levels Found");
-          console.log("TO DO: Alert message for Wizard Level Error - multiple classes found?");
+          ui.notifications.info("Wow! You're talented enough to be a wizard twice? Must not be THAT good if you're still trying to learn spells.... Go check your classes!", {permanent: false});
+          chatString = "Spell Learning: " + spellName + "<br><br>Roll Cancelled<br>Wow! You're talented enough to be a wizard twice? Why are you still trying to learn spells???<br><br> You have multiple wizrd classes. Go delete one please.";
+          let chatData = { content: game.i18n.format(chatString, {name: this.name}), speaker };
+          ChatMessage.applyRollMode(chatData, roll.options.rollMode);
+          await ChatMessage.create(chatData); 
           return;
         }
       }
     }
     if(wizLevel == 0){
-      console.log("No Wizard Class found");
-      console.log("TO DO: Alert message for no Wizard Class found");
+      console.log("Error: No Wizard Class found");
+      ui.notifications.info("You're NOT a wizard, Harry! Go check your classes!", {permanent: false});
+      chatString = "Spell Learning: " + spellName + "<br><br>Roll Cancelled<br>You're not a wizard, Harry!<br><br> No wizard level found. Please make sure you have a wizard class, and that the class name is spelled correctly.";
+      let chatData = { content: game.i18n.format(chatString, {name: this.name}), speaker };
+      ChatMessage.applyRollMode(chatData, roll.options.rollMode);
+      await ChatMessage.create(chatData); 
       return;
     }
 
@@ -2170,7 +2361,27 @@ export default class Actor5e extends Actor {
       console.log("Passed DC");
     } else{
       console.log("Failed DC");
-      console.log("TO DO: Chat Message for failed learning roll");
+
+      // chat message
+      chatString = "Spell Learning: " + spellName + "<br><br>Better luck next time!<br>DC Failed. No learning accomplished.<br><br>";
+      if(advantageMode == 1 || advantageMode == -1){
+        chatString += "D20: " + selectedRoll + "<br>Other D20: " + otherRoll;
+      } else if(advantageMode == 0){
+        chatString += "D20: " + selectedRoll;
+      }else if(advantageMode == -2){
+        chatString += "D20: " + selectedRoll + "<br>Other D20: " + otherRoll + "<br>Additional Disadvantage Modifier: -2";
+      } else {
+        chatString += "Error configuring chat message";
+      }
+      chatString += "<br>Arcana bonus: " + arcanabonus + "<br><br>Roll Calculation: D20 + Arcana bonus<br>" + selectedRoll + " + "  + arcanabonus;
+      if(advantageMode == -2){
+        chatString += " - 2";
+      }
+      chatString += " = " + totalArcana + "<br>DC: " + dc;
+      let chatData = { content: game.i18n.format(chatString, {name: this.name}), speaker };
+      ChatMessage.applyRollMode(chatData, roll.options.rollMode);
+      await ChatMessage.create(chatData); 
+
       return;
     }
 
@@ -2183,93 +2394,95 @@ export default class Actor5e extends Actor {
     // template knowledge - add/subtract from base arcana value - does not effect hours - no modifier if there are no templates to spell
       // modifier # template spells known - not known
 
-    // iterate through template paths
-    for (const [key, value] of Object.entries(templatePaths)){
-      var spells = value.spells;
-      var unknownSpells = 0;
-      var knownSpells = 0;
-      // iterate through template spells
-      for (const [key2, value2] of Object.entries(spells)){
-        var spellName = value2.name;
-        var spellKnown = false;
-        //iternate through items to find spells
-        itemList.forEach(item => {
-          // if item is a spell check if match
-          if (item.data.type == "spell"){
-            // if spell matches template spell
-            if ((item.data.name).toLowerCase() === spellName.toLowerCase()){
-              var minimumLevel = value2.minLevel;
-              var learned = item.data.data.learned;
-              //if minimum level is N/A add to known else factor in minimum level
-              if(minimumLevel == -1){
-                if(learned.cantrip === true || learned.one === true || learned.two === true || learned.three === true || learned.four === true || learned.five === true || learned.six === true || learned.seven === true || learned.eight === true || learned.nine === true || learned.ten === true || learned.eleven === true || learned.twelve === true || learned.thirteen === true){
-                  spellKnown = true;
-                }
-              } else{
-                var maxLevelKnown = -1;
-                if(learned.cantrip === true){
-                  maxLevelKnown = 0;
-                }
-                if(learned.one === true){
-                  maxLevelKnown = 1;
-                }
-                if(learned.two === true){
-                  maxLevelKnown = 2;
-                }
-                if(learned.three === true){
-                  maxLevelKnown = 3;
-                }
-                if(learned.four === true){
-                  maxLevelKnown = 4;
-                }
-                if(learned.five === true){
-                  maxLevelKnown = 5;
-                }
-                if(learned.six === true){
-                  maxLevelKnown = 6;
-                }
-                if(learned.seven === true){
-                  maxLevelKnown = 7;
-                }
-                if(learned.eight === true){
-                  maxLevelKnown = 8;
-                }
-                if(learned.nine === true){
-                  maxLevelKnown = 9;
-                }
-                if(learned.ten === true){
-                  maxLevelKnown = 10;
-                }
-                if(learned.eleven === true){
-                  maxLevelKnown = 11;
-                }
-                if(learned.twelve === true){
-                  maxLevelKnown = 12;
-                }
-                if(learned.thirteen === true){
-                  maxLevelKnown = 13;
-                }
-                if (maxLevelKnown >= minimumLevel){
-                  spellKnown += 1;
-                }
-              }
+    if(templatePaths != undefined){
 
+      // iterate through template paths
+      for (const [key, value] of Object.entries(templatePaths)){
+        var spells = value.spells;
+        var unknownSpells = 0;
+        var knownSpells = 0;
+        // iterate through template spells
+        for (const [key2, value2] of Object.entries(spells)){
+          var spellName = value2.name;
+          var spellKnown = false;
+          //iternate through items to find spells
+          itemList.forEach(item => {
+            // if item is a spell check if match
+            if (item.data.type == "spell"){
+              // if spell matches template spell
+              if ((item.data.name).toLowerCase() === spellName.toLowerCase()){
+                var minimumLevel = value2.minLevel;
+                var learned = item.data.data.learned;
+                //if minimum level is N/A add to known else factor in minimum level
+                if(minimumLevel == -1){
+                  if(learned.cantrip === true || learned.one === true || learned.two === true || learned.three === true || learned.four === true || learned.five === true || learned.six === true || learned.seven === true || learned.eight === true || learned.nine === true || learned.ten === true || learned.eleven === true || learned.twelve === true || learned.thirteen === true){
+                    spellKnown = true;
+                  }
+                } else{
+                  var maxLevelKnown = -1;
+                  if(learned.cantrip === true){
+                    maxLevelKnown = 0;
+                  }
+                  if(learned.one === true){
+                    maxLevelKnown = 1;
+                  }
+                  if(learned.two === true){
+                    maxLevelKnown = 2;
+                  }
+                  if(learned.three === true){
+                    maxLevelKnown = 3;
+                  }
+                  if(learned.four === true){
+                    maxLevelKnown = 4;
+                  }
+                  if(learned.five === true){
+                    maxLevelKnown = 5;
+                  }
+                  if(learned.six === true){
+                    maxLevelKnown = 6;
+                  }
+                  if(learned.seven === true){
+                    maxLevelKnown = 7;
+                  }
+                  if(learned.eight === true){
+                    maxLevelKnown = 8;
+                  }
+                  if(learned.nine === true){
+                    maxLevelKnown = 9;
+                  }
+                  if(learned.ten === true){
+                    maxLevelKnown = 10;
+                  }
+                  if(learned.eleven === true){
+                    maxLevelKnown = 11;
+                  }
+                  if(learned.twelve === true){
+                    maxLevelKnown = 12;
+                  }
+                  if(learned.thirteen === true){
+                    maxLevelKnown = 13;
+                  }
+                  if (maxLevelKnown >= minimumLevel){
+                    spellKnown += 1;
+                  }
+                }
+
+              }
             }
+          })
+          if(spellKnown === true){
+            knownSpells += 1;
+          }else{
+            unknownSpells += 1;
           }
-        })
-        if(spellKnown === true){
-          knownSpells += 1;
-        }else{
-          unknownSpells += 1;
+        }
+        var currentModifier = knownSpells - unknownSpells;
+        if (currentModifier > templateModifier){
+          templateModifier = currentModifier;
+          templatePathName = value.name;
         }
       }
-      var currentModifier = knownSpells - unknownSpells;
-      if (currentModifier > templateModifier){
-        templateModifier = currentModifier;
-        templatePathName = value.name;
-      }
     }
-
     // base values (include crit & template)
     if (templateModifier == -1000){
       baseArcana = totalArcana;
@@ -2279,21 +2492,15 @@ export default class Actor5e extends Actor {
      baseArcana = totalArcana + templateModifier;
     }
 
-    console.log("templateModifier: " + templateModifier);
-    console.log("baseArcana: " + baseArcana);
-    console.log("base hours: " + baseHours);
+
 
 
     // resolve pillars from base
 
     var knownPillar =  data.spell.pillar;
-    console.log(knownPillar);
     var knownSpec = data.spell.specialty;
-    console.log(knownSpec);
     var knownMinor1 = data.spell.minor1;
     var knownMinor2 = data.spell.minor2;
-    console.log(knownMinor1);
-    console.log(knownMinor2);
     var pillarMatch = false;
     var specMatch = false;
     var minorMatch = false;
@@ -2314,31 +2521,24 @@ export default class Actor5e extends Actor {
     }
     // Check for Pillar Match
     if (knownPillar !== "none"){
-      console.log("Pillar selected");
       var spellPillar = [];
       if(item.data.data.school.abj || item.data.data.school.evo){
         spellPillar.push("arc");
-        console.log("Arcane Pillar");
       }
       if (item.data.data.school.con|| item.data.data.school.trs){
         spellPillar.push("mas");
-        console.log("Mass Pillar");
       }
       if(item.data.data.school.nec || item.data.data.school.bio){
         spellPillar.push("ess");
-        console.log("Essence Pillar");
       }
       if(item.data.data.school.enc || item.data.data.school.ill || item.data.data.school.div){
         spellPillar.push("psi");
-        console.log("Psionic Pillar");
       }
       if(item.data.data.school.nat){
         spellPillar.push("nat");
-        console.log("Nature");
       }
       if(item.data.data.school.din){
         spellPillar.push("div");
-        console.log("Divine");
       }
       spellPillar.forEach(pillar => {
         if(pillar === knownPillar){
@@ -2393,7 +2593,11 @@ export default class Actor5e extends Actor {
     if(pillarArcanaMult != 0){
       pillarArcana = (baseArcana * pillarArcanaMult) + pillarArcanaAdd;
     } else{
-      pillarArcana = baseArcana + pillarArcanaAdd;
+      if(pillarArcanaAdd != 0){
+        pillarArcana = baseArcana + pillarArcanaAdd;
+      }else{
+        pillarArcana = 0;
+      }
     }
     if(pillarHourMult != pillarHours){
       pillarHours = (baseHours * pillarHourMult) + pillarHourAdd;
@@ -2470,25 +2674,185 @@ export default class Actor5e extends Actor {
       }
     }
 
-
-    console.log("Aid Arcana: " + aidArcana);
-    console.log("Aid Hours: " + aidHours);
-
     // add together pillar and aids
     var totalArcana = aidArcana + pillarArcana;
     var totalHours = aidHours + pillarHours;
-    console.log(totalArcana);
-    console.log(totalHours);
-
+ 
+    if(totalArcana == 0){
+      totalArcana = baseArcana;
+    }
+    if(totalHours ==0 ){
+      totalHours = baseHours;
+    }
     // Complexity - very end of calculations
       // divides final amount of arcana by complexity level ( 3 or 4 levels) - spell details
 
+    var complexity = parseInt(item.data.data.complexity);
+    var precomplexityArcana = totalArcana;
+    totalArcana = totalArcana/complexity;
 
 
+    // modify hours/arcana needed totals
+
+    var previousArcana = parseInt(item.data.data.learning.arcana);
+    var previousHours = parseInt(item.data.data.learning.hours);
+    var gainedArcana = totalArcana;
+    var gainedHours = totalHours;
+    totalArcana = previousArcana + totalArcana;
+    totalHours = previousHours + totalHours;
+    newHoursNeeded = totalHoursNeeded - totalHours;
+    newArcanaNeeded = totalArcanaNeeded - totalArcana;
 
 
+    //check for negative numbers - set to zero
+    if(newArcanaNeeded < 0){
+      newArcanaNeeded = 0;
+    }
+    if(newHoursNeeded < 0){
+      newHoursNeeded = 0;
+    }
+    //check if completedly learned?
+    if(newHoursNeeded == 0 && newArcanaNeeded == 0){
+      var levelLearned = "";
+      //update level learned
+      if(spellLevel == 0){
+        levelLearned = "data.learned.cantrip";
+      } else if(spellLevel == 1){
+        levelLearned = "data.learned.one";
+      } else if(spellLevel == 2){
+        levelLearned = "data.learned.two";
+      } else if(spellLevel == 3){
+        levelLearned = "data.learned.three";
+      } else if(spellLevel == 4){
+        levelLearned = "data.learned.four";
+      } else if(spellLevel == 5){
+        levelLearned = "data.learned.five";
+      } else if(spellLevel == 6){
+        levelLearned = "data.learned.six";
+      } else if(spellLevel == 7){
+        levelLearned = "data.learned.seven";
+      } else if(spellLevel == 8){
+        levelLearned = "data.learned.eight";
+      } else if(spellLevel == 9){
+        levelLearned = "data.learned.nine";
+      } else if(spellLevel == 10){
+        levelLearned = "data.learned.ten";
+      } else if(spellLevel == 11){
+        levelLearned = "data.learned.eleven";
+      } else if(spellLevel == 12){
+        levelLearned = "data.learned.twelve";
+      } else if(spellLevel == 13){
+        levelLearned = "data.learned.thirteen";
+      }
+
+      var levelDescription = "";
+      if (spellLevel == 0){
+        levelDescription = "cantrip";
+      } else {
+        levelDescription = "level " + spellLevel;
+      }
+      // chat output for completed learning
+      chatString = "Spell Learning: " + spellName + "Wooooooo! Congratulations! You have learned " + levelDescription + " " + spellName +  "!<br>";
+      // other chat details
 
 
+      let chatData = { content: game.i18n.format(chatString, {name: this.name}), speaker };
+      ChatMessage.applyRollMode(chatData, roll.options.rollMode);
+      await ChatMessage.create(chatData); 
+
+      item.update({[levelLearned]: true, "data.learning.currently": false, "data.learning.arcana": 0 , "data.learning.hours": 0, "data.learning.hoursNeeded": 0, "data.learning.arcanaNeeded": 0})
+    } else{
+      chatString = "<b>Spell Learning: " + spellName + "</b><br><br>"; 
+      chatString += "Learning Successful!<br>" +  gainedHours + " Hours gained & " + gainedArcana + " Arcana gained<br><br>";
+      //rolls
+      if(advantageMode == 1 || advantageMode == -1){
+        if(advantageMode == 1){
+          chatString += "Rolled with Advantage<br>";
+        } else{
+          chatString += "Rolled with Disadvantage<br>";
+        }
+        chatString += "D20: " + selectedRoll + "<br>Other D20: " + otherRoll;
+      } else if(advantageMode == 0){
+        chatString += "D20: " + selectedRoll;
+      }else if(advantageMode == -2){
+        chatString += "Rolled with 2x Disadvantage<br>D20: " + selectedRoll + "<br>Other D20: " + otherRoll + "<br>Additional Disadvantage Modifier: -2";
+      } else {
+        chatString += "Error configuring chat message";
+      }
+      chatString += "<br>Arcana bonus: " + arcanabonus + "<br><br><u><b>Arcana(DC) Calculation:</b></u><br> D20 + Arcana bonus"; 
+      if(advantageMode == -2){
+        chatString += " + Disadvantage Modifier";
+      }
+      chatString +="<br>" + selectedRoll + " + "  + arcanabonus;
+      var dcValue = selectedRoll + arcanabonus;
+      if(advantageMode == -2){
+        chatString += " - 2";
+        dcValue -=2;
+      }
+      chatString += " = " + dcValue + "<br>DC: " + dc + "<br>";
+
+      // crit & template paths
+      if(crit){
+        chatString += "<br><br>Critical Success! (+3 hours and +1d100 arcana) <br>";
+        chatString += "D100: " + percentile + "<br><br>";
+      }
+      if(noTemplatePaths){
+        chatString += "<br>Template Path: No template path or spells are included with this spell<br>"
+      }else{
+        chatString += "Template Path: " + templatePathName + "<br>Template Modifier: " + templateModifer; 
+      }
+      //tradiditon bonuses
+      chatString += "<br><u><b>Tradition Bonuses:</b></u><br>"
+      if(pillarMatch){
+        chatString += "Pillar Specialization (+Wiz Level and 1.5x hours)<br>";
+      }
+      if(specMatch){
+        chatString += "Magical Tradition (2x arcana and 2x hours)<br>";
+      }
+      if(minorMatch){
+        chatString += "Minor Matgical Tradition (+Wiz Level)<br>";
+      }
+      if(!pillarMatch && !specMatch && !minorMatch){
+        chatString += "No Bonuses<br>";
+      }
+      if(pillarArcana != 0 && pillarHours != 0){
+        chatString += "<br>Arcana from Traditions: " + pillarArcana + "<br>Hours from Traditions: "  + pillarHours;
+      }
+
+      //aid bonuses
+      chatString += "<br><br><b><u>Aid Bonuses:</u></b><br>";
+      if(roll.options.scrollBonus){
+        chatString += "Scroll Bonus (x3 hours)<br>";
+      }
+      if(roll.options.spellbookBonus){
+        chatString += "Spellbook Bonus (x3 hours and x3 arcana)<br>";
+      }
+      if(roll.options.instructorAdditiveBonusArcana != "" || roll.options.instructorAdditiveBonusHour != "" || roll.options.instructorMultipleBonusArcana != "" || roll.options.instructorMultipleBonusHour != "" || roll.options.otherAdditiveBonusArcana != "" || roll.options.otherAdditiveBonusHour != "" || roll.options.otherMultipleBonusArcana != "" || roll.options.otherMultipleBonusHour != ""){
+        chatString += "Instructor & Other Aid:<br>Arcana Additive: " + aidBonusArcanaAdd + "<br>Arcana Multiple: " + aidBonusArcanaMult + "<br>Hours Additive: " + aidBonusHoursAdd + "<br>Hours Multiple: " + aidBonusHoursMult + "<br>";
+      }
+      if(roll.options.instructorAdditiveBonusArcana != "" || roll.options.instructorAdditiveBonusHour != "" || roll.options.instructorMultipleBonusArcana != "" || roll.options.instructorMultipleBonusHour != "" || roll.options.otherAdditiveBonusArcana != "" || roll.options.otherAdditiveBonusHour != "" || roll.options.otherMultipleBonusArcana != "" || roll.options.otherMultipleBonusHour != "" ||  roll.options.spellbookBonus || roll.options.scrollBonus){
+        chatString += "<br>Aid total arcana: " + aidArcana + "<br>Aid total hours: " + aidHours + "<br>";
+      }else{
+        chatString += "No Bonuses<br>";
+      }
+
+      if(aidArcana == 0 && aidHours == 0 && pillarArcana == 0 && pillarHours == 0 ){
+        chatString += "<br>Base Hours Only: " + hours + "<br>Base Arcana Only: " + baseArcana + "<br>";
+      }
+
+      //total numbers
+      chatString += "<br>Total Arcana / Complexity: " + precomplexityArcana + " / " + complexity + " = " + gainedArcana + "<br>Total Hours: " + gainedHours;
+
+      // use spell charge
+
+
+      let chatData = { content: game.i18n.format(chatString, {name: this.name}), speaker };
+      ChatMessage.applyRollMode(chatData, roll.options.rollMode);
+      await ChatMessage.create(chatData); 
+
+    item.update({"data.learning.arcana": totalArcana , "data.learning.hours": totalHours, "data.learning.hoursNeeded": newHoursNeeded, "data.learning.arcanaNeeded": newArcanaNeeded});
+    }
+  
     return roll;
   }
 
@@ -2509,6 +2873,7 @@ export default class Actor5e extends Actor {
     const parts = [`1${denomination}`, "@abilities.con.mod"];
     const title = `${game.i18n.localize("SKJAALD.HitDiceRoll")}: ${this.name}`;
     const rollData = foundry.utils.deepClone(this.data.data);
+    const focus = true;
 
     // Call the roll helper utility
     const roll = await damageRoll({
@@ -2517,6 +2882,8 @@ export default class Actor5e extends Actor {
       data: rollData,
       title: title,
       allowCritical: false,
+      focusRoll: true,
+      focuses: focusList,
       fastForward: !dialog,
       dialogOptions: {width: 350},
       messageData: {

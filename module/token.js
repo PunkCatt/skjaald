@@ -8,17 +8,18 @@ export class TokenDocument5e extends TokenDocument {
   getBarAttribute(...args) {
     const data = super.getBarAttribute(...args);
     if ( data && (data.attribute === "attributes.hp") ) {
-      data.value += parseInt(getProperty(this.actor.data, "data.attributes.hp.temp") || 0);
+      data.value += parseInt(getProperty(this.actor.data, "data.attributes.hp.grit") || 0);
       data.max += parseInt(getProperty(this.actor.data, "data.attributes.hp.tempmax") || 0);
     }
     return data;
   }
 
-  /** @inheritdoc */
   static getTrackedAttributes(data, _path=[]) {
     const attributes = super.getTrackedAttributes(data, _path);
-    if ( _path.length ) return attributes;
+    // console.log(attributes);
+    if ( _path.length ){ return attributes;}
     const allowed = CONFIG.SKJAALD.trackableAttributes;
+    // console.log(allowed);
     attributes.value = attributes.value.filter(attrs => this._isAllowedAttribute(allowed, attrs));
     return attributes;
   }
@@ -29,11 +30,33 @@ export class TokenDocument5e extends TokenDocument {
    * @returns {{bar: string[], value: string[]}}
    */
   static getConsumedAttributes(data) {
+    console.log(data);
     const attributes = super.getTrackedAttributes(data);
+    attributes.bar = [['attributes','hp','value'],['attributes','encumberance','value'],['resources','primary','value'],['resources','secondary','value'],
+        ['resources','tertiary','value'],['item','uses','value'],['item','hp','value'],['item', 'quantity'],['item','weight'],['item','duration','value'],['item','armor','value'],
+        ['item','target'],['item','range'],['item','save','dc']];
+    
+
     const allowed = CONFIG.SKJAALD.consumableResources;
-    attributes.value = attributes.value.filter(attrs => this._isAllowedAttribute(allowed, attrs));
+    // console.log(allowed);
+    // console.log(attributes);
+    attributes.value = [['attributes','hp','hitDicecurrent'], ["attributes", 'hp', 'grit'], ["attributes", 'dp', 'value'], ['attributes','ration', 'value'], 
+    ['attributes', 'waterskin','value'], ['details', 'honor'], ['details','morality'],['attributes','movement','walk'],['attributes','ac','flat'],
+    ['attributes','senses','blindsight'], ['attributes','senses','darkvision'],['attributes','senses','special'],['attributes','senses','tremorsense'],['attributes','senses','truesight'],
+    
+    
+    ['skills','acr','total'],['skills','ani','total'],['skills','ath','total'],
+    ['skills','dec','total'],['skills','his','total'],['skills','ins','total'],['skills','inv','total'],['skills','itm','total'],['skills','med','total'],
+    ['skills','nat','total'],['skills','per','total'],['skills','prc','total'],['skills','prf','total'],['skills','rel','total'],['skills','slt','total'],
+    ['skills','ste','total'],['skills','sur','total'],
+    
+    ['skills','acr','passive'],['skills','ani','passive'],['skills','ath','passive'],
+    ['skills','dec','passive'],['skills','his','passive'],['skills','ins','passive'],['skills','inv','passive'],['skills','itm','passive'],['skills','med','passive'],
+    ['skills','nat','passive'],['skills','per','passive'],['skills','prc','passive'],['skills','prf','passive'],['skills','rel','passive'],['skills','slt','passive'],
+    ['skills','ste','passive'],['skills','sur','passive']];
+    console.log(attributes);
     return attributes;
-  }
+   }
 
   /**
    * Traverse the configured allowed attributes to see if the provided one matches.
@@ -45,8 +68,10 @@ export class TokenDocument5e extends TokenDocument {
   static _isAllowedAttribute(allowed, attrs) {
     let allow = allowed;
     for ( const attr of attrs ) {
+      console.log(attr);
+      console.log(attr);
       if ( allow === undefined ) return false;
-      if ( allow === true ) return true;
+      if ( allow === true ) {console.log(attr); return true};
       if ( allow["*"] !== undefined ) allow = allow["*"];
       else allow = allow[attr];
     }

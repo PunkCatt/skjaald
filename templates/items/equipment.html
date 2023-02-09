@@ -1,5 +1,4 @@
 <form class="{{cssClass}} flexcol" autocomplete="off">
-
     {{!-- Item Sheet Header --}}
     <header class="sheet-header flexrow">
         <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img"/>
@@ -29,6 +28,7 @@
             </ul>
         </div>
     </header>
+
 
     {{!-- Item Sheet Navigation --}}
     <nav class="sheet-navigation tabs" data-group="primary">
@@ -204,46 +204,46 @@
             <div class="form-group stacked">
                 <label>{{ localize "SKJAALD.Slots" }}</label>
                 <label class="checkbox">
-                    <input type="checkbox" name="data.head" {{checked data.head}}> {{ localize "SKJAALD.Head" }}</input>
+                    <input class="equip-slots {{item._id}}" type="checkbox" name="data.head" {{checked data.head}}> {{ localize "SKJAALD.Head" }}</input>
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" name="data.neck" {{checked data.neck}}/> {{ localize "SKJAALD.Neck" }}
+                    <input class="equip-slots {{item._id}}" type="checkbox" name="data.neck" {{checked data.neck}}/> {{ localize "SKJAALD.Neck" }}
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" name="data.shoulders" {{checked data.shoulders}}/> {{ localize "SKJAALD.Shoulders" }}
+                    <input class="equip-slots {{item._id}}" type="checkbox" name="data.shoulders" {{checked data.shoulders}}/> {{ localize "SKJAALD.Shoulders" }}
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" name="data.inner" {{checked data.inner}}/> {{ localize "SKJAALD.Inner" }}
-                </label>
-            </div>
-
-            <div class="form-group stacked">
-                <label class="checkbox">
-                    <input type="checkbox" name="data.outer" {{checked data.outer}}/> {{ localize "SKJAALD.Outer" }}
-                </label>
-                <label class="checkbox">
-                    <input type="checkbox" name="data.torso" {{checked data.torso}}> {{ localize "SKJAALD.Torso" }}</input>
-                </label>
-                <label class="checkbox">
-                    <input type="checkbox" name="data.waist" {{checked data.waist}}> {{ localize "SKJAALD.Waist" }}</input>
-                </label>
-                <label class="checkbox">
-                    <input type="checkbox" name="data.arms" {{checked data.arms}}/> {{ localize "SKJAALD.Arms" }}
+                    <input class="equip-slots {{item._id}}" type="checkbox" name="data.inner" {{checked data.inner}}/> {{ localize "SKJAALD.Inner" }}
                 </label>
             </div>
 
             <div class="form-group stacked">
                 <label class="checkbox">
-                    <input type="checkbox" name="data.hands" {{checked data.hands}}/> {{ localize "SKJAALD.Hands" }}
+                    <input class="equip-slots {{item._id}}" type="checkbox" name="data.outer" {{checked data.outer}}/> {{ localize "SKJAALD.Outer" }}
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" name="data.rings" {{checked data.rings}}> {{ localize "SKJAALD.Rings" }}</input>
+                    <input class="equip-slots {{item._id}}" type="checkbox" name="data.torso" {{checked data.torso}}> {{ localize "SKJAALD.Torso" }}</input>
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" name="data.thighs" {{checked data.thighs}}/> {{ localize "SKJAALD.Thighs" }}
+                    <input class="equip-slots {{item._id}}" type="checkbox" name="data.waist" {{checked data.waist}}> {{ localize "SKJAALD.Waist" }}</input>
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" name="data.legs" {{checked data.legs}}> {{ localize "SKJAALD.Legs" }}</input>
+                    <input class="equip-slots {{item._id}}" type="checkbox" name="data.arms" {{checked data.arms}}/> {{ localize "SKJAALD.Arms" }}
+                </label>
+            </div>
+
+            <div class="form-group stacked">
+                <label class="checkbox">
+                    <input class="equip-slots {{item._id}}" type="checkbox" name="data.hands" {{checked data.hands}}/> {{ localize "SKJAALD.Hands" }}
+                </label>
+                <label class="checkbox">
+                    <input class="equip-slots {{item._id}}" type="checkbox" name="data.rings" {{checked data.rings}}> {{ localize "SKJAALD.Rings" }}</input>
+                </label>
+                <label class="checkbox">
+                    <input class="equip-slots {{item._id}}" type="checkbox" name="data.thighs" {{checked data.thighs}}/> {{ localize "SKJAALD.Thighs" }}
+                </label>
+                <label class="checkbox">
+                    <input class="equip-slots {{item._id}}" type="checkbox" name="data.legs" {{checked data.legs}}> {{ localize "SKJAALD.Legs" }}</input>
                 </label>
             </div>
 
@@ -252,7 +252,12 @@
             {{!-- Item Activation Template --}}
             {{> "systems/skjaald/templates/items/parts/item-activation.html"}}
 
-            <h3 class="form-header">{{ localize "SKJAALD.ItemEquipmentAction" }}</h3>
+            <h3 class="form-header">
+                <div>
+                    {{ localize "SKJAALD.ItemEquipmentAction" }}
+                </div>
+                <a class="attack-control add-attack"><i class="fas fa-plus"></i></a>
+            </h3>
 
             {{!-- Item Action Template --}}
             {{> "systems/skjaald/templates/items/parts/item-action.html"}}

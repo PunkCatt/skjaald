@@ -62,6 +62,16 @@
                 </label>
             </div>
 
+            {{#if (eq data.consumableType "focus")}}
+
+            <div class="form-group">
+                <label>{{ localize "SKJAALD.MagicalItem" }}</label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.magicalItem" {{checked data.magicalItem}}/>
+                </label>
+            </div>
+            {{/if}}
+
             <div class="form-group">
                 <label>{{localize "SKJAALD.Attunement"}}</label>
                 <select name="data.attunement" data-dtype="Number">
@@ -79,6 +89,76 @@
                 </label>
             </div>
 
+            {{!-- Focus Details --}}
+            {{#if (eq data.consumableType "focus")}}
+            <h3 class="form-header">{{ localize "SKJAALD.ItemConsumableFocus" }}</h3>
+
+            {{!-- Damage Type --}}
+            <div class="form-group">
+                <label>{{ localize "SKJAALD.DamageType" }}</label>
+                <div class="form-fields">
+                
+                        <li class="damage-part flexrow">
+                            <select name="data.alternateDamage">
+                                {{#select data.alternateDamage }}
+                                <option value="">{{ localize "SKJAALD.None" }}</option>
+                                {{#each config.damageTypes as |name type|}}
+                                <option value="{{type}}">{{name}}</option>
+                                {{/each}}
+                                {{#each config.healingTypes as |name type|}}
+                                <option value="{{type}}">{{name}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+                        </li>
+           
+                </div>
+            </div>
+
+            {{!-- Recharge Rate --}}
+            <div class="form-group input-select">
+                <label>{{ localize "SKJAALD.RechargeRate" }}</label>
+                <div class="form-fields">
+                    <input type="text" name="data.recharge.sizeIncrease" value="{{data.recharge.sizeIncrease}}" data-dtype="Number" placeholder="{{ localize 'SKJAALD.SizeNumber' }}"/>
+                    <span class="sep">/</span>
+                    <input type="text" name="data.recharge.time" value="{{data.recharge.time}}" data-dtype="Number" placeholder="{{ localize 'SKJAALD.TimeNumber' }}"/>
+                    <select name="data.recharge.units">
+                        {{#select data.recharge.units}}
+                        <option value=""></option>
+                        {{#each config.rechargeTimePeriods as |name key|}}
+                        <option value="{{key}}">{{name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </div>
+            </div>
+
+            {{!-- Ammo Dice --}}
+            <div class="form-group select-select">
+                <label>{{ localize "SKJAALD.AmmoDie" }}</label>
+                <div class="form-fields">
+                    <select name="data.ammoDie.current">
+                        {{#select data.ammoDie.current}}
+                        <option value=""></option>
+                        {{#each config.ammoDieSizes as |name key|}}
+                        <option value="{{key}}">{{name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                    <span class="sep">/</span>
+                    <select name="data.ammoDie.max">
+                        {{#select data.ammoDie.max}}
+                        <option value=""></option>
+                        {{#each config.ammoDieSizes as |name key|}}
+                        <option value="{{key}}">{{name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </div>
+            </div>
+
+            {{/if}}
+
             <h3 class="form-header">{{ localize "SKJAALD.ItemConsumableUsage" }}</h3>
 
             {{!-- Item Activation Template --}}
@@ -89,9 +169,15 @@
                     <input type="checkbox" name="data.uses.autoDestroy" {{checked data.uses.autoDestroy}}/> {{ localize "SKJAALD.ItemDestroyEmpty" }}
                 </label>
             </div>
+            
             {{/if}}
 
-            <h3 class="form-header">{{ localize "SKJAALD.ItemConsumableActivation" }}</h3>
+            <h3 class="form-header">
+                <div>
+                    {{ localize "SKJAALD.ItemConsumableActivation" }}
+                </div>
+                <a class="attack-control add-attack"><i class="fas fa-plus"></i></a>
+            </h3>
 
             {{!-- Item Action Template --}}
             {{> "systems/skjaald/templates/items/parts/item-action.html"}}

@@ -154,7 +154,7 @@ Hooks.once("setup", function() {
     "equipmentTypes", "healingTypes", "itemActionTypes", "itemRarity", "languages", "limitedUsePeriods",
     "miscEquipmentTypes", "movementTypes", "movementUnits", "polymorphSettings", "proficiencyLevels", "senses",
     "skills", "spellComponents", "spellLevels", "spellPreparationModes", "spellScalingModes", "spellSchools",
-    "targetTypes", "timePeriods", "toolProficiencies", "toolTypes", "vehicleTypes", "weaponProficiencies",
+    "targetTypes", "timePeriods","rechargeTimePeriods", "ammoDieSizes", "toolProficiencies", "toolTypes", "vehicleTypes", "weaponProficiencies",
     "weaponProperties", "weaponTypes"
   ];
   const sortKeys = [

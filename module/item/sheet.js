@@ -15,6 +15,9 @@ export default class ItemSheet5e extends ItemSheet {
       this.options.width = this.position.width = 600;
       this.options.height = this.position.height = 680;
     }
+
+    //get focuses list
+    // listOfFocuses= this._getItemConsumptionTargets(itemData, "charges");
   }
 
   /* -------------------------------------------- */
@@ -67,10 +70,14 @@ export default class ItemSheet5e extends ItemSheet {
     data.abilityConsumptionTargetsAttribute = this._getItemConsumptionTargets(itemData, "attribute");
     data.abilityConsumptionTargetsCharges = this._getItemConsumptionTargets(itemData, "charges");
     data.abilityConsumptionTargetsMaterial = this._getItemConsumptionTargets(itemData, "material");
+    data.abilityConsumptionTargetsItemUse = this._getItemConsumptionTargets(itemData, "itemUse");
+    console.log("consuptionCharges");
+    console.log(data);
 
  
     // Action Details
     data.hasAttackRoll = this.item.hasAttack;
+    data.hasNonAttackRoll = this.item.hasAttack;
     data.isHealing = itemData.data.actionType === "heal";
     data.isFlatDC = getProperty(itemData, "data.save.scaling") === "flat";
     data.isLine = ["line", "wall"].includes(itemData.data.target?.type);
@@ -107,40 +114,38 @@ export default class ItemSheet5e extends ItemSheet {
       this.item.update({"data.learning.currently": true});
     }
 
-    //spell learning calculation
-    if(data.itemType == "Spell"){
-      console.log(data.data);
+     // spell calculations
+     if(data.itemType == "Spell"){
       if(data.data.learning.currently){
-      data.data.learning.hoursNeeded = ((parseInt(data.data.learning.level) * 10) + 10) - data.data.learning.hours;
-      data.data.learning.arcanaNeeded = ((parseInt(data.data.learning.level) * 100) + 100) - data.data.learning.arcana;
+        var level = data.data.learning.level;
+        if(level == ""){
+          level = 0;
+        }
+        var newHoursNeeded = ((parseInt(level) * 10) + 10)- data.data.learning.hours;
+        data.data.learning.arcanaNeeded = ((parseInt(level) * 100) + 100) - data.data.learning.arcana;
+        data.data.learning.arcanaTotal = (parseInt(level) * 100) + 100;
+        data.data.learning.hoursTotal = (parseInt(level) * 10) + 10;
+        this.item.update({"data.learning.hoursNeeded": newHoursNeeded});
       }
-      data.data.learningNow = false;
+
     }
 
     // regular learning calculation
     if(data.itemType == "Proficiency" || data.itemType == "Other Learning"){
       if(data.data.learning.currently){
-        console.log("Level Learning: " + data.data.learning.level);
         if (data.data.learning.level == 1){
-          console.log("in proficient");
           data.data.learning.hoursNeeded = 1000 - data.data.learning.hours;
           data.data.learning.hoursTotal = 1000;
-          console.log("hours: " + data.data.learning.hours);
-          console.log("hours Needed: " + data.data.learning.hoursNeeded);
 
         } else if (data.data.learning.level == 2){
-          console.log("in expertise");
           data.data.learning.hoursNeeded = 10000 - data.data.learning.hours;
           data.data.learning.hoursTotal = 10000;
         } else if (data.data.learning.level == 3) {
-          console.log("in mastery");
           data.data.learning.hoursNeeded = 100000 - data.data.learning.hours;
           data.data.learning.hoursTotal = 100000;
-          console.log(data.data.learning.hoursNeeded)
         }
       }
-      //this.item.update({"data.learningNow": false});
-      //this.item.update({"data.learning.alert": false});
+
     }
 
 
@@ -188,33 +193,36 @@ export default class ItemSheet5e extends ItemSheet {
    * @private
    */
   _getItemConsumptionTargets(item, category) {
-    const consume = item.data.consume || {};
+    // const consume = item.data.consume || {};
 
 
-    if ( !consume.type ) return [];
+    // if ( !consume.type ) return [];
     const actor = this.item.actor;
+    const items = actor.data.items;
 
     if ( !actor ) return {};
 
     
-
       // Ammunition
       if ( category === "ammo" ) {
-
+        // add equiped to check
         return actor.itemTypes.consumable.reduce((ammo, i) => {
-
           if ( i.data.data.consumableType === "ammo" ) {
-            ammo[i.id] = `${i.name} (${i.data.data.quantity})`;
+            if ( i.data.data.equipped){
+              ammo[i.id] = `${i.name} (${i.data.data.quantity})`;
+            }
           }
           return ammo;
-        }, {[item._id]: `${item.name} (${item.data.quantity})`});
+        }, {});
       }
 
       // Attributes
       else if ( category === "attribute" ) {
         const attributes = TokenDocument.implementation.getConsumedAttributes(actor.data.data);
-        attributes.bar.forEach(a => a.push("value"));
+        //console.log(attributes);
+        attributes.bar.forEach(a => {a.push("value"); console.log(a);});
         return attributes.bar.concat(attributes.value).reduce((obj, a) => {
+          //console.log(obj);
           let k = a.join(".");
           obj[k] = k;
           return obj;
@@ -224,17 +232,33 @@ export default class ItemSheet5e extends ItemSheet {
       // Materials
       else if ( category === "material" ) {
         return actor.items.reduce((obj, i) => {
-          if ( ["consumable", "loot"].includes(i.data.type) && !i.data.data.activation ) {
+
+          if ( ["loot"].includes(i.data.type) ) {
             obj[i.id] = `${i.name} (${i.data.data.quantity})`;
+          } else if(["consumable"].includes(i.data.type)) {
+            if(i.data.data.consumableType != "focus" && i.data.data.consumableType != "ammo"){
+              obj[i.id] = `${i.name} (${i.data.data.quantity})`;
+            }
           }
           return obj;
         }, {});
       }
 
       // Charges
+      //add equiped to check
       else if ( category === "charges" ) {
+        return actor.itemTypes.consumable.reduce((focus, i) => {
+          if ( i.data.data.consumableType === "focus" ) {
+            if ( i.data.data.equipped){
+              focus[i.id] = `${i.name} (${i.data.data.ammoDie.current})`;
+            }
+          }
+          return focus;
+        }, {});
+      }  
+      
+      else if ( category === "itemUse" ) {
         return actor.items.reduce((obj, i) => {
-
           // Limited-use items
           const uses = i.data.data.uses || {};
           if ( uses.per && uses.max ) {
@@ -243,7 +267,7 @@ export default class ItemSheet5e extends ItemSheet {
               : ` (${game.i18n.format("SKJAALD.AbilityUseConsumableLabel", {max: uses.max, per: uses.per})})`;
             obj[i.id] = i.name + label;
           }
-
+  
           // Recharging items
           const recharge = i.data.data.recharge || {};
           if ( recharge.value ) obj[i.id] = `${i.name} (${game.i18n.format("SKJAALD.Recharge")})`;
@@ -251,6 +275,9 @@ export default class ItemSheet5e extends ItemSheet {
         }, {});
       }
       else return {};
+
+
+
   }
 
   /* -------------------------------------------- */
@@ -394,6 +421,7 @@ export default class ItemSheet5e extends ItemSheet {
       html.find(".attack-control").click(this._onAttackControl.bind(this));
       html.find(".spell-effect-control").click(this._onEffectControl.bind(this));
       html.find(".spell-template-control").click(this._onTemplateControl.bind(this));
+      html.find(".equip-slots").click(this._toggleEquipmentSlots.bind(this));
       html.find(".trait-selector").click(this._onConfigureTraits.bind(this));
       html.find(".effect-control").click(ev => {
         if ( this.item.isOwned ) return ui.notifications.warn("Managing Active Effects within an Owned Item is not currently supported and will be added in a subsequent update.");
@@ -584,13 +612,11 @@ export default class ItemSheet5e extends ItemSheet {
     // Add new damage component
     if ( a.classList.contains("add-template") ) {
       await this._onSubmit(event);  // Submit any unsaved 
-      console.log(a.classList);
       const target = event.currentTarget.className;
       const parts = target.split(' ');
       const index = parseInt(parts[2]);
       const templates = Object.values(this.item.data.data.templatePaths[index].spells || []); 
       templates.push({name: "Template Spell", minLevel: -1});
-      console.log(templates);
       //UPDATE HERE
       return this.item.update({data: {
         templatePaths: {
@@ -615,10 +641,56 @@ export default class ItemSheet5e extends ItemSheet {
   }
 
 
- 
+   /* -------------------------------------------- */
+
+ /**
+ * Handle cycling equipped value of armor.
+ * @param {Event} event   A click or contextmenu event which triggered the handler.
+ * @returns {Promise}     Updated data for this actor after changes are applied.
+ * @private
+ */
+  _toggleEquipmentSlots(event) {
+  event.preventDefault();
 
 
+  var changedTo = event.currentTarget.checked;
+  var itemID = event.currentTarget.classList[1];
+  if (changedTo == false){
+    var item = this.actor.data.items.get(itemID);
+    var slot = event.currentTarget.name;
+    var slot = slot.split(".")[1];
+    var actor = item.actor;
+    if(slot != "rings"){
+      var equipedItem = actor.data.data.attributes.wornArmor[slot];
+      if(equipedItem != "none"){
+        if(itemID == equipedItem){
+          var name = "data.attributes.wornArmor." + slot;
+          actor.update({ [name] : "none"});
+          item.update({"data.equipped": false});
+        }
+      }
+    } else if(slot == "rings"){
+      if(actor.data.data.attributes.wornArmor.ring1 == itemID){
+        actor.update({"data.attributes.wornArmor.ring1": "none"});
+        item.update({"data.equipped": false});
+      }else if(actor.data.data.attributes.wornArmor.ring2 == itemID){
+        actor.update({"data.attributes.wornArmor.ring2": "none"});
+        item.update({"data.equipped": false});
+      }else if(actor.data.data.attributes.wornArmor.ring3 == itemID){
+        actor.update({"data.attributes.wornArmor.ring3": "none"});
+        item.update({"data.equipped": false});
+      }else if(actor.data.data.attributes.wornArmor.ring4 == itemID){
+        actor.update({"data.attributes.wornArmor.ring4": "none"});
+        item.update({"data.equipped": false});
+      }
+    }  
+  } 
+
+  return this._onSubmit(event);
+}
   /* -------------------------------------------- */
+
+
 
   /**
    * Handle spawning the TraitSelector application for selection various options.

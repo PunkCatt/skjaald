@@ -244,26 +244,28 @@
             </div>
 
             {{#if data.learning.currently}}
-            <div class="form-group ">
-                <label>{{ localize "SKJAALD.HoursNeeded" }}</label>
-                <input type="number" name="data.learning.hoursNeeded" value="{{data.learning.hoursNeeded}}"/>
-            </div>
-            <div class="form-group ">
-                <label>{{ localize "SKJAALD.ArcanaNeeded" }}</label>
-                <input type="number" name="data.learning.arcanaNeeded" value="{{data.learning.arcanaNeeded}}"/>
-            </div>
-
-            
-
-            {{!-- Template Paths --}}
-            <div class="form-group">
-                <div>
-                    <label>{{ localize "SKJAALD.SpellTemplatePaths" }}</label>  <a class="spell-template-control add-path"><i class="fas fa-plus"></i></a>
+                <div class="form-group ">
+                    <label>{{ localize "SKJAALD.Hours" }}</label>
+                    <input type="hidden" name="data.learning.hoursNeeded" value="{{data.learning.hoursNeeded}}" data-dtype="Number"/>
+                    <input type="text" name="data.learning.hours" value="{{data.learning.hours}}"/> / <input type="text" name="data.learning.hoursTotal" value="{{data.learning.hoursTotal}}"/>
                 </div>
-            </div>
-    
-            {{!-- Template Paths Template --}}
-            {{> "systems/skjaald/templates/actors/parts/template-paths.html"}}
+                <div class="form-group ">
+                    <label>{{ localize "SKJAALD.ArcanaNeeded" }}</label>
+                    <input type="hidden" name="data.learning.arcanaNeeded" value="{{data.learning.arcanaNeeded}}" data-dtype="Number"/>
+
+                    <input type="text" name="data.learning.arcana" value="{{data.learning.arcana}}"/> / <input type="text" name="data.learning.arcanaTotal" value="{{data.learning.arcanaTotal}}"/>
+                </div>
+
+
+                {{!-- Template Paths --}}
+                <div class="form-group">
+                    <div>
+                        <label>{{ localize "SKJAALD.SpellTemplatePaths" }}</label>  <a class="spell-template-control add-path"><i class="fas fa-plus"></i></a>
+                    </div>
+                </div>
+        
+                {{!-- Template Paths Template --}}
+                {{> "systems/skjaald/templates/actors/parts/template-paths.html"}}
 
             {{/if}}
 

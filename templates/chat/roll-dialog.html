@@ -3,6 +3,22 @@
         <label>{{ localize "SKJAALD.Formula" }}</label>
         <input type="text" name="formula" value="{{formula}}" disabled/>
     </div>
+    {{log "in roll dialog"}}
+
+
+    {{#if focusRoll}}
+        <div class="form-group">
+            <label>{{ localize "SKJAALD.RollSelectFocus" }}</label>
+            <select name="focusChoice">
+                {{#select focusChoice}}
+                <option value=""></option>
+                {{#each focuses as |name key|}}
+                <option value="{{key}}">{{name}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
+        </div>
+    {{/if}}
     
     {{#if skillLearning}}
         <div class="form-group">
@@ -26,55 +42,55 @@
     {{/if}}
 
     {{#if spellLearning}}
-    <div class="form-group">
-        <label>{{ localize "SKJAALD.RollUseSpellCharge" }}</label>
-        <left><input type="checkbox" name="useSpellCharge"/></left>
-    </div>
-    <div class="form-group">
-        <label>{{ localize "SKJAALD.RollSpellbookBonus" }}</label>
-        <left><input type="checkbox" name="spellbookBonus" /></left>
-    </div>
-    <div class="form-group">
-        <label>{{ localize "SKJAALD.RollScrollBonus" }}</label>
-        <left><input type="checkbox" name="scrollBonus" value=""/></left>
-    </div>
-    <h3><center>Instructor Bonuses</center></h3>
-    <div class="form-group">
-        <label>{{ localize "SKJAALD.RollInstructorAdditiveBonusArcana" }}</label>
-        <input type="text" name="instructorAdditiveBonusArcana" value="" placeholder="0"/>
-    </div>
-    <div class="form-group">
-        <label>{{ localize "SKJAALD.RollInstructorMultipleBonusArcana" }}</label>
-        <input type="text" name="instructorMultipleBonusArcana" value="" placeholder="0"/>
-    </div>
-    <div class="form-group">
-        <label>{{ localize "SKJAALD.RollInstructorAdditiveBonusHour" }}</label>
-        <input type="text" name="instructorAdditiveBonusHour" value="" placeholder="0"/>
-    </div>
-    <div class="form-group">
-        <label>{{ localize "SKJAALD.RollInstructorMultipleBonusHour" }}</label>
-        <input type="text" name="instructorMultipleBonusHour" value="" placeholder="0"/>
-    </div>
-    <h3><center>Other Aid Bonuses</center></h3>
-    <div class="form-group">
-        <label>{{ localize "SKJAALD.RollInstructorAdditiveBonusArcana" }}</label>
-        <input type="text" name="otherAdditiveBonusArcana" value="" placeholder="0"/>
-    </div>
-    <div class="form-group">
-        <label>{{ localize "SKJAALD.RollInstructorMultipleBonusArcana" }}</label>
-        <input type="text" name="otherMultipleBonusArcana" value="" placeholder="0"/>
-    </div>
-    <div class="form-group">
-        <label>{{ localize "SKJAALD.RollInstructorAdditiveBonusHour" }}</label>
-        <input type="text" name="otherAdditiveBonusHour" value="" placeholder="0"/>
-    </div>
-    <div class="form-group">
-        <label>{{ localize "SKJAALD.RollInstructorMultipleBonusHour" }}</label>
-        <input type="text" name="otherMultipleBonusHour" value="" placeholder="0"/>
-    </div>
-    <h3><center>Other Modifiers/Settings</center></h3>
+        <div class="form-group">
+            <label>{{ localize "SKJAALD.RollUseSpellCharge" }}</label>
+            <left><input type="checkbox" name="useSpellCharge"/></left>
+        </div>
+        <div class="form-group">
+            <label>{{ localize "SKJAALD.RollSpellbookBonus" }}</label>
+            <left><input type="checkbox" name="spellbookBonus" /></left>
+        </div>
+        <div class="form-group">
+            <label>{{ localize "SKJAALD.RollScrollBonus" }}</label>
+            <left><input type="checkbox" name="scrollBonus" value=""/></left>
+        </div>
+        <h3><center>Instructor Bonuses</center></h3>
+        <div class="form-group">
+            <label>{{ localize "SKJAALD.RollInstructorAdditiveBonusArcana" }}</label>
+            <input type="text" name="instructorAdditiveBonusArcana" value="" placeholder="0"/>
+        </div>
+        <div class="form-group">
+            <label>{{ localize "SKJAALD.RollInstructorMultipleBonusArcana" }}</label>
+            <input type="text" name="instructorMultipleBonusArcana" value="" placeholder="0"/>
+        </div>
+        <div class="form-group">
+            <label>{{ localize "SKJAALD.RollInstructorAdditiveBonusHour" }}</label>
+            <input type="text" name="instructorAdditiveBonusHour" value="" placeholder="0"/>
+        </div>
+        <div class="form-group">
+            <label>{{ localize "SKJAALD.RollInstructorMultipleBonusHour" }}</label>
+            <input type="text" name="instructorMultipleBonusHour" value="" placeholder="0"/>
+        </div>
+        <h3><center>Other Aid Bonuses</center></h3>
+        <div class="form-group">
+            <label>{{ localize "SKJAALD.RollInstructorAdditiveBonusArcana" }}</label>
+            <input type="text" name="otherAdditiveBonusArcana" value="" placeholder="0"/>
+        </div>
+        <div class="form-group">
+            <label>{{ localize "SKJAALD.RollInstructorMultipleBonusArcana" }}</label>
+            <input type="text" name="otherMultipleBonusArcana" value="" placeholder="0"/>
+        </div>
+        <div class="form-group">
+            <label>{{ localize "SKJAALD.RollInstructorAdditiveBonusHour" }}</label>
+            <input type="text" name="otherAdditiveBonusHour" value="" placeholder="0"/>
+        </div>
+        <div class="form-group">
+            <label>{{ localize "SKJAALD.RollInstructorMultipleBonusHour" }}</label>
+            <input type="text" name="otherMultipleBonusHour" value="" placeholder="0"/>
+        </div>
+        <h3><center>Other Modifiers/Settings</center></h3>
 
-{{/if}}
+    {{/if}}
 
     {{#if chooseModifier}}
         <div class="form-group">

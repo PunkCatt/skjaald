@@ -63,19 +63,33 @@ export default class Item5e extends Item {
    * @type {boolean}
    */
   get hasAttack() {
+
+  if (this.data.type == "weapon" || this.data.type == "equipment" || this.data.type == 'consumable'){
+
     const attacks = this.data.data.attacks;
 
-  if (this.data.type == "weapon"){
-
-    for (const attack of Object.entries(attacks)) {
-      if( ["mwak", "rwak", "msak", "rsak"].includes(attack[1].actionType) )
-      return true;
+    if(attacks){
+      for (const attack of Object.entries(attacks)) {
+        if( ["mwak", "rwak", "msak", "rsak", "other"].includes(attack[1].actionType) )
+        return true;
+      }
     }
-
     return false;
 
-  } else {
-    return ["mwak", "rwak", "msak", "rsak"].includes(this.data.data.actionType);
+  }else if (this.data.type == "spell"){
+    const effects = this.data.data.effects;
+
+    if(effects){
+      for (const attack of Object.entries(effects)) {
+        console.log(attack);
+        if( ["mwak", "rwak", "msak", "rsak", "other"].includes(attack[1].actionType) )
+        return true;
+      }
+    }
+    return false;
+  }else {
+    return ["mwak", "rwak", "msak", "rsak", "other"].includes(this.data.data.actionType);
+
   }
 
   }
@@ -88,12 +102,57 @@ export default class Item5e extends Item {
    */
   get hasDamage() {
 
-    if (this.data.type == "weapon"){ return true;}
+    if (this.data.type == "weapon" || this.data.type == 'equipment' || this.data.type == 'consumable' ){
+      const attacks = this.data.data.attacks;
+      if(attacks){
+        for (const attack of Object.entries(attacks)) {
+          console.log(attack[1].damageparts);
+          if( attack[1].damageparts )
+          return true;
+        }
+      }
+      return false;
+    }else if (this.data.type == 'spell'){
+      const attacks = this.data.data.effects;
+      if(attacks){
+        for (const attack of Object.entries(attacks)) {
+          console.log(attack[1].damageparts);
+          if( attack[1].damageparts )
+          return true;
+        }
+      }
+      return false;
+    }
 
       return !!(this.data.data.damage && this.data.data.damage.parts.length);
     
 
     
+  }
+
+  /* -------------------------------------------- */
+
+   /**
+   * Does the Item implement a damage roll as part of its usage?
+   * @type {array}
+   */
+   get focuses() {
+
+    var actor = this.parent;
+    var items = actor.items;
+    var focuses = {};
+    items.forEach(item => {
+      if(item.type == 'consumable'){
+        if(item.data.data.consumableType == "focus"){
+          if ( item.data.data.equipped){
+            focuses[item.id] = `${item.name} (${item.data.data.ammoDie.current})`;
+          }
+        }
+        console.log("focuses:");
+        console.log(focuses);
+      }
+    });
+   return focuses;
   }
 
   /* -------------------------------------------- */
@@ -188,7 +247,7 @@ export default class Item5e extends Item {
    * @type {boolean}
    */
   get areEffectsSuppressed() {
-    const requireEquipped = (this.data.type !== "consumable") || ["rod", "trinket", "wand"].includes(
+    const requireEquipped = (this.data.type !== "consumable") || ["rod", "trinket", "focus"].includes(
       this.data.data.consumableType);
     if ( requireEquipped && (this.data.data.equipped === false) ) return true;
 
@@ -1072,7 +1131,7 @@ export default class Item5e extends Item {
    * @returns {Promise<Roll>}              A Promise which resolves to the created Roll instance, or null if the action
    *                                       cannot be performed.
    */
-  rollDamage({critical=false, event=null, spellLevel=null, versatile=false, attackID=null, options={}}={}) {
+  rollDamage({critical=false, event=null, spellLevel=null, versatile=false, attackID=null, effectID=null, options={}}={}) {
     if ( !this.hasDamage ) throw new Error("You may not make a Damage Roll with this Item.");
     const itemData = this.data.data;
     const actorData = this.actor.data.data;
@@ -1082,7 +1141,14 @@ export default class Item5e extends Item {
     };
 
     var partArray = [];
-    const damageparts = itemData.attacks[attackID].damageparts;
+    var damageparts;
+    console.log(actorData);
+    var focusRoll = false;
+    if(this.data.type == 'spell'){
+      damageparts = itemData.effects[attackID].damageparts;
+    }else{
+      damageparts = itemData.attacks[attackID].damageparts;
+    }
     for (let i in damageparts){
       const damagepart = damageparts[i];
       partArray.push(damagepart[0]);
@@ -1095,6 +1161,13 @@ export default class Item5e extends Item {
 
     console.log("come back here");
     if ( spellLevel ) rollData.item.level = spellLevel;
+    var focusRollBool = false;
+    if(this.data.type == 'spell'){
+      console.log(rollData);
+      focusRollBool = true;
+    }
+
+    
 
     // Configure the damage roll
     const actionFlavor = game.i18n.localize(itemData.actionType === "heal" ? "SKJAALD.Healing" : "SKJAALD.DamageRoll");
@@ -1111,7 +1184,9 @@ export default class Item5e extends Item {
       dialogOptions: {
         width: 400,
         top: event ? event.clientY - 80 : null,
-        left: window.innerWidth - 710
+        left: window.innerWidth - 710,
+        focuses: this.focuses,
+        focusRoll: focusRollBool,
       },
       messageData
     };
@@ -1121,6 +1196,13 @@ export default class Item5e extends Item {
       parts[0] = itemData.damage.versatile;
       messageData["flags.skjaald.roll"].versatile = true;
     }
+
+    // Add focus usage details
+
+    // if(this.data.type == 'spell'){
+    //   rollConfig.focusRoll = true;
+    //   rollConfig.focuses = this.focuses;
+    // }
 
     // Scale damage from up-casting spells
     if ( (this.data.type === "spell") ) {
@@ -1416,6 +1498,8 @@ export default class Item5e extends Item {
     const message = game.messages.get(messageId);
     const action = button.dataset.action;
     const attackID = button.dataset.id;
+    console.log(button.dataset);
+    const effectID = button.dataset.id;
 
     // Validate permission to proceed with the roll
     const isTargetted = action === "save";
@@ -1445,7 +1529,8 @@ export default class Item5e extends Item {
           event: event,
           spellLevel: spellLevel,
           versatile: action === "versatile",
-          attackID: attackID
+          attackID: attackID,
+          effectID: effectID
         });
         break;
       case "formula":

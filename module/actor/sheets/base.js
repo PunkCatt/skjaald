@@ -313,8 +313,6 @@ export default class ActorSheet5e extends ActorSheet {
       data.effects.inactive.effects = "test";
     }
 
-
-
     // Return data to the sheet
     return data;
   }
