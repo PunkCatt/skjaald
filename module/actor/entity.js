@@ -1533,7 +1533,7 @@ export default class Actor5e extends Actor {
     if ( !roll ) return null;
 
     // Take action depending on the result
-    const success = roll.total >= 10;
+    const success = roll.total >= 15;
     const d20 = roll.dice[0].total;
 
     let chatString;

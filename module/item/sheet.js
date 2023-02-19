@@ -197,10 +197,11 @@ export default class ItemSheet5e extends ItemSheet {
 
 
     // if ( !consume.type ) return [];
+    if ( !actor ) return {};
+
     const actor = this.item.actor;
     const items = actor.data.items;
 
-    if ( !actor ) return {};
 
     
       // Ammunition
