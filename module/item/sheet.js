@@ -197,9 +197,10 @@ export default class ItemSheet5e extends ItemSheet {
 
 
     // if ( !consume.type ) return [];
-    if ( !actor ) return {};
 
     const actor = this.item.actor;
+    if ( !actor ) return {};
+
     const items = actor.data.items;
 
 
