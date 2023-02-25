@@ -1,6 +1,7 @@
 
 {{#if (ne itemType 'Spell')}}
-
+    {{log 'in item-action'}}
+    {{log data.attacks}}
 
     {{#each data.attacks as |attack a| }}
 

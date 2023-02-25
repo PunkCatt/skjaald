@@ -305,7 +305,7 @@ export default class Item5e extends Item {
 
 
     else if ( itemData.type === "weapon" ) {
-
+      labels.armor = data.armor.value ? `${data.armor.value} ${game.i18n.localize("SKJAALD.AC")}` : "";
       
     }
 

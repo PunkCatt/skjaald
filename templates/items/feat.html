@@ -77,8 +77,10 @@
                 </div>
             </div>
             {{/if}}
-
-            <h3 class="form-header">{{ localize "SKJAALD.FeatureAttack" }}</h3>
+            <div>
+                <h3 class="form-header">{{ localize "SKJAALD.FeatureAttack" }}</h3>
+                <a class="attack-control add-attack"><i class="fas fa-plus"></i></a>
+            </div>
 
             {{!-- Item Action Template --}}
             {{> "systems/skjaald/templates/items/parts/item-action.html"}}

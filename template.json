@@ -621,7 +621,7 @@
       },
       "mountable": {
         "armor": {
-          "value": 10,
+          "value": 0,
           "ac": 0
         },
         "hp": {
