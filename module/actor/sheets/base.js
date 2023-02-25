@@ -144,134 +144,136 @@ export default class ActorSheet5e extends ActorSheet {
       }
     }
 
+
+
     // ration/waterskin
+    if(!data.isNPC){
+      if (actorData.data.attributes.ration.value > 0 ) {
+        actorData.data.attributes.ration.icon1 = '<i class="fas fa-check"></i>';
+      }
+      if (actorData.data.attributes.ration.value > 1 ) {
+        actorData.data.attributes.ration.icon2 = '<i class="fas fa-check"></i>';
+      }
+      if (actorData.data.attributes.ration.value > 2 ) {
+        actorData.data.attributes.ration.icon3 = '<i class="fas fa-check"></i>';
+      }
+      if (actorData.data.attributes.ration.value > 3) {
+        actorData.data.attributes.ration.icon4 = '<i class="fas fa-check"></i>';
+      }
+      if (actorData.data.attributes.ration.value > 4 ) {
+        actorData.data.attributes.ration.icon5 = '<i class="fas fa-check"></i>';
+      }
 
-    if (actorData.data.attributes.ration.value > 0 ) {
-      actorData.data.attributes.ration.icon1 = '<i class="fas fa-check"></i>';
-    }
-    if (actorData.data.attributes.ration.value > 1 ) {
-      actorData.data.attributes.ration.icon2 = '<i class="fas fa-check"></i>';
-    }
-    if (actorData.data.attributes.ration.value > 2 ) {
-      actorData.data.attributes.ration.icon3 = '<i class="fas fa-check"></i>';
-    }
-    if (actorData.data.attributes.ration.value > 3) {
-      actorData.data.attributes.ration.icon4 = '<i class="fas fa-check"></i>';
-    }
-    if (actorData.data.attributes.ration.value > 4 ) {
-      actorData.data.attributes.ration.icon5 = '<i class="fas fa-check"></i>';
-    }
+      if (actorData.data.attributes.waterskin.value > 0 ) {
+        actorData.data.attributes.waterskin.icon1 = '<i class="fas fa-check"></i>';
+      }
+      if (actorData.data.attributes.waterskin.value > 1 ) {
+        actorData.data.attributes.waterskin.icon2 = '<i class="fas fa-check"></i>';
+      }
+      if (actorData.data.attributes.waterskin.value > 2 ) {
+        actorData.data.attributes.waterskin.icon3 = '<i class="fas fa-check"></i>';
+      }
+      if (actorData.data.attributes.waterskin.value > 3) {
+        actorData.data.attributes.waterskin.icon4 = '<i class="fas fa-check"></i>';
+      }
+      if (actorData.data.attributes.waterskin.value > 4 ) {
+        actorData.data.attributes.waterskin.icon5 = '<i class="fas fa-check"></i>';
+      }
 
-    if (actorData.data.attributes.waterskin.value > 0 ) {
-      actorData.data.attributes.waterskin.icon1 = '<i class="fas fa-check"></i>';
-    }
-    if (actorData.data.attributes.waterskin.value > 1 ) {
-      actorData.data.attributes.waterskin.icon2 = '<i class="fas fa-check"></i>';
-    }
-    if (actorData.data.attributes.waterskin.value > 2 ) {
-      actorData.data.attributes.waterskin.icon3 = '<i class="fas fa-check"></i>';
-    }
-    if (actorData.data.attributes.waterskin.value > 3) {
-      actorData.data.attributes.waterskin.icon4 = '<i class="fas fa-check"></i>';
-    }
-    if (actorData.data.attributes.waterskin.value > 4 ) {
-      actorData.data.attributes.waterskin.icon5 = '<i class="fas fa-check"></i>';
-    }
+      //inpiration/fate
 
-    //inpiration/fate
+      if (actorData.data.attributes.inspiration.point1 == true ) {
+        actorData.data.attributes.inspiration.icon1 = '<i class="fas fa-check"></i>';
+      }
+      if (actorData.data.attributes.inspiration.point2 == true ) {
+        actorData.data.attributes.inspiration.icon2 = '<i class="fas fa-check"></i>';
+      }
+      if (actorData.data.attributes.inspiration.point3 == true ) {
+        actorData.data.attributes.inspiration.icon3 = '<i class="fas fa-check"></i>';
+      }
 
-    if (actorData.data.attributes.inspiration.point1 == true ) {
-      actorData.data.attributes.inspiration.icon1 = '<i class="fas fa-check"></i>';
-    }
-    if (actorData.data.attributes.inspiration.point2 == true ) {
-      actorData.data.attributes.inspiration.icon2 = '<i class="fas fa-check"></i>';
-    }
-    if (actorData.data.attributes.inspiration.point3 == true ) {
-      actorData.data.attributes.inspiration.icon3 = '<i class="fas fa-check"></i>';
-    }
+      if (actorData.data.attributes.legend.point1 == true ) {
+        actorData.data.attributes.legend.icon1 = '<i class="fas fa-check"></i>';
+      }
+      if (actorData.data.attributes.legend.point2 == true ) {
+        actorData.data.attributes.legend.icon2 = '<i class="fas fa-check"></i>';
+      }
+      if (actorData.data.attributes.legend.point3 == true ) {
+        actorData.data.attributes.legend.icon3 = '<i class="fas fa-check"></i>';
+      }
 
-    if (actorData.data.attributes.legend.point1 == true ) {
-      actorData.data.attributes.legend.icon1 = '<i class="fas fa-check"></i>';
-    }
-    if (actorData.data.attributes.legend.point2 == true ) {
-      actorData.data.attributes.legend.icon2 = '<i class="fas fa-check"></i>';
-    }
-    if (actorData.data.attributes.legend.point3 == true ) {
-      actorData.data.attributes.legend.icon3 = '<i class="fas fa-check"></i>';
-    }
+      if (actorData.data.attributes.fate.value >= 1){
+        actorData.data.attributes.fate.icon = '<i class="fas fa-check"></i>';
+      }
 
-    if (actorData.data.attributes.fate.value >= 1){
-      actorData.data.attributes.fate.icon = '<i class="fas fa-check"></i>';
-    }
+      //Death Icons
+      if (actorData.data.attributes.death.save1 == "empty") {
+        actorData.data.attributes.death.icon1 = '<i class="far fa-circle"></i>';
+      } else if (actorData.data.attributes.death.save1 == "success") {
+        actorData.data.attributes.death.icon1 = '<i class="fas fa-heart"></i>';
+      } else if (actorData.data.attributes.death.save1 == "failure") {
+        actorData.data.attributes.death.icon1 = '<i class="fas fa-skull-crossbones"></i>';
+      }
 
-    //Death Icons
-    if (actorData.data.attributes.death.save1 == "empty") {
-      actorData.data.attributes.death.icon1 = '<i class="far fa-circle"></i>';
-    } else if (actorData.data.attributes.death.save1 == "success") {
-      actorData.data.attributes.death.icon1 = '<i class="fas fa-heart"></i>';
-    } else if (actorData.data.attributes.death.save1 == "failure") {
-      actorData.data.attributes.death.icon1 = '<i class="fas fa-skull-crossbones"></i>';
-    }
+      if (actorData.data.attributes.death.save2 == "empty") {
+        actorData.data.attributes.death.icon2 = '<i class="far fa-circle"></i>';
+      } else if (actorData.data.attributes.death.save2 == "success") {
+        actorData.data.attributes.death.icon2 = '<i class="fas fa-heart"></i>';
+      } else if (actorData.data.attributes.death.save2 == "failure") {
+        actorData.data.attributes.death.icon2 = '<i class="fas fa-skull-crossbones"></i>';
+      }
 
-    if (actorData.data.attributes.death.save2 == "empty") {
-      actorData.data.attributes.death.icon2 = '<i class="far fa-circle"></i>';
-    } else if (actorData.data.attributes.death.save2 == "success") {
-      actorData.data.attributes.death.icon2 = '<i class="fas fa-heart"></i>';
-    } else if (actorData.data.attributes.death.save2 == "failure") {
-      actorData.data.attributes.death.icon2 = '<i class="fas fa-skull-crossbones"></i>';
-    }
+      if (actorData.data.attributes.death.save3 == "empty") {
+        actorData.data.attributes.death.icon3 = '<i class="far fa-circle"></i>';
+      } else if (actorData.data.attributes.death.save3 == "success") {
+        actorData.data.attributes.death.icon3 = '<i class="fas fa-heart"></i>';
+      } else if (actorData.data.attributes.death.save3 == "failure") {
+        actorData.data.attributes.death.icon3 = '<i class="fas fa-skull-crossbones"></i>';
+      }
 
-    if (actorData.data.attributes.death.save3 == "empty") {
-      actorData.data.attributes.death.icon3 = '<i class="far fa-circle"></i>';
-    } else if (actorData.data.attributes.death.save3 == "success") {
-      actorData.data.attributes.death.icon3 = '<i class="fas fa-heart"></i>';
-    } else if (actorData.data.attributes.death.save3 == "failure") {
-      actorData.data.attributes.death.icon3 = '<i class="fas fa-skull-crossbones"></i>';
-    }
+      if (actorData.data.attributes.death.save12 == "empty") {
+        actorData.data.attributes.death.icon12 = '<i class="far fa-circle"></i>';
+      } else if (actorData.data.attributes.death.save12 == "success") {
+        actorData.data.attributes.death.icon12 = '<i class="fas fa-heart"></i>';
+      } else if (actorData.data.attributes.death.save12 == "failure") {
+        actorData.data.attributes.death.icon12 = '<i class="fas fa-skull-crossbones"></i>';
+      }
 
-    if (actorData.data.attributes.death.save12 == "empty") {
-      actorData.data.attributes.death.icon12 = '<i class="far fa-circle"></i>';
-    } else if (actorData.data.attributes.death.save12 == "success") {
-      actorData.data.attributes.death.icon12 = '<i class="fas fa-heart"></i>';
-    } else if (actorData.data.attributes.death.save12 == "failure") {
-      actorData.data.attributes.death.icon12 = '<i class="fas fa-skull-crossbones"></i>';
-    }
+      if (actorData.data.attributes.death.save22 == "empty") {
+        actorData.data.attributes.death.icon22 = '<i class="far fa-circle"></i>';
+      } else if (actorData.data.attributes.death.save22 == "success") {
+        actorData.data.attributes.death.icon22 = '<i class="fas fa-heart"></i>';
+      } else if (actorData.data.attributes.death.save22 == "failure") {
+        actorData.data.attributes.death.icon22 = '<i class="fas fa-skull-crossbones"></i>';
+      }
 
-    if (actorData.data.attributes.death.save22 == "empty") {
-      actorData.data.attributes.death.icon22 = '<i class="far fa-circle"></i>';
-    } else if (actorData.data.attributes.death.save22 == "success") {
-      actorData.data.attributes.death.icon22 = '<i class="fas fa-heart"></i>';
-    } else if (actorData.data.attributes.death.save22 == "failure") {
-      actorData.data.attributes.death.icon22 = '<i class="fas fa-skull-crossbones"></i>';
-    }
+      if (actorData.data.attributes.death.save32 == "empty") {
+        actorData.data.attributes.death.icon32 = '<i class="far fa-circle"></i>';
+      } else if (actorData.data.attributes.death.save32 == "success") {
+        actorData.data.attributes.death.icon32 = '<i class="fas fa-heart"></i>';
+      } else if (actorData.data.attributes.death.save32 == "failure") {
+        actorData.data.attributes.death.icon32 = '<i class="fas fa-skull-crossbones"></i>';
+      }
 
-    if (actorData.data.attributes.death.save32 == "empty") {
-      actorData.data.attributes.death.icon32 = '<i class="far fa-circle"></i>';
-    } else if (actorData.data.attributes.death.save32 == "success") {
-      actorData.data.attributes.death.icon32 = '<i class="fas fa-heart"></i>';
-    } else if (actorData.data.attributes.death.save32 == "failure") {
-      actorData.data.attributes.death.icon32 = '<i class="fas fa-skull-crossbones"></i>';
-    }
+      // Acted Toggle
+      if (actorData.data.attributes.acted.value == true ) {
+        actorData.data.attributes.acted.icon = '<i class="fas fa-check"></i>';
+      }
 
-    // Acted Toggle
-    if (actorData.data.attributes.acted.value == true ) {
-      actorData.data.attributes.acted.icon = '<i class="fas fa-check"></i>';
+      // Action Toggles
+      if (actorData.data.attributes.acted.action.value == true ) {
+        actorData.data.attributes.acted.action.icon = '<i class="fas fa-check"></i>';
+      }
+      if (actorData.data.attributes.acted.halfaction.value == true ) {
+        actorData.data.attributes.acted.halfaction.icon = '<i class="fas fa-check"></i>';
+      }
+      if (actorData.data.attributes.acted.reaction.value == true ) {
+        actorData.data.attributes.acted.reaction.icon = '<i class="fas fa-check"></i>';
+      }
+      if (actorData.data.attributes.acted.movement.value == true ) {
+        actorData.data.attributes.acted.movement.icon = '<i class="fas fa-check"></i>';
+      }
     }
-
-    // Action Toggles
-    if (actorData.data.attributes.acted.action.value == true ) {
-      actorData.data.attributes.acted.action.icon = '<i class="fas fa-check"></i>';
-    }
-    if (actorData.data.attributes.acted.halfaction.value == true ) {
-      actorData.data.attributes.acted.halfaction.icon = '<i class="fas fa-check"></i>';
-    }
-    if (actorData.data.attributes.acted.reaction.value == true ) {
-      actorData.data.attributes.acted.reaction.icon = '<i class="fas fa-check"></i>';
-    }
-    if (actorData.data.attributes.acted.movement.value == true ) {
-      actorData.data.attributes.acted.movement.icon = '<i class="fas fa-check"></i>';
-    }
-
 
     // Movement speeds
     data.movement = this._getMovementSpeed(actorData);
@@ -1056,16 +1058,30 @@ export default class ActorSheet5e extends ActorSheet {
     const field = event.currentTarget.previousElementSibling;
     const skillName = field.parentElement.dataset.skill;
     const source = this.actor.data._source.data.skills[skillName];
+    const dup = (field.name).slice(-1) == "2";
+
     if ( !source ) return;
 
-    // Cycle to the next or previous skill level
-    const levels = [0, 1, 0.5, 2, 3];
-    let idx = levels.indexOf(source.value);
-    const next = idx + (event.type === "click" ? 1 : 3);
-    field.value = levels[next % 5];
-  
-    // Update the field value and save the form
-    return this._onSubmit(event);
+
+    if(dup == false){
+      // Cycle to the next or previous skill level
+      const levels = [0, 1, 0.5, 2, 3];
+      let idx = levels.indexOf(source.value);
+      const next = idx + (event.type === "click" ? 1 : 3);
+      field.value = levels[next % 5];
+    
+      // Update the field value and save the form
+      return this._onSubmit(event);
+    } else{
+
+      const levels = [0, 1, 0.5, 2, 3];
+      let idx = levels.indexOf(source.value);
+      const next = idx + (event.type === "click" ? 1 : 3);
+      let value = levels[next % 5];
+      let name = field.name.slice(0,-1);
+      return this.actor.update({[name]: value});
+    }
+
   }
     /* -------------------------------------------- */
 

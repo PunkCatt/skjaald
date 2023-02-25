@@ -738,6 +738,7 @@ SKJAALD.distanceUnits = {
   touch: "SKJAALD.DistTouch",
   spec: "SKJAALD.Special",
   any: "SKJAALD.DistAny",
+  melee: "SKJAALD.DistMelee",
   ...SKJAALD.movementUnits
 };
 

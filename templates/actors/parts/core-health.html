@@ -49,8 +49,24 @@
                 </h5>
             </li>
 
+            <li class="attribute wounds container-box container-panel">
+                <div class="attribute-value container-box-body auto-calc-value" data-property="attributes.wounds">
+                <select class="" name="data.attributes.hp.wounds" data-type="String">
+                    {{#select data.attributes.hp.wounds}}
+                    <option value="0">Not Wounded</option>
+                    <option value="1">Wounded</option>
+                    <option value="2">Severely Wounded</option>
+                    <option value="3">Critically Wounded</option>
+                    {{/select}}
+                </select>
+                </div>
+                <h5 class="attribute-name container-box-header roll-hd rollable">
+                    {{ localize "SKJAALD.Wounds" }}
+                </h5>
+            </li>
+
             <li class="attribute exhaustEffects sheet-pc-exhaustion-details container-box container-panel">
-                <ul class="sheet-list-conditions sheet-container-body">
+                <ul class="sheet-container-body">
                     <li>
                         <label class="sheet-radio health0 noclick">
                             <input type="checkbox" {{checked data.attributes.exhaustion.exhaust0}}>
@@ -60,41 +76,65 @@
                     <li>
                         <label class="sheet-radio health1 noclick">
                             <input type="checkbox"  {{checked data.attributes.exhaustion.exhaust1}}>
-                            <span><strong>1:</strong> Disadvantage on Ability Checks</span>
+                            <span><strong>1:</strong> -1 to All d20 Rolls and Checks</span>
                         </label>
                     </li>
                     <li>
                         <label class="sheet-radio health2 noclick">
                             <input type="checkbox" {{checked data.attributes.exhaustion.exhaust2}}>
-                            <span><strong>2:</strong> Disadvantage on Saving Throws and Attacks</span>
+                            <span><strong>2:</strong> Any Grit Points Gained Are Halved</span>
                         </label>
                     </li>
                     <li>
                         <label class="sheet-radio health3 noclick">
                             <input type="checkbox" {{checked data.attributes.exhaustion.exhaust3}}>
-                            <span><strong>3:</strong> Movement Speed is Halved</span>
+                            <span><strong>3:</strong>  -2 to All d20 Rolls and Checks</span>
                         </label>
                     </li>
                     <li>
                         <label class="sheet-radio health4 noclick">
                             <input type="checkbox" {{checked data.attributes.exhaustion.exhaust4}}>
-                            <span><strong>4:</strong> Maximum HP is Halved</span>
+                            <span><strong>4:</strong> Disadvantage on Ability Checks</span>
                         </label>
                     </li>
                     <li>
                         <label class="sheet-radio health5 noclick">
                             <input type="checkbox"  {{checked data.attributes.exhaustion.exhaust5}}>
-                            <span><strong>5:</strong> Movement Speed Reduced to 0</span>
+                            <span><strong>5:</strong> -3 to All d20 Rolls and Checks</span>
                         </label>
                     </li>
                     <li>
                         <label class="sheet-radio health6 noclick">
                             <input type="checkbox"  {{checked data.attributes.exhaustion.exhaust6}} >
-                            <span><strong>6:</strong> Unconcious</span>
+                            <span><strong>6:</strong> Base movement speed is halved</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="sheet-radio health7 noclick">
+                            <input type="checkbox"  {{checked data.attributes.exhaustion.exhaust7}} >
+                            <span><strong>7:</strong> -4 to All d20 Rolls and Checks</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="sheet-radio health8 noclick">
+                            <input type="checkbox"  {{checked data.attributes.exhaustion.exhaust8}} >
+                            <span><strong>8:</strong> All Attributes are Temporarily Halved</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="sheet-radio health9 noclick">
+                            <input type="checkbox"  {{checked data.attributes.exhaustion.exhaust9}} >
+                            <span><strong>9:</strong> -5 to All d20 Rolls and Checks</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="sheet-radio health10 noclick">
+                            <input type="checkbox"  {{checked data.attributes.exhaustion.exhaust10}} >
+                            <span><strong>10:</strong> Unconscious</span>
                         </label>
                     </li>
                 </ul>
-                <h5 class="attribute-name container-box-header sheet-container-header">
+                <h5 class="exhaustion-effects-header attribute-name container-box-header sheet-container-header ">
                     {{ localize "SKJAALD.ExhaustionEffects" }}
                 </h5>
             </li>

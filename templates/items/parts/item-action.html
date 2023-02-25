@@ -30,6 +30,7 @@
                 <select name="data.attacks.{{a}}.ability">
                     {{#select (lookup this "ability")}}
                     <option value="">{{ localize "SKJAALD.Default" }}</option>
+                    <option value="0">{{ localize "SKJAALD.None"}}</option>
                     {{#each ../config.abilities as |ability a|}}
                     <option value="{{a}}">{{ability}}</option>
                     {{/each}}
@@ -379,6 +380,7 @@
             <select name="data.effects.{{e}}.ability">
                 {{#select (lookup this "ability")}}
                 <option value="">{{ localize "SKJAALD.Default" }}</option>
+                <option value="0">{{ localize "SKJAALD.None"}}</option>
                 {{#each ../config.abilities as |ability a|}}
                 <option value="{{a}}">{{ability}}</option>
                 {{/each}}

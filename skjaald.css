@@ -934,7 +934,7 @@
 .skjaald.sheet.actor .core-container {
   display: grid;
   grid-template-columns: 295px 1fr 1fr;
-  grid-template-rows: 69px 143px 135px 1fr;
+  grid-template-rows: 69px 193px 135px 1fr;
   grid-row-gap: 10px;
   grid-column-gap: 5px;
   grid-template-areas: "attributes stats stats" "attributes health health" "attributes conditions conditions" "attributes resources nonconfeatures";
@@ -963,16 +963,16 @@
   grid-template-columns: repeat(7, 1fr);
   grid-column-gap: 5px;
   grid-row-gap: 5px;
-  grid-template-areas: "ac dp speed initiative actions actions actions actions";
+  grid-template-areas: "ac dp pp speed initiative actions actions actions";
 }
 .skjaald.sheet.actor .health-grid {
   grid-area: health;
   display: grid;
-  grid-template-rows: 69px 69px;
+  grid-template-rows: 69px 69px 45px;
   grid-template-columns: repeat(6, 1fr);
   grid-column-gap: 5px;
   grid-row-gap: 5px;
-  grid-template-areas: "maxhp hp hp Ex-effects Ex-effects Ex-effects" "hit hit death Ex-effects Ex-effects Ex-effects";
+  grid-template-areas: "maxhp hp hp Ex-effects Ex-effects Ex-effects" "hit hit death Ex-effects Ex-effects Ex-effects" "wounds wounds rage Ex-effects Ex-effects Ex-effects";
 }
 .skjaald.sheet.actor .conditions-grid {
   grid-area: conditions;
@@ -994,7 +994,7 @@
 .skjaald.sheet.actor .combat-container {
   display: grid;
   grid-template-columns: 295px 1fr 1fr;
-  grid-template-rows: 69px 143px 135px 100px 1fr;
+  grid-template-rows: 69px 193px 135px 100px 1fr;
   grid-row-gap: 10px;
   grid-column-gap: 5px;
   grid-template-areas: "attributes stats stats" "attributes health health" "attributes resources spellStats" "attributes resources comFeatures" "attributes attacks comFeatures";
@@ -1288,6 +1288,12 @@
   font-size: 25px;
   justify-content: center;
 }
+
+.skjaald.sheet.actor .auto-pp-value {
+  line-height: 25px;
+  font-size: 25px;
+  justify-content: center;
+}
 .skjaald.sheet.actor .auto-calc-value {
   line-height: 25px;
   font-size: 25px;
@@ -1309,6 +1315,11 @@
   justify-content: center;
   margin-bottom: -3px;
   margin-top: 7px;
+}
+.skjaald.sheet.actor .core-container .health-grid .exhaustEffects .container-box-header,
+.skjaald.sheet.actor .combat-container .health-grid .exhaustEffects .container-box-header{
+  margin-top: 0px;
+  margin-bottom: 5px;
 }
 .skjaald.sheet.actor .container-box-footer {
   font-size: 12px;
@@ -1631,7 +1642,15 @@
 .skjaald.sheet.actor .denialpoints {
   grid-area: dp;
 }
+.skjaald.sheet.actor .protectionpoints {
+  grid-area: pp;
+}
 .skjaald.sheet.actor .dp input {
+  width: 36px;
+  height: 23px;
+  text-align: center;
+}
+.skjaald.sheet.actor .pp input {
   width: 36px;
   height: 23px;
   text-align: center;
@@ -1728,6 +1747,14 @@
 .skjaald.sheet.actor .hit-dice {
   grid-area: hit;
 }
+.skjaald.sheet.actor .wounds {
+  grid-area: wounds;
+  min-height: 42px;
+}
+.skjaald.sheet.actor .wounds .auto-calc-value{
+  margin-top: -3px;
+  margin-bottom: 4px;
+}
 .skjaald.sheet.actor .death-saves {
   grid-area: death;
 }
@@ -1745,7 +1772,8 @@
  .sheet-pc-exhaustion-details ul {
   list-style: none;
   margin: 0;
-  padding: 0; }
+  padding: 0; 
+  margin-bottom: 5px;}
  .sheet-pc-exhaustion-details .sheet-pc-exhaustion-dot {
   background: white;
   border-radius: 100%;
@@ -1793,7 +1821,8 @@
    .sheet-pc-exhaustion-details li input[type=checkbox]:checked + span .sheet-pc-exhaustion-dot {
     background: #8c8c8c; }
  .sheet-pc-exhaustion-details li:nth-of-type(1) input[type=checkbox]:checked + span::after {
-  display: none; }
+  background: #46cf01;
+  height: 12px; }
  .sheet-pc-exhaustion-details li:not(:nth-of-type(1)) input[type=checkbox]:checked + span {
   color: rgb(0, 0, 0); }
  .sheet-pc-exhaustion-details li:nth-of-type(2) input[type=checkbox]:checked + span::after {
@@ -1801,19 +1830,31 @@
   height: 12px; }
  .sheet-pc-exhaustion-details li:nth-of-type(3) input[type=checkbox]:checked + span::after {
   background: #b4cf01;
-  height: 35px; }
+  height: 26px; }
  .sheet-pc-exhaustion-details li:nth-of-type(4) input[type=checkbox]:checked + span::after {
   background: #cfb401;
-  height: 53px; }
+  height: 40px; }
  .sheet-pc-exhaustion-details li:nth-of-type(5) input[type=checkbox]:checked + span::after {
-  background: #cf7d01;
-  height: 66px; }
+  background: #cfb401;
+  height: 54px; }
  .sheet-pc-exhaustion-details li:nth-of-type(6) input[type=checkbox]:checked + span::after {
+  background: #cf7d01;
+  height: 68px; }
+.sheet-pc-exhaustion-details li:nth-of-type(7) input[type=checkbox]:checked + span::after {
+  background: #cf7d01;
+  height: 82px; }
+ .sheet-pc-exhaustion-details li:nth-of-type(8) input[type=checkbox]:checked + span::after {
   background: #cf4601;
-  height: 85px; }
- .sheet-pc-exhaustion-details li:nth-of-type(7) input[type=checkbox]:checked + span::after {
+  height: 96px; }
+ .sheet-pc-exhaustion-details li:nth-of-type(9) input[type=checkbox]:checked + span::after {
+  background: #cf4601;
+  height: 110px; }
+ .sheet-pc-exhaustion-details li:nth-of-type(10) input[type=checkbox]:checked + span::after {
+  background: #cf4601;
+  height: 124px; }
+ .sheet-pc-exhaustion-details li:nth-of-type(11) input[type=checkbox]:checked + span::after {
   background: #cf0101;
-  height: 102px; }
+  height: 138px; }
 .skjaald.sheet.actor .well-conditions {
   grid-area: well-conditions;
   flex-direction: column;

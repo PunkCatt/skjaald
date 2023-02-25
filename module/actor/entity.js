@@ -284,6 +284,10 @@ export default class Actor5e extends Actor {
     actorData.data.attributes.exhaustion.exhaust4 = false;
     actorData.data.attributes.exhaustion.exhaust5 = false;
     actorData.data.attributes.exhaustion.exhaust6 = false;
+    actorData.data.attributes.exhaustion.exhaust7 = false;
+    actorData.data.attributes.exhaustion.exhaust8 = false;
+    actorData.data.attributes.exhaustion.exhaust9 = false;
+    actorData.data.attributes.exhaustion.exhaust10 = false;
     switch ( String(actorData.data.attributes.exhaustion.total) ) {
       case "0":
         actorData.data.attributes.exhaustion.exhaust0 = true;
@@ -306,13 +310,25 @@ export default class Actor5e extends Actor {
       case "6":
         actorData.data.attributes.exhaustion.exhaust6  = true;
         break;
+      case "7":
+        actorData.data.attributes.exhaustion.exhaust7  = true;
+        break;
+      case "8":
+        actorData.data.attributes.exhaustion.exhaust8  = true;
+        break;
+      case "9":
+        actorData.data.attributes.exhaustion.exhaust9  = true;
+        break;
+      case "10":
+        actorData.data.attributes.exhaustion.exhaust10  = true;
+        break;
     }
 
     if (actorData.data.attributes.exhaustion.total < 0){
       actorData.data.attributes.exhaustion.exhaust0 = true;
     }
-    if (actorData.data.attributes.exhaustion.total > 6){
-      actorData.data.attributes.exhaustion.exhaust6  = true;
+    if (actorData.data.attributes.exhaustion.total > 10){
+      actorData.data.attributes.exhaustion.exhaust10  = true;
     }
     if (isNaN(actorData.data.attributes.exhaustion.base)){
       actorData.data.attributes.exhaustion.base = 0;
@@ -449,6 +465,8 @@ export default class Actor5e extends Actor {
 
     actorData.data.attributes.ac.foo2 = actorData.data.attributes.ac.foo;
     actorData.data.attributes.dp.value2 = actorData.data.attributes.dp.value;
+    actorData.data.attributes.hp.wounds2 = actorData.data.attributes.hp.wounds;
+
 
     // Spell Attack Bonus
     
@@ -829,7 +847,14 @@ export default class Actor5e extends Actor {
 
     // Spellcasting DC
     const spellcastingAbility = ad.abilities[ad.attributes.spellcasting.ability];
-    ad.attributes.spellcasting.spelldc = spellcastingAbility ? spellcastingAbility.dc : 8 + ad.attributes.prof;
+    console.log("spell DC");
+    console.log(ad);
+    console.log(ad.classes.wizard);
+    if(ad.classes.wizard.levels > 0){
+      ad.attributes.spellcasting.spelldc = 8 + ad.abilities.int.mod + ad.classes.wizard.levels;
+    } else{
+      ad.attributes.spellcasting.spelldc = 0;
+    }
 
     // Translate the list of classes into spell-casting progression
     const progression = {

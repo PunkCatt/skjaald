@@ -22,6 +22,19 @@
             </h4>
         </li>
 
+        <li class="attribute protectionpoints container-panel">
+            <h5 class="container-box-footer">
+                {{ localize "SKJAALD.Max" }}: 
+                    <span>{{data.attributes.maxpp.value}}</span>
+            </h5>    
+            <div class="attribute-value container-box-body auto-pp-value pp" data-property="attributes.pp">
+                <input class="duplicate" type="text" name="data.attributes.pp.value2" value="{{data.attributes.pp.value}}" data-dtype="Number"/>
+            </div>
+            <h4 class="attribute-name container-box-header">
+                {{ localize "SKJAALD.ProtectionPoints" }}
+            </h4>
+        </li>
+
         <li class="attribute speed container-panel">
             <div class="attribute-value container-box-body auto-calc-value speed-input">
                 <input type="text" value="{{data.attributes.movement.walk}}" data-dtype="Number"/>

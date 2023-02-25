@@ -81,7 +81,6 @@ export default class Item5e extends Item {
 
     if(effects){
       for (const attack of Object.entries(effects)) {
-        console.log(attack);
         if( ["mwak", "rwak", "msak", "rsak", "other"].includes(attack[1].actionType) )
         return true;
       }
@@ -106,7 +105,6 @@ export default class Item5e extends Item {
       const attacks = this.data.data.attacks;
       if(attacks){
         for (const attack of Object.entries(attacks)) {
-          console.log(attack[1].damageparts);
           if( attack[1].damageparts )
           return true;
         }
@@ -116,7 +114,6 @@ export default class Item5e extends Item {
       const attacks = this.data.data.effects;
       if(attacks){
         for (const attack of Object.entries(attacks)) {
-          console.log(attack[1].damageparts);
           if( attack[1].damageparts )
           return true;
         }
@@ -454,7 +451,7 @@ export default class Item5e extends Item {
    *
    * @returns {{rollData: object, parts: string[]}|null}  Data used in the item's Attack roll.
    */
-  getAttackToHit() {
+  getAttackToHit(attackID) {
     const itemData = this.data.data;
     if ( !this.hasAttack || !itemData ) return;
     const rollData = this.getRollData();
@@ -462,10 +459,11 @@ export default class Item5e extends Item {
     // Define Roll bonuses
     const parts = [];
 
+    console.log(itemData.attacks[attackID.attackID].attackBonus);
     // Include the item's innate attack bonus as the initial value and label
-    if ( itemData.attackBonus ) {
-      parts.push(itemData.attackBonus);
-      this.labels.toHit = itemData.attackBonus;
+    if ( itemData.attacks[attackID.attackID].attackBonus ) {
+      parts.push(itemData.attacks[attackID.attackID].attackBonus);
+      this.labels.toHit = itemData.attacks[attackID.attackID].attackBonus;
     }
 
     // Take no further action for un-owned items
@@ -475,7 +473,7 @@ export default class Item5e extends Item {
     parts.push("@mod");
 
     // Add proficiency bonus if an explicit proficiency flag is present or for non-item features
-    if ( !["weapon", "consumable"].includes(this.data.type) || itemData.proficient ) {
+    if ( itemData.proficient ) {
       parts.push("@prof");
       if ( this.data.data.prof?.hasProficiency ) {
         rollData.prof = this.data.data.prof.term;
@@ -1042,7 +1040,7 @@ export default class Item5e extends Item {
    * @param {object} options        Roll options which are configured and provided to the d20Roll function
    * @returns {Promise<Roll|null>}   A Promise which resolves to the created Roll instance
    */
-  async rollAttack(options={}) {
+  async rollAttack(attackID, options={}) {
     const itemData = this.data.data;
     const flags = this.actor.data.flags.skjaald || {};
     if ( !this.hasAttack ) {
@@ -1051,7 +1049,7 @@ export default class Item5e extends Item {
     let title = `${this.name} - ${game.i18n.localize("SKJAALD.AttackRoll")}`;
 
     // Get the parts and rollData for this item's attack
-    const {parts, rollData} = this.getAttackToHit();
+    const {parts, rollData} = this.getAttackToHit(attackID);
 
     // Handle ammunition consumption
     delete this._ammo;
@@ -1068,12 +1066,13 @@ export default class Item5e extends Item {
           title += ` [${ammo.name}]`;
         }
       }
-
       // Get pending ammunition update
       const usage = this._getUsageUpdates({consumeResource: true});
       if ( usage === false ) return null;
       ammoUpdate = usage.resourceUpdates || {};
     }
+    console.log(parts);
+
 
     // Compose roll options
     let rollConfig = {
@@ -1142,7 +1141,6 @@ export default class Item5e extends Item {
 
     var partArray = [];
     var damageparts;
-    console.log(actorData);
     var focusRoll = false;
     if(this.data.type == 'spell'){
       damageparts = itemData.effects[attackID].damageparts;
@@ -1163,7 +1161,6 @@ export default class Item5e extends Item {
     if ( spellLevel ) rollData.item.level = spellLevel;
     var focusRollBool = false;
     if(this.data.type == 'spell'){
-      console.log(rollData);
       focusRollBool = true;
     }
 
@@ -1223,6 +1220,20 @@ export default class Item5e extends Item {
     const actorBonus = getProperty(actorData, `bonuses.${itemData.actionType}`) || {};
     if ( actorBonus.damage && (parseInt(actorBonus.damage) !== 0) ) {
       parts.push(actorBonus.damage);
+    }
+
+    // Add damage bonus formula
+    var ability;
+    if(this.data.type == 'spell'){
+      ability = itemData.effects[attackID].ability;
+    }else{
+      ability = itemData.attacks[attackID].ability;
+    }
+
+    
+    const abilityBonus = actorData.abilities[ability].mod;
+    if (abilityBonus != undefined)  {
+      parts.push(abilityBonus);
     }
 
     // Handle ammunition damage
@@ -1498,7 +1509,6 @@ export default class Item5e extends Item {
     const message = game.messages.get(messageId);
     const action = button.dataset.action;
     const attackID = button.dataset.id;
-    console.log(button.dataset);
     const effectID = button.dataset.id;
 
     // Validate permission to proceed with the roll
@@ -1521,7 +1531,7 @@ export default class Item5e extends Item {
     let targets;
     switch ( action ) {
       case "attack":
-        await item.rollAttack({event}); break;
+        await item.rollAttack({attackID, effectID,  event}); break;
       case "damage":
       case "versatile":
         await item.rollDamage({

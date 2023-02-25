@@ -20,7 +20,7 @@
 
             {{#if hasAttack}}
                 {{#each data.attacks as |attack a| }}
-                <button data-action="attack">{{ lookup this "name" }}</button>
+                <button data-action="attack" data-id="{{a}}">{{ lookup this "name" }}</button>
                     {{#if (ne (lookup this 'damageparts') undefined)}}
                         <button data-action="damage" data-id="{{a}}">
                             {{#if isHealing}}{{ localize "SKJAALD.Healing" }}
@@ -51,7 +51,7 @@
 
             {{#if hasAttack}}
                 {{#each data.effects as |attack a| }}
-                <button data-action="attack">{{ lookup this "name" }}</button>
+                <button data-action="attack" data-id="{{a}}">{{ lookup this "name" }}</button>
                     {{#if (ne (lookup this 'damageparts') undefined)}}
                         <button data-action="damage" data-id="{{a}}">
                             {{#if isHealing}}{{ localize "SKJAALD.Healing" }}
