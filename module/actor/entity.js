@@ -1542,13 +1542,15 @@ export default class Actor5e extends Actor {
       data.saveBonus = Roll.replaceFormulaData(bonuses.save, data);
     }
 
+    parts.push(data.abilities.con.mod);
+    parts.push(data.abilities.)
     // Evaluate the roll
     const rollData = foundry.utils.mergeObject(options, {
       parts: parts,
       data: data,
       title: `${game.i18n.localize("SKJAALD.DeathSavingThrow")}: ${this.name}`,
       halflingLucky: this.getFlag("skjaald", "halflingLucky"),
-      targetValue: 10,
+      targetValue: 15,
       messageData: {
         speaker: speaker,
         "flags.skjaald.roll": {type: "death"}
