@@ -848,9 +848,7 @@ export default class Actor5e extends Actor {
     // Spellcasting DC
     const spellcastingAbility = ad.abilities[ad.attributes.spellcasting.ability];
     console.log("spell DC");
-    console.log(ad);
-    console.log(ad.classes.wizard);
-    if(ad.classes.wizard.levels > 0){
+    if(ad.classes.wizard != undefined){
       ad.attributes.spellcasting.spelldc = 8 + ad.abilities.int.mod + ad.classes.wizard.levels;
     } else{
       ad.attributes.spellcasting.spelldc = 0;
