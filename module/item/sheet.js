@@ -506,7 +506,7 @@ export default class ItemSheet5e extends ItemSheet {
       const name = "data.effects." + index + ".damageparts";
 
 
-
+      console.log(index);
       const attacks =  Object.values(this.item.data.data.effects[index].damageparts || []);
       attacks.splice(index2, 1);
       return this.item.update({ [name]: attacks}, {});

@@ -459,9 +459,8 @@ export default class Item5e extends Item {
     // Define Roll bonuses
     const parts = [];
 
-    console.log(itemData.attacks[attackID.attackID].attackBonus);
     // Include the item's innate attack bonus as the initial value and label
-    if ( itemData.attacks[attackID.attackID].attackBonus ) {
+    if ( attackID != undefined ) {
       parts.push(itemData.attacks[attackID.attackID].attackBonus);
       this.labels.toHit = itemData.attacks[attackID.attackID].attackBonus;
     }
