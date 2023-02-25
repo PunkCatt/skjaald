@@ -1543,7 +1543,7 @@ export default class Actor5e extends Actor {
     }
 
     parts.push(data.abilities.con.mod);
-    parts.push(data.abilities.int.mod);
+    parts.push(data.abilities.wis.mod);
     // Evaluate the roll
     const rollData = foundry.utils.mergeObject(options, {
       parts: parts,
