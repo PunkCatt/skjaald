@@ -2798,9 +2798,19 @@
 }
 .dice-roll .dice-total.critical {
   color: #C5B317;
+  text-shadow:
+  -.75px -.75px 0 #000,
+  .75px -.75px 0 #000,
+  -.75px .75px 0 #000,
+  .75px .75px 0 #000; 
 }
 .dice-roll .dice-total.fumble {
   color: #7414C4;
+  text-shadow:
+  -.75px -.75px 0 #000,
+  .75px -.75px 0 #000,
+  -.75px .75px 0 #000,
+  .75px .75px 0 #000;  
 }
 /* ----------------------------------------- */
 /*  Basic Structure                          */

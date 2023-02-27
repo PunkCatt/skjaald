@@ -225,6 +225,10 @@ export default class D20Roll extends Roll {
       this.terms.findSplice(t => t.term === "@mod", new NumericTerm({number: abl.mod}));
       this.options.flavor += ` (${CONFIG.SKJAALD.abilities[form.ability.value]})`;
     }
+    console.log(this);
+    if(form.critrange.value != ""){
+      this.options.critical = parseInt(form.critrange.value);
+    }
 
     // Store data from dialog
 
