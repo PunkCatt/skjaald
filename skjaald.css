@@ -3163,8 +3163,27 @@
   top: 475px;
   left: 458px;
 }
+.armorDude .weapons{
+  position: absolute;
+  top: 454px;
+  left: 62px;
+}
+.armorDude .weapon1-drop{
+  position: absolute;
+  top: 475px;
+  left: 19px;
+}
+.armorDude .weapon2-drop{
+  position: absolute;
+  top: 500px;
+  left: 19px;
+}
 .armorDude select{
   width: 97px;
+}
+.armorDude .weapon1-drop,
+.armorDude .weapon2-drop{
+  width: 140px;
 }
 .spells .details .editor,
 .weapons .details .editor{

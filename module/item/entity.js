@@ -461,15 +461,23 @@ export default class Item5e extends Item {
 
     // Include the item's innate attack bonus as the initial value and label
     if ( attackID != undefined ) {
-      parts.push(itemData.attacks[attackID.attackID].attackBonus);
-      this.labels.toHit = itemData.attacks[attackID.attackID].attackBonus;
+      if(itemData.attacks[attackID.attackID].attackBonus != "" || itemData.attacks[attackID.attackID].attackBonus != 0){
+        parts.push(itemData.attacks[attackID.attackID].attackBonus);
+        this.labels.toHit = itemData.attacks[attackID.attackID].attackBonus;
+      }
     }
 
     // Take no further action for un-owned items
     if ( !this.isOwned ) return {rollData, parts};
 
     // Ability score modifier
-    parts.push("@mod");
+    if ( attackID != undefined ) {
+      const ablMod = itemData.attacks[attackID.attackID].ability;
+
+      parts.push(this.actor.data.data.abilities[ablMod].mod);
+      this.labels.toHit = ablMod;
+    }
+    
 
     // Add proficiency bonus if an explicit proficiency flag is present or for non-item features
     if ( itemData.proficient ) {

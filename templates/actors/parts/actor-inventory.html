@@ -14,6 +14,7 @@
                 <label class="rings">{{ localize "SKJAALD.Rings" }}</label>
                 <label class="thighs">{{ localize "SKJAALD.Thighs" }}</label>
                 <label class="legs">{{ localize "SKJAALD.Legs" }}</label>
+                <label class="weapons"> {{ localize "SKJAALD.Weapons"}}</label>
 
 
                 <select class="head-drop change-equip {{data.attributes.wornArmor.head}}" name="data.attributes.wornArmor.head">
@@ -24,6 +25,16 @@
                     {{/each}}
                     {{/select}}
                 </select>
+                {{#if suppHead}}
+                    <select class="head-drop change-equip {{data.attributes.wornArmor.headSupp}} head-supp" name="data.attributes.wornArmor.headSupp">
+                        {{#select data.attributes.wornArmor.headSupp }}
+                        <option value="none">{{ localize "SKJAALD.None" }}</option>
+                        {{#each armorOptionsHeadSupp }}
+                        <option value="{{@key}}">{{this}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                {{/if}}
                 <select class="neck-drop change-equip {{data.attributes.wornArmor.neck}}" name="data.attributes.wornArmor.neck">
                     {{#select data.attributes.wornArmor.neck }}
                     <option value="none">{{ localize "SKJAALD.None" }}</option>
@@ -32,6 +43,16 @@
                     {{/each}}
                     {{/select}}
                 </select>
+                {{#if suppNeck}}
+                    <select class="neck-drop change-equip {{data.attributes.wornArmor.neckSupp}} neck-supp" name="data.attributes.wornArmor.neckSupp">
+                        {{#select data.attributes.wornArmor.neckSupp }}
+                        <option value="none">{{ localize "SKJAALD.None" }}</option>
+                        {{#each armorOptionsNeckSupp as |name type|}}
+                        <option value="{{@key}}">{{this}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                {{/if}}
                 <select class="shoulders-drop change-equip {{data.attributes.wornArmor.shoulders}}" name="data.attributes.wornArmor.shoulders">
                     {{#select data.attributes.wornArmor.shoulders }}
                     <option value="none">{{ localize "SKJAALD.None" }}</option>
@@ -40,6 +61,16 @@
                     {{/each}}
                     {{/select}}
                 </select>
+                {{#if suppShoulders}}
+                    <select class="shoulders-drop change-equip {{data.attributes.wornArmor.shouldersSupp}} shoulders-supp" name="data.attributes.wornArmor.shouldersSupp">
+                        {{#select data.attributes.wornArmor.shouldersSupp }}
+                        <option value="none">{{ localize "SKJAALD.None" }}</option>
+                        {{#each armorOptionsShouldersSupp as |name type|}}
+                        <option value="{{@key}}">{{this}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                {{/if}}
                 <select class="inner-drop change-equip {{data.attributes.wornArmor.inner}}" name="data.attributes.wornArmor.inner">
                     {{#select data.attributes.wornArmor.inner }}
                     <option value="none">{{ localize "SKJAALD.None" }}</option>
@@ -48,7 +79,17 @@
                     {{/each}}
                     {{/select}}
                 </select>
-                <select class="outer-drop change- {{data.attributes.wornArmor.outer}}" name="data.attributes.wornArmor.outer">
+                {{#if suppInner}}
+                    <select class="inner-drop change-equip {{data.attributes.wornArmor.innerSupp}} inner-supp" name="data.attributes.wornArmor.innerSupp">
+                        {{#select data.attributes.wornArmor.innerSupp }}
+                        <option value="none">{{ localize "SKJAALD.None" }}</option>
+                        {{#each armorOptionsInnerSupp as |name type|}}
+                        <option value="{{@key}}">{{this}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                {{/if}}
+                <select class="outer-drop change-equip {{data.attributes.wornArmor.outer}}" name="data.attributes.wornArmor.outer">
                     {{#select data.attributes.wornArmor.outer }}
                     <option value="none">{{ localize "SKJAALD.None" }}</option>
                     {{#each armorOptionsOuter as |name type|}}
@@ -56,7 +97,17 @@
                     {{/each}}
                     {{/select}}
                 </select>
-                <select class="torso-drop change-equip  {{data.attributes.wornArmor.torso}}" name="data.attributes.wornArmor.torso">
+                {{#if suppOuter}}
+                    <select class="outer-drop change-equip {{data.attributes.wornArmor.outersupp}} outer-supp" name="data.attributes.wornArmor.outerSupp">
+                        {{#select data.attributes.wornArmor.outerSupp }}
+                        <option value="none">{{ localize "SKJAALD.None" }}</option>
+                        {{#each armorOptionsOuterSupp as |name type|}}
+                        <option value="{{@key}}">{{this}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                {{/if}}
+                <select class="torso-drop change-equip {{data.attributes.wornArmor.torso}}" name="data.attributes.wornArmor.torso">
                     {{#select data.attributes.wornArmor.torso }}
                     <option value="none">{{ localize "SKJAALD.None" }}</option>
                     {{#each armorOptionsTorso as |name type|}}
@@ -64,6 +115,16 @@
                     {{/each}}
                     {{/select}}
                 </select>
+                {{#if suppTorso}}
+                    <select class="torso-drop change-equip {{data.attributes.wornArmor.torsoSupp}} torso-supp" name="data.attributes.wornArmor.torsoSupp">
+                        {{#select data.attributes.wornArmor.torsoSupp }}
+                        <option value="none">{{ localize "SKJAALD.None" }}</option>
+                        {{#each armorOptionsTorsoSupp as |name type|}}
+                        <option value="{{@key}}">{{this}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                {{/if}}
                 <select class="waist-drop change-equip {{data.attributes.wornArmor.waist}}" name="data.attributes.wornArmor.waist">
                     {{#select data.attributes.wornArmor.waist }}
                     <option value="none">{{ localize "SKJAALD.None" }}</option>
@@ -72,6 +133,16 @@
                     {{/each}}
                     {{/select}}
                 </select>
+                {{#if suppWaist}}
+                    <select class="waist-drop change-equip {{data.attributes.wornArmor.waistSupp}} waist-supp" name="data.attributes.wornArmor.waistSupp">
+                        {{#select data.attributes.wornArmor.waistSupp }}
+                        <option value="none">{{ localize "SKJAALD.None" }}</option>
+                        {{#each armorOptionsWaistSupp as |name type|}}
+                        <option value="{{@key}}">{{this}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                {{/if}}
                 <select class="arms-drop change-equip {{data.attributes.wornArmor.arms}}" name="data.attributes.wornArmor.arms">
                     {{#select data.attributes.wornArmor.arms }}
                     <option value="none">{{ localize "SKJAALD.None" }}</option>
@@ -80,6 +151,16 @@
                     {{/each}}
                     {{/select}}
                 </select>
+                {{#if suppArms}}
+                    <select class="arms-drop change-equip {{data.attributes.wornArmor.armsSupp}} arms-supp" name="data.attributes.wornArmor.armsSupp">
+                        {{#select data.attributes.wornArmor.armsSupp }}
+                        <option value="none">{{ localize "SKJAALD.None" }}</option>
+                        {{#each armorOptionsArmSupp as |name type|}}
+                        <option value="{{@key}}">{{this}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                {{/if}}
                 <select class="hands-drop change-equip {{data.attributes.wornArmor.hands}}" name="data.attributes.wornArmor.hands">
                     {{#select data.attributes.wornArmor.hands }}
                     <option value="none">{{ localize "SKJAALD.None" }}</option>
@@ -88,6 +169,16 @@
                     {{/each}}
                     {{/select}}
                 </select>
+                {{#if suppHands}}
+                    <select class="hands-drop change-equip {{data.attributes.wornArmor.handsSupp}} hands-supp" name="data.attributes.wornArmor.handsSupp">
+                        {{#select data.attributes.wornArmor.handsSupp }}
+                        <option value="none">{{ localize "SKJAALD.None" }}</option>
+                        {{#each armorOptionsHandSupp as |name type|}}
+                        <option value="{{@key}}">{{this}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                {{/if}}
                 <select class="ring1-drop change-equip {{data.attributes.wornArmor.ring1}}" name="data.attributes.wornArmor.ring1">
                     {{#select data.attributes.wornArmor.ring1 }}
                     <option value="none">{{ localize "SKJAALD.None" }}</option>
@@ -128,10 +219,46 @@
                     {{/each}}
                     {{/select}}
                 </select>
+                {{#if suppthighs}}
+                    <select class="thighs-drop change-equip {{data.attributes.wornArmor.thighsSupp}} thighs-supp" name="data.attributes.wornArmor.thighsSupp">
+                        {{#select data.attributes.wornArmor.thighsSupp }}
+                        <option value="none">{{ localize "SKJAALD.None" }}</option>
+                        {{#each armorOptionsThighSupp as |name type|}}
+                        <option value="{{@key}}">{{this}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                {{/if}}
                 <select class="legs-drop change-equip {{data.attributes.wornArmor.legs}}" name="data.attributes.wornArmor.legs">
                     {{#select data.attributes.wornArmor.legs }}
                     <option value="none">{{ localize "SKJAALD.None" }}</option>
                     {{#each armorOptionsLeg as |name type|}}
+                    <option value="{{@key}}">{{this}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+                {{#if suppLegs}}
+                <select class="legs-drop change-equip {{data.attributes.wornArmor.legsSupp}} legs-supp" name="data.attributes.wornArmor.legsSupp">
+                    {{#select data.attributes.wornArmor.legsSupp }}
+                    <option value="none">{{ localize "SKJAALD.None" }}</option>
+                    {{#each armorOptionsLegSupp as |name type|}}
+                    <option value="{{@key}}">{{this}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+                {{/if}}
+                <select class="weapon1-drop change-equip {{data.attributes.wornArmor.weapon1}}" name="data.attributes.wornArmor.weapon1">
+                    {{#select data.attributes.wornArmor.weapon1 }}
+                    <option value="none">{{ localize "SKJAALD.None" }}</option>
+                    {{#each armorOptionsWeapons as |name type|}}
+                    <option value="{{@key}}">{{this}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+                <select class="weapon2-drop change-equip {{data.attributes.wornArmor.weapon2}}" name="data.attributes.wornArmor.weapon2">
+                    {{#select data.attributes.wornArmor.weapon2 }}
+                    <option value="none">{{ localize "SKJAALD.None" }}</option>
+                    {{#each armorOptionsWeapons as |name type|}}
                     <option value="{{@key}}">{{this}}</option>
                     {{/each}}
                     {{/select}}

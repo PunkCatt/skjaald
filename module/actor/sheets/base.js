@@ -293,23 +293,36 @@ export default class ActorSheet5e extends ActorSheet {
     // Prepare warnings
     data.warnings = this.actor._preparationWarnings;
 
-    //testing armor lists
-    data.armorOptionsHead = this._getArmorForSlotsList(data, "head", "head");
-    data.armorOptionsNeck = this._getArmorForSlotsList(data, "neck", "neck");
-    data.armorOptionsShoulders = this._getArmorForSlotsList(data, "shoulders", "shoulders");
-    data.armorOptionsTorso = this._getArmorForSlotsList(data, "torso", "torso");
-    data.armorOptionsInner = this._getArmorForSlotsList(data, "inner", "inner");
-    data.armorOptionsOuter = this._getArmorForSlotsList(data, "outer", "outer");
-    data.armorOptionsWaist = this._getArmorForSlotsList(data, "waist", "waist");
-    data.armorOptionsArm = this._getArmorForSlotsList(data, "arms", "arms");
-    data.armorOptionsRing1 = this._getArmorForSlotsList(data, "rings", "ring1");
-    data.armorOptionsRing2 = this._getArmorForSlotsList(data, "rings", "ring2");
-    data.armorOptionsRing3 = this._getArmorForSlotsList(data, "rings", "ring3");
-    data.armorOptionsRing4 = this._getArmorForSlotsList(data, "rings", "ring4");
-    data.armorOptionsHand = this._getArmorForSlotsList(data, "hands", "hands");
-    data.armorOptionsThigh = this._getArmorForSlotsList(data, "thighs", "thighs");
-    data.armorOptionsLeg = this._getArmorForSlotsList(data, "legs", "legs");
+    // Prepare armor slots
+    var slotList = this._getArmorForSlotsList(data);
 
+    //testing armor lists
+    data.armorOptionsHead = this._getArmorForSlotsList(data, "head", "head", false);
+    data.armorOptionsHeadSupp = this._getArmorForSlotsList(data, "head", "head", true);
+    data.armorOptionsNeck = this._getArmorForSlotsList(data, "neck", "neck", false);
+    data.armorOptionsNeckSupp = this._getArmorForSlotsList(data, "neck", "neck", true);
+    data.armorOptionsShoulders = this._getArmorForSlotsList(data, "shoulders", "shoulders", false);
+    data.armorOptionsShouldersSupp = this._getArmorForSlotsList(data, "shoulders", "shoulders", true);
+    data.armorOptionsTorso = this._getArmorForSlotsList(data, "torso", "torso", false);
+    data.armorOptionsTorsoSupp = this._getArmorForSlotsList(data, "torso", "torso", true);
+    data.armorOptionsInner = this._getArmorForSlotsList(data, "inner", "inner", false);
+    data.armorOptionsInnerSupp = this._getArmorForSlotsList(data, "inner", "inner", true);
+    data.armorOptionsOuter = this._getArmorForSlotsList(data, "outer", "outer", false);
+    data.armorOptionsOuterSupp = this._getArmorForSlotsList(data, "outer", "outer", true);
+    data.armorOptionsWaist = this._getArmorForSlotsList(data, "waist", "waist", false);
+    data.armorOptionsWaistSupp = this._getArmorForSlotsList(data, "waist", "waist", true);
+    data.armorOptionsArm = this._getArmorForSlotsList(data, "arms", "arms", false);
+    data.armorOptionsArmSupp = this._getArmorForSlotsList(data, "arms", "arms", true);
+    data.armorOptionsRing1 = this._getArmorForSlotsList(data, "rings", "ring1", false);
+    data.armorOptionsRing2 = this._getArmorForSlotsList(data, "rings", "ring2", false);
+    data.armorOptionsRing3 = this._getArmorForSlotsList(data, "rings", "ring3", false);
+    data.armorOptionsRing4 = this._getArmorForSlotsList(data, "rings", "ring4", false);
+    data.armorOptionsHand = this._getArmorForSlotsList(data, "hands", "hands", false);
+    data.armorOptionsHandSupp = this._getArmorForSlotsList(data, "hands", "hands", true);
+    data.armorOptionsThigh = this._getArmorForSlotsList(data, "thighs", "thighs", false);
+    data.armorOptionsThighSupp = this._getArmorForSlotsList(data, "thighs", "thighs", true);
+    data.armorOptionsLeg = this._getArmorForSlotsList(data, "legs", "legs", false );
+    data.armorOptionsWeapons = this._getArmorForSlotsList(data,"weapons", "weapons", false);
 
     if (data.effects.inactive.effects == ""){
       data.effects.inactive.effects = "test";
@@ -345,11 +358,12 @@ export default class ActorSheet5e extends ActorSheet {
   /**
    * Prepare the display of movement speed data for the Actor.
    * @param {object} data                The Actor data being prepared.
-   * @param {string} slot                Show the largest movement speed as "primary", otherwise show "walk".
+   * @param {string} slot 
+   * @param {boolean} suppFlag           
    * @returns {{string: string}}
    * @private
    */
-   _getArmorForSlotsList(data, slot, specific) {
+   _getArmorForSlotsList(data, slot, specific, suppFlag) {
     
     var armor = {};
     const wornArmor = data.actor.data.attributes.wornArmor;
@@ -455,6 +469,8 @@ export default class ActorSheet5e extends ActorSheet {
             armor[item._id] = item.name;
           }
         }
+      } else if (item.typ == "weapon"){
+        //populate weapons lists
       }
     });
 
@@ -1700,7 +1716,12 @@ export default class ActorSheet5e extends ActorSheet {
    */
   _onRollAbilityTest(event) {
     event.preventDefault();
-    let ability = event.currentTarget.parentElement.dataset.ability;
+    let ability;
+    if(event.currentTarget.parentElement.dataset.ability == ""){
+      ability = event.currentTarget.parentElement.dataset.skill;
+    } else{
+      ability = event.currentTarget.parentElement.dataset.ability;
+    }
     this.actor.rollAbilityTest(ability, {event: event});
   }
 

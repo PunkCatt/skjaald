@@ -3,7 +3,6 @@
  * @returns {Promise}      A Promise which resolves once the migration is completed
  */
 export const migrateWorld = async function() {
-  ui.notifications.info(`Applying skjaald System Migration for version ${game.system.data.version}. Please be patient and do not close your game or shut down your server.`, {permanent: true});
 
   const migrationData = await getMigrationData();
 
@@ -75,7 +74,6 @@ export const migrateWorld = async function() {
 
   // Set the migration as complete
   game.settings.set("skjaald", "systemMigrationVersion", game.system.data.version);
-  ui.notifications.info(`skjaald System Migration to version ${game.system.data.version} completed!`, {permanent: true});
 };
 
 /* -------------------------------------------- */

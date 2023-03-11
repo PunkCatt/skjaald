@@ -1363,6 +1363,7 @@ export default class Actor5e extends Actor {
    * @param {object} options      Options which configure how ability tests or saving throws are rolled
    */
   rollAbility(abilityId, options={}) {
+    console.log(abilityId);
     const label = CONFIG.SKJAALD.abilities[abilityId];
     new Dialog({
       title: `${game.i18n.format("SKJAALD.AbilityPromptTitle", {ability: label})}: ${this.name}`,
@@ -1412,7 +1413,9 @@ export default class Actor5e extends Actor {
     const data = this.getRollData();
 
     // Add ability modifier
+    console.log(abilityId);
     parts.push("@mod");
+    
     data.mod = abl.mod;
 
     // Include proficiency bonus
