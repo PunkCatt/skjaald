@@ -449,7 +449,7 @@ export default class Actor5e extends Actor {
     actorData.data.attributes.hp.hitDicecurrent2 = actorData.data.attributes.hp.hitDicecurrent;
     actorData.data.attributes.hp.hitDiceMax2 = actorData.data.attributes.hp.hitDiceMax;
 
-    actorData.data.attributes.death.save12 = "empty";
+    actorData.data.attributes.death.save12 = actorData.data.attributes.death.save1;
     actorData.data.attributes.death.save22 = actorData.data.attributes.death.save2;
     actorData.data.attributes.death.save32 = actorData.data.attributes.death.save3;
     
@@ -466,6 +466,7 @@ export default class Actor5e extends Actor {
     actorData.data.attributes.ac.foo2 = actorData.data.attributes.ac.foo;
     actorData.data.attributes.dp.value2 = actorData.data.attributes.dp.value;
     actorData.data.attributes.hp.wounds2 = actorData.data.attributes.hp.wounds;
+    actorData.data.attributes.dp.max2 = actorData.data.attributes.dp.max;
 
 
     // Spell Attack Bonus
@@ -1363,7 +1364,6 @@ export default class Actor5e extends Actor {
    * @param {object} options      Options which configure how ability tests or saving throws are rolled
    */
   rollAbility(abilityId, options={}) {
-    console.log(abilityId);
     const label = CONFIG.SKJAALD.abilities[abilityId];
     new Dialog({
       title: `${game.i18n.format("SKJAALD.AbilityPromptTitle", {ability: label})}: ${this.name}`,
@@ -1377,25 +1377,25 @@ export default class Actor5e extends Actor {
     }).render(true);
   }
 
-    /**
-   * Roll a generic ability test or saving throw.
-   * Prompt the user for input on which variety of roll they want to do.
-   * @param {string} abilityId    The ability id (e.g. "str")
-   * @param {object} options      Options which configure how ability tests or saving throws are rolled
-   */
-     rollAbilitySave(abilityId, options={}) {
-      const label = CONFIG.SKJAALD.abilities[abilityId];
-      new Dialog({
-        title: `${game.i18n.format("SKJAALD.AbilityPromptTitle", {ability: label})}: ${this.name}`,
-        content: `<p>${game.i18n.format("SKJAALD.AbilityPromptText", {ability: label})}</p>`,
-        buttons: {
-          save: {
-            label: game.i18n.localize("SKJAALD.ActionSave"),
-            callback: () => this.rollAbilitySave(abilityId, options)
-          }
-        }
-      }).render(true);
-    }
+  //   /**
+  //  * Roll a generic ability test or saving throw.
+  //  * Prompt the user for input on which variety of roll they want to do.
+  //  * @param {string} abilityId    The ability id (e.g. "str")
+  //  * @param {object} options      Options which configure how ability tests or saving throws are rolled
+  //  */
+  //    rollAbilitySave(abilityId, options={}) {
+  //     const label = CONFIG.SKJAALD.abilities[abilityId];
+  //     new Dialog({
+  //       title: `${game.i18n.format("SKJAALD.AbilityPromptTitle", {ability: label})}: ${this.name}`,
+  //       content: `<p>${game.i18n.format("SKJAALD.AbilityPromptText", {ability: label})}</p>`,
+  //       buttons: {
+  //         save: {
+  //           label: game.i18n.localize("SKJAALD.ActionSave"),
+  //           callback: () => this.rollAbilitySave(abilityId, options)
+  //         }
+  //       }
+  //     }).render(true);
+  //   }
 
   /* -------------------------------------------- */
 
@@ -1413,7 +1413,6 @@ export default class Actor5e extends Actor {
     const data = this.getRollData();
 
     // Add ability modifier
-    console.log(abilityId);
     parts.push("@mod");
     
     data.mod = abl.mod;

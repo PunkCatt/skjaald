@@ -12,7 +12,8 @@
         <li class="attribute denialpoints container-panel">
             <h5 class="container-box-footer">
                 {{ localize "SKJAALD.Max" }}: 
-                    <span>{{data.attributes.maxdp.value}}</span>
+                    <span>{{data.attributes.maxdp.value}}  <input class="max" type="text" name="data.attributes.dp.max" value="{{data.attributes.dp.max}}" data-dtype="Number" placeholder="0"/></span>
+                    
             </h5>    
             <div class="attribute-value container-box-body auto-dp-value dp" data-property="attributes.dp">
                 <input type="text" name="data.attributes.dp.value" value="{{data.attributes.dp.value}}" data-dtype="Number"/>

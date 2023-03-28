@@ -18,7 +18,7 @@
                     <input class="duplicate" type="hidden" name="data.abilities.{{id}}.proficient2" value="{{ability.baseProf}}" data-dtype="Number"/>
                     <a class="proficiency-toggle ability-proficiency" title="{{ localize 'SKJAALD.Proficiency' }}">{{{ability.icon}}}</a>
                     <span class="ability-save" title="{{ localize 'SKJAALD.SavingThrow' }}">{{numberFormat ability.save decimals=0 sign=true}}</span>
-                    <h4 class="ability-name rollable">{{label}}</h4>
+                    <h4 class="ability-save-name rollable {{id}}">{{label}}</h4>
                 </li>
             {{/each}}
         </div>

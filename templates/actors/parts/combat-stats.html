@@ -5,14 +5,18 @@
                 <input class="duplicate" type="text" name="data.attributes.ac.foo2" value="{{data.attributes.ac.foo}}" data-dtype="Number" placeholder="0"/>
             </div>
             <h5 class="attribute-name container-box-header ac-header">
-                {{ localize "SKJAALD.ArmorClass" }}
+            {{ localize "SKJAALD.ArmorClass" }}
             </h5>
+            <div class = "ac-max">
+                <input class="max" type="text" name="data.attributes.ac.max" value="{{data.attributes.ac.max}}" data-dtype="Number" placeholder="0"/>
+            </div>
+
         </li>
 
         <li class="attribute denialpoints container-panel">
             <h5 class="container-box-footer">
                 {{ localize "SKJAALD.Max" }}: 
-                    <span>{{data.attributes.maxdp.value}}</span>
+                    <span>{{data.attributes.maxdp.value}} <input class="duplicate max" type="text" name="data.attributes.dp.max2" value="{{data.attributes.dp.max}}" data-dtype="Number" placeholder="0"/></span>
             </h5>    
             <div class="attribute-value container-box-body auto-dp-value dp" data-property="attributes.dp">
                 <input class="duplicate" type="text" name="data.attributes.dp.value2" value="{{data.attributes.dp.value}}" data-dtype="Number"/>
@@ -25,7 +29,7 @@
         <li class="attribute protectionpoints container-panel">
             <h5 class="container-box-footer">
                 {{ localize "SKJAALD.Max" }}: 
-                    <span>{{data.attributes.maxpp.value}}</span>
+                    <span>{{data.attributes.maxpp.value}} <input class="max" type="text" name="data.attributes.pp.max" value="{{data.attributes.pp.max}}" data-dtype="Number" placeholder="0"/></span>
             </h5>    
             <div class="attribute-value container-box-body auto-pp-value pp" data-property="attributes.pp">
                 <input class="duplicate" type="text" name="data.attributes.pp.value2" value="{{data.attributes.pp.value}}" data-dtype="Number"/>

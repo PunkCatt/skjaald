@@ -459,12 +459,20 @@ export default class Item5e extends Item {
     // Define Roll bonuses
     const parts = [];
 
+    console.log(attackID);
+    console.log(itemData);
+
     // Include the item's innate attack bonus as the initial value and label
     if ( attackID != undefined ) {
-      if(itemData.attacks[attackID.attackID].attackBonus != "" || itemData.attacks[attackID.attackID].attackBonus != 0){
-        parts.push(itemData.attacks[attackID.attackID].attackBonus);
-        this.labels.toHit = itemData.attacks[attackID.attackID].attackBonus;
+      if(itemData.attacks){
+        if(itemData.attacks[attackID.attackID].attackBonus != "" || itemData.attacks[attackID.attackID].attackBonus != 0){
+          parts.push(itemData.attacks[attackID.attackID].attackBonus);
+          this.labels.toHit = itemData.attacks[attackID.attackID].attackBonus;
+        }
+      } else if(itemData.effects){
+        console.log(itemData.effects);
       }
+
     }
 
     // Take no further action for un-owned items
@@ -1410,6 +1418,7 @@ export default class Item5e extends Item {
     const title = `${this.name} - ${game.i18n.localize("SKJAALD.ToolCheck")}`;
 
     // Add proficiency
+    console.log(this);
     if ( this.data.data.prof?.hasProficiency ) {
       parts.push("@prof");
       rollData.prof = this.data.data.prof.term;

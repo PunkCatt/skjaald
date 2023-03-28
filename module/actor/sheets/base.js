@@ -182,23 +182,23 @@ export default class ActorSheet5e extends ActorSheet {
 
       //inpiration/fate
 
-      if (actorData.data.attributes.inspiration.point1 == true ) {
+      if (actorData.data.attributes.inspiration.point1 == "true" || actorData.data.attributes.inspiration.point1 == true) {
         actorData.data.attributes.inspiration.icon1 = '<i class="fas fa-check"></i>';
       }
-      if (actorData.data.attributes.inspiration.point2 == true ) {
+      if (actorData.data.attributes.inspiration.point2 == "true" || actorData.data.attributes.inspiration.point2 == true) {
         actorData.data.attributes.inspiration.icon2 = '<i class="fas fa-check"></i>';
       }
-      if (actorData.data.attributes.inspiration.point3 == true ) {
+      if (actorData.data.attributes.inspiration.point3 == "true" || actorData.data.attributes.inspiration.point3 == true ) {
         actorData.data.attributes.inspiration.icon3 = '<i class="fas fa-check"></i>';
       }
 
-      if (actorData.data.attributes.legend.point1 == true ) {
+      if (actorData.data.attributes.legend.point1 == "true" || actorData.data.attributes.legend.point1 == true) {
         actorData.data.attributes.legend.icon1 = '<i class="fas fa-check"></i>';
       }
-      if (actorData.data.attributes.legend.point2 == true ) {
+      if (actorData.data.attributes.legend.point2 == "true" || actorData.data.attributes.legend.point2 == true) {
         actorData.data.attributes.legend.icon2 = '<i class="fas fa-check"></i>';
       }
-      if (actorData.data.attributes.legend.point3 == true ) {
+      if (actorData.data.attributes.legend.point3 == "true" || actorData.data.attributes.legend.point3 == true) {
         actorData.data.attributes.legend.icon3 = '<i class="fas fa-check"></i>';
       }
 
@@ -1735,6 +1735,7 @@ export default class ActorSheet5e extends ActorSheet {
      _onRollAbilitySave(event) {
       event.preventDefault();
       let ability = event.currentTarget.classList[2];
+      console.log(ability);
       this.actor.rollAbilitySave(ability, {event: event});
     }
   

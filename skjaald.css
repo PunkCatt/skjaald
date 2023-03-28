@@ -972,7 +972,7 @@
   grid-template-columns: repeat(6, 1fr);
   grid-column-gap: 5px;
   grid-row-gap: 5px;
-  grid-template-areas: "maxhp hp hp Ex-effects Ex-effects Ex-effects" "hit hit death Ex-effects Ex-effects Ex-effects" "wounds wounds rage Ex-effects Ex-effects Ex-effects";
+  grid-template-areas: "maxhp hp hp Ex-effects Ex-effects Ex-effects" "hit hit death Ex-effects Ex-effects Ex-effects" "wounds wounds nhf Ex-effects Ex-effects Ex-effects";
 }
 .skjaald.sheet.actor .conditions-grid {
   grid-area: conditions;
@@ -1637,13 +1637,28 @@
   text-align: center;
 }
 .skjaald.sheet.actor .ac-header {
-  margin-top: 5px;
+  margin-top: 2px;
+  padding: 0 5px 3px;
+}
+.armor .ac-max{
+  padding-left: 24px;
+}
+.armor .ac-max input{
+  height: 15px;
+  width: 20px;
+  font-size: 11px;
 }
 .skjaald.sheet.actor .denialpoints {
   grid-area: dp;
 }
+.skjaald.sheet.actor .denialpoints .max{
+  width: 15px;
+}
 .skjaald.sheet.actor .protectionpoints {
   grid-area: pp;
+}
+.skjaald.sheet.actor .protectionpoints .max{
+  width: 15px;
 }
 .skjaald.sheet.actor .dp input {
   width: 36px;
@@ -1750,6 +1765,17 @@
 .skjaald.sheet.actor .wounds {
   grid-area: wounds;
   min-height: 42px;
+}
+.skjaald.sheet.actor .nhf {
+  grid-area: nhf;
+  min-height: 42px;
+}
+.skjaald.sheet.actor .nhf-value{
+  height: 25px;
+  padding: 0px 10px 0;
+  margin-top: 4px;
+  font-size: 20px;
+  text-align: center;
 }
 .skjaald.sheet.actor .wounds .auto-calc-value{
   margin-top: -3px;
