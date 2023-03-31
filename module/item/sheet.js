@@ -102,6 +102,8 @@ export default class ItemSheet5e extends ItemSheet {
     data.item = itemData;
     data.data = itemData.data;
 
+
+
     // LearningNow Toggle for Learning Lists
     if(data.data.learningNow === "true"){
       this.item.update({"data.learningNow": false});

@@ -702,7 +702,9 @@
       },
       "strength": 0,
       "stealth": false,
-      "proficient": true
+      "proficient": true,
+      "protection": 0,
+      "denial": 0
     },
     "feat": {
       "templates": ["itemDescription", "activatedEffect", "action"],
