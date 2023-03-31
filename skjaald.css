@@ -3064,6 +3064,11 @@
   top: 41px;
   left: 409px;
 }
+.armorDude .head-supp-drop{
+  position: absolute;
+  top: 17px;
+  left: 409px;
+}
 .armorDude .neck{
   position: absolute;
   top: 85px;
@@ -3071,10 +3076,20 @@
 }
 .armorDude .neck-drop{
   position:absolute;
-  top: 86px;
+  top: 84px;
+  left: 76px;
+}
+.armorDude .neck-supp-drop{
+  position:absolute;
+  top: 60px;
   left: 76px;
 }
 .armorDude .shoulders-drop{
+  position: absolute;
+  top: 73px;
+  left: 485px;
+} 
+.armorDude .shoulders-supp-drop{
   position: absolute;
   top: 99px;
   left: 485px;
@@ -3094,6 +3109,11 @@
   top: 137px;
   left: 15px;
 }
+.armorDude .torso-supp-drop{
+  position: absolute;
+  top: 113px;
+  left: 15px;
+}
 .armorDude .outer{
   position: absolute;
   top: 177px;
@@ -3102,6 +3122,11 @@
 .armorDude .outer-drop{
   position: absolute;
   top: 177px;
+  left: 488px;
+}
+.armorDude .outer-supp-drop{
+  position: absolute;
+  top: 153px;
   left: 488px;
 }
 .armorDude .inner{
@@ -3114,6 +3139,11 @@
   top: 199px;
   left: 30px;
 }
+.armorDude .inner-supp-drop{
+  position: absolute;
+  top: 175px;
+  left: 30px;
+}
 .armorDude .waist{
   position: absolute;
   top: 247px;
@@ -3124,6 +3154,11 @@
   top: 246px;
   left: 19px;
 }
+.armorDude .waist-supp-drop{
+  position: absolute;
+  top: 222px;
+  left: 19px;
+}
 .armorDude .arms{
   position: absolute;
   top: 238px;
@@ -3132,6 +3167,11 @@
 .armorDude .arms-drop{
   position: absolute;
   top: 237px;
+  left: 481px;
+}
+.armorDude .arms-supp-drop{
+  position: absolute;
+  top: 213px;
   left: 481px;
 }
 .armorDude .rings{
@@ -3169,6 +3209,11 @@
   top: 305px;
   left: 496px;
 }
+.armorDude .hands-supp-drop{
+  position: absolute;
+  top: 281px;
+  left: 496px;
+}
 .armorDude .thighs{
   position: absolute;
   top: 382px;
@@ -3176,7 +3221,12 @@
 }
 .armorDude .thighs-drop{
   position: absolute;
-  top: 382px;
+  top: 372px;
+  left: 53px;
+}
+.armorDude .thighs-supp-drop{
+  position: absolute;
+  top: 399px;
   left: 53px;
 }
 .armorDude .legs{
@@ -3187,6 +3237,11 @@
 .armorDude .legs-drop{
   position: absolute;
   top: 475px;
+  left: 458px;
+}
+.armorDude .legs-supp-drop{
+  position: absolute;
+  top: 451px;
   left: 458px;
 }
 .armorDude .weapons{
@@ -3211,6 +3266,37 @@
 .armorDude .weapon2-drop{
   width: 140px;
 }
+.armorDude .ac{
+  position: absolute;
+  top: 0px;
+  left: 13px;
+}
+.armorDude .acvalue{
+  position: absolute;
+  top: 5px;
+  left: 145px;
+}
+.armorDude .dp{
+  position: absolute;
+  top: 20px;
+  left: 12px;
+}
+.armorDude .dpvalue{
+  position: absolute;
+  top: 20px;
+  left: 145px;
+}
+.armorDude .pp{
+  position: absolute;
+  top: 35px;
+  left: 12px;
+}
+.armorDude .ppvalue{
+  position: absolute;
+  top: 35px;
+  left: 145px;
+}
+
 .spells .details .editor,
 .weapons .details .editor{
   height: 25%;

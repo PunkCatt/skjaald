@@ -476,6 +476,7 @@ export default class Actor5e extends Actor {
     actorData.data.attributes.hp.hitDiceDenom = this._getHitDieDenom(actorData);
 
     actorData.data.details.xp.value = actorData.data.attributes.acted.value;
+
   }
     
     /* -------------------------------------------- */

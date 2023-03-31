@@ -296,37 +296,62 @@ export default class ActorSheet5e extends ActorSheet {
     // Prepare armor slots
     var slotList = this._getArmorForSlotsList(data);
 
-    //testing armor lists
-    data.armorOptionsHead = this._getArmorForSlotsList(data, "head", "head", false);
-    data.armorOptionsHeadSupp = this._getArmorForSlotsList(data, "head", "head", true);
-    data.armorOptionsNeck = this._getArmorForSlotsList(data, "neck", "neck", false);
-    data.armorOptionsNeckSupp = this._getArmorForSlotsList(data, "neck", "neck", true);
-    data.armorOptionsShoulders = this._getArmorForSlotsList(data, "shoulders", "shoulders", false);
-    data.armorOptionsShouldersSupp = this._getArmorForSlotsList(data, "shoulders", "shoulders", true);
-    data.armorOptionsTorso = this._getArmorForSlotsList(data, "torso", "torso", false);
-    data.armorOptionsTorsoSupp = this._getArmorForSlotsList(data, "torso", "torso", true);
-    data.armorOptionsInner = this._getArmorForSlotsList(data, "inner", "inner", false);
-    data.armorOptionsInnerSupp = this._getArmorForSlotsList(data, "inner", "inner", true);
-    data.armorOptionsOuter = this._getArmorForSlotsList(data, "outer", "outer", false);
-    data.armorOptionsOuterSupp = this._getArmorForSlotsList(data, "outer", "outer", true);
-    data.armorOptionsWaist = this._getArmorForSlotsList(data, "waist", "waist", false);
-    data.armorOptionsWaistSupp = this._getArmorForSlotsList(data, "waist", "waist", true);
-    data.armorOptionsArm = this._getArmorForSlotsList(data, "arms", "arms", false);
-    data.armorOptionsArmSupp = this._getArmorForSlotsList(data, "arms", "arms", true);
-    data.armorOptionsRing1 = this._getArmorForSlotsList(data, "rings", "ring1", false);
-    data.armorOptionsRing2 = this._getArmorForSlotsList(data, "rings", "ring2", false);
-    data.armorOptionsRing3 = this._getArmorForSlotsList(data, "rings", "ring3", false);
-    data.armorOptionsRing4 = this._getArmorForSlotsList(data, "rings", "ring4", false);
-    data.armorOptionsHand = this._getArmorForSlotsList(data, "hands", "hands", false);
-    data.armorOptionsHandSupp = this._getArmorForSlotsList(data, "hands", "hands", true);
-    data.armorOptionsThigh = this._getArmorForSlotsList(data, "thighs", "thighs", false);
-    data.armorOptionsThighSupp = this._getArmorForSlotsList(data, "thighs", "thighs", true);
-    data.armorOptionsLeg = this._getArmorForSlotsList(data, "legs", "legs", false );
-    data.armorOptionsWeapons = this._getArmorForSlotsList(data,"weapons", "weapons", false);
+    //ArmorDude armor lists
+
+    data.armorOptionsHead = slotList.armor.head.regular;
+    data.armorOptionsHeadSupp = slotList.armor.head.supplementary;
+    data.armorOptionsNeck = slotList.armor.neck.regular;
+    data.armorOptionsNeckSupp = slotList.armor.neck.supplementary;
+    data.armorOptionsShoulders = slotList.armor.shoulders.regular;
+    data.armorOptionsShouldersSupp = slotList.armor.shoulders.supplementary;
+    data.armorOptionsTorso = slotList.armor.torso.regular;
+    data.armorOptionsTorsoSupp = slotList.armor.torso.supplementary;
+    data.armorOptionsInner = slotList.armor.inner.regular;
+    data.armorOptionsInnerSupp = slotList.armor.inner.supplementary;
+    data.armorOptionsOuter = slotList.armor.outer.regular;
+    data.armorOptionsOuterSupp = slotList.armor.outer.supplementary;
+    data.armorOptionsWaist = slotList.armor.waist.regular;
+    data.armorOptionsWaistSupp = slotList.armor.waist.supplementary;
+    data.armorOptionsArm = slotList.armor.arms.regular;
+    data.armorOptionsArmSupp = slotList.armor.arms.supplementary;
+    data.armorOptionsRing1 = slotList.armor.ring1.regular;
+    data.armorOptionsRing2 = slotList.armor.ring2.regular;
+    data.armorOptionsRing3 = slotList.armor.ring3.regular;
+    data.armorOptionsRing4 = slotList.armor.ring4.regular;
+    data.armorOptionsHand = slotList.armor.hands.regular;
+    data.armorOptionsHandSupp = slotList.armor.hands.supplementary;
+    data.armorOptionsThigh = slotList.armor.thighs.regular;
+    data.armorOptionsThighSupp = slotList.armor.thighs.supplementary;
+    data.armorOptionsLeg = slotList.armor.legs.regular;
+    data.armorOptionsLegSupp = slotList.armor.legs.supplementary;
+    data.armorOptionsWeapons = slotList.weapons;
+
+    //set Armor AC
+    actorData.data.attributes.ac.acCalc = slotList.ac;
+    actorData.data.attributes.dp.dpCalc = slotList.dp;
+    actorData.data.attributes.pp.ppCalc = slotList.pp;
+
 
     if (data.effects.inactive.effects == ""){
       data.effects.inactive.effects = "test";
     }
+
+    console.log(actorData.data.attributes.ac);
+    console.log((actorData.data.attributes.wornArmor.headSupp != "none"));
+
+    data.suppHead = (!(Object.keys(slotList.armor.head.supplementary).length === 0));
+    data.suppNeck = !(Object.keys(slotList.armor.neck.supplementary).length === 0);
+    data.suppShoulders = !(Object.keys(slotList.armor.shoulders.supplementary).length === 0);
+    data.suppInner = !(Object.keys(slotList.armor.inner.supplementary).length === 0);
+    data.suppOuter = !(Object.keys(slotList.armor.outer.supplementary).length === 0);
+    data.suppTorso = !(Object.keys(slotList.armor.torso.supplementary).length === 0);
+    data.suppWaist = !(Object.keys(slotList.armor.waist.supplementary).length === 0);
+    data.suppArms = !(Object.keys(slotList.armor.arms.supplementary).length === 0);
+    data.suppHands = !(Object.keys(slotList.armor.hands.supplementary).length === 0);
+    data.suppthighs = !(Object.keys(slotList.armor.thighs.supplementary).length === 0);
+    data.suppLegs = !(Object.keys(slotList.armor.legs.supplementary).length === 0);
+
+
 
     // Return data to the sheet
     return data;
@@ -363,118 +388,303 @@ export default class ActorSheet5e extends ActorSheet {
    * @returns {{string: string}}
    * @private
    */
-   _getArmorForSlotsList(data, slot, specific, suppFlag) {
+   _getArmorForSlotsList(data) {
     
-    var armor = {};
+    var lists = {"armor":{"head":{"regular":{}, "supplementary":{}}, "neck":{"regular":{}, "supplementary":{}}, "arms":{"regular":{}, "supplementary":{}}, "hands":{"regular":{}, "supplementary":{}},
+    "inner":{"regular":{}, "supplementary":{}},"legs":{"regular":{}, "supplementary":{}},"outer":{"regular":{}, "supplementary":{}},"ring1":{"regular":{}},"ring2":{"regular":{}},"ring3":{"regular":{}},"ring4":{"regular":{}},
+    "shoulders":{"regular":{}, "supplementary":{}},"thighs":{"regular":{}, "supplementary":{}},"torso":{"regular":{}, "supplementary":{}},"waist":{"regular":{}, "supplementary":{}}},
+    "weapon":{}};
     const wornArmor = data.actor.data.attributes.wornArmor;
-    var equipped;
+    var acCalc = 0;
+    var dpCalc = 0;
+    var ppCalc = 0;
 
     data.items.forEach(item => {
       if (item.type == "equipment"){
-        if (item.data[slot]){
-          
-          switch(specific){
-            case "head":
-              equipped = wornArmor.arms == item._id || wornArmor.hands == item._id || wornArmor.inner == item._id || 
-               wornArmor.legs == item._id || wornArmor.neck == item._id || wornArmor.outer == item._id || wornArmor.ring1 == item._id || wornArmor.ring2 == item._id ||
-               wornArmor.ring3 == item._id || wornArmor.ring4 == item._id || wornArmor.shoulders == item._id || wornArmor.thighs == item._id || 
-               wornArmor.torso == item._id || wornArmor.waist == item._id;
-              break;
-            case "neck":
-              equipped = wornArmor.arms == item._id || wornArmor.hands == item._id || wornArmor.head == item._id || wornArmor.inner == item._id || 
-              wornArmor.legs == item._id || wornArmor.outer == item._id || wornArmor.ring1 == item._id || wornArmor.ring2 == item._id ||
-              wornArmor.ring3 == item._id || wornArmor.ring4 == item._id || wornArmor.shoulders == item._id || wornArmor.thighs == item._id || 
-              wornArmor.torso == item._id || wornArmor.waist == item._id;
-              break;
-            case "shoulders":
-              equipped = wornArmor.arms == item._id || wornArmor.hands == item._id || wornArmor.head == item._id || wornArmor.inner == item._id || 
-              wornArmor.legs == item._id || wornArmor.neck == item._id || wornArmor.outer == item._id || wornArmor.ring1 == item._id || wornArmor.ring2 == item._id ||
-              wornArmor.ring3 == item._id || wornArmor.ring4 == item._id || wornArmor.thighs == item._id || 
-              wornArmor.torso == item._id || wornArmor.waist == item._id;
-              break;
-            case "torso":
-              equipped = wornArmor.arms == item._id || wornArmor.hands == item._id || wornArmor.head == item._id || wornArmor.inner == item._id || 
-              wornArmor.legs == item._id || wornArmor.neck == item._id || wornArmor.outer == item._id || wornArmor.ring1 == item._id || wornArmor.ring2 == item._id ||
-              wornArmor.ring3 == item._id || wornArmor.ring4 == item._id || wornArmor.shoulders == item._id || wornArmor.thighs == item._id || 
-              wornArmor.waist == item._id;
-              break;
-            case "inner":
-              equipped = wornArmor.arms == item._id || wornArmor.hands == item._id || wornArmor.head == item._id || 
-              wornArmor.legs == item._id || wornArmor.neck == item._id || wornArmor.outer == item._id || wornArmor.ring1 == item._id || wornArmor.ring2 == item._id ||
-              wornArmor.ring3 == item._id || wornArmor.ring4 == item._id || wornArmor.shoulders == item._id || wornArmor.thighs == item._id || 
-              wornArmor.torso == item._id || wornArmor.waist == item._id;
-              break;
-            case "outer":
-              equipped = wornArmor.arms == item._id || wornArmor.hands == item._id || wornArmor.head == item._id || wornArmor.inner == item._id || 
-              wornArmor.legs == item._id || wornArmor.neck == item._id || wornArmor.ring1 == item._id || wornArmor.ring2 == item._id ||
-              wornArmor.ring3 == item._id || wornArmor.ring4 == item._id || wornArmor.shoulders == item._id || wornArmor.thighs == item._id || 
-              wornArmor.torso == item._id || wornArmor.waist == item._id;
-              break;
-            case "waist":
-              equipped = wornArmor.arms == item._id || wornArmor.hands == item._id || wornArmor.head == item._id || wornArmor.inner == item._id || 
-              wornArmor.legs == item._id || wornArmor.neck == item._id || wornArmor.outer == item._id || wornArmor.ring1 == item._id || wornArmor.ring2 == item._id ||
-              wornArmor.ring3 == item._id || wornArmor.ring4 == item._id || wornArmor.shoulders == item._id || wornArmor.thighs == item._id || 
-              wornArmor.torso == item._id;
-              break;
-            case "arms":
-              equipped = wornArmor.hands == item._id || wornArmor.head == item._id || wornArmor.inner == item._id || 
-              wornArmor.legs == item._id || wornArmor.neck == item._id || wornArmor.outer == item._id || wornArmor.ring1 == item._id || wornArmor.ring2 == item._id ||
-              wornArmor.ring3 == item._id || wornArmor.ring4 == item._id || wornArmor.shoulders == item._id || wornArmor.thighs == item._id || 
-              wornArmor.torso == item._id || wornArmor.waist == item._id;
-              break;
-            case "ring1":
-              equipped = wornArmor.arms == item._id || wornArmor.hands == item._id || wornArmor.head == item._id || wornArmor.inner == item._id || 
-              wornArmor.legs == item._id || wornArmor.neck == item._id || wornArmor.outer == item._id || wornArmor.ring2 == item._id ||
-              wornArmor.ring3 == item._id || wornArmor.ring4 == item._id || wornArmor.shoulders == item._id || wornArmor.thighs == item._id || 
-              wornArmor.torso == item._id || wornArmor.waist == item._id;
-              break;
-            case "ring2":
-              equipped = wornArmor.arms == item._id || wornArmor.hands == item._id || wornArmor.head == item._id || wornArmor.inner == item._id || 
-              wornArmor.legs == item._id || wornArmor.neck == item._id || wornArmor.outer == item._id || wornArmor.ring1 == item._id ||
-              wornArmor.ring3 == item._id || wornArmor.ring4 == item._id || wornArmor.shoulders == item._id || wornArmor.thighs == item._id || 
-              wornArmor.torso == item._id || wornArmor.waist == item._id;
-              break;
-            case "ring3":
-              equipped = wornArmor.arms == item._id || wornArmor.hands == item._id || wornArmor.head == item._id || wornArmor.inner == item._id || 
-              wornArmor.legs == item._id || wornArmor.neck == item._id || wornArmor.outer == item._id || wornArmor.ring1 == item._id ||
-              wornArmor.ring2 == item._id || wornArmor.ring4 == item._id || wornArmor.shoulders == item._id || wornArmor.thighs == item._id || 
-              wornArmor.torso == item._id || wornArmor.waist == item._id;
-              break;
-            case "ring4":
-              equipped = wornArmor.arms == item._id || wornArmor.hands == item._id || wornArmor.head == item._id || wornArmor.inner == item._id || 
-              wornArmor.legs == item._id || wornArmor.neck == item._id || wornArmor.outer == item._id || wornArmor.ring1 == item._id ||
-              wornArmor.ring2 == item._id || wornArmor.ring3 == item._id || wornArmor.shoulders == item._id || wornArmor.thighs == item._id || 
-              wornArmor.torso == item._id || wornArmor.waist == item._id;
-              break;
-            case "hands":
-              equipped = wornArmor.arms == item._id || wornArmor.head == item._id || wornArmor.inner == item._id || 
-              wornArmor.legs == item._id || wornArmor.neck == item._id || wornArmor.outer == item._id || wornArmor.ring1 == item._id || wornArmor.ring2 == item._id ||
-              wornArmor.ring3 == item._id || wornArmor.ring4 == item._id || wornArmor.shoulders == item._id || wornArmor.thighs == item._id || 
-              wornArmor.torso == item._id || wornArmor.waist == item._id;
-              break;
-            case "thighs":
-              equipped = wornArmor.arms == item._id || wornArmor.hands == item._id || wornArmor.head == item._id || wornArmor.inner == item._id || 
-              wornArmor.legs == item._id || wornArmor.neck == item._id || wornArmor.outer == item._id || wornArmor.ring1 == item._id || wornArmor.ring2 == item._id ||
-              wornArmor.ring3 == item._id || wornArmor.ring4 == item._id || wornArmor.shoulders == item._id || 
-              wornArmor.torso == item._id || wornArmor.waist == item._id;
-              break;
-            case "legs":
-              equipped = wornArmor.arms == item._id || wornArmor.hands == item._id || wornArmor.head == item._id || wornArmor.inner == item._id || 
-              wornArmor.neck == item._id || wornArmor.outer == item._id || wornArmor.ring1 == item._id || wornArmor.ring2 == item._id ||
-              wornArmor.ring3 == item._id || wornArmor.ring4 == item._id || wornArmor.shoulders == item._id || wornArmor.thighs == item._id || 
-              wornArmor.torso == item._id || wornArmor.waist == item._id;
-              break;
+        //add equipped armor to lists
+        console.log(item);
+        if(item.data.equipped){
+          console.log("equipped");
+
+          if(item.data.head){
+            if(wornArmor.head == item._id){
+              lists.armor.head.regular[item._id] = item.name;
+              acCalc += parseInt(item.data.armor.value);
+              dpCalc += parseInt(item.data.denial);
+              ppCalc += parseInt(item.data.protection);
+
+            }
+            if(wornArmor.headSupp == item._id){
+              lists.armor.head.regular[item._id] = item.name;
+              acCalc += parseInt(item.data.armor.value);
+              dpCalc += parseInt(item.data.denial);
+              ppCalc += parseInt(item.data.protection);
+            }
           }
-          if(!equipped){
-            armor[item._id] = item.name;
+          if(item.data.neck){
+            if(wornArmor.neckSupp == item._id){
+              lists.armor.neck.supplementary[item._id] = item.name;
+              acCalc += parseInt(item.data.armor.value);
+              dpCalc += parseInt(item.data.denial);
+              ppCalc += parseInt(item.data.protection);
+            }
+            if(wornArmor.neck == item._id){
+              lists.armor.neck.regular[item._id] = item.name;
+              acCalc += parseInt(item.data.armor.value);
+              dpCalc += parseInt(item.data.denial);
+              ppCalc += parseInt(item.data.protection);
+            }
+          }
+          if(item.data.arms){
+            if(wornArmor.armsSupp == item._id){
+              lists.armor.arms.supplementary[item._id] = item.name;
+              acCalc += parseInt(item.data.armor.value);
+              dpCalc += parseInt(item.data.denial);
+              ppCalc += parseInt(item.data.protection);
+            }
+            if(wornArmor.arms == item._id){
+              lists.armor.arms.regular[item._id] = item.name;
+              acCalc += parseInt(item.data.armor.value);
+              dpCalc += parseInt(item.data.denial);
+              ppCalc += parseInt(item.data.protection);
+            }
+          }
+          if(item.data.hands){
+            if(wornArmor.handsSupp == item._id){
+              lists.armor.hands.supplementary[item._id] = item.name;
+              acCalc += parseInt(item.data.armor.value);
+              dpCalc += parseInt(item.data.denial);
+              ppCalc += parseInt(item.data.protection);
+            }
+            if(wornArmor.hands == item._id){
+              lists.armor.hands.regular[item._id] = item.name;
+              acCalc += parseInt(item.data.armor.value);
+              dpCalc += parseInt(item.data.denial);
+              ppCalc += parseInt(item.data.protection);
+            }
+          }
+          if(item.data.inner){
+            if(wornArmor.innerSupp == item._id){
+              lists.armor.inner.supplementary[item._id] = item.name;
+              acCalc += parseInt(item.data.armor.value);
+              dpCalc += parseInt(item.data.denial);
+              ppCalc += parseInt(item.data.protection);
+            }
+            if(wornArmor.inner == item._id){
+              lists.armor.inner.regular[item._id] = item.name;
+              acCalc += parseInt(item.data.armor.value);
+              dpCalc += parseInt(item.data.denial);
+              ppCalc += parseInt(item.data.protection);
+            }
+          }
+          if(item.data.legs){
+            if(wornArmor.legsSupp == item._id){
+              lists.armor.legs.supplementary[item._id] = item.name;
+              acCalc += parseInt(item.data.armor.value);
+              dpCalc += parseInt(item.data.denial);
+              ppCalc += parseInt(item.data.protection);
+            }
+            if(wornArmor.legs == item._id){
+              lists.armor.legs.regular[item._id] = item.name;
+              acCalc += parseInt(item.data.armor.value);
+              dpCalc += parseInt(item.data.denial);
+              ppCalc += parseInt(item.data.protection);
+            }
+          }
+          if(item.data.outer){
+            if(wornArmor.outerSupp == item._id){
+              lists.armor.outer.supplementary[item._id] = item.name;
+              acCalc += parseInt(item.data.armor.value);
+              dpCalc += parseInt(item.data.denial);
+              ppCalc += parseInt(item.data.protection);
+            }
+            if(wornArmor.outer == item._id){
+              lists.armor.outer.regular[item._id] = item.name;
+              acCalc += parseInt(item.data.armor.value);
+              dpCalc += parseInt(item.data.denial);
+              ppCalc += parseInt(item.data.protection);
+            }
+          }
+          if(item.data.rings){
+            if(wornArmor.ring1 == item._id){
+              lists.armor.ring1.regular[item._id] = item.name;
+              acCalc += parseInt(item.data.armor.value);
+              dpCalc += parseInt(item.data.denial);
+              ppCalc += parseInt(item.data.protection);
+            }
+            if(wornArmor.ring2 == item._id){
+              lists.armor.ring2.regular[item._id] = item.name;
+              acCalc += parseInt(item.data.armor.value);
+              dpCalc += parseInt(item.data.denial);
+              ppCalc += parseInt(item.data.protection);
+            }
+            if(wornArmor.ring3 == item._id){
+              lists.armor.ring3.regular[item._id] = item.name;
+              acCalc += parseInt(item.data.armor.value);
+              dpCalc += parseInt(item.data.denial);
+              ppCalc += parseInt(item.data.protection);
+            }
+            if(wornArmor.ring4 == item._id){
+              lists.armor.ring4.regular[item._id] = item.name;
+              acCalc += parseInt(item.data.armor.value);
+              dpCalc += parseInt(item.data.denial);
+              ppCalc += parseInt(item.data.protection);
+            }
+          }
+          if(item.data.shoulders){
+            if(wornArmor.shouldersSupp == item._id){
+              lists.armor.shoulders.supplementary[item._id] = item.name;
+              acCalc += parseInt(item.data.armor.value);
+              dpCalc += parseInt(item.data.denial);
+              ppCalc += parseInt(item.data.protection);
+            }
+            if(wornArmor.shoulders == item._id){
+              lists.armor.shoulders.regular[item._id] = item.name;
+              acCalc += parseInt(item.data.armor.value);
+              dpCalc += parseInt(item.data.denial);
+              ppCalc += parseInt(item.data.protection);
+            }          
+          }
+          if(item.data.thighs){
+            if(wornArmor.thighsSupp == item._id){
+              lists.armor.thighs.supplementary[item._id] = item.name;
+              acCalc += parseInt(item.data.armor.value);
+              dpCalc += parseInt(item.data.denial);
+              ppCalc += parseInt(item.data.protection);
+            }
+            if(wornArmor.thighs == item._id){
+              lists.armor.thighs.regular[item._id] = item.name;
+              acCalc += parseInt(item.data.armor.value);
+              dpCalc += parseInt(item.data.denial);
+              ppCalc += parseInt(item.data.protection);
+            }          
+          }
+          if(item.data.torso){
+            if(wornArmor.torsoSupp == item._id){
+              lists.armor.torso.supplementary[item._id] = item.name;
+              acCalc += parseInt(item.data.armor.value);
+              dpCalc += parseInt(item.data.denial);
+              ppCalc += parseInt(item.data.protection);
+            }
+            if(wornArmor.torso == item._id){
+              lists.armor.torso.regular[item._id] = item.name;
+              acCalc += parseInt(item.data.armor.value);
+              dpCalc += parseInt(item.data.denial);
+              ppCalc += parseInt(item.data.protection);
+            }          
+          }
+          if(item.data.waist){
+            if(wornArmor.waistSupp == item._id){
+              lists.armor.waist.supplementary[item._id] = item.name;
+              acCalc += parseInt(item.data.armor.value);
+              dpCalc += parseInt(item.data.denial);
+              ppCalc += parseInt(item.data.protection);
+            }
+            if(wornArmor.waist == item._id){
+              lists.armor.waist.regular[item._id] = item.name;
+              acCalc += parseInt(item.data.armor.value);
+              dpCalc += parseInt(item.data.denial);
+              ppCalc += parseInt(item.data.protection);
+            }          
+          } 
+      
+        }else {
+        //if not already equipped
+
+          //add to respective lists
+          if(item.data.head){
+            if(item.data.supplementary){
+              lists.armor.head.supplementary[item._id] = item.name;
+            }else{
+              lists.armor.head.regular[item._id] = item.name;
+            }
+          }
+          if(item.data.neck){
+            if(item.data.supplementary){
+              lists.armor.neck.supplementary[item._id] = item.name;
+            }else{
+              lists.armor.neck.regular[item._id] = item.name;
+            }
+          }
+          if(item.data.arms){
+            if(item.data.supplementary){
+              lists.armor.arms.supplementary[item._id] = item.name;
+            }else{
+              lists.armor.arms.regular[item._id] = item.name;
+            }
+          }
+          if(item.data.hands){
+            if(item.data.supplementary){
+              lists.armor.hands.supplementary[item._id] = item.name;
+            }else{
+              lists.armor.hands.regular[item._id] = item.name;
+            }
+          }
+          if(item.data.inner){
+            if(item.data.supplementary){
+              lists.armor.inner.supplementary[item._id] = item.name;
+            }else{
+              lists.armor.inner.regular[item._id] = item.name;
+            }
+          }
+          if(item.data.legs){
+            if(item.data.supplementary){
+              lists.armor.legs.supplementary[item._id] = item.name;
+            }else{
+              lists.armor.legs.regular[item._id] = item.name;
+            }
+          }
+          if(item.data.outer){
+            if(item.data.supplementary){
+              lists.armor.outer.supplementary[item._id] = item.name;
+            }else{
+              lists.armor.outer.regular[item._id] = item.name;
+            }
+          }
+          if(item.data.rings){
+              lists.armor.ring1.regular[item._id] = item.name;
+              lists.armor.ring2.regular[item._id] = item.name;
+              lists.armor.ring3.regular[item._id] = item.name;
+              lists.armor.ring4.regular[item._id] = item.name;
+          }
+          if(item.data.shoulders){
+            if(item.data.supplementary){
+              lists.armor.shoulders.supplementary[item._id] = item.name;
+            }else{
+              lists.armor.shoulders.regular[item._id] = item.name;
+            }          
+          }
+          if(item.data.thighs){
+            if(item.data.supplementary){
+              lists.armor.thighs.supplementary[item._id] = item.name;
+            }else{
+              lists.armor.thighs.regular[item._id] = item.name;
+            }          
+          }
+          if(item.data.torso){
+            if(item.data.supplementary){
+              lists.armor.torso.supplementary[item._id] = item.name;
+            }else{
+              lists.armor.torso.regular[item._id] = item.name;
+            }          
+          }
+          if(item.data.waist){
+            if(item.data.supplementary){
+              lists.armor.waist.supplementary[item._id] = item.name;
+            }else{
+              lists.armor.waist.regular[item._id] = item.name;
+            }          
           }
         }
-      } else if (item.typ == "weapon"){
+      } else if (item.type == "weapon"){
         //populate weapons lists
       }
-    });
+    })
+    lists.ac = acCalc;
+    lists.dp = dpCalc;
+    lists.pp = ppCalc;
 
-    return armor;
+    return lists;
   }
 
   

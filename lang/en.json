@@ -925,6 +925,9 @@
     "SKJAALD.MagicalItem": "Magical Item?",
     "SKJAALD.ResourceDisplay": "Display in Resource Box?",
     "SKJAALD.Wounds": "Wounds",
+    "SKJAALD.DenailPointsMax": "Max Denial Points:",
+    "SKJAALD.ProtectionPointsMax": "Max Protection Points:",
+    "SKJAALD.ArmorClassMax": "Max Armor Class:",
     
     
     "SKJAALD.Rations": "Rations",

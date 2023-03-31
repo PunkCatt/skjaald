@@ -136,10 +136,18 @@
 
             {{!-- Stealth Disadvantage --}}
             <div class="form-group">
+                <label>{{ localize "SKJAALD.ItemEquipmentSuit" }}</label>
+                <input type="checkbox" name="data.suit" value="1" {{checked data.suit}}/>
+            </div>
+
+            {{!-- Suit --}}
+            <div class="form-group">
                 <label>{{ localize "SKJAALD.ItemEquipmentStealthDisav" }}</label>
                 <input type="checkbox" name="data.stealth" value="1" {{checked data.stealth}}/>
             </div>
             {{/if}}
+
+
 
             {{#if isMountable}}
             {{> 'systems/skjaald/templates/items/parts/item-mountable.html'}}
@@ -203,6 +211,14 @@
 
             <div class="form-group stacked">
                 <label>{{ localize "SKJAALD.Slots" }}</label>
+
+                <div class="form-group">
+                    <label>{{ localize "SKJAALD.ItemSlotNumbers" }}</label>
+                    <div class="form-fields">
+                       <input type="text" name="data.slotNumber" value="{{data.slotNumber}}" data-dtype="Number" placeholder="1"/>
+                    </div>
+                </div>
+
                 <label class="checkbox">
                     <input class="equip-slots {{item._id}}" type="checkbox" name="data.head" {{checked data.head}}> {{ localize "SKJAALD.Head" }}</input>
                 </label>
