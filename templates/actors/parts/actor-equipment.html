@@ -100,7 +100,7 @@
             {{#if ../../owner}}
             <div class="item-controls flexrow">
                 {{#unless @root.isVehicle}}
-                    {{#unless (eq item.type "equipment")}}
+                    {{#unless (or (eq item.type "equipment") (eq item.type "weapon"))}}
                         <a class="item-control item-toggle {{item.toggleClass}}" title='{{item.toggleTitle}}'><i class="fas fa-shield-alt"></i></a>
                     {{/unless}}
                 {{/unless}}

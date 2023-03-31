@@ -928,6 +928,8 @@
     "SKJAALD.DenailPointsMax": "Max Denial Points:",
     "SKJAALD.ProtectionPointsMax": "Max Protection Points:",
     "SKJAALD.ArmorClassMax": "Max Armor Class:",
+    "SKJAALD.OnHand": "Main Hand",
+    "SKJAALD.OffHand": "Offhand",
     
     
     "SKJAALD.Rations": "Rations",

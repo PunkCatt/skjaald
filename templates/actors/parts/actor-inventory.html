@@ -21,6 +21,8 @@
                 <label class="dpvalue">{{data.attributes.dp.dpCalc}}</label>
                 <label class="pp"> {{localize "SKJAALD.ProtectionPointsMax"}}</label>
                 <label class="ppvalue">{{data.attributes.pp.ppCalc}}</label>
+                <label class="onhand">{{localize "SKJAALD.OnHand"}}</label>
+                <label class="offhand">{{localize "SKJAALD.OffHand"}}</label>
 
 
 
@@ -257,7 +259,7 @@
                 <select class="weapon1-drop change-equip {{data.attributes.wornArmor.weapon1}}" name="data.attributes.wornArmor.weapon1">
                     {{#select data.attributes.wornArmor.weapon1 }}
                     <option value="none">{{ localize "SKJAALD.None" }}</option>
-                    {{#each armorOptionsWeapons as |name type|}}
+                    {{#each armorOptionsWeapon1 as |name type|}}
                     <option value="{{@key}}">{{this}}</option>
                     {{/each}}
                     {{/select}}
@@ -265,7 +267,7 @@
                 <select class="weapon2-drop change-equip {{data.attributes.wornArmor.weapon2}}" name="data.attributes.wornArmor.weapon2">
                     {{#select data.attributes.wornArmor.weapon2 }}
                     <option value="none">{{ localize "SKJAALD.None" }}</option>
-                    {{#each armorOptionsWeapons as |name type|}}
+                    {{#each armorOptionsWeapon2 as |name type|}}
                     <option value="{{@key}}">{{this}}</option>
                     {{/each}}
                     {{/select}}

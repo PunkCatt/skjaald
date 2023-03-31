@@ -3247,17 +3247,17 @@
 .armorDude .weapons{
   position: absolute;
   top: 454px;
-  left: 62px;
+  left: 115px;
 }
 .armorDude .weapon1-drop{
   position: absolute;
   top: 475px;
-  left: 19px;
+  left: 74px;
 }
 .armorDude .weapon2-drop{
   position: absolute;
   top: 500px;
-  left: 19px;
+  left: 74px;
 }
 .armorDude select{
   width: 97px;
@@ -3295,6 +3295,16 @@
   position: absolute;
   top: 35px;
   left: 145px;
+}
+.armorDude .onhand{
+  position: absolute;
+  top: 478px;
+  left: 11px;
+}
+.armorDude .offhand{
+  position: absolute;
+  top: 504px;
+  left: 11px;
 }
 
 .spells .details .editor,

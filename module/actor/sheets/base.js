@@ -324,7 +324,9 @@ export default class ActorSheet5e extends ActorSheet {
     data.armorOptionsThighSupp = slotList.armor.thighs.supplementary;
     data.armorOptionsLeg = slotList.armor.legs.regular;
     data.armorOptionsLegSupp = slotList.armor.legs.supplementary;
-    data.armorOptionsWeapons = slotList.weapons;
+    data.armorOptionsWeapon1 = slotList.weapon.weapon1;
+    data.armorOptionsWeapon2 = slotList.weapon.weapon2;
+    
 
     //set Armor AC
     actorData.data.attributes.ac.acCalc = slotList.ac;
@@ -335,9 +337,6 @@ export default class ActorSheet5e extends ActorSheet {
     if (data.effects.inactive.effects == ""){
       data.effects.inactive.effects = "test";
     }
-
-    console.log(actorData.data.attributes.ac);
-    console.log((actorData.data.attributes.wornArmor.headSupp != "none"));
 
     data.suppHead = (!(Object.keys(slotList.armor.head.supplementary).length === 0));
     data.suppNeck = !(Object.keys(slotList.armor.neck.supplementary).length === 0);
@@ -393,7 +392,7 @@ export default class ActorSheet5e extends ActorSheet {
     var lists = {"armor":{"head":{"regular":{}, "supplementary":{}}, "neck":{"regular":{}, "supplementary":{}}, "arms":{"regular":{}, "supplementary":{}}, "hands":{"regular":{}, "supplementary":{}},
     "inner":{"regular":{}, "supplementary":{}},"legs":{"regular":{}, "supplementary":{}},"outer":{"regular":{}, "supplementary":{}},"ring1":{"regular":{}},"ring2":{"regular":{}},"ring3":{"regular":{}},"ring4":{"regular":{}},
     "shoulders":{"regular":{}, "supplementary":{}},"thighs":{"regular":{}, "supplementary":{}},"torso":{"regular":{}, "supplementary":{}},"waist":{"regular":{}, "supplementary":{}}},
-    "weapon":{}};
+    "weapon":{"weapon1":{}, "weapon2":{}}};
     const wornArmor = data.actor.data.attributes.wornArmor;
     var acCalc = 0;
     var dpCalc = 0;
@@ -402,20 +401,25 @@ export default class ActorSheet5e extends ActorSheet {
     data.items.forEach(item => {
       if (item.type == "equipment"){
         //add equipped armor to lists
-        console.log(item);
         if(item.data.equipped){
           console.log("equipped");
 
           if(item.data.head){
             if(wornArmor.head == item._id){
               lists.armor.head.regular[item._id] = item.name;
+              if(item.data.armor.value == null){
+                item.data.armor.value = 0;
+              }
               acCalc += parseInt(item.data.armor.value);
               dpCalc += parseInt(item.data.denial);
               ppCalc += parseInt(item.data.protection);
 
             }
             if(wornArmor.headSupp == item._id){
-              lists.armor.head.regular[item._id] = item.name;
+              lists.armor.head.supplementary[item._id] = item.name;
+              if(item.data.armor.value == null){
+                item.data.armor.value = 0;
+              }
               acCalc += parseInt(item.data.armor.value);
               dpCalc += parseInt(item.data.denial);
               ppCalc += parseInt(item.data.protection);
@@ -424,12 +428,18 @@ export default class ActorSheet5e extends ActorSheet {
           if(item.data.neck){
             if(wornArmor.neckSupp == item._id){
               lists.armor.neck.supplementary[item._id] = item.name;
+              if(item.data.armor.value == null){
+                item.data.armor.value = 0;
+              }
               acCalc += parseInt(item.data.armor.value);
               dpCalc += parseInt(item.data.denial);
               ppCalc += parseInt(item.data.protection);
             }
             if(wornArmor.neck == item._id){
               lists.armor.neck.regular[item._id] = item.name;
+              if(item.data.armor.value == null){
+                item.data.armor.value = 0;
+              }
               acCalc += parseInt(item.data.armor.value);
               dpCalc += parseInt(item.data.denial);
               ppCalc += parseInt(item.data.protection);
@@ -438,12 +448,18 @@ export default class ActorSheet5e extends ActorSheet {
           if(item.data.arms){
             if(wornArmor.armsSupp == item._id){
               lists.armor.arms.supplementary[item._id] = item.name;
+              if(item.data.armor.value == null){
+                item.data.armor.value = 0;
+              }
               acCalc += parseInt(item.data.armor.value);
               dpCalc += parseInt(item.data.denial);
               ppCalc += parseInt(item.data.protection);
             }
             if(wornArmor.arms == item._id){
               lists.armor.arms.regular[item._id] = item.name;
+              if(item.data.armor.value == null){
+                item.data.armor.value = 0;
+              }
               acCalc += parseInt(item.data.armor.value);
               dpCalc += parseInt(item.data.denial);
               ppCalc += parseInt(item.data.protection);
@@ -452,12 +468,18 @@ export default class ActorSheet5e extends ActorSheet {
           if(item.data.hands){
             if(wornArmor.handsSupp == item._id){
               lists.armor.hands.supplementary[item._id] = item.name;
+              if(item.data.armor.value == null){
+                item.data.armor.value = 0;
+              }
               acCalc += parseInt(item.data.armor.value);
               dpCalc += parseInt(item.data.denial);
               ppCalc += parseInt(item.data.protection);
             }
             if(wornArmor.hands == item._id){
               lists.armor.hands.regular[item._id] = item.name;
+              if(item.data.armor.value == null){
+                item.data.armor.value = 0;
+              }
               acCalc += parseInt(item.data.armor.value);
               dpCalc += parseInt(item.data.denial);
               ppCalc += parseInt(item.data.protection);
@@ -466,12 +488,18 @@ export default class ActorSheet5e extends ActorSheet {
           if(item.data.inner){
             if(wornArmor.innerSupp == item._id){
               lists.armor.inner.supplementary[item._id] = item.name;
+              if(item.data.armor.value == null){
+                item.data.armor.value = 0;
+              }
               acCalc += parseInt(item.data.armor.value);
               dpCalc += parseInt(item.data.denial);
               ppCalc += parseInt(item.data.protection);
             }
             if(wornArmor.inner == item._id){
               lists.armor.inner.regular[item._id] = item.name;
+              if(item.data.armor.value == null){
+                item.data.armor.value = 0;
+              }
               acCalc += parseInt(item.data.armor.value);
               dpCalc += parseInt(item.data.denial);
               ppCalc += parseInt(item.data.protection);
@@ -480,12 +508,18 @@ export default class ActorSheet5e extends ActorSheet {
           if(item.data.legs){
             if(wornArmor.legsSupp == item._id){
               lists.armor.legs.supplementary[item._id] = item.name;
+              if(item.data.armor.value == null){
+                item.data.armor.value = 0;
+              }
               acCalc += parseInt(item.data.armor.value);
               dpCalc += parseInt(item.data.denial);
               ppCalc += parseInt(item.data.protection);
             }
             if(wornArmor.legs == item._id){
               lists.armor.legs.regular[item._id] = item.name;
+              if(item.data.armor.value == null){
+                item.data.armor.value = 0;
+              }
               acCalc += parseInt(item.data.armor.value);
               dpCalc += parseInt(item.data.denial);
               ppCalc += parseInt(item.data.protection);
@@ -494,12 +528,18 @@ export default class ActorSheet5e extends ActorSheet {
           if(item.data.outer){
             if(wornArmor.outerSupp == item._id){
               lists.armor.outer.supplementary[item._id] = item.name;
+              if(item.data.armor.value == null){
+                item.data.armor.value = 0;
+              }
               acCalc += parseInt(item.data.armor.value);
               dpCalc += parseInt(item.data.denial);
               ppCalc += parseInt(item.data.protection);
             }
             if(wornArmor.outer == item._id){
               lists.armor.outer.regular[item._id] = item.name;
+              if(item.data.armor.value == null){
+                item.data.armor.value = 0;
+              }
               acCalc += parseInt(item.data.armor.value);
               dpCalc += parseInt(item.data.denial);
               ppCalc += parseInt(item.data.protection);
@@ -508,24 +548,36 @@ export default class ActorSheet5e extends ActorSheet {
           if(item.data.rings){
             if(wornArmor.ring1 == item._id){
               lists.armor.ring1.regular[item._id] = item.name;
+              if(item.data.armor.value == null){
+                item.data.armor.value = 0;
+              }
               acCalc += parseInt(item.data.armor.value);
               dpCalc += parseInt(item.data.denial);
               ppCalc += parseInt(item.data.protection);
             }
             if(wornArmor.ring2 == item._id){
               lists.armor.ring2.regular[item._id] = item.name;
+              if(item.data.armor.value == null){
+                item.data.armor.value = 0;
+              }
               acCalc += parseInt(item.data.armor.value);
               dpCalc += parseInt(item.data.denial);
               ppCalc += parseInt(item.data.protection);
             }
             if(wornArmor.ring3 == item._id){
               lists.armor.ring3.regular[item._id] = item.name;
+              if(item.data.armor.value == null){
+                item.data.armor.value = 0;
+              }
               acCalc += parseInt(item.data.armor.value);
               dpCalc += parseInt(item.data.denial);
               ppCalc += parseInt(item.data.protection);
             }
             if(wornArmor.ring4 == item._id){
               lists.armor.ring4.regular[item._id] = item.name;
+              if(item.data.armor.value == null){
+                item.data.armor.value = 0;
+              }
               acCalc += parseInt(item.data.armor.value);
               dpCalc += parseInt(item.data.denial);
               ppCalc += parseInt(item.data.protection);
@@ -534,12 +586,18 @@ export default class ActorSheet5e extends ActorSheet {
           if(item.data.shoulders){
             if(wornArmor.shouldersSupp == item._id){
               lists.armor.shoulders.supplementary[item._id] = item.name;
+              if(item.data.armor.value == null){
+                item.data.armor.value = 0;
+              }
               acCalc += parseInt(item.data.armor.value);
               dpCalc += parseInt(item.data.denial);
               ppCalc += parseInt(item.data.protection);
             }
             if(wornArmor.shoulders == item._id){
               lists.armor.shoulders.regular[item._id] = item.name;
+              if(item.data.armor.value == null){
+                item.data.armor.value = 0;
+              }
               acCalc += parseInt(item.data.armor.value);
               dpCalc += parseInt(item.data.denial);
               ppCalc += parseInt(item.data.protection);
@@ -548,12 +606,18 @@ export default class ActorSheet5e extends ActorSheet {
           if(item.data.thighs){
             if(wornArmor.thighsSupp == item._id){
               lists.armor.thighs.supplementary[item._id] = item.name;
+              if(item.data.armor.value == null){
+                item.data.armor.value = 0;
+              }
               acCalc += parseInt(item.data.armor.value);
               dpCalc += parseInt(item.data.denial);
               ppCalc += parseInt(item.data.protection);
             }
             if(wornArmor.thighs == item._id){
               lists.armor.thighs.regular[item._id] = item.name;
+              if(item.data.armor.value == null){
+                item.data.armor.value = 0;
+              }
               acCalc += parseInt(item.data.armor.value);
               dpCalc += parseInt(item.data.denial);
               ppCalc += parseInt(item.data.protection);
@@ -562,12 +626,18 @@ export default class ActorSheet5e extends ActorSheet {
           if(item.data.torso){
             if(wornArmor.torsoSupp == item._id){
               lists.armor.torso.supplementary[item._id] = item.name;
+              if(item.data.armor.value == null){
+                item.data.armor.value = 0;
+              }
               acCalc += parseInt(item.data.armor.value);
               dpCalc += parseInt(item.data.denial);
               ppCalc += parseInt(item.data.protection);
             }
             if(wornArmor.torso == item._id){
               lists.armor.torso.regular[item._id] = item.name;
+              if(item.data.armor.value == null){
+                item.data.armor.value = 0;
+              }
               acCalc += parseInt(item.data.armor.value);
               dpCalc += parseInt(item.data.denial);
               ppCalc += parseInt(item.data.protection);
@@ -576,12 +646,18 @@ export default class ActorSheet5e extends ActorSheet {
           if(item.data.waist){
             if(wornArmor.waistSupp == item._id){
               lists.armor.waist.supplementary[item._id] = item.name;
+              if(item.data.armor.value == null){
+                item.data.armor.value = 0;
+              }
               acCalc += parseInt(item.data.armor.value);
               dpCalc += parseInt(item.data.denial);
               ppCalc += parseInt(item.data.protection);
             }
             if(wornArmor.waist == item._id){
               lists.armor.waist.regular[item._id] = item.name;
+              if(item.data.armor.value == null){
+                item.data.armor.value = 0;
+              }
               acCalc += parseInt(item.data.armor.value);
               dpCalc += parseInt(item.data.denial);
               ppCalc += parseInt(item.data.protection);
@@ -678,6 +754,16 @@ export default class ActorSheet5e extends ActorSheet {
         }
       } else if (item.type == "weapon"){
         //populate weapons lists
+        if(item.data.equipped){
+          if(wornArmor.weapon1==item._id){
+            lists.weapon.weapon1[item._id] = item.name;
+          }else if(wornArmor.weapon2==item._id){
+            lists.weapon.weapon2[item._id] = item.name;
+          }
+        }else{
+          lists.weapon.weapon1[item._id] = item.name;
+          lists.weapon.weapon2[item._id] = item.name;
+        }
       }
     })
     lists.ac = acCalc;
