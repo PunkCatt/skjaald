@@ -31,10 +31,15 @@
         },
         "attributes": {
           "ac": {
-            "value": 10
+            "value": 0
           },
           "dp": {
-            "value": 0
+            "value": 0,
+            "dpCalc": 0
+          },
+          "pp": {
+            "value": 0,
+            "ppCalc": 0
           },
           "hp": {
             "value": 10,
