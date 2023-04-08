@@ -402,8 +402,7 @@ export default class ActorSheet5e extends ActorSheet {
       if (item.type == "equipment"){
         //add equipped armor to lists
         if(item.data.equipped){
-          console.log("equipped");
-
+          
           if(item.data.head){
             if(wornArmor.head == item._id){
               lists.armor.head.regular[item._id] = item.name;
@@ -528,6 +527,7 @@ export default class ActorSheet5e extends ActorSheet {
           if(item.data.outer){
             if(wornArmor.outerSupp == item._id){
               lists.armor.outer.supplementary[item._id] = item.name;
+              
               if(item.data.armor.value == null){
                 item.data.armor.value = 0;
               }
@@ -663,6 +663,12 @@ export default class ActorSheet5e extends ActorSheet {
               ppCalc += parseInt(item.data.protection);
             }          
           } 
+
+          // add multi slot pieces to lists
+          if(item.data.slotNumber > 1){
+            console.log("multi-slot item");
+          }
+
       
         }else {
         //if not already equipped
@@ -755,7 +761,10 @@ export default class ActorSheet5e extends ActorSheet {
       } else if (item.type == "weapon"){
         //populate weapons lists
         if(item.data.equipped){
-          if(wornArmor.weapon1==item._id){
+          if(item.data.quantity > 1){
+            lists.weapon.weapon1[item._id] = item.name;
+            lists.weapon.weapon2[item._id] = item.name;
+          }else if(wornArmor.weapon1==item._id){
             lists.weapon.weapon1[item._id] = item.name;
           }else if(wornArmor.weapon2==item._id){
             lists.weapon.weapon2[item._id] = item.name;
@@ -1408,13 +1417,42 @@ export default class ActorSheet5e extends ActorSheet {
   
     var changedTo = event.currentTarget.value;
     var changedFrom = event.currentTarget.classList[2];
+    
     if (changedFrom != "none"){
       var item = this.actor.data.items.get(changedFrom);
-      item.update({"data.equipped": false});
+      if(item.data.type == "weapon" ){
+        if(item.data.data.quantity > 1){
+            //Weapon with multiple quantity - don't unequip if still in other slot
+          var slot = (event.currentTarget.classList[0]).split("-")[0];
+          if(slot == "weapon1"){
+            if (this.actor.data.data.attributes.wornArmor.weapon2 == item._id){
+              console.log("equipped in other slot");
+            }else {
+              item.update({"data.equipped": false});
+            }
+          }else if(slot == "weapon2"){
+            if (this.actor.data.data.attributes.wornArmor.weapon1 == item.data._id){
+              console.log("equipped in other slot");
+            } else{
+              item.update({"data.equipped": false});
+            }
+          }
+        }
+      }else{
+        item.update({"data.equipped": false});
+      }
     } 
     if (changedTo != "none"){
       var item = this.actor.data.items.get(changedTo);
       item.update({"data.equipped": true});
+
+      if(parseInt(item.data.data.slotNumber) > 1){
+        console.log("multi-slot item");
+        console.log("TO DO: auto equip other slots");
+        var slot = (event.currentTarget.name).split(".", 4)[3];
+        console.log(slot);
+
+      }
 
     }
 

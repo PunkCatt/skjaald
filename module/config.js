@@ -574,6 +574,28 @@ SKJAALD.shieldIds = {
 };
 
 /**
+ * The set of armor property flags which can exist on a piece of armor.
+ * @enum {string}
+ */
+SKJAALD.armorProperties = {
+  quiet: "SKJAALD.Quiet",
+  heavy: "SKJAALD.Heavy",
+  loud: "SKJAALD.Loud",
+  narrowing: "SKJAALD.Narrowing",
+  concealing: "SKJAALD.Concealing",
+  glancing: "SKJAALD.Glancing",
+  dampening: "SKJAALD.Dampening",
+  nimble: "SKJAALD.Nimble",
+  wrist: "SKJAALD.WristMounted",
+  cover: "SKJAALD.Cover",
+  exotic: "SKJAALD.Exotic",
+  supplementary: "SKJAALD.Supplementary",
+  constraining: "SKJAALD.Constraining",
+  peripheral: "SKJAALD.Peripheral"
+
+}
+
+/**
  * Common armor class calculations.
  * @enum {{ label: string, [formula]: string }}
  */

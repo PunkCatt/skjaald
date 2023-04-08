@@ -163,62 +163,27 @@
             </div>
             {{/if}}
 
-            <div class="form-group stacked">
+            <div class="form-group stacked weapon-properties">
                 <label>{{ localize "SKJAALD.Properties" }}</label>
+                {{#each config.armorProperties as |name prop|}}
                 <label class="checkbox">
-                    <input type="checkbox" name="data.quiet" {{checked data.quiet}}> {{ localize "SKJAALD.Quiet" }}</input>
+                    <input type="checkbox" name="data.{{prop}}" {{checked (lookup ../data prop)}}/> {{ localize name }}
                 </label>
-                <label class="checkbox">
-                    <input type="checkbox" name="data.heavy" {{checked data.heavy}}/> {{ localize "SKJAALD.Heavy" }}
-                </label>
-                <label class="checkbox">
-                    <input type="checkbox" name="data.loud" {{checked data.loud}}/> {{ localize "SKJAALD.Loud" }}
-                </label>
-                <label class="checkbox">
-                    <input type="checkbox" name="data.narrowing" {{checked data.narrowing}}/> {{ localize "SKJAALD.Narrowing" }}
-                </label>
+                {{/each}}
             </div>
 
-            <div class="form-group stacked">
-                <label class="checkbox">
-                    <input type="checkbox" name="data.concealing" {{checked data.concealing}}> {{ localize "SKJAALD.Concealing" }}</input>
-                </label>
-                <label class="checkbox">
-                    <input type="checkbox" name="data.glancing" {{checked data.glancing}}/> {{ localize "SKJAALD.Glancing" }}
-                </label>
-                <label class="checkbox">
-                    <input type="checkbox" name="data.dampening" {{checked data.dampening}}/> {{ localize "SKJAALD.Dampening" }}
-                </label>
-                <label class="checkbox">
-                    <input type="checkbox" name="data.nimble" {{checked data.nimble}}/> {{ localize "SKJAALD.Nimble" }}
-                </label>
-            </div>
-
-            <div class="form-group stacked">
-                <label class="checkbox">
-                    <input type="checkbox" name="data.wrist" {{checked data.wrist}}> {{ localize "SKJAALD.WristMounted" }}</input>
-                </label>
-                <label class="checkbox">
-                    <input type="checkbox" name="data.cover" {{checked data.cover}}/> {{ localize "SKJAALD.Cover" }}
-                </label>
-                <label class="checkbox">
-                    <input type="checkbox" name="data.exotic" {{checked data.exotic}}/> {{ localize "SKJAALD.Exotic" }}
-                </label>
-                <label class="checkbox">
-                    <input type="checkbox" name="data.supplementary" {{checked data.supplementary}}/> {{ localize "SKJAALD.Supplementary" }}
-                </label>
-            </div>
-
-            <div class="form-group stacked">
+            <div class="form-group stacked"> 
                 <label>{{ localize "SKJAALD.Slots" }}</label>
+            </div>
 
-                <div class="form-group">
-                    <label>{{ localize "SKJAALD.ItemSlotNumbers" }}</label>
-                    <div class="form-fields">
-                       <input type="text" name="data.slotNumber" value="{{data.slotNumber}}" data-dtype="Number" placeholder="1"/>
-                    </div>
+            <div class="form-group">
+                <label>{{ localize "SKJAALD.ItemSlotNumbers" }}</label>
+                <div class="form-fields">
+                   <input type="text" name="data.slotNumber" value="{{data.slotNumber}}" data-dtype="Number" placeholder="1"/>
                 </div>
+            </div>
 
+            <div class="form-group stacked">
                 <label class="checkbox">
                     <input class="equip-slots {{item._id}}" type="checkbox" name="data.head" {{checked data.head}}> {{ localize "SKJAALD.Head" }}</input>
                 </label>
