@@ -99,14 +99,11 @@ export default class DamageRoll extends Roll {
   /** @inheritdoc */
   toMessage(messageData={}, options={}) {
     messageData.flavor = messageData.flavor || this.options.flavor;
-    console.log('in to message');
-    console.log(messageData);
     if ( this.isCritical ) {
       const label = game.i18n.localize("SKJAALD.CriticalHit");
       messageData.flavor = messageData.flavor ? `${messageData.flavor} (${label})` : label;
     }
     options.rollMode = options.rollMode ?? this.options.rollMode;
-    console.log(messageData);
     return super.toMessage(messageData, options);
   }
 
@@ -128,7 +125,6 @@ export default class DamageRoll extends Roll {
    */
   async configureDialog({title, defaultRollMode, defaultCritical=false, template, allowCritical=true}={}, options={}) {
 
-    console.log(options);
     var focusRoll = options.focusRoll;
     var focuses = options.focuses;
 
@@ -188,7 +184,6 @@ export default class DamageRoll extends Roll {
     this.options.critical = isCritical;
     this.options.rollMode = form.rollMode.value;
     this.configureDamage();
-    console.log(html);
 
     return this;
   }

@@ -1419,7 +1419,9 @@ export default class ActorSheet5e extends ActorSheet {
     var changedFrom = event.currentTarget.classList[2];
     
     if (changedFrom != "none"){
+      console.log("unequipping item");
       var item = this.actor.data.items.get(changedFrom);
+      console.log(item);
       if(item.data.type == "weapon" ){
         if(item.data.data.quantity > 1){
             //Weapon with multiple quantity - don't unequip if still in other slot
@@ -1437,6 +1439,8 @@ export default class ActorSheet5e extends ActorSheet {
               item.update({"data.equipped": false});
             }
           }
+        } else {
+          item.update({"data.equipped": false});
         }
       }else{
         item.update({"data.equipped": false});
@@ -2069,7 +2073,6 @@ export default class ActorSheet5e extends ActorSheet {
      _onRollAbilitySave(event) {
       event.preventDefault();
       let ability = event.currentTarget.classList[2];
-      console.log(ability);
       this.actor.rollAbilitySave(ability, {event: event});
     }
   

@@ -145,8 +145,6 @@ export default class Item5e extends Item {
             focuses[item.id] = `${item.name} (${item.data.data.ammoDie.current})`;
           }
         }
-        console.log("focuses:");
-        console.log(focuses);
       }
     });
    return focuses;
@@ -368,6 +366,7 @@ export default class Item5e extends Item {
     // Proficiency
     const isProficient = (this.type === "spell") || this.data.data.proficient; // Always proficient in spell attacks.
     this.data.data.prof = new Proficiency(this.actor?.data.data.attributes.prof, isProficient);
+    var attackID;
 
     if ( this.data.data.hasOwnProperty("actionType") ) {
       // Ability checks
@@ -379,7 +378,7 @@ export default class Item5e extends Item {
       this.getSaveDC();
 
       // To Hit
-      this.getAttackToHit();
+      this.getAttackToHit(attackID);
 
       // Limited Uses
       this.prepareMaxUses();
@@ -453,48 +452,49 @@ export default class Item5e extends Item {
    */
   getAttackToHit(attackID) {
     const itemData = this.data.data;
-    if ( !this.hasAttack || !itemData ) return;
+    if ( !this.hasAttack || !itemData) return;
+    if (attackID == undefined) return;
     const rollData = this.getRollData();
 
     // Define Roll bonuses
     const parts = [];
 
     console.log(attackID);
-    console.log(itemData);
 
+    var attack;
+    if(this.data.type == "weapon"){
+      attack = itemData.attacks[attackID.attackID];
+    } else if (this.data.type == "spell"){
+      attack = itemData.effects[attackID.effectID];
+    }
+
+    console.log(attack);
     // Include the item's innate attack bonus as the initial value and label
     if ( attackID != undefined ) {
-      if(itemData.attacks){
-        if(itemData.attacks[attackID.attackID].attackBonus != "" || itemData.attacks[attackID.attackID].attackBonus != 0){
-          parts.push(itemData.attacks[attackID.attackID].attackBonus);
-          this.labels.toHit = itemData.attacks[attackID.attackID].attackBonus;
-        }
-      } else if(itemData.effects){
+      if(this.data.type == "spell"){
         if(itemData.effects[attackID.effectID].attackBonus != "" || itemData.effects[attackID.effectID].attackBonus != 0){
           parts.push(itemData.effects[attackID.effectID].attackBonus);
           this.labels.toHit = itemData.effects[attackID.effectID].attackBonus;
         }
+       } else{
+        if(itemData.attacks[attackID.attackID].attackBonus != "" || itemData.attacks[attackID.attackID].attackBonus != 0){
+          parts.push(itemData.attacks[attackID.attackID].attackBonus);
+          this.labels.toHit = itemData.attacks[attackID.attackID].attackBonus;
+        }
       }
-
     }
 
     // Take no further action for un-owned items
     if ( !this.isOwned ) return {rollData, parts};
 
-    console.log(attackID);
     // Ability score modifier
     if ( attackID != undefined ) {
-      if(itemData.attacks){
-        const ablMod = itemData.attacks[attackID.attackID].ability;
+
+        const ablMod = attack.ability;
 
         parts.push(this.actor.data.data.abilities[ablMod].mod);
         this.labels.toHit = ablMod;
-      } else if (itemData.effects){
-        const ablMod = itemData.effects[attackID.effectID].ability;
-
-        parts.push(this.actor.data.data.abilities[ablMod].mod);
-        this.labels.toHit = ablMod;
-      }
+    
     }
     
 
@@ -510,21 +510,21 @@ export default class Item5e extends Item {
     const actorBonus = this.actor.data.data.bonuses?.[itemData.actionType] || {};
     if ( actorBonus.attack ) parts.push(actorBonus.attack);
 
-    // One-time bonus provided by consumed ammunition
-    if ( (itemData.consume?.type === "ammo") && this.actor.items ) {
-      const ammoItemData = this.actor.items.get(itemData.consume.target)?.data;
+    // // One-time bonus provided by consumed ammunition
+    // if ( (itemData.consume?.type === "ammo") && this.actor.items ) {
+    //   const ammoItemData = this.actor.items.get(itemData.consumetarget)?.data;
 
-      if (ammoItemData) {
-        const ammoItemQuantity = ammoItemData.data.quantity;
-        const ammoCanBeConsumed = ammoItemQuantity && (ammoItemQuantity - (itemData.consume.amount ?? 0) >= 0);
-        const ammoItemAttackBonus = ammoItemData.data.attackBonus;
-        const ammoIsTypeConsumable = (ammoItemData.type === "consumable") && (ammoItemData.data.consumableType === "ammo");
-        if ( ammoCanBeConsumed && ammoItemAttackBonus && ammoIsTypeConsumable ) {
-          parts.push("@ammo");
-          rollData.ammo = ammoItemAttackBonus;
-        }
-      }
-    }
+    //   if (ammoItemData) {
+    //     const ammoItemQuantity = ammoItemData.data.quantity;
+    //     const ammoCanBeConsumed = ammoItemQuantity && (ammoItemQuantity - (itemData.consume.amount ?? 0) >= 0);
+    //     const ammoItemAttackBonus = ammoItemData.data.attackBonus;
+    //     const ammoIsTypeConsumable = (ammoItemData.type === "consumable") && (ammoItemData.data.consumableType === "ammo");
+    //     if ( ammoCanBeConsumed && ammoItemAttackBonus && ammoIsTypeConsumable ) {
+    //       parts.push("@ammo");
+    //       rollData.ammo = ammoItemAttackBonus;
+    //     }
+    //   }
+    // }
 
     // Condense the resulting attack bonus formula into a simplified label
     const roll = new Roll(parts.join("+"), rollData);
@@ -606,6 +606,9 @@ export default class Item5e extends Item {
     const id = this.data.data;                // Item system data
     const actor = this.actor;
     const ad = actor.data.data;               // Actor system data
+
+    console.log("come back here");
+    console.log(this);
 
     // Reference aspects of the item data necessary for usage
     const hasArea = this.hasAreaTarget;       // Is the ability usage an AoE?
@@ -693,7 +696,7 @@ export default class Item5e extends Item {
    * @returns {object|boolean}            A set of data changes to apply when the item is used, or false
    * @private
    */
-  _getUsageUpdates({consumeQuantity, consumeRecharge, consumeResource, consumeSpellLevel, consumeUsage}) {
+  _getUsageUpdates({consumeQuantity, consumeRecharge, consumeResource, consumeSpellLevel, consumeUsage, attackID}) {
 
     // Reference item data
     const id = this.data.data;
@@ -713,7 +716,8 @@ export default class Item5e extends Item {
 
     // Consume Limited Resource
     if ( consumeResource ) {
-      const canConsume = this._handleConsumeResource(itemUpdates, actorUpdates, resourceUpdates);
+      const canConsume = this._handleConsumeResource(itemUpdates, actorUpdates, resourceUpdates, attackID);
+      console.log(canConsume);
       if ( canConsume === false ) return false;
     }
 
@@ -732,6 +736,8 @@ export default class Item5e extends Item {
 
     // Consume Limited Usage
     if ( consumeUsage ) {
+      console.log(attackID)
+      console.log(id);
       const uses = id.uses || {};
       const available = Number(uses.value ?? 0);
       let used = false;
@@ -774,35 +780,48 @@ export default class Item5e extends Item {
    * @returns {boolean|void}            Return false to block further progress, or return nothing to continue
    * @private
    */
-  _handleConsumeResource(itemUpdates, actorUpdates, resourceUpdates) {
+  _handleConsumeResource(itemUpdates, actorUpdates, resourceUpdates, attackID) {
     const actor = this.actor;
     const itemData = this.data.data;
-    const consume = itemData.consume || {};
-    if ( !consume.type ) return;
+    var attack;
+    if(this.data.type == "weapon"){
+      attack = itemData.attacks[attackID.attackID];
+    } else if (this.data.type == "spell"){
+      attack = itemData.effects[attackID.attackID];
+    }
+    const consumetype = attack.consumetype || {};
+    if ( !consumetype ) return;
+    const consumeTarget = attack.consumetarget;
+    const consumeAmount = attack.consumeamount;
+
 
     // No consumed target
-    const typeLabel = CONFIG.SKJAALD.abilityConsumptionTypes[consume.type];
-    if ( !consume.target ) {
+    const typeLabel = CONFIG.SKJAALD.abilityConsumptionTypes[consumetype];
+    if ( !consumeTarget ) {
       ui.notifications.warn(game.i18n.format("SKJAALD.ConsumeWarningNoResource", {name: this.name, type: typeLabel}));
       return false;
     }
 
     // Identify the consumed resource and its current quantity
     let resource = null;
-    let amount = Number(consume.amount ?? 1);
+    let amount = Number(consumeAmount ?? 1);
     let quantity = 0;
-    switch ( consume.type ) {
+    switch ( consumetype ) {
       case "attribute":
-        resource = getProperty(actor.data.data, consume.target);
+        resource = getProperty(actor.data.data, consumeTarget);
         quantity = resource || 0;
         break;
       case "ammo":
       case "material":
-        resource = actor.items.get(consume.target);
+        resource = actor.items.get(consumeTarget);
+        console.log(resource);
+        //come back here
         quantity = resource ? resource.data.data.quantity : 0;
         break;
       case "charges":
-        resource = actor.items.get(consume.target);
+      case "itemuse":
+        resource = actor.items.get(consumeTarget);
+        console.log(resource);
         if ( !resource ) break;
         const uses = resource.data.data.uses;
         if ( uses.per && uses.max ) quantity = uses.value;
@@ -827,15 +846,16 @@ export default class Item5e extends Item {
     }
 
     // Define updates to provided data objects
-    switch ( consume.type ) {
+    switch ( consumetype ) {
       case "attribute":
-        actorUpdates[`data.${consume.target}`] = remaining;
+        actorUpdates[`data.${consumeTarget}`] = remaining;
         break;
       case "ammo":
       case "material":
         resourceUpdates["data.quantity"] = remaining;
         break;
       case "charges":
+      case "itemuse":
         const uses = resource.data.data.uses || {};
         const recharge = resource.data.data.recharge || {};
         if ( uses.per && uses.max ) resourceUpdates["data.uses.value"] = remaining;
@@ -1068,6 +1088,8 @@ export default class Item5e extends Item {
    */
   async rollAttack(attackID, options={}) {
     const itemData = this.data.data;
+    const actorID = this.actor.data._id;
+    const actor = this.actor;
     const flags = this.actor.data.flags.skjaald || {};
     if ( !this.hasAttack ) {
       throw new Error("You may not place an Attack Roll with this Item.");
@@ -1075,36 +1097,62 @@ export default class Item5e extends Item {
     let title = `${this.name} - ${game.i18n.localize("SKJAALD.AttackRoll")}`;
 
     // Get the parts and rollData for this item's attack
+    console.log(attackID);
     const {parts, rollData} = this.getAttackToHit(attackID);
 
     // Handle ammunition consumption
     delete this._ammo;
     let ammo = null;
     let ammoUpdate = null;
-    const consume = itemData.consume;
-    if ( consume?.type === "ammo" ) {
-      ammo = this.actor.items.get(consume.target);
+    var attack;
+    if(this.data.type == "weapon"){
+      attack = itemData.attacks[attackID.attackID];
+    } else if (this.data.type == "spell"){
+      attack = itemData.effects[attackID.attackID];
+    }
+
+
+    const consumeType = attack.consumetype;
+    console.log(consumeType);
+    if ( consumeType === "ammo" ) {
+      ammo = this.actor.items.get(attack.consumetarget);
       if (ammo?.data) {
         const q = ammo.data.data.quantity;
-        const consumeAmount = consume.amount ?? 0;
+        const consumeAmount = attack.consumeamount ?? 0;
         if ( q && (q - consumeAmount >= 0) ) {
           this._ammo = ammo;
           title += ` [${ammo.name}]`;
         }
       }
       // Get pending ammunition update
-      const usage = this._getUsageUpdates({consumeResource: true});
+      const usage = this._getUsageUpdates({consumeResource: true, attackID});
+      if ( usage === false ) return null;
+      ammoUpdate = usage.resourceUpdates || {};
+    } else if( consumeType === "itemuse"){
+      console.log("consume use");
+      ammo = this.actor.items.get(attack.consumetarget);
+      if (ammo?.data) {
+        const q = ammo.data.data.quantity;
+        const consumeAmount = attack.consumeamount ?? 0;
+        if ( q && (q - consumeAmount >= 0) ) {
+          this._ammo = ammo;
+          title += ` [${ammo.name}]`;
+        }
+      }
+      // Get pending ammunition update
+      const usage = this._getUsageUpdates({consumeResource: true, attackID});
       if ( usage === false ) return null;
       ammoUpdate = usage.resourceUpdates || {};
     }
-
     var focusRollBool = false;
-    console.log(itemData);
     if(this.data.type == 'spell'){
       if(itemData.requiresConduit){
         focusRollBool = true;
       }
     }
+   
+
+
     // Compose roll options
     let rollConfig = {
       parts: parts,
@@ -1117,6 +1165,8 @@ export default class Item5e extends Item {
         top: options.event ? options.event.clientY - 80 : null,
         left: window.innerWidth - 710,
         focusRoll: focusRollBool,
+        focuses: this.focuses,
+        actorID: actorID
       },
       messageData: {
         "flags.skjaald.roll": {type: "attack", itemId: this.id },
@@ -1141,6 +1191,60 @@ export default class Item5e extends Item {
     // Invoke the d20 roll helper
     const roll = await d20Roll(rollConfig);
     if ( roll === null ) return null;
+
+
+        // Handle Conduit Consuption
+        if ( consumeType === "charges"){
+          //Handle Focus consumption
+      
+              // get conduit from popup
+              var focus = this.actor.items.get(roll.options.conduitChoice);
+              if (focus?.data) {
+                console.log(focus.data);
+                var ammoDie = focus.data.data.ammoDie.current;
+                console.log(ammoDie);
+
+                console.log("come back here for conduit roll automation");
+
+
+                // roll conduit
+
+                // Evaluate a global saving throw bonus
+                    // const parts = [];
+                    // const data = this.getRollData();
+                    // const speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
+
+                    // // Evaluate the roll
+                    // const rollData = foundry.utils.mergeObject(options, {
+                    //   parts: parts,
+                    //   data: data,
+                    //   title: `${game.i18n.localize("SKJAALD.DeathSavingThrow")}: ${this.name}`,
+                    //   halflingLucky: this.getFlag("skjaald", "halflingLucky"),
+                    //   targetValue: 15,
+                    //   messageData: {
+                    //     speaker: speaker,
+                    //     "flags.skjaald.roll": {type: "death"}
+                    //   }
+                    // });
+                    // const roll = await d20Roll(rollData);
+                    // if ( !roll ) return null;
+
+                // send roll to chat
+                    // if ( chatString ) {
+                    //   let chatData = { content: game.i18n.format(chatString, {name: this.name}), speaker };
+                    //   ChatMessage.applyRollMode(chatData, roll.options.rollMode);
+                    //   await ChatMessage.create(chatData);
+                    // }
+              }
+
+          // Get pending ammunition update
+            // const usage = this._getUsageUpdates({consumeResource: true, attackID});
+            // if ( usage === false ) return null;
+            // ammoUpdate = usage.resourceUpdates || {};
+  
+          }
+
+
 
     // Commit ammunition consumption on attack rolls resource consumption if the attack roll was made
     if ( ammo && !foundry.utils.isObjectEmpty(ammoUpdate) ) await ammo.update(ammoUpdate);
@@ -1189,8 +1293,6 @@ export default class Item5e extends Item {
     const parts = partArray;
     const rollData = this.getRollData();
 
-    console.log("come back here");
-    console.log(this.data);
     if ( spellLevel ) rollData.item.level = spellLevel;
     var focusRollBool = false;
     if(this.data.type == 'spell'){
@@ -1199,7 +1301,6 @@ export default class Item5e extends Item {
       }
     }
 
-    
 
     // Configure the damage roll
     const actionFlavor = game.i18n.localize(itemData.actionType === "heal" ? "SKJAALD.Healing" : "SKJAALD.DamageRoll");
@@ -1438,7 +1539,6 @@ export default class Item5e extends Item {
     const title = `${this.name} - ${game.i18n.localize("SKJAALD.ToolCheck")}`;
 
     // Add proficiency
-    console.log(this);
     if ( this.data.data.prof?.hasProficiency ) {
       parts.push("@prof");
       rollData.prof = this.data.data.prof.term;

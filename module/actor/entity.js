@@ -2901,7 +2901,7 @@ export default class Actor5e extends Actor {
     const parts = [`1${denomination}`, "@abilities.con.mod"];
     const title = `${game.i18n.localize("SKJAALD.HitDiceRoll")}: ${this.name}`;
     const rollData = foundry.utils.deepClone(this.data.data);
-    const focus = true;
+    const focus = false;
 
     // Call the roll helper utility
     const roll = await damageRoll({
@@ -2910,8 +2910,7 @@ export default class Actor5e extends Actor {
       data: rollData,
       title: title,
       allowCritical: false,
-      focusRoll: true,
-      focuses: focusList,
+      focusRoll: false,
       fastForward: !dialog,
       dialogOptions: {width: 350},
       messageData: {

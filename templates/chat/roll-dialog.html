@@ -4,8 +4,8 @@
         <input type="text" name="formula" value="{{formula}}" disabled/>
     </div>
     {{log "in roll dialog"}}
-    {{log focusRoll}}
-
+    {{log actorID}}
+    <input type="hidden" name="actorID" value="{{actorID}}" placeholder="0"/>
 
     {{#if focusRoll}}
         <div class="form-group">

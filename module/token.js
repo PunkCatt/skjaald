@@ -53,7 +53,6 @@ export class TokenDocument5e extends TokenDocument {
     ['skills','dec','passive'],['skills','his','passive'],['skills','ins','passive'],['skills','inv','passive'],['skills','itm','passive'],['skills','med','passive'],
     ['skills','nat','passive'],['skills','per','passive'],['skills','prc','passive'],['skills','prf','passive'],['skills','rel','passive'],['skills','slt','passive'],
     ['skills','ste','passive'],['skills','sur','passive']];
-    console.log(attributes);
     return attributes;
    }
 
@@ -67,8 +66,6 @@ export class TokenDocument5e extends TokenDocument {
   static _isAllowedAttribute(allowed, attrs) {
     let allow = allowed;
     for ( const attr of attrs ) {
-      console.log(attr);
-      console.log(attr);
       if ( allow === undefined ) return false;
       if ( allow === true ) {console.log(attr); return true};
       if ( allow["*"] !== undefined ) allow = allow["*"];

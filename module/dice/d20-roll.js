@@ -146,10 +146,11 @@ export default class D20Roll extends Roll {
    *                                          dialog was closed
    */
   async configureDialog({title, defaultRollMode, defaultAction=D20Roll.ADV_MODE.NORMAL, chooseModifier=false, skillLearning=false, spellLearning=false, rollFocus=false,
-    defaultAbility, template}={}, options={}) {
+    defaultAbility, template, speaker}={}, options={}) {
 
     var focusRoll = options.focusRoll;
     var focuses = options.focuses;
+    var actorID = options.actorID;
 
     // Render the Dialog inner HTML
     const content = await renderTemplate(template ?? this.constructor.EVALUATION_TEMPLATE, {
@@ -161,6 +162,7 @@ export default class D20Roll extends Roll {
       spellLearning,
       focuses: focuses,
       focusRoll: focusRoll,
+      actorID: actorID,
       defaultAbility,
       abilities: CONFIG.SKJAALD.abilities
     });
@@ -179,15 +181,15 @@ export default class D20Roll extends Roll {
         buttons: {
           advantage: {
             label: game.i18n.localize("SKJAALD.Advantage"),
-            callback: html => resolve(this._onDialogSubmit(html, D20Roll.ADV_MODE.ADVANTAGE, skillLearning, spellLearning, focusRoll))
+            callback: html => resolve(this._onDialogSubmit(html, D20Roll.ADV_MODE.ADVANTAGE, skillLearning, spellLearning, focuses, actorID))
           },
           normal: {
             label: game.i18n.localize("SKJAALD.Normal"),
-            callback: html => resolve(this._onDialogSubmit(html, D20Roll.ADV_MODE.NORMAL, skillLearning, spellLearning, focusRoll))
+            callback: html => resolve(this._onDialogSubmit(html, D20Roll.ADV_MODE.NORMAL, skillLearning, spellLearning, focusRoll, focuses, actorID))
           },
           disadvantage: {
             label: game.i18n.localize("SKJAALD.Disadvantage"),
-            callback: html => resolve(this._onDialogSubmit(html, D20Roll.ADV_MODE.DISADVANTAGE, skillLearning, spellLearning, focusRoll))
+            callback: html => resolve(this._onDialogSubmit(html, D20Roll.ADV_MODE.DISADVANTAGE, skillLearning, spellLearning, focusRoll, focuses, actorID))
           }
         },
         default: defaultButton,
@@ -205,7 +207,7 @@ export default class D20Roll extends Roll {
    * @returns {D20Roll}              This damage roll.
    * @private
    */
-  _onDialogSubmit(html, advantageMode, skillLearning, spellLearning, rollFocus) {
+  _onDialogSubmit(html, advantageMode, skillLearning, spellLearning, rollFocus, focuses, speaker) {
     const form = html[0].querySelector("form");
 
     // Append a Trainer bonus term
@@ -229,7 +231,6 @@ export default class D20Roll extends Roll {
       this.terms.findSplice(t => t.term === "@mod", new NumericTerm({number: abl.mod}));
       this.options.flavor += ` (${CONFIG.SKJAALD.abilities[form.ability.value]})`;
     }
-    console.log(this);
     if(form.critrange.value != ""){
       this.options.critical = parseInt(form.critrange.value);
     }
@@ -275,8 +276,27 @@ export default class D20Roll extends Roll {
     if (form.otherMultipleBonusHour != undefined){
       this.options.otherMultipleBonusHour = form.otherMultipleBonusHour.value;
     }
+
+    var actor = game.actors.get(form.actorID.value);
     
-    
+    if(form.focusChoice != undefined){
+      this.options.conduitChoice = form.focusChoice.value;
+      if(this.options.conduitChoice == ""){
+        console.log("no required conduit");
+        console.log("TO DO: error message");
+        return null;
+      }
+
+      var conduit = this.options.conduitChoice;
+      var conduit = actor.data.items.get(conduit);
+      // check that conduit is not expended
+
+      if(conduit.data.data.ammoDie.current == "zero"){
+        console.log("conduit expended");
+        console.log("TO DO: error message");
+        return null;
+      }
+    }
 
     // Apply advantage or disadvantage
     this.options.advantageMode = advantageMode;

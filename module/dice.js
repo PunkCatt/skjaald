@@ -218,6 +218,7 @@ export async function d20Roll({
   chatMessage=true, messageData={}, rollMode, speaker, flavor // Chat Message customization
 }={}) {
 
+
   // Handle input arguments
   const formula = ["1d20"].concat(parts).join(" + ");
   const {advantageMode, isFF} = _determineAdvantageMode({advantage, disadvantage, fastForward, event});
@@ -247,7 +248,8 @@ export async function d20Roll({
       defaultRollMode: defaultRollMode,
       defaultAction: advantageMode,
       defaultAbility: data?.item?.ability,
-      template
+      template,
+      speaker
     }, dialogOptions);
     if ( configured === null ) return null;
   }
@@ -338,7 +340,6 @@ export async function damageRoll({
   // Handle input arguments
   const defaultRollMode = rollMode || game.settings.get("core", "rollMode");
   const focusList = 0;
-  console.log(data);
 
   // Construct the DamageRoll instance
   const formula = parts.join(" + ");
@@ -362,7 +363,8 @@ export async function damageRoll({
       focusRoll,
       focuses: focusList,
       template,
-      allowCritical
+      allowCritical, 
+      actor
     }, dialogOptions);
     if ( configured === null ) return null;
   }

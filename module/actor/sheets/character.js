@@ -136,7 +136,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     };
 
     for( let i of items){
-      if (i.type == "consumable") resources.resource.items.push(i);
+      if (i.type == "consumable" && i.data.resourceDisplay) resources.resource.items.push(i);
     }
 
     // Attacks
@@ -146,11 +146,11 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     }
 
     for (let i of items){
-      if (i.type == "weapon") attacks.weapon.items.push(i);
+      if (i.type == "weapon" && i.data.equipped) attacks.weapon.items.push(i);
     }
 
     for (let s of spells){
-      if (s.type == "spell") attacks.spell.items.push(s);
+      if (s.type == "spell" && s.data.preparation.prepared) attacks.spell.items.push(s);
     }
 
 

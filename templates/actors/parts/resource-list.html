@@ -11,6 +11,7 @@
         <div class="item-detail item-uses">{{localize "SKJAALD.Uses"}}</div>
         <div class="item-detail item-action">{{localize "SKJAALD.Usage"}}</div>
         {{/if}}
+        
 
         {{#if section.columns}}
             {{#each section.columns}}
@@ -37,8 +38,9 @@
                     {{#if item.isOriginalClass}} <i class="original-class fas fa-sun" title="{{localize 'SKJAALD.ClassOriginal'}}"></i>{{/if}}
                 </h4>
             </div>
-
                 <div class="item-detail item-uses">
+
+                    {{log 'come back here for resources list view'}}
 
                     <input type="text" value="{{item.data.uses.value}}" placeholder="0"/>/ {{item.data.uses.max}}
                 </div>

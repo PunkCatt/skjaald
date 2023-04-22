@@ -30,7 +30,6 @@
                 <label>{{ localize "SKJAALD.AbilityModifier" }}</label>
                 <select name="data.attacks.{{a}}.ability">
                     {{#select (lookup this "ability")}}
-                    <option value="">{{ localize "SKJAALD.Default" }}</option>
                     <option value="0">{{ localize "SKJAALD.None"}}</option>
                     {{#each ../config.abilities as |ability a|}}
                     <option value="{{a}}">{{ability}}</option>
@@ -165,7 +164,7 @@
                     <select name="data.attacks.{{a}}.consumetarget">
                         {{#select (lookup this "consumetarget")}}
                         <option value=""></option>
-                        {{#each abilityConsumptionTargetsAmmo as |name key|}}
+                        {{#each ../abilityConsumptionTargetsAmmo as |name key|}}
                         <option value="{{key}}">{{name}}</option>
                         {{/each}}
                         {{/select}}
@@ -199,6 +198,20 @@
                         {{#select (lookup this "consumetarget")}}
                         <option value=""></option>
                         {{#each ../abilityConsumptionTargetsMaterial as |name key|}}
+                        <option value="{{key}}">{{name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                    {{/if}}
+
+                    {{log (lookup this "consumetype")}}
+
+
+                    {{#if (eq (lookup this "consumetype")  'itemuse')}}
+                    <select name="data.attacks.{{a}}.consumetarget">
+                        {{#select (lookup this "consumetarget")}}
+                        <option value=""></option>
+                        {{#each ../abilityConsumptionTargetsItemUse as |name key|}}
                         <option value="{{key}}">{{name}}</option>
                         {{/each}}
                         {{/select}}
@@ -514,7 +527,7 @@
                 <select name="data.effects.{{e}}.consumetarget">
                     {{#select (lookup this "consumetarget")}}
                     <option value=""></option>
-                    {{#each abilityConsumptionTargetsAmmo as |name key|}}
+                    {{#each ../abilityConsumptionTargetsAmmo as |name key|}}
                     <option value="{{key}}">{{name}}</option>
                     {{/each}}
                     {{/select}}
@@ -548,6 +561,17 @@
                     {{#select (lookup this "consumetarget")}}
                     <option value=""></option>
                     {{#each ../abilityConsumptionTargetsMaterial as |name key|}}
+                    <option value="{{key}}">{{name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+                {{/if}}
+
+                {{#if (eq (lookup this "consumetype")  'itemuse')}}
+                <select name="data.effects.{{e}}.consumetarget">
+                    {{#select (lookup this "consumetarget")}}
+                    <option value=""></option>
+                    {{#each ../abilityConsumptionTargetsItemUse as |name key|}}
                     <option value="{{key}}">{{name}}</option>
                     {{/each}}
                     {{/select}}

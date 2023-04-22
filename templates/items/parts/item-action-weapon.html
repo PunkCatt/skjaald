@@ -25,7 +25,6 @@
             <label>{{ localize "SKJAALD.AbilityModifier" }}</label>
             <select name="data.attacks.{{a}}.ability">
                 {{#select (lookup this "ability")}}
-                <option value="">{{ localize "SKJAALD.Default" }}</option>
                 <option value="0">{{ localize "SKJAALD.None"}}</option>
                 {{#each ../config.abilities as |ability a|}}
                 <option value="{{a}}">{{ability}}</option>
@@ -197,6 +196,8 @@
                     {{/select}}
                 </select>
                 {{/if}}
+
+                {{log (lookup this "consumetype")}}
 
                 {{#if (eq (lookup this "consumetype")  'itemuse')}}
                 <select name="data.attacks.{{a}}.consumetarget">

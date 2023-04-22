@@ -71,8 +71,6 @@ export default class ItemSheet5e extends ItemSheet {
     data.abilityConsumptionTargetsCharges = this._getItemConsumptionTargets(itemData, "charges");
     data.abilityConsumptionTargetsMaterial = this._getItemConsumptionTargets(itemData, "material");
     data.abilityConsumptionTargetsItemUse = this._getItemConsumptionTargets(itemData, "itemUse");
-    console.log("consuptionCharges");
-    console.log(data);
 
  
     // Action Details
@@ -224,10 +222,8 @@ export default class ItemSheet5e extends ItemSheet {
       // Attributes
       else if ( category === "attribute" ) {
         const attributes = TokenDocument.implementation.getConsumedAttributes(actor.data.data);
-        //console.log(attributes);
-        attributes.bar.forEach(a => {a.push("value"); console.log(a);});
+        attributes.bar.forEach(a => {a.push("value"); });
         return attributes.bar.concat(attributes.value).reduce((obj, a) => {
-          //console.log(obj);
           let k = a.join(".");
           obj[k] = k;
           return obj;
@@ -509,7 +505,6 @@ export default class ItemSheet5e extends ItemSheet {
       const name = "data.effects." + index + ".damageparts";
 
 
-      console.log(index);
       const attacks =  Object.values(this.item.data.data.effects[index].damageparts || []);
       attacks.splice(index2, 1);
       return this.item.update({ [name]: attacks}, {});
