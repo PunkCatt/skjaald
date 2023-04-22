@@ -1092,13 +1092,12 @@
   display: grid;
   grid-template-areas: 
   "menu menu menu"
-  "cantrips one two"
-  "three four five"
-  "six seven eight"
-  "six seven nine";
+  "one two three"
+  "four five six"
+  "seven eight nine";
   grid-row-gap: 5px;
   grid-column-gap: 5px;
-  grid-template-rows: 60px 200px 200px 100px 100px 1fr;
+  grid-template-rows: 60px auto auto auto 1fr;
   grid-template-columns: repeat(3, 1fr);
 }
 .skjaald.sheet.actor .learning-grid{
@@ -1213,13 +1212,13 @@
   grid-area: eight;
 }
 .eight .container-panel{
-  min-height: 95px;
+  min-height: 195px;
 }
 .nine{
   grid-area: nine;
 }
 .nine .container-panel{
-  min-height: 95px;
+  min-height: 195px;
 }
 .skjaald.sheet.actor .container-box {
   display: flex;

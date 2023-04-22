@@ -762,7 +762,7 @@ export default class Actor5e extends Actor {
       // Compute passive bonus
       const passive = observant && (feats.observantFeat.skills.includes(id)) ? 5 : 0;
       const passiveBonus = this._simplifyBonus(skl.bonuses?.passive, bonusData);
-      skl.passive = 10 + skl.mod + skl.bonus + skl.prof.flat + passive + passiveBonus;
+      skl.passive = 5 + skl.mod + skl.bonus + skl.prof.flat + passive + passiveBonus;
 
       skl.proficient2;
       skl.ability2 = skl.ability;

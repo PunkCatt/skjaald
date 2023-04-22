@@ -942,7 +942,7 @@
     "SKJAALD.Glancing": "Glancing",
     "SKJAALD.Dampening": "Dampening",
     "SKJAALD.Nimble": "Nimble",
-    "SKJAALD.WristMounted": "Writst Mounted",
+    "SKJAALD.WristMounted": "Wrist-Mounted",
     "SKJAALD.Exotic": "Exotic",
     "SKJAALD.Head": "Head",
     "SKJAALD.Neck": "Neck",
@@ -1074,6 +1074,8 @@
     "SKJAALD.NA": "N/A",
     "SKJAALD.MinimumLevel": "Minimum Level",
     "SKJAALD.SpellTemplate": "Template Spells",
+    "SKJAALD.Constraining": "Constraining",
+    "SKJAALD.Peripheral": "Peripheral",
 
 
     
