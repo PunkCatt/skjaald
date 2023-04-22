@@ -148,6 +148,8 @@ export default class D20Roll extends Roll {
   async configureDialog({title, defaultRollMode, defaultAction=D20Roll.ADV_MODE.NORMAL, chooseModifier=false, skillLearning=false, spellLearning=false, rollFocus=false,
     defaultAbility, template}={}, options={}) {
 
+   
+
     // Render the Dialog inner HTML
     const content = await renderTemplate(template ?? this.constructor.EVALUATION_TEMPLATE, {
       formula: `${this.formula} + @bonus`,
