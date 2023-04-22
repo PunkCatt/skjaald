@@ -30,7 +30,6 @@ export class TokenDocument5e extends TokenDocument {
    * @returns {{bar: string[], value: string[]}}
    */
   static getConsumedAttributes(data) {
-    console.log(data);
     const attributes = super.getTrackedAttributes(data);
     attributes.bar = [['attributes','hp','value'],['attributes','encumberance','value'],['resources','primary','value'],['resources','secondary','value'],
         ['resources','tertiary','value'],['item','uses','value'],['item','hp','value'],['item', 'quantity'],['item','weight'],['item','duration','value'],['item','armor','value'],

@@ -161,6 +161,17 @@
                 </div>
             </div>
 
+            {{!-- Preparation Mode --}}
+            <div class="form-group input-select">
+                <label>{{ localize "SKJAALD.SpellSource" }}</label>
+                <div class="form-fields">
+                    <label class="checkbox prepared">
+                        {{ localize "SKJAALD.SpellRequiresConduit" }} <input type="checkbox" name="data.requiresConduit" {{checked data.requiresConduit}}/>
+                    </label>
+
+                </div>
+            </div>
+
             <h3 class="form-header">{{ localize "SKJAALD.SpellLearning" }}</h3>
 
             {{!-- Complexity Level --}}

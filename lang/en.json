@@ -930,6 +930,9 @@
     "SKJAALD.ArmorClassMax": "Max Armor Class:",
     "SKJAALD.OnHand": "Main Hand",
     "SKJAALD.OffHand": "Offhand",
+    "SKJAALD.RollSelectFocus": "Select Conduit",
+    "SKJAALD.SpellSource": "Source of Magic",
+    "SKJAALD.SpellRequiresConduit": "Conduit Required",
     
     
     "SKJAALD.Rations": "Rations",

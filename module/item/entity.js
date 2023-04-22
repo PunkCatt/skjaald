@@ -470,7 +470,10 @@ export default class Item5e extends Item {
           this.labels.toHit = itemData.attacks[attackID.attackID].attackBonus;
         }
       } else if(itemData.effects){
-        console.log(itemData.effects);
+        if(itemData.effects[attackID.effectID].attackBonus != "" || itemData.effects[attackID.effectID].attackBonus != 0){
+          parts.push(itemData.effects[attackID.effectID].attackBonus);
+          this.labels.toHit = itemData.effects[attackID.effectID].attackBonus;
+        }
       }
 
     }
@@ -478,12 +481,20 @@ export default class Item5e extends Item {
     // Take no further action for un-owned items
     if ( !this.isOwned ) return {rollData, parts};
 
+    console.log(attackID);
     // Ability score modifier
     if ( attackID != undefined ) {
-      const ablMod = itemData.attacks[attackID.attackID].ability;
+      if(itemData.attacks){
+        const ablMod = itemData.attacks[attackID.attackID].ability;
 
-      parts.push(this.actor.data.data.abilities[ablMod].mod);
-      this.labels.toHit = ablMod;
+        parts.push(this.actor.data.data.abilities[ablMod].mod);
+        this.labels.toHit = ablMod;
+      } else if (itemData.effects){
+        const ablMod = itemData.effects[attackID.effectID].ability;
+
+        parts.push(this.actor.data.data.abilities[ablMod].mod);
+        this.labels.toHit = ablMod;
+      }
     }
     
 
@@ -1086,9 +1097,14 @@ export default class Item5e extends Item {
       if ( usage === false ) return null;
       ammoUpdate = usage.resourceUpdates || {};
     }
-    console.log(parts);
 
-
+    var focusRollBool = false;
+    console.log(itemData);
+    if(this.data.type == 'spell'){
+      if(itemData.requiresConduit){
+        focusRollBool = true;
+      }
+    }
     // Compose roll options
     let rollConfig = {
       parts: parts,
@@ -1099,7 +1115,8 @@ export default class Item5e extends Item {
       dialogOptions: {
         width: 400,
         top: options.event ? options.event.clientY - 80 : null,
-        left: window.innerWidth - 710
+        left: window.innerWidth - 710,
+        focusRoll: focusRollBool,
       },
       messageData: {
         "flags.skjaald.roll": {type: "attack", itemId: this.id },
@@ -1173,10 +1190,13 @@ export default class Item5e extends Item {
     const rollData = this.getRollData();
 
     console.log("come back here");
+    console.log(this.data);
     if ( spellLevel ) rollData.item.level = spellLevel;
     var focusRollBool = false;
     if(this.data.type == 'spell'){
-      focusRollBool = true;
+      if(this.data.data.requiresConduit){
+        focusRollBool = true;
+      }
     }
 
     

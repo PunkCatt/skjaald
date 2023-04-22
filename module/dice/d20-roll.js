@@ -148,7 +148,8 @@ export default class D20Roll extends Roll {
   async configureDialog({title, defaultRollMode, defaultAction=D20Roll.ADV_MODE.NORMAL, chooseModifier=false, skillLearning=false, spellLearning=false, rollFocus=false,
     defaultAbility, template}={}, options={}) {
 
-   
+    var focusRoll = options.focusRoll;
+    var focuses = options.focuses;
 
     // Render the Dialog inner HTML
     const content = await renderTemplate(template ?? this.constructor.EVALUATION_TEMPLATE, {
@@ -158,7 +159,8 @@ export default class D20Roll extends Roll {
       chooseModifier,
       skillLearning,
       spellLearning,
-      rollFocus,
+      focuses: focuses,
+      focusRoll: focusRoll,
       defaultAbility,
       abilities: CONFIG.SKJAALD.abilities
     });
@@ -177,15 +179,15 @@ export default class D20Roll extends Roll {
         buttons: {
           advantage: {
             label: game.i18n.localize("SKJAALD.Advantage"),
-            callback: html => resolve(this._onDialogSubmit(html, D20Roll.ADV_MODE.ADVANTAGE, skillLearning, spellLearning, rollFocus))
+            callback: html => resolve(this._onDialogSubmit(html, D20Roll.ADV_MODE.ADVANTAGE, skillLearning, spellLearning, focusRoll))
           },
           normal: {
             label: game.i18n.localize("SKJAALD.Normal"),
-            callback: html => resolve(this._onDialogSubmit(html, D20Roll.ADV_MODE.NORMAL, skillLearning, spellLearning, rollFocus))
+            callback: html => resolve(this._onDialogSubmit(html, D20Roll.ADV_MODE.NORMAL, skillLearning, spellLearning, focusRoll))
           },
           disadvantage: {
             label: game.i18n.localize("SKJAALD.Disadvantage"),
-            callback: html => resolve(this._onDialogSubmit(html, D20Roll.ADV_MODE.DISADVANTAGE, skillLearning, spellLearning, rollFocus))
+            callback: html => resolve(this._onDialogSubmit(html, D20Roll.ADV_MODE.DISADVANTAGE, skillLearning, spellLearning, focusRoll))
           }
         },
         default: defaultButton,
