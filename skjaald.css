@@ -859,6 +859,9 @@
   width: 100%;
   z-index: -1;
 }
+.combat-resources{
+  margin-top: -14px;
+}
 .skjaald.sheet.actor .container-panel-armor:before {
   border-image: url('./ui/frames/AC Dark Clear.png') 65 50 65 50 fill stretch;
   border-style: solid;
@@ -1790,6 +1793,9 @@
 .noncombat-list {
   width: 222px;
 }
+.resource-list {
+  width: 245px;
+}
 
  .sheet-pc-exhaustion-details label {
   cursor: pointer;
@@ -2305,8 +2311,9 @@
   color: #44191A;
 }
 .skjaald.sheet.actor .inventory-list .item .item-uses input {
-  width: 15px;
+  width: 25px;
   text-align: center;
+  font-size: 12px;
 }
 .skjaald.sheet.actor .inventory-list .item .item-properties {
   margin-top: 3px;
@@ -2327,6 +2334,23 @@
   word-break: break-word;
   white-space: nowrap;
   overflow: hidden;
+}
+.skjaald.sheet.actor .inventory-list .item-detail-resource {
+  flex: 0 0 53px;
+  font-size: 12px;
+  text-align: center;
+  word-break: break-word;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.skjaald.sheet.actor .inventory-list .item-detail-resource:last-child {
+  border-right: none;
+}
+.skjaald.sheet.actor .inventory-list .item-detail-resource.item-action {
+  flex: 0 0 100px;
+}
+.skjaald.sheet.actor .inventory-list .item-detail-resource.attunement {
+  flex: 0 0 24px;
 }
 .skjaald.sheet.actor .inventory-list .item-detail:last-child {
   border-right: none;
@@ -2354,6 +2378,15 @@
   border-top: 1px solid #c9c7b8;
 }
 
+
+.skjaald.sheet .equipment-money .sheet-container-body input[type="text"]{
+  background: none;
+  border: 1px solid transparent;
+  width:75px;
+}
+.skjaald.sheet.actor .equipment-money .container-panel2 .sheet-container-header{
+  width:120px;
+}
 .skjaald.sheet.actor .encumbrance {
   flex: 0 0 12px;
   background: #7a7971;

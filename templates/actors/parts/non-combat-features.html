@@ -20,7 +20,7 @@
 
         {{#if ../owner}}
         <div class="item-controls flexrow">
-            <a class="item-control item-create" title="{{localize 'SKJAALD.FeatureAdd'}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
+            <a class="item-control item-create {{localize section.label}}" title="{{localize 'SKJAALD.FeatureAdd'}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
                 <i class="fas fa-plus"></i> {{localize "SKJAALD.Add"}}
             </a>
         </div>

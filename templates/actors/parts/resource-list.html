@@ -2,7 +2,7 @@
     <div class="attribute-value container-box-body auto-calc-value">
 
 
-<ol class="items-list inventory-list noncombat-list">
+<ol class="items-list inventory-list resource-list">
 {{#each sections as |section sid|}}
     <li class="items-header flexrow">
         <h3 class="item-name flexrow">{{localize section.label}}</h3>
@@ -21,7 +21,7 @@
 
         {{#if ../owner}}
         <div class="item-controls flexrow">
-            <a class="item-control item-create" title="{{localize 'SKJAALD.FeatureAdd'}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
+            <a class="item-control item-create {{localize section.label}}" title="{{localize 'SKJAALD.FeatureAdd'}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
                 <i class="fas fa-plus"></i> {{localize "SKJAALD.Add"}}
             </a>
         </div>
@@ -38,13 +38,22 @@
                     {{#if item.isOriginalClass}} <i class="original-class fas fa-sun" title="{{localize 'SKJAALD.ClassOriginal'}}"></i>{{/if}}
                 </h4>
             </div>
-                <div class="item-detail item-uses">
 
-                    {{log 'come back here for resources list view'}}
-
-                    <input type="text" value="{{item.data.uses.value}}" placeholder="0"/>/ {{item.data.uses.max}}
-                </div>
-
+            {{#if (eq data.consumableType 'focus')}}
+            <div class="item-detail-resource item-uses focus">
+                {{item.data.ammoDie.current}} / {{item.data.ammoDie.max}}
+            </div>
+            {{/if}}
+            {{#if (eq data.consumableType 'ammo')}}
+            <div class="item-detail-resource item-uses ammo">                
+                <input type="text" name="item.data.quantity" value="{{item.data.quantity}}" />
+            </div>
+            {{/if}}
+            {{#unless (or (eq data.consumableType 'ammo') (eq data.consumableType 'focus'))}}
+            <div class="item-detail-resource item-uses uses">
+                <input type="text" value="{{item.data.uses.value}}" placeholder="0"/>/ {{item.data.uses.max}}
+            </div>
+            {{/unless}}
 
 
             {{#if section.columns}}

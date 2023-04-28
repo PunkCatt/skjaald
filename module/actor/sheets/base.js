@@ -1419,7 +1419,6 @@ export default class ActorSheet5e extends ActorSheet {
     var changedFrom = event.currentTarget.classList[2];
     
     if (changedFrom != "none"){
-      console.log("unequipping item");
       var item = this.actor.data.items.get(changedFrom);
       console.log(item);
       if(item.data.type == "weapon" ){
@@ -1428,13 +1427,11 @@ export default class ActorSheet5e extends ActorSheet {
           var slot = (event.currentTarget.classList[0]).split("-")[0];
           if(slot == "weapon1"){
             if (this.actor.data.data.attributes.wornArmor.weapon2 == item._id){
-              console.log("equipped in other slot");
             }else {
               item.update({"data.equipped": false});
             }
           }else if(slot == "weapon2"){
             if (this.actor.data.data.attributes.wornArmor.weapon1 == item.data._id){
-              console.log("equipped in other slot");
             } else{
               item.update({"data.equipped": false});
             }
@@ -1832,9 +1829,19 @@ export default class ActorSheet5e extends ActorSheet {
     event.preventDefault();
     const itemId = event.currentTarget.closest(".item").dataset.itemId;
     const item = this.actor.items.get(itemId);
-    const uses = Math.clamped(0, parseInt(event.target.value), item.data.data.uses.max);
-    event.target.value = uses;
-    return item.update({ "data.uses.value": uses });
+    if(event.currentTarget.parentElement.classList[2] == 'uses'){
+      const uses = Math.clamped(0, parseInt(event.target.value), item.data.data.uses.max);
+      event.target.value = uses;
+      return item.update({ "data.uses.value": uses });
+    } else if (event.currentTarget.parentElement.classList[2] == 'ammo'){
+      const uses = Math.clamped(0, parseInt(event.target.value), 999);
+      event.target.value = uses;
+      return item.update({"data.quantity": uses}); 
+    } else if (event.currentTarget.parentElement.classList[2] == 'focus'){
+      console.log("Come back here to modify conduit level in resource box");
+      return;
+    }
+  return;
   }
 
   /* -------------------------------------------- */
@@ -1966,6 +1973,15 @@ export default class ActorSheet5e extends ActorSheet {
         itemData.data.proficient = 1;
       }
     }
+    if(event.currentTarget.classList[2] == 'Resource'){
+      itemData.data.resourceDisplay = true;
+    }
+    if(event.currentTarget.classList[2] == 'Non-Combat' && event.currentTarget.classList[3] == "Features"){
+      itemData.data.noncombatFeature = true;
+    } else if(event.currentTarget.classList[2] == 'Combat' && event.currentTarget.classList[3] == "Features"){
+      itemData.data.combatFeature = true;
+    }
+
 
     delete itemData.data.type;
     return this.actor.createEmbeddedDocuments("Item", [itemData]);

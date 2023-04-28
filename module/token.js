@@ -16,10 +16,8 @@ export class TokenDocument5e extends TokenDocument {
 
   static getTrackedAttributes(data, _path=[]) {
     const attributes = super.getTrackedAttributes(data, _path);
-    // console.log(attributes);
     if ( _path.length ){ return attributes;}
     const allowed = CONFIG.SKJAALD.trackableAttributes;
-    // console.log(allowed);
     attributes.value = attributes.value.filter(attrs => this._isAllowedAttribute(allowed, attrs));
     return attributes;
   }
@@ -37,8 +35,7 @@ export class TokenDocument5e extends TokenDocument {
     
 
     const allowed = CONFIG.SKJAALD.consumableResources;
-    // console.log(allowed);
-    // console.log(attributes);
+
     attributes.value = [['attributes','hp','hitDicecurrent'], ["attributes", 'hp', 'grit'], ["attributes", 'dp', 'value'], ['attributes','ration', 'value'], 
     ['attributes', 'waterskin','value'], ['details', 'honor'], ['details','morality'],['attributes','movement','walk'],['attributes','ac','flat'],
     ['attributes','senses','blindsight'], ['attributes','senses','darkvision'],['attributes','senses','special'],['attributes','senses','tremorsense'],['attributes','senses','truesight'],

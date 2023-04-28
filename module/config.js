@@ -300,8 +300,8 @@ SKJAALD.abilityActivationTypes = {
  * @enum {string}
  */
 SKJAALD.ammoDieSizes = {
-  zero: "SKJAALD.RechargeAmmoDie0",
-  one: "SKJAALD.RechargeAmmoDie1",
+  0: "SKJAALD.RechargeAmmoDie0",
+  1: "SKJAALD.RechargeAmmoDie1",
   d2: "SKJAALD.RechargeAmmoDieD2",
   d4: "SKJAALD.RechargeAmmoDieD4",
   d6: "SKJAALD.RechargeAmmoDieD6",

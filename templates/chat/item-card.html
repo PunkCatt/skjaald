@@ -16,7 +16,6 @@
         
 
         {{#if (eq item.type "weapon")}}
-        {{log "Weapon Card"}}
 
             {{#if hasAttack}}
                 {{#each data.attacks as |attack a| }}
@@ -47,7 +46,6 @@
 
         
         {{#if (eq item.type "spell")}}
-        {{log "Spell card"}}
 
             {{#if hasAttack}}
                 {{#each data.effects as |attack a| }}

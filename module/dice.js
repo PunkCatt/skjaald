@@ -364,7 +364,6 @@ export async function damageRoll({
       focuses: focusList,
       template,
       allowCritical, 
-      actor
     }, dialogOptions);
     if ( configured === null ) return null;
   }

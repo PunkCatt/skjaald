@@ -459,7 +459,6 @@ export default class Item5e extends Item {
     // Define Roll bonuses
     const parts = [];
 
-    console.log(attackID);
 
     var attack;
     if(this.data.type == "weapon"){
@@ -468,7 +467,6 @@ export default class Item5e extends Item {
       attack = itemData.effects[attackID.effectID];
     }
 
-    console.log(attack);
     // Include the item's innate attack bonus as the initial value and label
     if ( attackID != undefined ) {
       if(this.data.type == "spell"){
@@ -607,8 +605,6 @@ export default class Item5e extends Item {
     const actor = this.actor;
     const ad = actor.data.data;               // Actor system data
 
-    console.log("come back here");
-    console.log(this);
 
     // Reference aspects of the item data necessary for usage
     const hasArea = this.hasAreaTarget;       // Is the ability usage an AoE?
@@ -717,7 +713,6 @@ export default class Item5e extends Item {
     // Consume Limited Resource
     if ( consumeResource ) {
       const canConsume = this._handleConsumeResource(itemUpdates, actorUpdates, resourceUpdates, attackID);
-      console.log(canConsume);
       if ( canConsume === false ) return false;
     }
 
@@ -736,8 +731,7 @@ export default class Item5e extends Item {
 
     // Consume Limited Usage
     if ( consumeUsage ) {
-      console.log(attackID)
-      console.log(id);
+
       const uses = id.uses || {};
       const available = Number(uses.value ?? 0);
       let used = false;
@@ -814,14 +808,12 @@ export default class Item5e extends Item {
       case "ammo":
       case "material":
         resource = actor.items.get(consumeTarget);
-        console.log(resource);
         //come back here
         quantity = resource ? resource.data.data.quantity : 0;
         break;
       case "charges":
       case "itemuse":
         resource = actor.items.get(consumeTarget);
-        console.log(resource);
         if ( !resource ) break;
         const uses = resource.data.data.uses;
         if ( uses.per && uses.max ) quantity = uses.value;
@@ -1097,7 +1089,6 @@ export default class Item5e extends Item {
     let title = `${this.name} - ${game.i18n.localize("SKJAALD.AttackRoll")}`;
 
     // Get the parts and rollData for this item's attack
-    console.log(attackID);
     const {parts, rollData} = this.getAttackToHit(attackID);
 
     // Handle ammunition consumption
@@ -1113,7 +1104,6 @@ export default class Item5e extends Item {
 
 
     const consumeType = attack.consumetype;
-    console.log(consumeType);
     if ( consumeType === "ammo" ) {
       ammo = this.actor.items.get(attack.consumetarget);
       if (ammo?.data) {
@@ -1129,7 +1119,6 @@ export default class Item5e extends Item {
       if ( usage === false ) return null;
       ammoUpdate = usage.resourceUpdates || {};
     } else if( consumeType === "itemuse"){
-      console.log("consume use");
       ammo = this.actor.items.get(attack.consumetarget);
       if (ammo?.data) {
         const q = ammo.data.data.quantity;
