@@ -424,6 +424,7 @@ export default class ItemSheet5e extends ItemSheet {
       html.find(".spell-template-control").click(this._onTemplateControl.bind(this));
       html.find(".equip-slots").click(this._toggleEquipmentSlots.bind(this));
       html.find(".trait-selector").click(this._onConfigureTraits.bind(this));
+      html.find(".prof-level").change(this._onProficiencyLevelChange.bind(this));
       html.find(".effect-control").click(ev => {
         if ( this.item.isOwned ) return ui.notifications.warn("Managing Active Effects within an Owned Item is not currently supported and will be added in a subsequent update.");
         ActiveEffect5e.onManageActiveEffect(ev, this.item);
@@ -724,6 +725,30 @@ export default class ItemSheet5e extends ItemSheet {
         break;
     }
     new TraitSelector(this.item, options).render(true);
+  }
+
+  /* -------------------------------------------- */
+
+
+
+  /**
+   * Handle spawning the TraitSelector application for selection various options.
+   * @param {Event} event   The click event which originated the selection.
+   * @private
+   */
+
+  _onProficiencyLevelChange(event) {
+    event.preventDefault();
+    console.log(event);
+    this.item.update({"data.classProfMod": false});
+    this.item.update({"data.classExptMod": false});
+    this.item.update({"data.classMastMod": false});
+
+    console.log(event.currentTarget.classList);
+    if(event.currentTarget.classList[3] == "spell" || event.currentTarget.classList[1] == "spell"){
+      console.log("spell learning");
+      this.item.update({"data.learning.hours": 0, "data.learning.arcana": 0});
+    }
   }
 
   /* -------------------------------------------- */

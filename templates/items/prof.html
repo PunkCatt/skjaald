@@ -174,10 +174,10 @@
                 <label>{{ localize "SKJAALD.SpellCurrentLearning" }}</label>
                 <div class="form-fields">
                     <label class="checkbox learning">
-                        <input class="confirm" type="checkbox" name="data.learning.currently" {{checked data.learning.currently}}/>
+                        <input class="confirm prof-level" type="checkbox" name="data.learning.currently" {{checked data.learning.currently}}/>
                     </label>
                     {{#if data.learning.currently}}
-                        <select name="data.learning.level">
+                        <select class="prof-level" name="data.learning.level">
                             {{#select data.learning.level}}
                             {{#each config.proficiencyLevels as |name lev|}}
                             <option value="{{lev}}">{{name}}</option>
@@ -187,8 +187,55 @@
                     {{/if}}
                 </div>
             </div>
+
+
           
             {{#if data.learning.currently}}
+
+            {{#if (eq data.learning.level '1')}}
+            <div class="form-group input-select">
+                <label>{{ localize "SKJAALD.ClassProfMod" }}</label>
+                <div class="form-fields">
+                    <label class="checkbox learning">
+                        <input type="checkbox" name="data.classProfMod" {{checked data.classProfMod}}/>
+                    </label>
+                </div>
+            </div>
+            {{/if}}
+            {{#if (eq data.learning.level '2')}}
+
+            <div class="form-group input-select">
+                <label>{{ localize "SKJAALD.ClassExptMod" }}</label>
+                <div class="form-fields">
+                    <label class="checkbox learning">
+                        <input type="checkbox" name="data.classExptMod" {{checked data.classExptMod}}/>
+                    </label>
+                </div>
+            </div>
+            {{/if}}
+            {{#if (eq data.learning.level '3')}}
+
+            <div class="form-group input-select">
+                <label>{{ localize "SKJAALD.ClassMastMod" }}</label>
+                <div class="form-fields">
+                    <label class="checkbox learning">
+                        <input type="checkbox" name="data.classMastMod" {{checked data.classMastMod}}/>
+                    </label>
+                </div>
+            </div>
+            {{/if}}
+            {{#if (or (eq race 'Gnome') (eq race 'gnome'))}}
+            <div class="form-group input-select">
+                <label>{{ localize "SKJAALD.PerfectStudent" }}</label>
+                <div class="form-fields">
+                    <label class="checkbox learning">
+                        <input type="checkbox" name="data.perfectstudent" {{checked data.perfectstudent}}/>
+                    </label>
+                </div>
+            </div>
+            {{/if}}
+
+
             <div class="form-group ">
                 <label>{{ localize "SKJAALD.ConseqBonus" }}</label>
                 <input type="number" name="data.learning.conseqBonus" value="{{data.learning.conseqBonus}}"/>
@@ -200,22 +247,7 @@
                 <input class="hours-input" type="number" name="data.learning.hours" value="{{data.learning.hours}}"/> / <input class="hours-input" type="number" name="data.learning.hoursTotal" value="{{data.learning.hoursTotal}}"/>
             </div>
             {{/if}}
-            {{#if data.learning.currently}}
-                {{#if (or (eq race 'Gnome') (eq race 'gnome'))}}
-                <div class="form-group input-select">
-                    <label>{{ localize "SKJAALD.PerfectStudent" }}</label>
-                    <div class="form-fields">
-                        <label class="checkbox learning">
-                            <input type="checkbox" name="data.perfectstudent" {{checked data.perfectstudent}}/>
-                        </label>
-                        {{#if data.perfectstudent}}
-                        <input type="number" name="data.learning.perfectStudentUses" value="{{data.learning.perfectStudentUses}}" data-dtype="Number"/> /<input type="number" name="data.learning.perfectStudentTotal" value="{{data.learning.perfectStudentTotal}}" data-dtype="Number"/>
-                        {{/if}}
-                        
-                    </div>
-                </div>
-                {{/if}}
-            {{/if}}
+
         </div>
     </section>
 </form>

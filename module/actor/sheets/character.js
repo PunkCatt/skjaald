@@ -146,7 +146,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     }
 
     for (let i of items){
-      if (i.type == "weapon" && i.data.equipped) attacks.weapon.items.push(i);
+      if ((i.type == "weapon" && i.data.equipped) || (i.type == "weapon" && i.data.naturalAttack)) attacks.weapon.items.push(i);
     }
 
     for (let s of spells){

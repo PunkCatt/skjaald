@@ -239,11 +239,11 @@
             <div class="form-group input-select">
                 <label>{{ localize "SKJAALD.SpellCurrentLearning" }}</label>
                 <div class="form-fields">
-                    <label class="checkbox learning">
+                    <label class="checkbox learning prof-level spell">
                         <input type="checkbox" name="data.learning.currently" {{checked data.learning.currently}}/>
                     </label>
                     {{#if data.learning.currently}}
-                        <select name="data.learning.level">
+                        <select class="prof-level spell" name="data.learning.level">
                             {{#select data.learning.level}}
                             {{#each config.spellLevels as |name lev|}}
                             <option value="{{lev}}">{{name}}</option>
@@ -255,6 +255,28 @@
             </div>
 
             {{#if data.learning.currently}}
+
+         
+            <div class="form-group input-select">
+                <label>{{ localize "SKJAALD.ClassProfMod" }}</label>
+                <div class="form-fields">
+                    <label class="checkbox learning">
+                        <input type="checkbox" name="data.classProfMod" {{checked data.classProfMod}}/>
+                    </label>
+                </div>
+            </div>
+            
+            {{#if (or (eq race 'Gnome') (eq race 'gnome'))}}
+            <div class="form-group input-select">
+                <label>{{ localize "SKJAALD.PerfectStudent" }}</label>
+                <div class="form-fields">
+                    <label class="checkbox learning">
+                        <input type="checkbox" name="data.perfectstudent" {{checked data.perfectstudent}}/>
+                    </label>
+                </div>
+            </div>
+            {{/if}}
+
                 <div class="form-group ">
                     <label>{{ localize "SKJAALD.Hours" }}</label>
                     <input type="hidden" name="data.learning.hoursNeeded" value="{{data.learning.hoursNeeded}}" data-dtype="Number"/>

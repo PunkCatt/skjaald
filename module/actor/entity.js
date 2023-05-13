@@ -470,8 +470,12 @@ export default class Actor5e extends Actor {
 
 
     // Spell Attack Bonus
-    
-    actorData.data.attributes.spellcasting.spellbonus = actorData.data.abilities[actorData.data.attributes.spellcasting.ability].mod;
+    if(actorData.data.abilities[actorData.data.attributes.spellcasting.ability] == undefined){
+      actorData.data.attributes.spellcasting.spellbonus = 0;
+    } else{
+      actorData.data.attributes.spellcasting.spellbonus = actorData.data.abilities[actorData.data.attributes.spellcasting.ability].mod;
+    }
+
     
     actorData.data.attributes.hp.hitDiceDenom = this._getHitDieDenom(actorData);
 
@@ -1627,8 +1631,11 @@ export default class Actor5e extends Actor {
     const item = this.items.get(itemId);
     const itemName = item.data.name;
 
-    //Identify Perfect Student
+    //Identify Perfect Student/Class Bonus/Expert of Experts
     const perfectStudent = item.data.data.perfectstudent;
+    const classProfMod = item.data.data.classProfMod;
+    const classExptMod = item.data.data.classExptMod;
+    const classMastMod = item.data.data.classMastMod;
 
     // Evaluate a global saving throw bonus
     const parts = ['1d20', '1d100','1d100', '@prof', "@mod", '@conseq'];
@@ -1689,7 +1696,7 @@ export default class Actor5e extends Actor {
     var crit = false;
     var doubleCrit = false;
     let skillLevel = item.data.data.learning.level;
-    const pb = data.prof._baseProficiency;
+    const pb = data.attributes.prof;
     let lastLearned = data.attributes.learning.lastLearnedID;
     var abilityMod = roll.terms[10].total;
     let intensity = parseInt(roll.options.intensity);
@@ -1697,6 +1704,8 @@ export default class Actor5e extends Actor {
     let finalChat = "";
     var advantageMode = roll.options.advantageMode;
     var doubleAdvantage = false;
+    const intMod = data.abilities.int.mod;
+
 
 
     // set prof bonus
@@ -1892,8 +1901,40 @@ export default class Actor5e extends Actor {
           hours = hours;
         }
         pass=true;
+
+
         finalChat += "<b><u>Learning: " + itemName + "</u></b>";
         finalChat += "<br>Successful Light Training!";
+
+        if(perfectStudent){
+          finalChat += "<br><br>Perfect Student Applied";
+        }
+        if(classProfMod){
+          finalChat += "<br>Class Proficiency Learning Modifier Applied";
+        }
+        if(classExptMod){
+          finalChat += "<br>Class Expertise Learning Modifier Applied";
+        }
+        if(classMastMod){
+          finalChat += "<br>Class Mastery Learning Modifier Applied";
+        }
+        if(classProfMod || classExptMod){
+          //class modifier and maybe perfect student
+          finalChat += "<br><br>Hours: ";
+          if(perfectStudent){
+            finalChat += "(" + hours + " + " + intMod + " (int mod) + " + pb + " (prof))";
+            hours = hours + intMod + pb;
+          }else{
+            finalChat += hours;
+          }
+          hours = hours * 2;
+          finalChat += " * 2 = " + hours;
+        }else if(perfectStudent){
+          //perfect student but no class multiplier
+          finalChat += "hours + " + " + intMod + " (intMod) + " + pb + " (pb);
+          hours = hours + intMod + pb;
+        }else{
+        }
         finalChat += "<br><br>You've completed " + hours + " hours of training";
         if(advantageMode == -1){
           finalChat += "<br><br>Rolled with Disadvantage";
@@ -1917,8 +1958,41 @@ export default class Actor5e extends Actor {
         }else{
           hours = hours;
         }
+
+
+  
         finalChat += "<b><u>Learning: " + itemName + "</u></b><br>";
         finalChat += "Failed Light Training....";
+
+        if(perfectStudent){
+          finalChat += "<br><br>Perfect Student Applied";
+        }
+        if(classProfMod){
+          finalChat += "<br>Class Proficiency Learning Modifier Applied";
+        }
+        if(classExptMod){
+          finalChat += "<br>Class Expertise Learning Modifier Applied";
+        }
+        if(classMastMod){
+          finalChat += "<br>Class Mastery Learning Modifier Applied";
+        }
+        if(classProfMod || classExptMod){
+          //class modifier and maybe perfect student
+          finalChat += "<br<br>>Hours: ";
+          if(perfectStudent){
+            finalChat += "(" + hours + " + " + intMod + " (int mod) + " + pb + " (prof))";
+            hours = hours + intMod + pb;
+          }else{
+            finalChat += hours;
+          }
+          hours = hours * 2;
+          finalChat += " * 2 = " + hours;
+        }else if(perfectStudent){
+          //perfect student but no class multiplier
+          finalChat += "hours + " + " + intMod + " (intMod) + " + pb + " (pb);
+          hours = hours + intMod + pb;
+        }else{
+        }
         finalChat += "<br><br>You've completed " + hours + " hours of training";
         if(advantageMode == -1){
           finalChat += "<br><br>Rolled with Disadvantage";
@@ -1970,6 +2044,36 @@ export default class Actor5e extends Actor {
         pass = true;
         finalChat += "<b><u>Learning: " + itemName + "</u></b><br>";
         finalChat += "Successful Heavy Training!";
+
+        if(perfectStudent){
+          finalChat += "<br><br>Perfect Student Applied";
+        }
+        if(classProfMod){
+          finalChat += "<br>Class Proficiency Learning Modifier Applied";
+        }
+        if(classExptMod){
+          finalChat += "<br>Class Expertise Learning Modifier Applied";
+        }
+        if(classMastMod){
+          finalChat += "<br>Class Mastery Learning Modifier Applied";
+        }
+        if(classProfMod || classExptMod){
+          //class modifier and maybe perfect student
+          finalChat += "<br<br>>Hours: ";
+          if(perfectStudent){
+            finalChat += "(" + hours + " + " + intMod + " (int mod) + " + pb + " (prof))";
+            hours = hours + intMod + pb;
+          }else{
+            finalChat += hours;
+          }
+          hours = hours * 2;
+          finalChat += " * 2 = " + hours;
+        }else if(perfectStudent){
+          //perfect student but no class multiplier
+          finalChat += "hours + " + " + intMod + " (intMod) + " + pb + " (pb);
+          hours = hours + intMod + pb;
+        }else{
+        }
         finalChat += "<br>You've completed " + hours + " hours of training";
         if(advantageMode == -1){
           finalChat += "<br><br>Rolled with Disadvantage";
@@ -1995,6 +2099,36 @@ export default class Actor5e extends Actor {
         }
         finalChat += "<b><u>Learning: " + itemName + "</u></b><br>";
         finalChat += "Failed Heavy Training....";
+
+        if(perfectStudent){
+          finalChat += "<br><br>Perfect Student Applied";
+        }
+        if(classProfMod){
+          finalChat += "<br>Class Proficiency Learning Modifier Applied";
+        }
+        if(classExptMod){
+          finalChat += "<br>Class Expertise Learning Modifier Applied";
+        }
+        if(classMastMod){
+          finalChat += "<br>Class Mastery Learning Modifier Applied";
+        }
+        if(classProfMod || classExptMod){
+          //class modifier and maybe perfect student
+          finalChat += "<br<br>>Hours: ";
+          if(perfectStudent){
+            finalChat += "(" + hours + " + " + intMod + " (int mod) + " + pb + " (prof))";
+            hours = hours + intMod + pb;
+          }else{
+            finalChat += hours;
+          }
+          hours = hours * 2;
+          finalChat += " * 2 = " + hours;
+        }else if(perfectStudent){
+          //perfect student but no class multiplier
+          finalChat += "hours + " + " + intMod + " (intMod) + " + pb + " (pb);
+          hours = hours + intMod + pb;
+        }else{
+        }
         finalChat += "<br>You've completed " + hours + " hours of training";
         if(advantageMode == -1){
           finalChat += "<br><br>Rolled with Disadvantage";
@@ -2071,6 +2205,36 @@ export default class Actor5e extends Actor {
                 pass = true;
                 finalChat += "<b><u>Learning: " + itemName + "</u></b><br>";
                 finalChat += "Successful Exhuastive Training!";
+
+                if(perfectStudent){
+                  finalChat += "<br><br>Perfect Student Applied";
+                }
+                if(classProfMod){
+                  finalChat += "<br>Class Proficiency Learning Modifier Applied";
+                }
+                if(classExptMod){
+                  finalChat += "<br>Class Expertise Learning Modifier Applied";
+                }
+                if(classMastMod){
+                  finalChat += "<br>Class Mastery Learning Modifier Applied";
+                }
+                if(classProfMod || classExptMod){
+                  //class modifier and maybe perfect student
+                  finalChat += "<br<br>>Hours: ";
+                  if(perfectStudent){
+                    finalChat += "(" + hours + " + " + intMod + " (int mod) + " + pb + " (prof))";
+                    hours = hours + intMod + pb;
+                  }else{
+                    finalChat += hours;
+                  }
+                  hours = hours * 2;
+                  finalChat += " * 2 = " + hours;
+                }else if(perfectStudent){
+                  //perfect student but no class multiplier
+                  finalChat += "hours + " + " + intMod + " (intMod) + " + pb + " (pb);
+                  hours = hours + intMod + pb;
+                }else{
+                }
                 finalChat += "<br>You've completed " + hours + " hours of training<br>Fatigue levels Gained: " + exhaustion;   
                 if(advantageMode == -1){
                   finalChat += "<br><br>Rolled with Disadvantage";
@@ -2100,6 +2264,36 @@ export default class Actor5e extends Actor {
                 }
                 finalChat += "<b><u>Learning: " + itemName + "</u></b>";
                 finalChat += "<br>Failed Exhaustive Training..."
+
+                if(perfectStudent){
+                  finalChat += "<br><br>Perfect Student Applied";
+                }
+                if(classProfMod){
+                  finalChat += "<br>Class Proficiency Learning Modifier Applied";
+                }
+                if(classExptMod){
+                  finalChat += "<br>Class Expertise Learning Modifier Applied";
+                }
+                if(classMastMod){
+                  finalChat += "<br>Class Mastery Learning Modifier Applied";
+                }
+                if(classProfMod || classExptMod){
+                  //class modifier and maybe perfect student
+                  finalChat += "<br<br>>Hours: ";
+                  if(perfectStudent){
+                    finalChat += "(" + hours + " + " + intMod + " (int mod) + " + pb + " (prof))";
+                    hours = hours + intMod + pb;
+                  }else{
+                    finalChat += hours;
+                  }
+                  hours = hours * 2;
+                  finalChat += " * 2 = " + hours;
+                }else if(perfectStudent){
+                  //perfect student but no class multiplier
+                  finalChat += "hours + " + " + intMod + " (intMod) + " + pb + " (pb);
+                  hours = hours + intMod + pb;
+                }else{
+                }
                 finalChat += "<br>You've completed " + hours + " hours of training<br>Fatigue levels Gained: " + exhaustion + "<br>";
 
                 if(advantageMode == -1){
@@ -2223,6 +2417,11 @@ export default class Actor5e extends Actor {
     const roll = await d20Roll(rollData);
     if ( !roll ) return null;
 
+    //Identify Perfect Student/Class Bonus/Expert of Experts
+    const perfectStudent = item.data.data.perfectstudent;
+    const classProfMod = item.data.data.classProfMod;
+
+
 
     // Take action depending on the result
     console.log(roll);
@@ -2255,7 +2454,7 @@ export default class Actor5e extends Actor {
     var crit = false;
     var doubleCrit = false;
     let spellLevel = item.data.data.learning.level;
-    const pb = data.prof._baseProficiency;
+    const pb = data.attributes.prof;
     var abilityMod = roll.terms[10].total;
     let finalChat = "";
     var arcanabonus = 0; // arcana modifier?
@@ -2274,6 +2473,10 @@ export default class Actor5e extends Actor {
     var noTemplatePaths = false;
     var itemList = actor.items;
     var spellName = item.data.name;
+    var previousArcana = parseInt(item.data.data.learning.arcana);
+    var previousHours = parseInt(item.data.data.learning.hours);
+    const intMod = data.abilities.int.mod;
+
 
 
     // Calculate DC for roll
@@ -2392,6 +2595,31 @@ export default class Actor5e extends Actor {
 
       // chat message
       chatString = "Spell Learning: " + spellName + "<br><br>Better luck next time!<br>DC Failed. No learning accomplished.<br><br>";
+      if(perfectStudent){
+        chatString += "But Gnomes never really fail at learning....<br>";
+        var perfectStudentHours;
+        if(classProfMod){
+          perfectStudentHours = intMod * 2;
+          chatString += perfectStudentHours + " hours gained<br> Perfect Student & Class Proficiency Modifier Applied!<br>(int mod * 2)<br><br>";
+          var newArcana = previousArcana + perfectStudentHours;
+          var updatedArcanaNeeded = totalArcanaNeeded - newArcana;
+
+          item.update({"data.learning.arcana": newArcana , "data.learning.arcanaNeeded": updatedArcanaNeeded});
+
+
+        }else{
+          perfectStudentHours = intMod;
+          chatString +="<b>" + perfectStudentHours + " hours gained</b><br> Perfect Student Applied!<br>";
+          var newArcana = previousArcana + perfectStudentHours;
+          var updatedArcanaNeeded = totalArcanaNeeded - newArcana;
+
+          item.update({"data.learning.arcana": newArcana , "data.learning.arcanaNeeded": updatedArcanaNeeded});
+
+        }
+
+
+
+      }
       if(advantageMode == 1 || advantageMode == -1){
         chatString += "D20: " + selectedRoll + "<br>Other D20: " + otherRoll;
       } else if(advantageMode == 0){
@@ -2594,8 +2822,12 @@ export default class Actor5e extends Actor {
     //resolve minors - in both minors only apply minor bonus once
     if (knownMinor1 !== "none" || knownMinor2 !== "none"){
       console.log("Minor(s) selected");
+      console.log(knownMinor1);
+      console.log(knownMinor2);
       checkedSpellSchools.forEach(school => {
-        if (school == knownMinor1 || knownMinor2){
+        if (school == knownMinor1 || school == knownMinor2){
+          console.log(school);
+          console.log(checkedSpellSchools);
           minorMatch = true;
           console.log("Minor Bonus!"); 
         }
@@ -2722,10 +2954,18 @@ export default class Actor5e extends Actor {
 
     // modify hours/arcana needed totals
 
-    var previousArcana = parseInt(item.data.data.learning.arcana);
-    var previousHours = parseInt(item.data.data.learning.hours);
+
     var gainedArcana = totalArcana;
     var gainedHours = totalHours;
+
+    if(perfectStudent){
+      totalArcana = totalArcana + intMod;
+      gainedArcana = gainedArcana + intMod;
+    }
+    if(classProfMod){
+      totalArcana = totalArcana * 2;
+      gainedArcana = gainedArcana * 2;
+    }
     totalArcana = previousArcana + totalArcana;
     totalHours = previousHours + totalHours;
     newHoursNeeded = totalHoursNeeded - totalHours;
@@ -2739,7 +2979,7 @@ export default class Actor5e extends Actor {
     if(newHoursNeeded < 0){
       newHoursNeeded = 0;
     }
-    //check if completedly learned?
+    //check if completely learned?
     if(newHoursNeeded == 0 && newArcanaNeeded == 0){
       var levelLearned = "";
       //update level learned
@@ -2792,14 +3032,22 @@ export default class Actor5e extends Actor {
     } else{
       chatString = "<b>Spell Learning: " + spellName + "</b><br><br>"; 
       chatString += "Learning Successful!<br>" +  gainedHours + " Hours gained & " + gainedArcana + " Arcana gained<br><br>";
+
+      if(perfectStudent){
+        chatString += "Perfect Student Applied<br>";
+      }
+      if(classProfMod){
+        chatString += "Class Proficiency Modifier Applied<br>";
+      }
+
       //rolls
       if(advantageMode == 1 || advantageMode == -1){
         if(advantageMode == 1){
-          chatString += "Rolled with Advantage<br>";
+          chatString += "<br>Rolled with Advantage<br>";
         } else{
-          chatString += "Rolled with Disadvantage<br>";
+          chatString += "<br>Rolled with Disadvantage<br>";
         }
-        chatString += "D20: " + selectedRoll + "<br>Other D20: " + otherRoll;
+        chatString += "<br>D20: " + selectedRoll + "<br>Other D20: " + otherRoll;
       } else if(advantageMode == 0){
         chatString += "D20: " + selectedRoll;
       }else if(advantageMode == -2){
@@ -2807,16 +3055,22 @@ export default class Actor5e extends Actor {
       } else {
         chatString += "Error configuring chat message";
       }
-      chatString += "<br>Arcana bonus: " + arcanabonus + "<br><br><u><b>Arcana(DC) Calculation:</b></u><br> D20 + Arcana bonus"; 
+      chatString += "<br>Arcana bonus: " + arcanabonus + "<br><br><u><b>Arcana(DC) Calculation:</b></u><br> D20 + Arcana bonus";
+
+
       if(advantageMode == -2){
         chatString += " + Disadvantage Modifier";
       }
+
       chatString +="<br>" + selectedRoll + " + "  + arcanabonus;
+
       var dcValue = selectedRoll + arcanabonus;
+
       if(advantageMode == -2){
         chatString += " - 2";
         dcValue -=2;
       }
+   
       chatString += " = " + dcValue + "<br>DC: " + dc + "<br>";
 
       // crit & template paths
@@ -2869,7 +3123,22 @@ export default class Actor5e extends Actor {
       }
 
       //total numbers
-      chatString += "<br>Total Arcana / Complexity: " + precomplexityArcana + " / " + complexity + " = " + gainedArcana + "<br>Total Hours: " + gainedHours;
+      chatString += "<br>Arcana / Complexity: " + precomplexityArcana + " / " + complexity + " = " + (precomplexityArcana/complexity);
+      if(perfectStudent){
+        if(classProfMod){
+          chatString += "<br> Perfect Student & Class Proficiency Modifier: (Arcana + int mod) * 2 = " + ((dcValue + intMod)*2);
+
+        }else{
+          chatString += "<br> Perfect Student: Arcana + int mod = " + (dcValue + intMod);
+        }
+      } else if(classProfMod){
+        chatString += "<br>Class Proficiency Modifier: Arcana * 2 = " + (dcValue *2);
+      }
+
+
+
+      chatString += "<br>Total Arcana: " + gainedArcana;
+      chatString += "<br>Total Hours: " + gainedHours;
 
       // use spell charge
 

@@ -41,6 +41,12 @@
             {{/each}}
             {{/unless}}
 
+            
+            {{#if hasAreaTarget}}
+            {{log 'come back here templates!'}}
+            <button data-action="placeTemplate">{{ localize "SKJAALD.PlaceTemplate" }}</button>
+            {{/if}}
+
 
         {{/if}}
 
@@ -80,6 +86,7 @@
                 {{#if hasAttack}}<button data-action="attack">{{ localize "SKJAALD.Attack" }}</button>{{/if}}
 
                 {{#if hasDamage}}
+                {{log 'damage if  '}}
                 <button data-action="damage">
                     {{#if isHealing}}{{ localize "SKJAALD.Healing" }}
                     {{else}}{{localize "SKJAALD.Damage" }}{{/if}}
@@ -101,6 +108,7 @@
                 {{/if}}
 
                 {{#if hasAreaTarget}}
+                {{log 'come back here templates!'}}
                 <button data-action="placeTemplate">{{ localize "SKJAALD.PlaceTemplate" }}</button>
                 {{/if}}
 
