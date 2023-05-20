@@ -753,6 +753,21 @@ export default class ItemSheet5e extends ItemSheet {
 
   /* -------------------------------------------- */
 
+     /**
+   * Handle manual change of CES Fatigue.
+   * @param {Event} event   A click or contextmenu event which triggered the handler.
+   * @returns {Promise<Actor5e>}     Updated data for this actor after changes are applied.
+   * @private
+   */
+     _onFeatureUseChange(event){
+      event.preventDefault();
+      console.log("change to number of uses");
+
+
+     }
+
+     /* ------------------------------------------ */
+
   /** @inheritdoc */
   async _onSubmit(...args) {
     if ( this._tabs[0].active === "details" ) this.position.height = "auto";

@@ -1989,7 +1989,7 @@ export default class Actor5e extends Actor {
           finalChat += " * 2 = " + hours;
         }else if(perfectStudent){
           //perfect student but no class multiplier
-          finalChat += "hours + " + " + intMod + " (intMod) + " + pb + " (pb);
+          finalChat +="<br>" + hours + " + " + intMod + " (intMod) + " + pb + " (pb)";
           hours = hours + intMod + pb;
         }else{
         }
@@ -2457,7 +2457,6 @@ export default class Actor5e extends Actor {
     const pb = data.attributes.prof;
     var abilityMod = roll.terms[10].total;
     let finalChat = "";
-    var arcanabonus = 0; // arcana modifier?
     var wizLevel = 0;
     var totalArcana = 0;
     var pass = false;
@@ -2549,6 +2548,7 @@ export default class Actor5e extends Actor {
       console.log("Crit!");
       crit = true;
     }
+    console.log(data);
 
     //calculate final arcana value
     if(advantageMode == -2){

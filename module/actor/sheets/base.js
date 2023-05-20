@@ -1239,6 +1239,9 @@ export default class ActorSheet5e extends ActorSheet {
 
       // Resource management
       html.find(".resource-control").click(this._onConfigMenu.bind(this));
+
+      //Feature Uses chagne
+      html.find(".feature-uses").change(this._onFeatureUseChange.bind(this));
     }
 
     // Owner Only Listeners
@@ -1626,6 +1629,23 @@ export default class ActorSheet5e extends ActorSheet {
       }
   
      /* -------------------------------------------- */
+
+    
+   /**
+   * Handle manual change of CES Fatigue.
+   * @param {Event} event   A click or contextmenu event which triggered the handler.
+   * @returns {Promise<Actor5e>}     Updated data for this actor after changes are applied.
+   * @private
+   */
+     _onFeatureUseChange(event){
+      event.preventDefault();
+      console.log("change to number of uses");
+      console.log(event);
+
+
+     }
+
+     /* ------------------------------------------ */
 
   // /**
   //  * Handle change of exhaustion.
