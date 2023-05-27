@@ -1423,6 +1423,7 @@ export default class Actor5e extends Actor {
     data.mod = abl.mod;
 
     // Include proficiency bonus
+    console.log(abl);
     if ( abl.checkProf.hasProficiency ) {
       parts.push("@prof");
       data.prof = abl.checkProf.term;
@@ -1456,6 +1457,80 @@ export default class Actor5e extends Actor {
       messageData: {
         speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
         "flags.skjaald.roll": {type: "ability", abilityId }
+      }
+    });
+    return d20Roll(rollData);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Roll an Ability Test
+   * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
+   * @param {string} abilityId    The ability ID (e.g. "str")
+   * @param {object} options      Options which configure how ability tests are rolled
+   * @returns {Promise<Roll>}     A Promise which resolves to the created Roll instance
+   */
+  rollProfTest(item, event, options={}) {
+    console.log("in prof roll");
+
+    console.log(item);
+    const label = item.data.name;
+    const parts = [];
+    const abilityId = item.data.data.ability;
+    const abl = this.data.data.abilities[abilityId];
+
+    const data = this.getRollData();
+
+    // Add ability modifier
+    parts.push("@mod");
+    
+    data.mod = abl.mod;
+
+    // Include proficiency bonus
+    if ( item.data.data.proficient >= 1) {
+      console.log("proficient");
+      var proficiency = this.data.data.attributes.prof;
+      console.log(this.data.data.attributes.prof);
+      parts.push("@prof");
+      var level = item.data.data.proficient;
+      if(level == 1){
+        data.prof = proficiency;
+      }else if(level == 2){
+        data.prof = (2 * proficiency);
+      }else if(level == 3){
+        data.prof = (3 * proficiency);
+      }
+    }
+
+    // Add ability-specific check bonus
+    if ( abl.bonuses?.check ) {
+      const checkBonusKey = `${abilityId}CheckBonus`;
+      parts.push(`@${checkBonusKey}`);
+      data[checkBonusKey] = Roll.replaceFormulaData(abl.bonuses.check, data);
+    }
+
+    // Add global actor bonus
+    const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
+    if ( bonuses.check ) {
+      parts.push("@checkBonus");
+      data.checkBonus = Roll.replaceFormulaData(bonuses.check, data);
+    }
+
+    // Add provided extra roll parts now because they will get clobbered by mergeObject below
+    if (options.parts?.length > 0) {
+      parts.push(...options.parts);
+    }
+
+    // Roll and return
+    const rollData = foundry.utils.mergeObject(options, {
+      parts: parts,
+      data: data,
+      title: `${game.i18n.format("SKJAALD.ToolPromptTitle", {ability: label})}: ${this.name}`,
+      halflingLucky: this.getFlag("skjaald", "halflingLucky"),
+      messageData: {
+        speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
+        "flags.skjaald.roll": {type: "prof", abilityId }
       }
     });
     return d20Roll(rollData);

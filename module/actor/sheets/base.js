@@ -1641,8 +1641,11 @@ export default class ActorSheet5e extends ActorSheet {
       event.preventDefault();
       console.log("change to number of uses");
       console.log(event);
-
-
+      var newValue = event.currentTarget.value;
+      console.log(newValue);
+      var itemId = event.target.classList[1];
+      const item = this.actor.items.get(itemId);
+      return item.update({"data.uses.value": newValue});
      }
 
      /* ------------------------------------------ */
@@ -1872,11 +1875,28 @@ export default class ActorSheet5e extends ActorSheet {
    * @returns {Promise}    Results of the roll.
    * @private
    */
-  _onItemRoll(event) {
+  async _onItemRoll(event) {
     event.preventDefault();
     const itemId = event.currentTarget.closest(".item").dataset.itemId;
+    console.log("Item Roll");
     const item = this.actor.items.get(itemId);
-    if ( item ) return item.roll();
+    console.log(item);
+    if(item){
+      if(item.type === "prof"){
+        console.log("prof");
+        // Update here
+
+        this.actor.rollProfTest(item, {event: event});
+
+        
+
+        
+
+      }else{
+       return item.roll();
+      }
+    }
+
   }
 
     /* -------------------------------------------- */

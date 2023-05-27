@@ -497,7 +497,20 @@ export default class Item5e extends Item {
     
 
     // Add proficiency bonus if an explicit proficiency flag is present or for non-item features
-    if ( itemData.proficient ) {
+    
+    if(itemData.master){
+      console.log("Mastery");
+      parts.push("@prof");
+      if ( this.data.data.prof?.hasProficiency ) {
+        rollData.prof = (3 * (this.data.data.prof.term));
+      }
+    }else if(itemData.expert){
+      console.log("expertise");
+      parts.push("@prof");
+      if ( this.data.data.prof?.hasProficiency ) {
+        rollData.prof = (2 * (this.data.data.prof.term));
+      }
+    }else if ( itemData.proficient ) {
       parts.push("@prof");
       if ( this.data.data.prof?.hasProficiency ) {
         rollData.prof = this.data.data.prof.term;
@@ -719,7 +732,7 @@ export default class Item5e extends Item {
     // Consume Spell Slots
     // if ( consumeSpellLevel ) {
     //   if ( Number.isNumeric(consumeSpellLevel) ) consumeSpellLevel = `spell${consumeSpellLevel}`;
-    //   const level = this.actor?.data.data.spells[consumeSpellLevel];
+    //   const level = this.acto?.data.data.spells[consumeSpellLevel];
     //   const spells = Number(level?.value ?? 0);
     //   if ( spells === 0 ) {
     //     const label = game.i18n.localize(consumeSpellLevel === "pact" ? "SKJAALD.SpellProgPact" : `SKJAALD.SpellLevel${id.level}`);

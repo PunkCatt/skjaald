@@ -933,6 +933,7 @@
     "SKJAALD.RollSelectFocus": "Select Conduit",
     "SKJAALD.SpellSource": "Source of Magic",
     "SKJAALD.SpellRequiresConduit": "Conduit Required",
+    "SKJAALD.ToolPromptTitle": "{ability} Check",
     
     
     "SKJAALD.Rations": "Rations",
